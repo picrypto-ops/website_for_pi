@@ -1,0 +1,44 @@
+@use "../base/variables" as variables;
+@use "../base/mixins" as mixins;
+header {
+  background-color: variables.$primary-color;
+  color: white;
+  padding: 1rem 0;
+
+  nav {
+    ul {
+      list-style-type: none;
+      padding: 0;
+      @include mixins.flex-center;
+
+      li {
+        margin: 0 1rem;
+
+        a {
+          color: white;
+          text-decoration: none;
+          font-weight: bold;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+.language-switcher {
+  @include mixins.flex-center;
+  gap: 1rem;
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+

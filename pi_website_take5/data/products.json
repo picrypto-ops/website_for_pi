@@ -1,0 +1,45 @@
+[
+  {
+    "id": "mergers_acquisitions",
+    "name": "mergers_acquisitions",
+    "description": "mergers_acquisitions_desc",
+    "segment": "investment-banking",
+    "team_group": "ma_team"
+  },
+  {
+    "id": "capital_markets",
+    "name": "capital_markets",
+    "description": "capital_markets_desc",
+    "segment": "investment-banking",
+    "team_group": "cm_team"
+  },
+  {
+    "id": "advisory_services",
+    "name": "advisory_services",
+    "description": "advisory_services_desc",
+    "segment": "investment-banking",
+    "team_group": "as_team"
+  },
+  {
+    "id": "equity_funds",
+    "name": "equity_funds",
+    "description": "equity_funds_desc",
+    "segment": "asset-management",
+    "team_group": "ef_team"
+  },
+  {
+    "id": "fixed_income",
+    "name": "fixed_income",
+    "description": "fixed_income_desc",
+    "segment": "asset-management",
+    "team_group": "fi_team"
+  },
+  {
+    "id": "alternative_investments",
+    "name": "alternative_investments",
+    "description": "alternative_investments_desc",
+    "segment": "asset-management",
+    "team_group": "ai_team"
+  }
+]
+

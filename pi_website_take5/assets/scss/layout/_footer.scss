@@ -1,0 +1,44 @@
+@use "../base/variables" as variables;;  
+
+footer {
+  background-color: variables.$secondary-color;
+  color: white;
+  padding: 2rem 0;
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    img {
+      max-width: 150px;
+    }
+  }
+
+  .footer-links {
+    ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      gap: 1rem;
+
+      a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+}
+

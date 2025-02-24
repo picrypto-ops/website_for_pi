@@ -1,0 +1,21 @@
+[
+  {
+    "id": "john-doe",
+    "name": "John Doe",
+    "title": "CEO",
+    "short_bio": "john_doe_short_bio",
+    "long_bio": "john_doe_long_bio",
+    "image": "john-doe.jpg",
+    "groups": ["executive", "ma_team"]
+  },
+  {
+    "id": "jane-smith",
+    "name": "Jane Smith",
+    "title": "CIO",
+    "short_bio": "jane_smith_short_bio",
+    "long_bio": "jane_smith_long_bio",
+    "image": "jane-smith.jpg",
+    "groups": ["executive", "ef_team"]
+  }
+]
+

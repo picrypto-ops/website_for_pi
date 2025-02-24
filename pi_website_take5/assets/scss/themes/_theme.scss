@@ -1,0 +1,35 @@
+@use "../base/variables" as variables;;
+
+.theme-light {
+  --bg-color: #{variables.$background-color};
+  --text-color: #{variables.$text-color};
+  --primary-color: #{variables.$primary-color};
+  --secondary-color: #{variables.$secondary-color};
+}
+
+// Dark theme
+.theme-dark {
+  --bg-color: #{variables.$dark_bg-color};
+  --text-color: #{variables.$dark_text-color};
+  --primary-color: #{variables.$dark_primary-color};
+  --secondary-color: #{variables.$dark_secondary-color};
+}
+
+// Apply theme variables
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary-color);
+}
+
+.button, .cta-button {
+  background-color: var(--primary-color);
+}
+
+header, footer {
+  background-color: var(--secondary-color);
+}
+

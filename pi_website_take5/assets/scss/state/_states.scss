@@ -1,0 +1,20 @@
+@use "../base/variables" as variables;;
+
+.is-hidden {
+  display: none;
+}
+
+.is-visible {
+  display: block;
+}
+
+.is-active {
+  font-weight: bold;
+  color: variables.$primary-color;
+}
+
+.is-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+

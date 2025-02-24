@@ -1,0 +1,41 @@
+{
+  "name": "pi_website_take5",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "base": "^3.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "layout": "^2.2.0",
+    "lucide-react": "^0.475.0",
+    "modules": "^0.4.0",
+    "next": "14.2.16",
+    "react": "^18",
+    "react-dom": "^18",
+    "state": "^0.2.0",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss-animate": "^1.0.7",
+    "themes": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.16",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "assemble-less": {
+      "less": "4.2.2"
+    }
+  }
+}

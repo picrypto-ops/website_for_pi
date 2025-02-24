@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>site_title - home_title</title>
+    <meta name="description" content="home_description">
+    <link rel="canonical" href="https://www.pigroup.com/en/home">
+    <meta property="og:title" content="site_title - home_title">
+    <meta property="og:description" content="home_description">
+    <meta property="og:url" content="https://www.pigroup.com/en/home">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="assets/js/main.js" defer></script>
+        <script src="assets/js/pi_bg_wave.js" defer></script>
+    </head>
+<body class="home-page">
+    <a href="#main-content" class="skip-link">skip_to_content</a>
+    <header>
+        <nav>
+            <ul>
+                            </ul>
+        </nav>
+        <div class="language-switcher">
+            <a href="?page=home&lang=en">English</a>
+            <a href="?page=home&lang=he">עברית</a>
+        </div>
+    </header>
+    <main id="main-content">
+
+
+<div class="home-page">
+    <section class="hero full-page">
+        <div class="hero-content">
+            <h1><br />
+<b>Warning</b>:  Trying to access array offset on value of type null in <b>C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\pages\home.php</b> on line <b>10</b><br />
+</h1>
+            <p>home_hero_description</p>
+            <a href="#learn-more" class="cta-button">learn_more</a>
+        </div>
+        <div id="pi-bg-wave"></div>
+        <div class="scroll-indicator">
+            <span>scroll_down</span>
+            <i class="arrow-down"></i>
+        </div>
+    </section>
+
+    <section id="learn-more" class="featured-segments">
+        <div class="container">
+            <h2>our_segments</h2>
+            <br />
+<b>Warning</b>:  foreach() argument must be of type array|object, null given in <b>C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\pages\home.php</b> on line <b>24</b><br />
+        </div>
+    </section>
+
+    <section class="featured-products">
+        <div class="container">
+            <h2>our_products</h2>
+            <br />
+<b>Warning</b>:  foreach() argument must be of type array|object, null given in <b>C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\pages\home.php</b> on line <b>37</b><br />
+        </div>
+    </section>
+
+    <section class="about-preview">
+        <div class="container">
+            <h2><br />
+<b>Warning</b>:  Trying to access array offset on value of type null in <b>C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\pages\home.php</b> on line <b>52</b><br />
+</h2>
+            <p>about_us_short</p>
+            <a href="?page=about&lang=en" class="button">learn_more</a>
+        </div>
+    </section>
+</div>
+
+</main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/images/logo.png" alt="PI Group Logo">
+            </div>
+            <div class="footer-links">
+                <ul>
+                                    </ul>
+            </div>
+            <div class="footer-social">
+                <!-- Add social media links here -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PI Group. all_rights_reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
+
