@@ -1,8 +1,8 @@
 @use "../base/variables" as variables;
 @use "../base/mixins" as mixins;
 header {
-  background-color: variables.$primary-color;
-  color: white;
+  background-color: variables.$secondary-color;
+  color: variables.$hero-text-color;
   padding: 1rem 0;
 
   nav {

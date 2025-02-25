@@ -1,0 +1,103 @@
+{
+    "home": {
+      "term_slug": "home",
+      "language_slug": {
+        "en": {
+          "label": "Home"
+        },
+        "he": {
+          "label": "דף הבית"
+        }
+      }
+    },
+    "investment_banking": {
+      "term_slug": "investment_banking",
+      "language_slug": {
+        "en": {
+          "label": "Investment Banking"
+        },
+        "he": {
+          "label": "בנקאות השקעות"
+        }
+      }
+    },
+    "asset_management": {
+      "term_slug": "asset_management",
+      "language_slug": {
+        "en": {
+          "label": "Asset Management"
+        },
+        "he": {
+          "label": "ניהול נכסים"
+        }
+      }
+    },
+    "team": {
+      "term_slug": "team",
+      "language_slug": {
+        "en": {
+          "label": "Our Team"
+        },
+        "he": {
+          "label": "הצוות שלנו"
+        }
+      }
+    },
+    "about": {
+      "term_slug": "about",
+      "language_slug": {
+        "en": {
+          "label": "About Us"
+        },
+        "he": {
+          "label": "אודותינו"
+        }
+      }
+    },
+    "contact": {
+      "term_slug": "contact",
+      "language_slug": {
+        "en": {
+          "label": "Contact Us"
+        },
+        "he": {
+          "label": "צור קשר"
+        }
+      }
+    },
+    "our_segments": {
+      "term_slug": "our_segments",
+      "language_slug": {
+        "en": {
+          "label": "Our Segments"
+        },
+        "he": {
+          "label": "המגזרים שלנו"
+        }
+      }
+    },
+    "our_products": {
+      "term_slug": "our_products",
+      "language_slug": {
+        "en": {
+          "label": "Our Products"
+        },
+        "he": {
+          "label": "המוצרים שלנו"
+        }
+      }
+    },
+    "about_us_short": {
+      "term_slug": "about_us_short",
+      "language_slug": {
+        "en": {
+          "label": "PI Group is a leading financial services company specializing in investment banking and asset management."
+        },
+        "he": {
+          "label": "קבוצת PI היא חברת שירותים פיננסיים מובילה המתמחה בבנקאות השקעות וניהול נכסים."
+        }
+      }
+    }
+  }
+  
+  

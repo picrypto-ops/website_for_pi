@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Home</title>
+    <title>דף הבית - דף הבית</title>
     <meta name="description" content="description">
-    <link rel="canonical" href="https://www.pigroup.com/en/home">
-    <meta property="og:title" content="Home - Home">
+    <link rel="canonical" href="https://www.pigroup.com/he/home">
+    <meta property="og:title" content="דף הבית - דף הבית">
     <meta property="og:description" content="description">
-    <meta property="og:url" content="https://www.pigroup.com/en/home">
+    <meta property="og:url" content="https://www.pigroup.com/he/home">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -52,27 +52,27 @@
             <ul>
                                 <li class="active">
                     <a href="/">
-                        Home                    </a>
+                        דף הבית                    </a>
                 </li>
                                 <li class="">
                     <a href="/investment-banking">
-                        Investment Banking                    </a>
+                        בנקאות השקעות                    </a>
                 </li>
                                 <li class="">
                     <a href="/asset-management">
-                        Asset Management                    </a>
+                        ניהול נכסים                    </a>
                 </li>
                                 <li class="">
                     <a href="/team">
-                        Our Team                    </a>
+                        הצוות שלנו                    </a>
                 </li>
                                 <li class="">
                     <a href="/about">
-                        About Us                    </a>
+                        אודותינו                    </a>
                 </li>
                                 <li class="">
                     <a href="/contact">
-                        Contact Us                    </a>
+                        צור קשר                    </a>
                 </li>
                             </ul>
         </nav>
@@ -87,7 +87,7 @@
 <div class="home-page">
     <section class="hero full-page">
         <div class="hero-content">
-            <h1>Home</h1>
+            <h1>דף הבית</h1>
             <p>description</p>
             <a href="#learn-more" class="cta-button">learn_more</a>
         </div>
@@ -100,17 +100,17 @@
 
     <section id="learn-more" class="featured-segments">
         <div class="container">
-            <h2>Our Segments</h2>
+            <h2>המגזרים שלנו</h2>
                                                 <div class="segment-card">
-                        <h3>Investment Banking</h3>
-                        <p>Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.</p>
-                        <a href="?page=segment&id=investment_banking&lang=en" class="button">
+                        <h3>מסחר ביטוח</h3>
+                        <p>מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי.</p>
+                        <a href="?page=segment&id=investment_banking&lang=he" class="button">
                             read_more                        </a>
                     </div>
                                     <div class="segment-card">
-                        <h3>Asset Management</h3>
-                        <p>Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.</p>
-                        <a href="?page=segment&id=asset_management&lang=en" class="button">
+                        <h3>ניהול מניות</h3>
+                        <p>מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי.</p>
+                        <a href="?page=segment&id=asset_management&lang=he" class="button">
                             read_more                        </a>
                     </div>
                                     </div>
@@ -118,40 +118,40 @@
 
     <section class="featured-products">
         <div class="container">
-            <h2>Our Products</h2>
+            <h2>המוצרים שלנו</h2>
                                                                         <div class="product-card">
-                            <img src="images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
-                            <h3>PI Pituach</h3>
-                            <p>Innovate Today, Secure Tomorrow</p>
-                            <a href="?page=product&id=pi_pituach&lang=en" class="button">
+                            <img src="images/investment_banking/pi_pituach/logo_large.svg" alt="פאי פיתוח">
+                            <h3>פאי פיתוח</h3>
+                            <p>חדשנות היום, ביטחון למחר</p>
+                            <a href="?page=product&id=pi_pituach&lang=he" class="button">
                                 learn_more                            </a>
                         </div>
                                             <div class="product-card">
-                            <img src="images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
-                            <h3>PI Select</h3>
-                            <p>Invest With Confidence</p>
-                            <a href="?page=product&id=pi_select&lang=en" class="button">
+                            <img src="images/investment_banking/pi_select/logo_large.svg" alt="פאי סלקט">
+                            <h3>פאי סלקט</h3>
+                            <p>השקעה בביטחון</p>
+                            <a href="?page=product&id=pi_select&lang=he" class="button">
                                 learn_more                            </a>
                         </div>
                                                                                 <div class="product-card">
-                            <img src="images/asset_management/pi_emf_retired/logo_large.svg" alt="PI EMF (retired)">
-                            <h3>PI EMF (retired)</h3>
-                            <p>Mastering Market Discrepancies</p>
-                            <a href="?page=product&id=pi_emf&lang=en" class="button">
+                            <img src="images/asset_management/pi_emf_retired/logo_large.svg" alt="פאי EMF (בדימוס)">
+                            <h3>פאי EMF (בדימוס)</h3>
+                            <p>שליטה בפערי שוק</p>
+                            <a href="?page=product&id=pi_emf&lang=he" class="button">
                                 learn_more                            </a>
                         </div>
                                             <div class="product-card">
-                            <img src="images/asset_management/pi_global/logo_large.svg" alt="PI Global">
-                            <h3>PI Global</h3>
-                            <p>Macro & Derivatives Excellence</p>
-                            <a href="?page=product&id=pi_global&lang=en" class="button">
+                            <img src="images/asset_management/pi_global/logo_large.svg" alt="פאי גלובל">
+                            <h3>פאי גלובל</h3>
+                            <p>מצוינות במאקרו ונגזרים</p>
+                            <a href="?page=product&id=pi_global&lang=he" class="button">
                                 learn_more                            </a>
                         </div>
                                             <div class="product-card">
-                            <img src="images/asset_management/pi_equity/logo_large.svg" alt="PI Equity">
-                            <h3>PI Equity</h3>
-                            <p>Cultivating Israeli Business Gems</p>
-                            <a href="?page=product&id=pi_equity&lang=en" class="button">
+                            <img src="images/asset_management/pi_equity/logo_large.svg" alt="פאי אקוויטי">
+                            <h3>פאי אקוויטי</h3>
+                            <p>טיפוח יהלומי עסקים ישראליים</p>
+                            <a href="?page=product&id=pi_equity&lang=he" class="button">
                                 learn_more                            </a>
                         </div>
                                                         </div>
@@ -159,9 +159,9 @@
 
     <section class="about-preview">
         <div class="container">
-            <h2>About Us</h2>
-            <p>PI Group is a leading financial services company specializing in investment banking and asset management.</p>
-            <a href="?page=about&lang=en" class="button">
+            <h2>אודותינו</h2>
+            <p>קבוצת PI היא חברת שירותים פיננסיים מובילה המתמחה בבנקאות השקעות וניהול נכסים.</p>
+            <a href="?page=about&lang=he" class="button">
                 learn_more            </a>
         </div>
     </section>

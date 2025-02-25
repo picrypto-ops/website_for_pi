@@ -1,17 +1,33 @@
-[
-  {
-    "id": "investment-banking",
-    "name": "investment_banking",
-    "short_description": "investment_banking_short",
-    "long_description": "investment_banking_long",
-    "products": ["mergers_acquisitions", "capital_markets", "advisory_services"]
-  },
-  {
-    "id": "asset-management",
-    "name": "asset_management",
-    "short_description": "asset_management_short",
-    "long_description": "asset_management_long",
-    "products": ["equity_funds", "fixed_income", "alternative_investments"]
+{
+    "investment_banking": {
+      "segment_slug": "investment_banking",
+      "language_slug": {
+        "en": {
+          "name": "Investment Banking",
+          "title": "Innovative Financial Solutions",
+          "short_description": "Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market."
+        },
+        "he": {
+          "name": "מסחר ביטוח",
+          "title": "מסחר ביטוח מיוחד",
+          "short_description": "מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי."
+        }
+      }
+    },
+    "asset_management": {
+      "segment_slug": "asset_management",
+      "language_slug": {   
+        "en": {
+          "name": "Asset Management",
+          "title": "Expert Portfolio Management",
+          "short_description": "Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes."
+        },
+        "he": {
+          "name": "ניהול מניות",
+          "title": "מניהול מניות מיוחד",
+          "short_description": "מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי."
+        }
+      }
+    }
   }
-]
 

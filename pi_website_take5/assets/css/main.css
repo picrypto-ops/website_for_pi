@@ -41,8 +41,8 @@ a:hover {
 }
 
 header {
-  background-color: #0033a0;
-  color: white;
+  background-color: #003366;
+  color: #ffffff;
   padding: 1rem 0;
 }
 header nav ul {
@@ -203,19 +203,18 @@ footer .footer-bottom {
 .home-page .hero {
   height: 100vh;
   background-color: #0033a0;
-  color: white;
+  color: #ffffff;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .home-page .hero .hero-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
   text-align: center;
   z-index: 1;
-  position: relative;
+  max-width: 800px;
+  padding: 2rem;
 }
 .home-page .hero .hero-content h1 {
   font-size: 3rem;
@@ -254,21 +253,42 @@ footer .footer-bottom {
   transform: rotate(45deg);
   animation: bounce 2s infinite;
 }
-.home-page .featured-segments {
+.home-page .featured-segments,
+.home-page .featured-products,
+.home-page .about-preview {
   padding: 4rem 0;
-  background-color: white;
+  background-color: var(--bg-color);
 }
-.home-page .featured-segments .segment-card {
-  background-color: #f5f5f5;
+.home-page .segment-card,
+.home-page .product-card {
+  background-color: white;
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.home-page .about-preview {
-  padding: 4rem 0;
-  background-color: #f5f5f5;
-  text-align: center;
+.home-page .segment-card:hover,
+.home-page .product-card:hover {
+  transform: translateY(-5px);
+}
+.home-page .segment-card h3,
+.home-page .product-card h3 {
+  margin-bottom: 1rem;
+}
+
+.featured-segments .container,
+.featured-products .container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding-bottom: 1rem;
 }
 
 @keyframes bounce {
@@ -282,6 +302,10 @@ footer .footer-bottom {
     transform: translateY(-5px) rotate(45deg);
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+
 .is-hidden {
   display: none;
 }
@@ -298,6 +322,13 @@ footer .footer-bottom {
 .is-disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+:root {
+  --bg-color: #f5f5f5;
+  --text-color: #333;
+  --primary-color: #0033a0;
+  --secondary-color: #003366;
 }
 
 .theme-light {

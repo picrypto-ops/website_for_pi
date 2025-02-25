@@ -7,6 +7,7 @@ function loadJsonData($file) {
             return $data;
         }
     }
+    error_log("Error loading JSON file: {$jsonFile}");
     return null;
 }
 
@@ -42,6 +43,10 @@ function responsiveImage($src, $alt, $class = '') {
 }
 
 function getLocalizedContent($data, $lang, $key) {
-    return isset($data['language_slug'][$lang][$key]) ? $data['language_slug'][$lang][$key] : '';
+    return isset($data['language_slug'][$lang][$key]) ? $data['language_slug'][$lang][$key] : $key;
+}
+
+function getTranslatedContent($data, $lang, $key) {
+    return isset($data['language_slug'][$lang][$key]) ? $data['language_slug'][$lang][$key] : $key;
 }
 

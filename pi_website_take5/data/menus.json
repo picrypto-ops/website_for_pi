@@ -1,0 +1,140 @@
+{
+    "main_menu": [
+        {
+            "main_page_slug": "home",
+            "url": "/",
+            "language_slug": {
+                "en": {
+                    "label": "Home"
+                },
+                "he": {
+                    "label": "דף הבית"
+                }
+            },
+            "items": []
+        },
+        {
+            "main_page_slug": "investment_banking",
+            "url": "/investment-banking",
+            "language_slug": {
+                "en": {
+                    "label": "Investment Banking"
+                },
+                "he": {
+                    "label": "בנקאות השקעות"
+                }
+            },
+            "items": [
+                {
+                    "url": "/investment-banking/pi-pituach",
+                    "language_slug": {
+                        "en": {
+                            "label": "PI Pituach"
+                        },
+                        "he": {
+                            "label": "פאי פיתוח"
+                        }
+                    }
+                },
+                {
+                    "url": "/investment-banking/pi-select",
+                    "language_slug": {
+                        "en": {
+                            "label": "PI Select"
+                        },
+                        "he": {
+                            "label": "פאי סלקט"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "main_page_slug": "asset_management",
+            "url": "/asset-management",
+            "language_slug": {
+                "en": {
+                    "label": "Asset Management"
+                },
+                "he": {
+                    "label": "ניהול נכסים"
+                }
+            },
+            "items": [
+                {
+                    "url": "/asset-management/pi-emf",
+                    "language_slug": {
+                        "en": {
+                            "label": "PI-EMF"
+                        },
+                        "he": {
+                            "label": "פאי-EMF"
+                        }
+                    }
+                },
+                {
+                    "url": "/asset-management/pi-global",
+                    "language_slug": {
+                        "en": {
+                            "label": "PI Global"
+                        },
+                        "he": {
+                            "label": "פאי גלובל"
+                        }
+                    }
+                },
+                {
+                    "url": "/asset-management/pi-equity",
+                    "language_slug": {
+                        "en": {
+                            "label": "PI Equity"
+                        },
+                        "he": {
+                            "label": "פאי אקוויטי"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "main_page_slug": "team",
+            "url": "/team",
+            "language_slug": {
+                "en": {
+                    "label": "Our Team"
+                },
+                "he": {
+                    "label": "הצוות שלנו"
+                }
+            },
+            "items": []
+        },
+        {
+            "main_page_slug": "about",
+            "url": "/about",
+            "language_slug": {
+                "en": {
+                    "label": "About Us"
+                },
+                "he": {
+                    "label": "אודותינו"
+                }
+            },
+            "items": []
+        },
+        {
+            "main_page_slug": "contact",
+            "url": "/contact",
+            "language_slug": {
+                "en": {
+                    "label": "Contact Us"
+                },
+                "he": {
+                    "label": "צור קשר"
+                }
+            },
+            "items": []
+        }
+    ]
+}
+

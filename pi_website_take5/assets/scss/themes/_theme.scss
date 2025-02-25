@@ -1,5 +1,12 @@
 @use "../base/variables" as variables;;
 
+:root {
+  --bg-color: #{variables.$background-color};
+  --text-color: #{variables.$text-color};
+  --primary-color: #{variables.$primary-color};
+  --secondary-color: #{variables.$secondary-color};
+}
+
 .theme-light {
   --bg-color: #{variables.$background-color};
   --text-color: #{variables.$text-color};

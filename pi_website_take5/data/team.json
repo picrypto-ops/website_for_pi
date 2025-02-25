@@ -1,21 +1,182 @@
-[
-  {
-    "id": "john-doe",
-    "name": "John Doe",
-    "title": "CEO",
-    "short_bio": "john_doe_short_bio",
-    "long_bio": "john_doe_long_bio",
-    "image": "john-doe.jpg",
-    "groups": ["executive", "ma_team"]
-  },
-  {
-    "id": "jane-smith",
-    "name": "Jane Smith",
-    "title": "CIO",
-    "short_bio": "jane_smith_short_bio",
-    "long_bio": "jane_smith_long_bio",
-    "image": "jane-smith.jpg",
-    "groups": ["executive", "ef_team"]
-  }
-]
+{
+    "founders": [
+        {
+            "name_slug": "aaron-cohen",
+            "photo": "/images/team/aaron_cohen.png",
+            "is_founder": true,
+            "language_slug": {
+                "en": {
+                    "name": "Aron Cohen",
+                    "position": "Founder",
+                    "short_bio": "",
+                    "bio": "Aron Cohen co founded in 1999 the Pi group. Cohen has a BA and MBA from Bar Ilan University. Cohen has over thirty years of experience in creating and investing in numerous niche businesses and financial products."
+                },
+                "he": {
+                    "name": "אהרן כהן",
+                    "position": "מייסד",
+                    "short_bio": "",
+                    "bio": "אהרן כהן הוא המייסד השותף של קבוצת פאי בשנת 1999. כהן הוא בעל תואר ראשון ותואר שני במנהל עסקים מאוניברסיטת בר-אילן. לכהן יש למעלה משלושים שנות ניסיון ביצירה והשקעה במספר רב של עסקים ייחודיים בשווקים הפיננסיים בישראל."
+                }
+            }
+        },
+        {
+            "name_slug": "jonny-kaye",
+            "photo": "/images/team/jonny_kaye.png",
+            "is_founder": true,
+            "language_slug": {
+                "en": {
+                    "name": "Jonny Kaye",
+                    "position": "Founder",
+                    "short_bio": "",
+                    "bio": "Jonny Kaye co founded in 1999 the Pi group. Kaye has a BA and MBA both from Harvard University. Kaye has over thirty years of experience of successfully investing and managing the risk of a wide variety of asset classes."
+                },
+                "he": {
+                    "name": "גוני קיי",
+                    "position": "מייסד",
+                    "short_bio": "",
+                    "bio": "יוני קיי הוא מומחה בשווקים פיננסיים עם 30 שנות ניסיון, בעל תואר ראשון בהצטיינות יתרה ותואר שני במנהל עסקים מאוניברסיטת הרווארד. הקריירה שלו החלה בבורסות המסחר בשיקגו בשנות ה-90, ולאחר מכן בתפקידי הנהלה בדסק הנגזרים של Batuha. קיי היה שותף-מייסד של PI Finance בשנת 1999 והקים את Equilibrium Market Making בשנת 2002. משנת 2006 עד 2021, הוא ניהל את PI Spc, קרן מאקרו שהגיעה לשיא של 300 מיליון דולר בנכסים מנוהלים."
+                }
+            }
+        }
+    ],
+    "management": [
+        {
+            "name_slug": "shlomi-cohen",
+            "photo": "/images/team/shlomi_cohen.png",
+            "is_founder": false,
+            "language_slug": {
+                "en": {
+                    "name": "Shlomi Cohen",
+                    "position": "Chief Financial Officer",
+                    "short_bio": "Shlomi Cohen brings 25 years of financial expertise, specializing in corporate finance and risk management.",
+                    "bio": "Shlomi Cohen has 25 years of experience in finance and accounting. He began his career in the mid-90s at PwC and has been with the PI Group since inception in 1999. Currently, Shlomi serves as the CFO of all companies under the PI Group, where he is responsible for managing the financial operations and daily activities of the group's companies. With his extensive experience and deep understanding of finance, Shlomi continues to lead the group towards growth and financial success."
+                },
+                "he": {
+                    "name": "שלומי כהן",
+                    "position": "סמנכ\"ל כספים",
+                    "short_bio": "שלומי כהן מביא 20 שנות מומחיות פיננסית, עם התמחות במימון תאגידי וניהול סיכונים.",
+                    "bio": "שלומי כהן הוא מומחה פיננסי וחשבונאי בעל 20 שנות ניסיון מקצועי. הוא החל את דרכו ב-PwC באמצע שנות ה-90 ומאז מלווה את קבוצת פאי מיום הקמתה. ב-2015 מונה כהן לסמנכ\"ל הכספים של קרן PI Spc. כיום, הוא משמש כמנהל הכספים של כלל החברות בקבוצת פאי, אחראי על ניהול מערך הכספים והתפעול היומיומי. עם ניסיונו העשיר והבנתו המעמיקה בתחום הפיננסי, שלומי ממשיך להוביל את הקבוצה לצמיחה והצלחה פיננסית."
+                }
+            }
+        },
+        {
+            "name_slug": "ronen-bitman",
+            "photo": "/images/team/ronen_bitman.png",
+            "is_founder": false,
+            "language_slug": {
+                "en": {
+                    "name": "Ronen Bitman",
+                    "position": "Chief Technology Officer",
+                    "short_bio": "Ronen Bitman bring 25 years of fintech and technology experience, specializing in developing advanced risk management systems.",
+                    "bio": "Ronen Bitman has 25 years of experience in software management and development in the fintech field. Ronen Has been with PI Group since 2001. Currently, Ronen serves as the CTO of all companies under the PI Group, where he is responsible for the group technological systems, architecture and developments. With his extensive experience and deep understanding of technology, Ronen continues to lead the group towards efficiency and innovation"
+                },
+                "he": {
+                    "name": "רונן ביטמן",
+                    "position": "מנהל טכנולוגיות ראשי",
+                    "short_bio": "רונן ביטמן, מנהל הטכנולוגיות הראשי של קבוצת PI, הוא מומחה בעל ניסיון של למעלה מ-25 שנים בתחום הפינטק והטכנולוגיה. הוא מוביל את החדשנות הטכנולוגית בחברה, מתמחה בפיתוח מערכות מתקדמות לניהול סיכונים, ומתמקד כיום בשילוב בינה מלאכותית בפעילויות הקבוצה.",
+                    "bio": "רונן ביטמן, מנהל הטכנולוגיות הראשי של קבוצת PI, מביא עמו ניסיון עשיר של למעלה מ-25 שנים בניהול ופיתוח תוכנה בתחום הפינטק. במהלך הקריירה שלו, שימש כיועץ מוביל לעסקאות טכנולוגיה בשווקים פרטיים ולתכנון ארכיטקטורת מערכות. ליישום חדשנות הטכנולוגית ופתרונות מתקדמים במגוון תחומים. בין הישגיו ניתן למנות פיתוח מערכות מתוחכמות לניתוח וניהול סיכונים עבור נכסים סחירים ונגזרים, ליצירת מערכת לניתוח סיכונים ופגיעויות בחוזים חכמים בבלוקציין. כיום, ביטמן מתמקד בשילוב טכנולוגיות בינה מלאכותית בפעילויות קבוצת PI, ומוביל את ההתפתחות הטכנולוגית של החברה לקראת עתיד מבטיח."
+                }
+            }
+        },
+        {
+            "name_slug": "hagit-borohovitz",
+            "photo": "/images/team/hagit_borohovitz.png",
+            "is_founder": false,
+            "language_slug": {
+                "en": {
+                    "name": "Hagit Borohovitz",
+                    "position": "Chief Legal Officer",
+                    "short_bio": "Hagit Borohovitz, with over 15 years of legal expertise in financial markets, leads our legal and compliance operations.",
+                    "bio": "Hagit Borohovitz brings over 15 years of legal expertise in financial markets and regulatory compliance. She began her career at Herzog Fox & Neeman, one of Israel's premier law firms, specializing in securities and financial regulation. Prior to joining PI, she served as legal counsel for several major investment firms. Borohovitz holds an LLB from Tel Aviv University and an LLM in Corporate Law from NYU School of Law."
+                },
+                "he": {
+                    "name": "חגית בורוכוביץ",
+                    "position": "יועצת משפטית ראשית",
+                    "short_bio": "חגית בורוהוביץ, עם מעל 15 שנות מומחיות משפטית בשווקים פיננסיים, מובילה את הפעילות המשפטית והציות שלנו.",
+                    "bio": "*מחכה לנוסח מאהרןעורכת דין מנוסה עם למעלה מעשור של מומחיות בהקמה וניהול קרנות השקעה ישראליות ובינלאומיות. מאז 2018 מובילה בקבוצת פאי כיועצת משפטית ועורכת דין בכירה, ומשנת 2020 מכהנת כדירקטורית בשתי קרנות מרכזיות בקבוצה. בעלת יכולות מוכחות בניהול תהליכים תפעוליים מורכבים, ניהול משא ומתן עם ספקים ויועצים משפטיים בינלאומיים, תוך הקפדה על עמידה בסטנדרטים רגולטוריים מחמירים. בשנת 2023 מונתה לתפקיד סמנכ\"ל תפעול בפאי פיתוח, ומביאה עמה ניסיון עשיר מתפקידיה הקודמים כעורכת דין פנימית ומנהלת תפעולית ב-The Israel Economic Development Corporation. הקריירה המשפטית שלה החלה בהתמחות במשרד עורכי דין נאור-אפשטיין, שם צברה ידע מעמיק בתחומי המשפט האזרחי והמסחרי."
+                }
+            }
+        },
+        {
+            "name_slug": "ronen-elgali",
+            "photo": "/images/team/ronen_elgali.png",
+            "is_founder": false,
+            "language_slug": {
+                "en": {
+                    "name": "Ronen Elgali",
+                    "position": "Chief Investment Officer",
+                    "short_bio": "Elgali Ronen brings 30+ years of managing funds and investment expertise, specializing in company analysis, valuation, and developing investment strategies.",
+                    "bio": "Throughout his career, Ronen has gained significant expertise in hedge fund management, company analysis, and valuations, while holding senior positions in leading investment firms. His skills include in-depth analysis of financial reports, building financial models, and analyzing market trends for informed investment decisions. At Sphera, where he worked for 10 years, Ronen joined in its early days and established and managed the research department, developed unique research approaches, and managed the small-cap equity fund. At Alpha and Mor, he was involved in restructuring efforts that led to significant growth in assets under management. Currently, at the Pi Group, Ronen serves as the Chief Investment Officer, where he analyzes and builds financial models for companies and provides professional investment advice."
+                },
+                "he": {
+                    "name": "רונן אלגלי",
+                    "position": "מנהל השקעות ראשי",
+                    "short_bio": "אלגאלי רונן הוא מנהל השקעות ראשי בעל ניסיון עשיר בניהול קרנות והשקעות בשוק ההון. הוא מתמחה בניתוח חברות, הערכות שווי, ופיתוח אסטרטגיות השקעה, תוך שימוש במומחיותו בכלכלה ומימון לניהול יעיל של נכסים ויצירת ערך למשקיעים.",
+                    "bio": "אלגאלי רונן הינו מנהל השקעות ראשי בעל ניסיון עשיר בתחום הפיננסים והשקעות, המגובה ברקע אקדמי איתן בכלכלה ומנהל עסקים. במהלך הקריירה שלו, צבר רונן מומחיות משמעותית בניהול קרנות גידור, ניתוח חברות והערכות שווי, תוך כדי מילוי תפקידים בכירים בחברות השקעה מובילות. יכולותיו כוללות ניתוח מעמיק של דוחות כספיים, בניית מודלים פיננסיים וניתוח מגמות שוק לקבלת החלטות השקעה מושכלות. בספירה, רונן הקים וניהל את מחלקת המחקר, פיתח גישות מחקר ייחודיות וניהל את קרן המניות הקטנות, באלפא ובמור עסק בשיקום שהוביל לצמיחה משמעותית בנכסים המנוהלים. כיום בקבוצת פאי משמש רונן כמנהל השקעות ראשי, שם הוא מנתח ובונה מודל"
+                }
+            }
+        }
+    ],
+    "pi_pituach": [
+        {
+            "name_slug": "dan-rosenberg",
+            "photo": "/images/team/dan_rosenberg.png",
+            "is_founder": true,
+            "language_slug": {
+                "en": {
+                    "name": "Dan Rosenberg",
+                    "position": "Founder",
+                    "short_bio": "Co-founder and Director at Pi Pituach Group, with over 20 years of experience in derivative trading and risk management in banks and investment firms.",
+                    "bio": "Co-Founder and Director at Pi Pituach Group, which includes Pi Deposits and Pi Plus, both reporting companies issuing deposit-backed bonds on the Tel Aviv Stock Exchange. Served as a senior trader at the Pi SPC hedge fund since 2010. With over 20 years of experience in trading derivative instruments and complex interest rate transactions, possesses unique expertise in pricing sophisticated financial instruments and managing risks associated with them. Previously held the position of senior interest rate trader in the trading room of Bank Hapoalim."
+                },
+                "he": {
+                    "name": "דן רוזנברג",
+                    "position": "מייסד",
+                    "short_bio": "מייסד משותף ודירקטור בקבוצת פאי פיתוח, עם ניסיון של למעלה מ-20 שנה במסחר בנגזרים וניהול סיכונים בבנקים ובתי השקעות.",
+                    "bio": "מייסד משותף ודירקטור בקבוצת פאי פיתוח, הכוללת את החברות פאי פיקדונות ופאי פלוס, חברות מדווחות המנפיקות איגוחי פיקדונות בבורסה בתל אביב. שימש כסוחר בכיר בקרן הגידור פאי SPC משנת 2010. מעל 20 שנות ניסיון במסחר במכשירים נגזרים ובעסקאות ריבית מורכבות, ובעל מומחיות ייחודית בתמחור מכשירים מורכבים ובניהול סיכונים במסגרתם. שימש כסוחר ריביות בכיר בחדר עסקאות בבנק הפועלים."
+                }
+            }
+        },
+        {
+            "name_slug": "itai-ruschkewitz",
+            "photo": "/images/team/itai_ruschkewitz.png",
+            "is_founder": true,
+            "language_slug": {
+                "en": {
+                    "name": "Itay Ruschkewitz",
+                    "position": "CEO and Co-Founder",
+                    "short_bio": "CEO and Co-Founder of Pi Pituach Financial Instruments Development Group.",
+                    "bio": "Owner and CEO of Complex, a financial consulting firm, where he serves as an advisor to a wide range of leading entities in the Israeli economy, including banks, insurance companies, and financial institutions. Has extensive experience in formulating strategies and financing plans, developing new financial instruments in the Israeli capital market, raising financing, leading transactions, and issuing complex instruments, including securitizations, private debt, and complex bonds such as CoCo. Represents Allianz Global Investors, the investment arm of Allianz, in Israel. Previously served as a partner at PwC Israel and before that as a partner at Giza Singer Even."
+                },
+                "he": {
+                    "name": "איתי רושקביץ",
+                    "position": "מנכ\"ל ומייסד משותף",
+                    "short_bio": "מנכ\"ל ומייסד משותף של קבוצת פאי פיתוח מכשירים פיננסים בע\"מ.",
+                    "bio": "בעלים ומנכ\"ל חברת הייעוץ הפיננסי Complex, בה משמש כיועץ לשורה ארוכה של גופים מובילים במשק הישראלי, בהם בנקים, חברות ביטוח וגופים פיננסיים. בעל ניסיון רב בגיבוש אסטרטגיות ותוכניות מימון, פיתוח מכשירים פיננסיים חדשים בשוק ההון הישראלי, בגיוס מימון, הובלת עסקאות והנפקת מכשירים מורכבים, ובכלל זאת עסקאות איגוח, חוב פרטי ואג\"ח מורכבות כגון CoCo. מייצג בישראל את חברת Allianz Global Investors, זרוע ההשקעות של חברת הביטוח Allianz. שימש כשותף ב-PwC ישראל. קודם לכן שימש כשותף בגיזה זינגר אבן."
+                }
+            }
+        }
+    ],
+    "pi_select": [
+        {
+            "name_slug": "buky-katzman",
+            "photo": "/images/team/buky_katzman.png",
+            "is_founder": true,
+            "language_slug": {
+                "en": {
+                    "name": "Baruch (Buky) Katzman",
+                    "position": "Co-founder",
+                    "short_bio": "An expert in civil and commercial law with extensive experience representing international and local companies, investment firms, and industry executives. After a distinguished career as a senior partner in a leading law firm, he embarked on an independent path combining business activities with legal consulting, while continuing to contribute to the legal and business community in various public roles.",
+                    "bio": "A renowned expert in civil and commercial law with over 20 years of experience representing international and local companies, investment firms, and top executives. After a distinguished career as a senior partner at Herzog, Fox & Neeman, he embarked on an independent path combining business activities with legal consulting. He leverages his extensive network and deep legal-commercial understanding to engage in significant business ventures. He holds important public positions, including directorships in international legal organizations and sports committees. His contributions extend to lecturing at law faculties, providing legal commentary in media, and writing for professional journals."
+                },
+                "he": {
+                    "name": "ברוך (בוקי) כצמן",
+                    "position": "מייסד משותף",
+                    "short_bio": "מומחה למשפט אזרחי ומסחרי עם ניסיון עשיר בייצוג חברות בינלאומיות ומקומיות, בתי השקעות ובכירים בתעשייה. לאחר קריירה מפוארת כשותף בכיר במשרד עורכי דין מוביל, פנה לדרך עצמאית המשלבת פעילות עסקית עם ייעוץ משפטי, תוך שהוא ממשיך לתרום לקהילה המשפטית והעסקית במגוון תפקידים ציבוריים.",
+                    "bio": "מומחה בעל שם בתחום המשפט האזרחי והמסחרי, צבר ניסיון עשיר של למעלה מ-20 שנה בייצוג מגוון רחב של לקוחות, כולל חברות בינלאומיות ומקומיות, בתי השקעות, בעלי שליטה, מנכ\"לים ודירקטורים. לאחר קריירה מרשימה כשותף בכיר במשרד עורכי הדין הרצוג, פוקס, נאמן ושות', בחר לפנות לדרך עצמאית המשלבת פעילות עסקית עם ייעוץ משפטי במשרד מוביל. בשנים האחרונות, הוא מנצל את רשת הקשרים הענפה שבנה, יחד עם הבנתו המשפטית והמסחרית העמוקה, כדי להיות מעורב בפעילות עסקית משמעותית. לצד עיסוקיו המקצועיים, הוא ממלא תפקידים ציבוריים חשובים, כגון דירקטור בארגון הבינלאומי של עורכי-דין ומשפטנים יהודיים וחבר בהנהלה הישראלית של מכבי עולמי. תרומתו לקהילה המשפטית והעסקית באה לידי ביטוי גם בהרצאותיו בפקולטות למשפטים, חברותו בוועדות ספורט בינלאומיות, ופעילותו כפרשן משפטי בתקשורת וככותב בכתבי עת מקצועיים."
+                }
+            }
+        }
+    ]
+}
 

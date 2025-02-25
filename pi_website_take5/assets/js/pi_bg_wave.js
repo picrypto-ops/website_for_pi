@@ -1,54 +1,237 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.createElement("canvas")
-  const ctx = canvas.getContext("2d")
-  const container = document.getElementById("pi-bg-wave")
+import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
 
-  container.appendChild(canvas)
+const rootStyles = getComputedStyle(document.documentElement);
+const SEPARATION_X = parseFloat(rootStyles.getPropertyValue('--separation-x')) || 200;
+const SEPARATION_Y = parseFloat(rootStyles.getPropertyValue('--separation-y')) || 400;
+const AMOUNTX = parseInt(rootStyles.getPropertyValue('--count-row')) || 40;
+const AMOUNTY = parseInt(rootStyles.getPropertyValue('--count-col')) || 25;
+const SPEED = parseFloat(rootStyles.getPropertyValue('--particle-speed')) || 0.04;
+const PARTICLE_SIZE = parseFloat(rootStyles.getPropertyValue('--particle-size')) || 4;
+const PARTICLE_COLOR = rootStyles.getPropertyValue('--particle-color').trim() || '#bacde4';
+let camera, scene, renderer, shaderMaterial, particles;
+let count = 0;
 
-  let width, height, wave
 
-  function resize() {
-    width = container.clientWidth
-    height = container.clientHeight
-    canvas.width = width
-    canvas.height = height
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerWidth / 2;
+var mouseX = 0, mouseY = -400;
 
-    wave = new Wave(ctx, width, height)
-  }
 
-  class Wave {
-    constructor(ctx, width, height) {
-      this.ctx = ctx
-      this.width = width
-      this.height = height
-      this.color = "#0033a0"
+// Your SVG as a string
+const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg 
+    width="154px" 
+    height="240px" 
+    viewBox="0 0 154 240" 
+    version="1.1" 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g 
+        id="Pi-Group" 
+        stroke="none" 
+        stroke-width="1" 
+        fill="none" 
+        fill-rule="evenodd">
+        <g id="Group" 
+            transform="translate(0.999047, 0.544741)" 
+            fill="#FFFFFF">
+            <path 
+                d="M149.872952,35.4552592 L39.8089057,40.9032171 C27.7457427,42.1152525 18.3095751,45.5467114 11.500403,51.1975939 C-0.333020599,61.0180662 0.00191479463,73.2325363 0.00191479463,79.2900801 C0.00191479463,85.0373066 1.62565636,98.8121876 12.9639409,108.276606 C19.6594839,113.865584 26.9175708,116.843383 34.7382016,117.210004 C38.319661,117.34403 41.0407114,117.228881 42.9013531,116.864556 C44.7619947,116.50023 46.671869,115.593643 48.6309759,114.144795 C49.0132543,113.782531 49.2350354,113.521548 49.2963193,113.361848 C49.4468795,112.969501 49.4705079,112.582361 49.4705079,112.340048 C49.4705079,111.949789 49.0930872,111.68414 48.3382459,111.543101 C44.6341197,112.074399 41.0207197,112.340048 37.4980457,112.340048 C35.2932553,112.340048 32.0023684,112.079129 29.4598536,111.543101 C28.4466844,111.329498 26.9588819,110.764882 24.9964461,109.849253 C20.7842307,107.601129 17.6402472,104.707361 15.5644955,101.16795 C13.8796993,98.2951653 13.0592415,96.1545168 12.3475509,93.1688588 C11.1256137,88.0426332 11.1750678,82.2087312 11.500403,79.2900801 C11.9999852,74.8082219 13.1999985,66.3469328 18.8651357,59.2193271 C21.0352215,56.4890284 21.9749324,55.2639557 25.4390057,53.0405303 C25.9184471,52.7327994 29.1626082,50.6307878 33.4020289,49.2364415 C36.9858709,48.0577151 41.5620562,47.5301469 42.9013531,47.5301469 C44.4928995,47.5301469 46.6735095,47.4879311 49.2963193,48.0800656 C49.6890959,48.1687402 50.2650988,48.3438501 51.0243279,48.6053954 C51.5569594,48.7799202 51.9788044,48.9902689 52.289863,49.2364415 C52.524876,49.4224314 52.7764019,49.6153438 53.0584956,50.0593226 C53.1015324,50.1270568 53.1632872,50.2210602 53.2067598,50.3909119 C53.2187578,50.4377893 53.2434685,50.5553276 53.2808919,50.743527 C53.3034119,50.8914553 53.3177904,51.0103846 53.3240272,51.1003147 C53.3302641,51.1902449 53.332631,51.3127687 53.3311279,51.4678863 L53.3311279,165.134434 C53.2832986,165.557637 53.229421,165.849437 53.1694951,166.009833 C52.9756932,166.528556 52.8079842,167.097386 52.6134842,167.550625 C51.6881149,169.70699 50.740822,171.05463 49.9492804,171.912599 C49.3403254,172.572658 48.0913838,173.629738 47.3669124,173.999874 C46.642441,174.370009 46.4378368,174.504877 45.8332829,174.731016 C45.666085,174.793558 45.2938386,174.905672 44.9690012,174.993503 C44.7649675,175.04867 44.4763119,175.080223 44.1030342,175.088161 L41.1173253,175.005568 C40.7112732,175.02393 40.4325343,175.047974 40.2811087,175.077698 C40.1296832,175.107422 39.9722822,175.168991 39.8089057,175.262406 C39.5219149,175.457575 39.3045692,175.645642 39.1568684,175.826606 C38.7208808,176.360783 38.3045672,177.145062 38.1551906,177.678897 C37.9299069,178.484005 37.9299069,179.60543 38.1551906,181.043174 L77.659345,181.043174 C77.8944517,180.995828 78.0481561,180.925753 78.1204582,180.832948 C78.2051095,180.724292 78.2856661,180.574915 78.3252159,180.428491 C78.3794488,180.227705 78.3761275,180.028553 78.3790355,179.911779 C78.3981608,179.143769 78.4573589,178.088301 78.3790355,177.678897 C78.3038242,177.28576 78.030122,176.654774 77.6002276,176.207323 C77.407063,176.00627 77.043805,175.762584 76.5104536,175.476266 C76.2535989,175.363181 76.0437353,175.306735 75.8808626,175.306926 C75.0265899,175.30793 74.2137733,175.450448 73.7432399,175.375429 C73.3801393,175.317538 72.6998757,175.243233 72.2029052,175.101981 C71.9820925,175.039221 71.6397067,174.880469 71.175748,174.625725 C70.4329461,173.912773 69.9118006,173.372154 69.6123115,173.003868 C69.3128223,172.635582 68.9430411,172.080614 68.5029678,171.338966 C68.0463806,170.315838 67.7114246,169.43245 67.4980997,168.688801 C67.4498253,168.520517 67.3983123,168.315879 67.2437605,167.893812 C67.1313593,167.458507 67.0331,167.064201 66.9508303,166.717532 C66.8698678,166.376372 66.7939644,165.848672 66.7231199,165.134434 L66.7231199,51.1975939 C66.7368394,50.8764038 66.7489056,50.6604967 66.7593185,50.5498725 C66.7835736,50.292191 66.8208619,50.1576067 66.8256637,50.1196815 C66.8388015,50.0173408 66.9913741,49.4637367 67.2074695,49.2364415 C67.3290176,49.1085938 67.5077403,48.9242231 67.7676931,48.7699414 C67.9698997,48.649932 68.2280269,48.5566431 68.5029678,48.4674245 C68.7003494,48.403374 69.1427059,48.3497969 69.8300373,48.3066931 L114.922969,48.3066931 C116.843994,48.3263147 118.087469,49.1083841 118.653393,50.6529015 C118.957862,51.4838544 119.054046,52.2660776 119.21514,53.4060376 C119.307364,54.0586499 119.307364,55.160882 119.21514,56.712734 L101.000953,221.455259 C100.918973,232.788593 103.918973,238.455259 110.000953,238.455259 C119.000953,238.455259 136.000953,223.455259 136.000953,210.455259 C136.000953,208.627077 133.951595,208.809228 132.000953,210.455259 C126.482707,215.111781 116.478616,228.84357 115.000953,221.455259 C114.167403,217.287505 115.572131,204.609904 119.21514,183.422456 L135.422781,47.5301469 C135.456527,47.3365323 135.48205,47.2004318 135.499349,47.1218455 C135.516648,47.0432592 135.532474,46.9760956 135.546828,46.9203548 C135.586204,46.7984842 135.623549,46.7074428 135.658864,46.6472305 C135.694179,46.5870182 135.762372,46.5032626 135.863442,46.3959637 C135.946871,46.3265272 136.024889,46.2768566 136.097497,46.2469519 C136.170104,46.2170472 136.298908,46.1839297 136.483908,46.1475992 C136.653938,46.1246855 136.813838,46.1132287 136.963608,46.1132287 C137.113379,46.1132287 137.498342,46.1246855 138.118498,46.1475992 L148.477629,46.7428987 C149.454839,46.6608258 150.203298,46.0993341 150.723009,45.0584237 C151.502574,43.497058 151.864548,41.7609924 151.864548,40.9032171 C151.864548,40.0454418 151.881866,39.4239249 151.392573,37.7045107 C151.066378,36.5582346 150.559838,35.8084841 149.872952,35.4552592 Z" 
+                id="Path" 
+                stroke="#FFFFFF" 
+                stroke-width="0.5">
+            </path>
+            <polygon 
+                id="Path-3" 
+                points="126.499867 1.77635684e-15 123.523873 4.96630575 120.528585 9.96480958 123.331169 15.1470329 126.499867 21.0062319 129.667118 15.1621108 132.483822 9.96480958 129.475752 4.95560728">
+            </polygon>
+        </g>
+    </g>
+</svg>`;
+
+// Function to create a texture from SVG
+function createSVGTexture(svgString, callback) {
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = () => {
+        const texture = new THREE.Texture(img);
+        texture.needsUpdate = true;
+        callback(texture);
+        URL.revokeObjectURL(url); // Clean up
+    };
+    img.onerror = (e) => {
+        console.error('Error loading SVG as texture', e);
+    };
+    img.src = url;
+}
+
+// Initialize the scene after the texture is loaded
+createSVGTexture(svg, (texture) => {
+    const vertexshader_element_id = document.getElementById('vertexshader');
+    const fragmentshader_element_id = document.getElementById('fragmentshader');
+    if (vertexshader_element_id && fragmentshader_element_id) {
+
+        shaderMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                color: { value: new THREE.Color(PARTICLE_COLOR) }, // Fixed color from CSS
+                pointTexture: { value: texture } // Pass the SVG texture
+            },
+            vertexShader: vertexshader_element_id.textContent,
+            fragmentShader: fragmentshader_element_id.textContent,
+            transparent: true
+        });
+    
+
+        init();
+        animate();
+    } else {
+        console.error('vertex or shader element not found');
     }
+});
 
-    draw(time) {
-      const { ctx, width, height, color } = this
+function init() {
+    const container = document.getElementById('threeJsContainer');
+    if (!container) return;
 
-      ctx.beginPath()
-      ctx.moveTo(0, height)
+    const containerRect = container.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+  
+    camera = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 1, 10000);
+    camera.position.z = 1000;
+    scene = new THREE.Scene();
 
-      for (let x = 0; x < width; x++) {
-        const y = Math.sin(x * 0.01 + time * 0.1) * 20 + height * 0.7
-        ctx.lineTo(x, y)
+    //
+
+    const numParticles = AMOUNTX * AMOUNTY;
+
+    const positions = new Float32Array(numParticles * 3);
+    const scales = new Float32Array(numParticles);
+
+    let i = 0, j = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        positions[i] = ix * SEPARATION_X - ((AMOUNTX * SEPARATION_X) / 2);
+        positions[i + 1] = 0;
+        positions[i + 2] = iy * SEPARATION_Y - ((AMOUNTY * SEPARATION_Y) / 2);
+        scales[j] = 1;
+        i += 3;
+        j++;
       }
+    }
 
-      ctx.lineTo(width, height)
-      ctx.fillStyle = color
-      ctx.fill()
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
+  
+    particles = new THREE.Points(geometry, shaderMaterial);
+    scene.add(particles);
+  
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(containerWidth, containerHeight);
+    container.appendChild(renderer.domElement);
+  
+    container.addEventListener('mousemove', onDocumentMouseMove, { passive: true });
+    container.addEventListener('touchstart', onDocumentTouchStart, { passive: true });
+    container.addEventListener('touchmove', onDocumentTouchMove, { passive: true });
+
+    //
+
+    window.addEventListener('resize', onWindowResize, { passive: false });
+}
+
+function onWindowResize() {
+    const container = document.getElementById('threeJsContainer');
+    if (!container) return;
+      windowHalfX = window.innerWidth / 2;
+    const containerRect = container.getBoundingClientRect();
+      windowHalfY = window.innerHeight / 2;
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+      camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = containerWidth / containerHeight;
+      camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(containerWidth, containerHeight);
+
+}
+
+//
+
+function onDocumentMouseMove(event) {
+    const container = document.getElementById('threeJsContainer');
+    if (!container) return;
+  
+    const containerRect = container.getBoundingClientRect();
+    mouseX = event.clientX - containerRect.left - containerRect.width / 2;
+  }
+  
+  function onDocumentTouchStart(event) {
+    if (event.touches.length === 1) {
+      const container = document.getElementById('threeJsContainer');
+      if (!container) return;
+      
+      const containerRect = container.getBoundingClientRect();
+      mouseX = event.touches[0].pageX - containerRect.left - containerRect.width / 2;
+      console.log('Container Touch Start');
     }
   }
-
-  function animate(time) {
-    ctx.clearRect(0, 0, width, height)
-    wave.draw(time)
-    requestAnimationFrame(animate)
+  
+  function onDocumentTouchMove(event) {
+    if (event.touches.length === 1) {
+      const container = document.getElementById('threeJsContainer');
+      if (!container) return;
+  
+      const containerRect = container.getBoundingClientRect();
+      mouseX = event.touches[0].pageX - containerRect.left - containerRect.width / 2;
+      console.log('Container Touch Move');
+    }
   }
+//
 
-  window.addEventListener("resize", resize)
-  resize()
-  animate(0)
-})
+function getCurrentColor() {
 
+    return new THREE.Color(PARTICLE_COLOR);
+}
+
+function animate() {
+        render();
+        requestAnimationFrame(animate);
+
+
+}
+
+function render() {
+    if (shaderMaterial && shaderMaterial.uniforms.color) {
+      shaderMaterial.uniforms.color.value.copy(getCurrentColor());
+    }
+  
+    camera.position.x += (mouseX - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+  
+    const positions = particles.geometry.attributes.position.array;
+    const scales = particles.geometry.attributes.scale.array;
+  
+    let i = 0, j = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        positions[i + 1] = (Math.sin((ix + count) * 0.3) * (SEPARATION_Y / 2)) +
+          (Math.sin((iy + count) * 0.5) * (SEPARATION_Y / 2));
+        scales[j] = PARTICLE_SIZE * ((Math.sin((ix + count) * 0.3) + 1) * 8 +
+          (Math.sin((iy + count) * 0.5) + 1) * 8);
+        i += 3;
+        j++;
+      }
+    }
+  
+    particles.geometry.attributes.position.needsUpdate = true;
+    particles.geometry.attributes.scale.needsUpdate = true;
+  
+    renderer.render(scene, camera);
+    count += SPEED;
+  }
