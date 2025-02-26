@@ -1,6 +1,7 @@
 <?php
 $generalData = loadJsonData('general');
 $menuData = loadJsonData('menus');
+$isHomePage = $page === 'home';
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang; ?>" dir="<?php echo $lang === 'he' ? 'rtl' : 'ltr'; ?>">
@@ -53,27 +54,41 @@ $menuData = loadJsonData('menus');
     <script src="assets/js/pi_bg_wave.js" type="module"></script>
 </head>
 <body class="<?php echo $page; ?>-page">
-    <header>
-        <nav>
-            <ul>
-                <?php
-                if (isset($menuData['main_menu'])):
-                    foreach ($menuData['main_menu'] as $item):
-                ?>
-                <li class="<?php echo isActiveMenu($page, $item['main_page_slug']); ?>">
-                    <a href="<?php echo $item['url']; ?>">
-                        <?php echo getTranslatedContent($item, $lang, 'label'); ?>
-                    </a>
-                </li>
-                <?php 
-                    endforeach;
-                endif;
-                ?>
-            </ul>
-        </nav>
-        <div class="language-switcher">
-            <a href="?page=<?php echo $page; ?>&lang=en">English</a>
-            <a href="?page=<?php echo $page; ?>&lang=he">עברית</a>
+    <header id="site-header" class="<?php echo $isHomePage ? 'home-header initially-hidden' : ''; ?>">
+        <div class="container">
+            <div class="header-content">
+                <!-- Part 1: Group name & logo -->
+                <div class="logo-section <?php echo $lang === 'he' ? 'logo-right' : 'logo-left'; ?>">
+                    <img src="assets/images/logo.svg" alt="PI Group Logo">
+                    <span class="group-name">PI Group</span>
+                </div>
+                
+                <!-- Part 2: Menu -->
+                <nav class="main-nav">
+                    <ul>
+                        <?php
+                        if (isset($menuData['main_menu'])):
+                            foreach ($menuData['main_menu'] as $item):
+                        ?>
+                        <li class="<?php echo isActiveMenu($page, $item['main_page_slug']); ?>">
+                            <a href="<?php echo $item['url']; ?>">
+                                <?php echo getTranslatedContent($item, $lang, 'label'); ?>
+                            </a>
+                        </li>
+                        <?php 
+                            endforeach;
+                        endif;
+                        ?>
+                    </ul>
+                </nav>
+                
+                <!-- Part 3: Language switcher -->
+                <div class="language-switcher <?php echo $lang === 'he' ? 'align-left' : 'align-right'; ?>">
+                    <a href="?page=<?php echo $page; ?>&lang=en" class="<?php echo $lang === 'en' ? 'active' : ''; ?>">EN</a>
+                    <span class="separator">|</span>
+                    <a href="?page=<?php echo $page; ?>&lang=he" class="<?php echo $lang === 'he' ? 'active' : ''; ?>">עב</a>
+                </div>
+            </div>
         </div>
     </header>
     <main id="main-content">

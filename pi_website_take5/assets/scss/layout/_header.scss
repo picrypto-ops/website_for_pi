@@ -1,19 +1,52 @@
 @use "../base/variables" as variables;
 @use "../base/mixins" as mixins;
+
 header {
   background-color: variables.$secondary-color;
   color: variables.$hero-text-color;
   padding: 1rem 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
 
-  nav {
+  &.initially-hidden {
+    transform: translateY(-100%);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+    
+    img {
+      max-width: 40px;
+      margin-right: 1rem;
+    }
+    
+    .group-name {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  }
+
+  .main-nav {
+    margin: 0 2rem;
+    
     ul {
       list-style-type: none;
       padding: 0;
-      @include mixins.flex-center;
+      display: flex;
+      gap: 2rem;
 
       li {
-        margin: 0 1rem;
-
         a {
           color: white;
           text-decoration: none;
@@ -23,21 +56,78 @@ header {
             text-decoration: underline;
           }
         }
+
+        &.active a {
+          color: variables.$primary-color;
+        }
       }
+    }
+  }
+
+  .language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    a {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+      
+      &.active {
+        font-weight: bold;
+      }
+    }
+    
+    .separator {
+      color: white;
+    }
+    
+    &.align-right {
+      margin-left: auto;
+    }
+    
+    &.align-left {
+      margin-right: auto;
+      order: -1;
     }
   }
 }
 
-.language-switcher {
-  @include mixins.flex-center;
-  gap: 1rem;
+// Adding space for the fixed header on non-home pages
+body:not(.home-page) {
+  padding-top: 60px;
+}
 
-  a {
-    color: white;
-    text-decoration: none;
+// RTL language adjustments
+html[dir="rtl"] {
+  .logo-section {
+    img {
+      margin-right: 0;
+      margin-left: 1rem;
+    }
+  }
+}
 
-    &:hover {
-      text-decoration: underline;
+@media (max-width: 768px) {
+  header {
+    .header-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .main-nav ul {
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .language-switcher {
+      margin-top: 1rem;
+      align-self: flex-end;
     }
   }
 }

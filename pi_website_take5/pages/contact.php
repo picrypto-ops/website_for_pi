@@ -1,10 +1,14 @@
 <?php
 $contactInfo = loadJsonData('contact');
+$pageData = loadJsonData('pages')['contact'];
 ?>
 
 <section class="contact-us">
     <div class="container">
-        <h1><?php echo t('contact_us_title'); ?></h1>
+        <h1><?php echo getTranslatedContent($pageData, $lang, 'title'); ?></h1>
+        <p class="slogan"><?php echo getTranslatedContent($pageData, $lang, 'slogan'); ?></p>
+        <p class="lead"><?php echo getTranslatedContent($pageData, $lang, 'short_description'); ?></p>
+        
         <div class="contact-content">
             <div class="contact-form">
                 <h2><?php echo t('send_us_message'); ?></h2>

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Home</title>
-    <meta name="description" content="description">
+    <meta name="description" content="">
     <link rel="canonical" href="https://www.pigroup.com/en/home">
     <meta property="og:title" content="Home - Home">
-    <meta property="og:description" content="description">
+    <meta property="og:description" content="">
     <meta property="og:url" content="https://www.pigroup.com/en/home">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
@@ -47,125 +47,331 @@
     <script src="assets/js/pi_bg_wave.js" type="module"></script>
 </head>
 <body class="home-page">
-    <header>
-        <nav>
-            <ul>
-                                <li class="active">
-                    <a href="/">
-                        Home                    </a>
-                </li>
-                                <li class="">
-                    <a href="/investment-banking">
-                        Investment Banking                    </a>
-                </li>
-                                <li class="">
-                    <a href="/asset-management">
-                        Asset Management                    </a>
-                </li>
-                                <li class="">
-                    <a href="/team">
-                        Our Team                    </a>
-                </li>
-                                <li class="">
-                    <a href="/about">
-                        About Us                    </a>
-                </li>
-                                <li class="">
-                    <a href="/contact">
-                        Contact Us                    </a>
-                </li>
-                            </ul>
-        </nav>
-        <div class="language-switcher">
-            <a href="?page=home&lang=en">English</a>
-            <a href="?page=home&lang=he">עברית</a>
+    <header id="site-header" class="home-header initially-hidden">
+        <div class="container">
+            <div class="header-content">
+                <!-- Part 1: Group name & logo -->
+                <div class="logo-section logo-left">
+                    <img src="assets/images/logo.svg" alt="PI Group Logo">
+                    <span class="group-name">PI Group</span>
+                </div>
+                
+                <!-- Part 2: Menu -->
+                <nav class="main-nav">
+                    <ul>
+                                                <li class="active">
+                            <a href="/">
+                                Home                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="/investment-banking">
+                                Investment Banking                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="/asset-management">
+                                Asset Management                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="/team">
+                                Our Team                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="/about">
+                                About Us                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="/contact">
+                                Contact Us                            </a>
+                        </li>
+                                            </ul>
+                </nav>
+                
+                <!-- Part 3: Language switcher -->
+                <div class="language-switcher align-right">
+                    <a href="?page=home&lang=en" class="active">EN</a>
+                    <span class="separator">|</span>
+                    <a href="?page=home&lang=he" class="">עב</a>
+                </div>
+            </div>
         </div>
     </header>
     <main id="main-content">
 
-
+<div style='position:fixed; top:0; right:0; z-index:1000; background:#fff; border:1px solid #ccc; padding:5px;'><button onclick="document.getElementById('debugInfo').style.display = document.getElementById('debugInfo').style.display === 'none' ? 'block' : 'none';">Toggle Debug</button><div id='debugInfo' style='display:none; max-height:300px; overflow:auto; padding:10px;'><h3>Debug Information</h3><p>TranslatableFactory class loaded: Yes</p><p>AbstractTranslatable class loaded: Yes</p><p>Home translatable class: PageTranslatable</p><p>About translatable class: PageTranslatable</p><p>WhatWeDo translatable class: PageTranslatable</p><p>General translatable class: GeneralTranslatable</p></div></div>
 <div class="home-page">
     <section class="hero full-page">
+        <!-- Logo in top right for English -->
+        <div class="hero-top-logo right-aligned">
+            <img src="assets/images/logo.svg" alt="PI Group Logo">
+        </div>
+        
         <div class="hero-content">
-            <h1>Home</h1>
-            <p>description</p>
-            <a href="#learn-more" class="cta-button">learn_more</a>
+            <h1>Unwavering Professionalism <br>Exceptional Results</h1>
+            <p class="slogan"></p>
+            <p class="wide-description">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
+            <a href="#about-us" class="cta-button"></a>
         </div>
+
+        <!-- ThreeJS container positioned at bottom 30% -->
         <div id="threeJsContainer"></div>
+        
         <div class="scroll-indicator">
-            <span>scroll_down</span>
-            <i class="arrow-down"></i>
+            <a href="#about-us" class="scroll-down">
+                <span></span>
+                <i class="arrow-down"></i>
+            </a>
         </div>
     </section>
 
-    <section id="learn-more" class="featured-segments">
-        <div class="container">
-            <h2>Our Segments</h2>
-                                                <div class="segment-card">
-                        <h3>Investment Banking</h3>
-                        <p>Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.</p>
-                        <a href="?page=segment&id=investment_banking&lang=en" class="button">
-                            read_more                        </a>
-                    </div>
-                                    <div class="segment-card">
-                        <h3>Asset Management</h3>
-                        <p>Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.</p>
-                        <a href="?page=segment&id=asset_management&lang=en" class="button">
-                            read_more                        </a>
-                    </div>
-                                    </div>
-    </section>
-
-    <section class="featured-products">
-        <div class="container">
-            <h2>Our Products</h2>
-                                                                        <div class="product-card">
-                            <img src="images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
-                            <h3>PI Pituach</h3>
-                            <p>Innovate Today, Secure Tomorrow</p>
-                            <a href="?page=product&id=pi_pituach&lang=en" class="button">
-                                learn_more                            </a>
-                        </div>
-                                            <div class="product-card">
-                            <img src="images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
-                            <h3>PI Select</h3>
-                            <p>Invest With Confidence</p>
-                            <a href="?page=product&id=pi_select&lang=en" class="button">
-                                learn_more                            </a>
-                        </div>
-                                                                                <div class="product-card">
-                            <img src="images/asset_management/pi_emf_retired/logo_large.svg" alt="PI EMF (retired)">
-                            <h3>PI EMF (retired)</h3>
-                            <p>Mastering Market Discrepancies</p>
-                            <a href="?page=product&id=pi_emf&lang=en" class="button">
-                                learn_more                            </a>
-                        </div>
-                                            <div class="product-card">
-                            <img src="images/asset_management/pi_global/logo_large.svg" alt="PI Global">
-                            <h3>PI Global</h3>
-                            <p>Macro & Derivatives Excellence</p>
-                            <a href="?page=product&id=pi_global&lang=en" class="button">
-                                learn_more                            </a>
-                        </div>
-                                            <div class="product-card">
-                            <img src="images/asset_management/pi_equity/logo_large.svg" alt="PI Equity">
-                            <h3>PI Equity</h3>
-                            <p>Cultivating Israeli Business Gems</p>
-                            <a href="?page=product&id=pi_equity&lang=en" class="button">
-                                learn_more                            </a>
-                        </div>
-                                                        </div>
-    </section>
-
-    <section class="about-preview">
+    <!-- About Us Section -->
+    <section id="about-us" class="about-preview full-page-section">
         <div class="container">
             <h2>About Us</h2>
-            <p>PI Group is a leading financial services company specializing in investment banking and asset management.</p>
+            <p>Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.
+Pi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.
+While proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.
+Pi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.
+More recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.
+Through innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.</p>
             <a href="?page=about&lang=en" class="button">
-                learn_more            </a>
+                Read More            </a>
+        </div>
+        
+        <!-- Add scroll indicator on each section -->
+        <div class="scroll-indicator">
+            <a href="#what-we-do" class="scroll-down">
+                <span></span>
+                <i class="arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section id="what-we-do" class="featured-segments full-page-section">
+        <div class="container">
+            <h2>What We Do</h2>
+            <p>Discover how we leverage decades of successful investing experience to deliver exceptional value for our partners.</p>
+            <div class="segment-grid">
+                                                                                    <div class="segment-card">
+                            <h3>Investment Banking</h3>
+                            <p>Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.</p>
+                            <a href="?page=segment&id=investment_banking&lang=en" class="segment-link">
+                                <span></span>
+                                <span class="icon-arrow-right"></span>
+                            </a>
+                        </div>
+                                                                    <div class="segment-card">
+                            <h3>Asset Management</h3>
+                            <p>Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.</p>
+                            <a href="?page=segment&id=asset_management&lang=en" class="segment-link">
+                                <span></span>
+                                <span class="icon-arrow-right"></span>
+                            </a>
+                        </div>
+                                                </div>
+        </div>
+        
+        <!-- Add scroll indicator -->
+        <div class="scroll-indicator">
+            <a href="#featured-products" class="scroll-down">
+                <span></span>
+                <i class="arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="featured-products" class="featured-products full-page-section">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="product-grid">
+                                    <div class="product-card">
+                                                    <img src="images/investment_banking/pi_pituach/logo_large.svg" alt="">
+                                                <h3></h3>
+                        <p></p>
+                        <a href="?page=product&id=pi_pituach&lang=en" class="button">
+                                                    </a>
+                    </div>
+                                    <div class="product-card">
+                                                    <img src="images/investment_banking/pi_select/logo_large.svg" alt="">
+                                                <h3></h3>
+                        <p></p>
+                        <a href="?page=product&id=pi_select&lang=en" class="button">
+                                                    </a>
+                    </div>
+                                    <div class="product-card">
+                                                    <img src="images/asset_management/pi_global/logo_large.svg" alt="">
+                                                <h3></h3>
+                        <p></p>
+                        <a href="?page=product&id=pi_global&lang=en" class="button">
+                                                    </a>
+                    </div>
+                                    <div class="product-card">
+                                                    <img src="images/asset_management/pi_equity/logo_large.svg" alt="">
+                                                <h3></h3>
+                        <p></p>
+                        <a href="?page=product&id=pi_equity&lang=en" class="button">
+                                                    </a>
+                    </div>
+                            </div>
+            
+            <a href="?page=products&lang=en" class="button">
+                            </a>
+        </div>
+        
+        <!-- Add scroll indicator -->
+        <div class="scroll-indicator">
+            <a href="#team" class="scroll-down">
+                <span></span>
+                <i class="arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team-preview full-page-section">
+        <div class="container">
+            <h2>Our Team</h2>
+            <p></p>
+            
+            <!-- Group team members by team group -->
+                            <div class="team-group">
+                    <h3>Founders</h3>
+                    <div class="team-preview-grid">
+                                                                                                                    <div class="team-card">
+                                                                            <img src="/images/team/aaron_cohen.png" alt="Aron Cohen">
+                                                                        <h3>Aron Cohen</h3>
+                                    <p>Founder</p>
+                                </div>
+                                                                                            <div class="team-card">
+                                                                            <img src="/images/team/jonny_kaye.png" alt="Jonny Kaye">
+                                                                        <h3>Jonny Kaye</h3>
+                                    <p>Founder</p>
+                                </div>
+                                                                        </div>
+                </div>
+                            <div class="team-group">
+                    <h3>Management</h3>
+                    <div class="team-preview-grid">
+                                                                                                                    <div class="team-card">
+                                                                            <img src="/images/team/shlomi_cohen.png" alt="Shlomi Cohen">
+                                                                        <h3>Shlomi Cohen</h3>
+                                    <p>Chief Financial Officer</p>
+                                </div>
+                                                                                            <div class="team-card">
+                                                                            <img src="/images/team/ronen_bitman.png" alt="Ronen Bitman">
+                                                                        <h3>Ronen Bitman</h3>
+                                    <p>Chief Technology Officer</p>
+                                </div>
+                                                                                            <div class="team-card">
+                                                                            <img src="/images/team/hagit_borohovitz.png" alt="Hagit Borohovitz">
+                                                                        <h3>Hagit Borohovitz</h3>
+                                    <p>Chief Legal Officer</p>
+                                </div>
+                                                                                            <div class="team-card">
+                                                                            <img src="/images/team/ronen_elgali.png" alt="Ronen Elgali">
+                                                                        <h3>Ronen Elgali</h3>
+                                    <p>Chief Investment Officer</p>
+                                </div>
+                                                                        </div>
+                </div>
+                            <div class="team-group">
+                    <h3>Pi_pituach</h3>
+                    <div class="team-preview-grid">
+                                                                                                                    <div class="team-card">
+                                                                            <img src="/images/team/dan_rosenberg.png" alt="Dan Rosenberg">
+                                                                        <h3>Dan Rosenberg</h3>
+                                    <p>Founder</p>
+                                </div>
+                                                                                            <div class="team-card">
+                                                                            <img src="/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz">
+                                                                        <h3>Itay Ruschkewitz</h3>
+                                    <p>CEO and Co-Founder</p>
+                                </div>
+                                                                        </div>
+                </div>
+                            <div class="team-group">
+                    <h3>Pi_select</h3>
+                    <div class="team-preview-grid">
+                                                                                                                    <div class="team-card">
+                                                                            <img src="/images/team/buky_katzman.png" alt="Baruch (Buky) Katzman">
+                                                                        <h3>Baruch (Buky) Katzman</h3>
+                                    <p>Co-founder</p>
+                                </div>
+                                                                        </div>
+                </div>
+                        
+            <a href="?page=our-team&lang=en" class="button">
+                            </a>
+        </div>
+        
+        <!-- Add scroll indicator -->
+        <div class="scroll-indicator">
+            <a href="#contact-us" class="scroll-down">
+                <span></span>
+                <i class="arrow-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact-us" class="contact-preview full-page-section">
+        <div class="container">
+            <h2></h2>
+            <p></p>
+            
+            <!-- Add contact details -->
+            <div class="contact-details-preview">
+                                
+                                
+                            </div>
+            
+            <a href="?page=contact&lang=en" class="button">
+                            </a>
+        </div>
+        
+        <!-- Add scroll button to appear on every page -->
+        <div class="scroll-indicator">
+            <a href="#" class="scroll-down" id="scrollToNextSection">
+                <span></span>
+                <i class="arrow-down"></i>
+            </a>
         </div>
     </section>
 </div>
+
+<!-- Replace embedded script with external script reference -->
+<script src="assets/js/home.js"></script>
+
+<!-- At the bottom of home.php, add this script to fix scroll buttons -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fix scroll indicators to ensure they're visible on all sections
+    const sections = document.querySelectorAll('.full-page-section');
+    const lastSection = sections[sections.length - 1];
+    
+    sections.forEach((section, index) => {
+        const scrollIndicator = section.querySelector('.scroll-indicator');
+        
+        // If this is the last section, hide its scroll indicator or make it scroll to top
+        if (index === sections.length - 1) {
+            if (scrollIndicator) {
+                scrollIndicator.style.display = 'none';
+                // Or alternatively, make it scroll to top:
+                // scrollIndicator.querySelector('a').setAttribute('href', '#');
+                // scrollIndicator.querySelector('span').textContent = 'Back to Top';
+            }
+        } 
+        // Otherwise make sure it points to the next section
+        else if (scrollIndicator && index < sections.length - 1) {
+            const nextSectionId = sections[index + 1].id;
+            if (nextSectionId) {
+                scrollIndicator.querySelector('a').setAttribute('href', '#' + nextSectionId);
+            }
+        }
+    });
+});
+</script>
 
 </main>
     <footer>

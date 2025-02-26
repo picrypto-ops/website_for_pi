@@ -1,4 +1,5 @@
 @use '../base/variables';
+@use '../base/mixins';
 
 .home-page {
   .hero {
@@ -9,115 +10,434 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    .hero-content {
-      text-align: center;
-      z-index: 1;
-      max-width: 800px;
-      padding: 2rem;
-
-      h1 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+    justify-content: flex-start;
+    padding: 0 5%;
+    
+    .hero-top-logo {
+      position: absolute;
+      top: 3rem;
+      z-index: 5;
+      
+      img {
+        width: 80px;
       }
-
-      p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
+      
+      &.right-aligned {
+        right: 5%;
+      }
+      
+      &.left-aligned {
+        left: 5%;
       }
     }
 
-    #pi-bg-wave {
+    .hero-content {
+      width: 50%;
+      z-index: 1;
+      padding: 2rem;
+
+      h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 1s ease-out;
+        line-height: 1.2;
+      }
+
+      .slogan {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-style: italic;
+        animation: fadeInUp 1.2s ease-out;
+      }
+
+      .wide-description {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1.4s ease-out;
+        width: 200%; // Make description twice as wide
+        max-width: 800px;
+      }
+      
+      .cta-button {
+        animation: fadeInUp 1.6s ease-out;
+      }
+    }
+
+    #threeJsContainer {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 30%; // Set to bottom 30% of the screen
       z-index: 0;
     }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      color: white;
-
-      span {
-        display: block;
-        margin-bottom: 0.5rem;
-      }
-
-      .arrow-down {
-        display: block;
-        width: 20px;
-        height: 20px;
-        border-right: 2px solid white;
-        border-bottom: 2px solid white;
-        transform: rotate(45deg);
-        animation: bounce 2s infinite;
-      }
-    }
   }
 
+  // Other sections styling
+  .about-preview,
   .featured-segments,
   .featured-products,
-  .about-preview {
-    padding: 4rem 0;
-    background-color: var(--bg-color);
+  .our-team-preview,
+  .contact-preview {
+    padding: 6rem 0;
+  }
+  
+  // Product grid layout
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
   }
 
-  .segment-card,
   .product-card {
-    background-color: white;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    width: 300px; // Fixed width
-    height: 300px; // Fixed height
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 25px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    min-height: 300px; // Fixed height for consistency
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
       transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    img {
+      max-width: 100%;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .placeholder-image {
+      width: 100%;
+      height: 100px;
+      background: #f3f3f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      margin-bottom: 15px;
     }
 
     h3 {
-      margin-bottom: 1rem;
+      margin-top: 0;
+      font-size: 1.4rem;
+      color: #333;
+    }
+
+    p {
+      flex-grow: 1;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      align-self: flex-start;
+      margin-top: auto;
+    }
+  }
+
+  // Team grid layout
+  .team-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+  }
+
+  .team-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .placeholder-photo {
+      width: 100%;
+      height: 200px;
+      background: #f3f3f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+    }
+
+    h3, p {
+      padding: 0 20px;
+    }
+
+    h3 {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin-top: 0;
+      color: #666;
+    }
+  }
+
+  .team-group h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+  }
+}
+
+// Scroll indicator styles
+.scroll-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 1000;
+  pointer-events: none;
+  
+  .scroll-down {
+    display: inline-block;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+      transform: translateY(-3px);
+    }
+    
+    &.animated {
+      animation: bounce-standalone 2s infinite;
+    }
+    
+    .arrow-down {
+      width: 15px;
+      height: 15px;
+      border-right: 2px solid #333;
+      border-bottom: 2px solid #333;
+      transform: rotate(45deg);
+      margin-top: -5px;
     }
   }
 }
 
-.featured-segments,
-.featured-products {
-  .container {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 2rem;
-    padding-bottom: 1rem;
+// Full-page section styles
+.full-page-section {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 80px;
+  box-sizing: border-box;
+  scroll-margin-top: 80px;
+  scroll-snap-align: start;
+}
+
+// RTL adjustments
+html[dir="rtl"] {
+  .home-page {
+    .hero {
+      .hero-content {
+        .wide-description {
+          direction: rtl;
+        }
+      }
+    }
+    
+    .segment-card,
+    .product-card,
+    .team-card {
+      p {
+        text-align: right;
+      }
+    }
+    
+    .segment-link {
+      align-self: flex-start;
+      
+      .icon-arrow-right {
+        transform: rotate(180deg);
+        margin-left: 0;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0) rotate(45deg);
-  }
-  40% {
-    transform: translateY(-10px) rotate(45deg);
-  }
-  60% {
-    transform: translateY(-5px) rotate(45deg);
-  }
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0) rotate(45deg);}
+  40% {transform: translateY(-10px) rotate(45deg);}
+  60% {transform: translateY(-5px) rotate(45deg);}
+}
+
+// Additional bounce animation for standalone scroll buttons
+@keyframes bounce-standalone {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
+
+.scroll-down.animated:not(.arrow-down) {
+  animation: bounce-standalone 2s infinite;
 }
 
 // Smooth scrolling
 html {
   scroll-behavior: smooth;
+}
+
+// Responsive adjustments
+@media (max-width: 992px) {
+  .home-page {
+    .hero {
+      .hero-content {
+        width: 70%;
+        
+        .wide-description {
+          width: 140%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    .hero {
+      .hero-content {
+        width: 90%;
+        
+        h1 {
+          font-size: 2.5rem;
+        }
+        
+        .wide-description {
+          width: 100%;
+          font-size: 1rem;
+        }
+      }
+      
+      .hero-top-logo img {
+        width: 60px;
+      }
+    }
+    
+    .segment-grid,
+    .product-grid,
+    .team-preview-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Fix team section height
+.our-team-preview {
+  min-height: auto; // Override min-height for team section
+  max-height: 100vh; // Limit height to viewport
+  overflow-y: auto; // Enable scrolling within the section
+  padding-bottom: 100px; // Add padding at bottom for scroll button
+  
+  .team-preview-grid {
+    margin-bottom: 60px; // Add space at bottom
+  }
+}
+
+// Fix view-all button for products and team
+.view-all-button {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  max-width: 200px;
+}
+
+// Make contact section always visible
+.contact-preview {
+  min-height: auto;
+  padding: 80px 0;
+  background-color: #f9f9f9; // Different background to distinguish
+  
+  .contact-details-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      
+      i {
+        margin-right: 15px;
+        font-size: 24px;
+        color: variables.$primary-color;
+      }
+      
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Section titles consistency
+.full-page-section h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  position: relative;
+  
+  &:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: variables.$primary-color;
+    margin: 15px auto 0;
+  }
 }
 

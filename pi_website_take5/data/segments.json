@@ -5,6 +5,7 @@
         "en": {
           "name": "Investment Banking",
           "title": "Innovative Financial Solutions",
+          "home_description": "Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.",
           "short_description": "Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market."
         },
         "he": {
@@ -20,11 +21,13 @@
         "en": {
           "name": "Asset Management",
           "title": "Expert Portfolio Management",
+          "home_description": "Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.",
           "short_description": "Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes."
         },
         "he": {
           "name": "ניהול מניות",
           "title": "מניהול מניות מיוחד",
+          "home_description": "מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי.",
           "short_description": "מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי."
         }
       }

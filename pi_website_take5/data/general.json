@@ -65,14 +65,14 @@
         }
       }
     },
-    "our_segments": {
-      "term_slug": "our_segments",
+    "what_we_do": {
+      "term_slug": "what_we_do",
       "language_slug": {
         "en": {
-          "label": "Our Segments"
+          "label": "What We Do"
         },
         "he": {
-          "label": "המגזרים שלנו"
+          "label": "מה אנחנו עושים"
         }
       }
     },
@@ -87,14 +87,14 @@
         }
       }
     },
-    "about_us_short": {
-      "term_slug": "about_us_short",
+    "read_more": {
+      "term_slug": "read_more",
       "language_slug": {
         "en": {
-          "label": "PI Group is a leading financial services company specializing in investment banking and asset management."
+          "label": "Read More"
         },
         "he": {
-          "label": "קבוצת PI היא חברת שירותים פיננסיים מובילה המתמחה בבנקאות השקעות וניהול נכסים."
+          "label": "קרא עוד"
         }
       }
     }
