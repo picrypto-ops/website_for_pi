@@ -10,6 +10,8 @@
 @use 'modules/buttons';
 @use 'modules/forms';
 @use 'modules/navigation';
+@use 'modules/breadcrumbs';
+@use 'modules/cards';
 @use 'modules/home';
 
 // State
@@ -17,5 +19,8 @@
 
 // Theme
 @use 'themes/theme';
+
+// Add Font Awesome - add this to your HTML header if not using SCSS compilation
+// <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 

@@ -2,15 +2,16 @@
 @use "../base/mixins" as mixins;
 
 header {
-  background-color: variables.$secondary-color;
-  color: variables.$hero-text-color;
-  padding: 1rem 0;
+  background-color: variables.$header-bg-color;
+  color: variables.$header-text-color;
+  padding: variables.$header-padding 0;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  transition: transform 0.3s ease;
+  transition: variables.$header-transition;
+  box-shadow: variables.$header-shadow;
 
   &.initially-hidden {
     transform: translateY(-100%);
@@ -27,38 +28,40 @@ header {
     align-items: center;
     
     img {
-      max-width: 40px;
+      max-width: variables.$logo-size;
       margin-right: 1rem;
     }
     
     .group-name {
-      font-weight: bold;
-      font-size: 1.2rem;
+      font-weight: variables.$nav-font-weight;
+      font-size: variables.$group-name-size;
+      color: variables.$nav-link-color;
     }
   }
 
   .main-nav {
-    margin: 0 2rem;
+    margin: 0 variables.$nav-gap;
     
     ul {
       list-style-type: none;
       padding: 0;
       display: flex;
-      gap: 2rem;
+      gap: variables.$nav-gap;
 
       li {
         a {
-          color: white;
+          color: variables.$nav-link-color;
           text-decoration: none;
           font-weight: bold;
 
           &:hover {
+            color: variables.$nav-link-hover;
             text-decoration: underline;
           }
         }
 
         &.active a {
-          color: variables.$primary-color;
+          color: variables.$nav-active;
         }
       }
     }
@@ -67,23 +70,25 @@ header {
   .language-switcher {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: variables.$lang-switcher-gap;
 
     a {
-      color: white;
+      color: variables.$nav-link-color;
       text-decoration: none;
 
       &:hover {
+        color: variables.$nav-link-hover;
         text-decoration: underline;
       }
       
       &.active {
         font-weight: bold;
+        color: variables.$nav-active;
       }
     }
     
     .separator {
-      color: white;
+      color: variables.$nav-link-color;
     }
     
     &.align-right {
@@ -99,7 +104,7 @@ header {
 
 // Adding space for the fixed header on non-home pages
 body:not(.home-page) {
-  padding-top: 60px;
+  padding-top: calc(variables.$header-height + (variables.$header-padding * 2));
 }
 
 // RTL language adjustments
@@ -114,20 +119,209 @@ html[dir="rtl"] {
 
 @media (max-width: 768px) {
   header {
+    padding: 10px 0;
+    
+    .container {
+      padding: 0 15px;
+      position: relative;
+    }
+    
+    .mobile-menu-toggle {
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1550;
+      background: transparent;
+      border: none;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      cursor: pointer;
+      
+      html[dir="ltr"] & {
+        left: 15px;
+      }
+      
+      html[dir="rtl"] & {
+        right: 15px;
+      }
+      
+      .menu-icon {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .bar {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 24px;
+        background: white;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        transition: all 0.3s ease;
+        
+        &:nth-child(1) {
+          top: 10px;
+        }
+        
+        &:nth-child(2) {
+          top: 18px;
+        }
+        
+        &:nth-child(3) {
+          top: 26px;
+        }
+      }
+      
+      &.active {
+        html[dir="ltr"] & {
+          left: auto;
+          right: 15px;
+        }
+        
+        html[dir="rtl"] & {
+          right: auto;
+          left: 15px;
+        }
+        
+        .bar:nth-child(1) {
+          transform: rotate(45deg);
+          top: 18px;
+        }
+        
+        .bar:nth-child(2) {
+          opacity: 0;
+        }
+        
+        .bar:nth-child(3) {
+          transform: rotate(-45deg);
+          top: 18px;
+        }
+      }
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      &:active {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      
+      &:before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        right: -15px;
+        bottom: -15px;
+      }
+      
+      .menu-icon, .bar {
+        pointer-events: none;
+      }
+    }
+    
     .header-content {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+      
+      .logo-section {
+        margin: 0 auto;
+        padding: 0 44px;
+      }
+      
+      .language-switcher {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1510;
+        
+        html[dir="ltr"] & {
+          right: 15px;
+        }
+        
+        html[dir="rtl"] & {
+          left: 15px;
+        }
+      }
+      
+      .main-nav {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        margin: 0;
+        background-color: variables.$header-bg-color;
+        
+        &.open {
+          max-height: 500px;
+          margin-top: 15px;
+          padding-bottom: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          width: 100%;
+          z-index: 1500;
+        }
+        
+        ul {
+          flex-direction: column;
+          gap: 0;
+          margin: 0;
+          padding: 0;
+          
+          li {
+            width: 100%;
+            
+            a {
+              padding: 12px 15px;
+              display: block;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+              transition: background-color 0.2s ease;
+              
+              &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                text-decoration: none;
+              }
+            }
+            
+            &:last-child a {
+              border-bottom: none;
+            }
+            
+            &.active a {
+              background-color: rgba(255, 255, 255, 0.15);
+            }
+          }
+        }
+      }
     }
     
-    .main-nav ul {
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .language-switcher {
-      margin-top: 1rem;
-      align-self: flex-end;
+    .mobile-menu-toggle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1550;
+      
+      &.active {
+        position: fixed;
+        top: 25px;
+        
+        html[dir="ltr"] & {
+          left: 15px;
+        }
+        
+        html[dir="rtl"] & {
+          right: 15px;
+        }
+      }
     }
   }
 }

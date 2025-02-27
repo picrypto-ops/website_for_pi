@@ -6,7 +6,7 @@ class TranslatableFactory {
     /**
      * Debug flag - set to true to enable debug output
      */
-    public static $debug = true;
+    public static $debug = false;
     
     /**
      * Loaded data cache

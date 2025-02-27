@@ -97,7 +97,18 @@
           "label": "קרא עוד"
         }
       }
-    }
+    },
+    "scroll_down": {
+        "term_slug": "scroll_down",
+        "language_slug": {
+          "en": {
+            "label": ""
+          },
+          "he": {
+            "label": ""
+          }
+        }
+      }    
   }
   
   

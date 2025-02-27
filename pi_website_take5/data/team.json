@@ -2,7 +2,7 @@
     "founders": [
         {
             "name_slug": "aaron-cohen",
-            "photo": "/images/team/aaron_cohen.png",
+            "photo": "assets/images/team/aaron_cohen.png",
             "is_founder": true,
             "display_in_home_page": true,
             "language_slug": {
@@ -22,7 +22,7 @@
         },
         {
             "name_slug": "jonny-kaye",
-            "photo": "/images/team/jonny_kaye.png",
+            "photo": "assets/images/team/jonny_kaye.png",
             "is_founder": true,
             "display_in_home_page": true,
             "language_slug": {
@@ -44,7 +44,7 @@
     "management": [
         {
             "name_slug": "shlomi-cohen",
-            "photo": "/images/team/shlomi_cohen.png",
+            "photo": "assets/images/team/shlomi_cohen.png",
             "is_founder": false,
             "display_in_home_page": true,
             "language_slug": {
@@ -64,7 +64,7 @@
         },
         {
             "name_slug": "ronen-bitman",
-            "photo": "/images/team/ronen_bitman.png",
+            "photo": "assets/images/team/ronen_bitman.png",
             "is_founder": false,
             "display_in_home_page": true,
             "language_slug": {
@@ -84,7 +84,7 @@
         },
         {
             "name_slug": "hagit-borohovitz",
-            "photo": "/images/team/hagit_borohovitz.png",
+            "photo": "assets/images/team/hagit_borohovitz.png",
             "is_founder": false,
             "display_in_home_page": true,
             "language_slug": {
@@ -104,7 +104,7 @@
         },
         {
             "name_slug": "ronen-elgali",
-            "photo": "/images/team/ronen_elgali.png",
+            "photo": "assets/images/team/ronen_elgali.png",
             "is_founder": false,
             "display_in_home_page": true,
             "language_slug": {
@@ -126,7 +126,7 @@
     "pi_pituach": [
         {
             "name_slug": "dan-rosenberg",
-            "photo": "/images/team/dan_rosenberg.png",
+            "photo": "assets/images/team/dan_rosenberg.png",
             "is_founder": true,
             "display_in_home_page": true,
             "language_slug": {
@@ -146,7 +146,7 @@
         },
         {
             "name_slug": "itai-ruschkewitz",
-            "photo": "/images/team/itai_ruschkewitz.png",
+            "photo": "assets/images/team/itai_ruschkewitz.png",
             "is_founder": true,
             "display_in_home_page": true,
             "language_slug": {
@@ -168,7 +168,7 @@
     "pi_select": [
         {
             "name_slug": "buky-katzman",
-            "photo": "/images/team/buky_katzman.png",
+            "photo": "assets/images/team/buky_katzman.png",
             "is_founder": true,
             "display_in_home_page": true,
             "language_slug": {

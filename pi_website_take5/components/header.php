@@ -57,6 +57,23 @@ $isHomePage = $page === 'home';
     <header id="site-header" class="<?php echo $isHomePage ? 'home-header initially-hidden' : ''; ?>">
         <div class="container">
             <div class="header-content">
+                <!-- Simplify the button but keep the inline handler for now -->
+                <button class="mobile-menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false"
+                    onclick="
+                        this.classList.toggle('active');
+                        document.querySelector('.main-nav').classList.toggle('open');
+                        document.body.classList.toggle('menu-open');
+                        return false;
+                    ">
+                    <span class="menu-icon">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                </button>
+                
                 <!-- Part 1: Group name & logo -->
                 <div class="logo-section <?php echo $lang === 'he' ? 'logo-right' : 'logo-left'; ?>">
                     <img src="assets/images/logo.svg" alt="PI Group Logo">

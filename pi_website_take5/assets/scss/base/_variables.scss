@@ -1,13 +1,110 @@
-$primary-color: #0033a0;
-$secondary-color: #003366;
-$text-color: #333;
-$background-color: #f5f5f5;
+@use "sass:color";
 
-$dark_bg-color: #1a1a1a;
-$dark_text-color: #f5f5f5;
-$dark_primary-color: #4a90e2;
-$dark_secondary-color: #2c3e50;
+// Brand Colors
+$primary-color: #4A6B9F;     // Darker professional blue
+$secondary-color: #7297C5;   // Medium blue
+$accent-color: #2C5282;      // Dark blue for emphasis
 
-// Add these new variables
+// Text Colors
+$text-color: #1A1A1A;        // Near black
+$text-light: #FFFFFF;        // White for dark backgrounds
+$text-muted: #64748B;        // Muted text
+$text-link: $primary-color;  // Link color
+
+// Background Colors
+$background-color: #f5f5f5;  // Light gray
 $hero-bg-color: $primary-color;
-$hero-text-color: #ffffff;
+$hero-text-color: $text-light;
+
+$nav-link-color: $text-light;
+// Header Colors
+$header-bg-color: $secondary-color;
+$header-text-color: $nav-link-color;
+
+// UI Element Colors
+$button-primary: $accent-color;
+$button-hover: color.adjust($accent-color, $lightness: -10%);
+$button-text: $text-light;
+
+// Navigation Colors
+$nav-link-hover: color.adjust($text-light, $lightness: -10%);
+$nav-active: $primary-color;
+
+// Scroll Indicator Colors
+$scroll-indicator-bg: rgba($accent-color, 0.8);
+$scroll-indicator-hover: rgba($accent-color, 1);
+
+// Breadcrumb Colors
+$breadcrumb-active: $primary-color;
+$breadcrumb-inactive: #CBD5E1;
+$breadcrumb-hover: #64748B;
+
+// Dark Theme Colors
+$dark-bg-color: #1a1a1a;
+$dark-text-color: #f5f5f5;
+$dark-primary-color: #4a90e2;
+$dark-secondary-color: #2c3e50;
+
+// Section Colors
+$section-header-color: $primary-color;
+$section-text-color: #555;
+$section-bg-light: rgba($primary-color, 0.05);
+
+// Card Colors
+$card-bg: #FFFFFF;
+$card-shadow-color: rgba(0, 0, 0, 0.1);
+$card-hover-shadow-color: rgba(0, 0, 0, 0.15);
+
+// Header Elements
+$header-height: 60px;
+$header-padding: 1rem;
+$header-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$header-transition: transform 0.3s ease;
+
+
+// Logo
+$logo-size: 40px;
+$group-name-size: 1.2rem;
+
+// Navigation
+$nav-gap: 2rem;
+$nav-font-weight: bold;
+$nav-transition: color 0.3s ease;
+
+// Language Switcher
+$lang-switcher-gap: 0.5rem;
+$lang-active-weight: bold;
+
+// Breadcrumb Navigation
+$breadcrumb-padding: 1rem;
+$breadcrumb-bg: rgba($background-color, 0.9);
+$breadcrumb-border: 1px solid rgba($primary-color, 0.1);
+$breadcrumb-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$breadcrumb-gap: 1rem;
+$breadcrumb-transition: all 0.3s ease;
+
+// Card Styling
+$card-bg-color: $card-bg;
+$card-border-radius: 8px;
+$card-padding: 1.5rem;
+$card-margin: 1rem;
+$card-shadow-color: 0 2px 4px $card-shadow-color;
+$card-hover-shadow-color: 0 4px 8px $card-hover-shadow-color;
+$card-transition: all 0.3s ease;
+
+// Add these new footer variables to your existing variables.scss
+// Footer Colors and Styling
+$footer-bg-color: $secondary-color;
+$footer-text-color: $text-light;
+$footer-link-color: $text-light;
+$footer-link-hover-opacity: 0.8;
+$footer-border-top: 1px solid rgba($text-light, 0.1);
+
+// Footer Dimensions
+$footer-padding-y: 2rem;
+$footer-padding-x: 20px;
+$footer-max-width: 1200px;
+$footer-logo-size: 50px;
+$footer-text-size: 1.1rem;
+$footer-bottom-margin: 2rem;
+$footer-link-gap: 1.5rem;

@@ -1,0 +1,42 @@
+@use "../base/variables" as variables;
+
+.card {
+  background-color: variables.$card-bg-color;
+  border-radius: variables.$card-border-radius;
+  padding: variables.$card-padding;
+  margin: variables.$card-margin;
+  box-shadow: variables.$card-shadow-color;
+  transition: variables.$card-transition;
+
+  &:hover {
+    box-shadow: variables.$card-hover-shadow-color;
+    transform: translateY(-2px);
+  }
+
+  .card-header {
+    margin-bottom: 1rem;
+
+    h3 {
+      color: variables.$section-header-color;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .card-content {
+    color: variables.$section-text-color;
+  }
+
+  .card-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(variables.$primary-color, 0.1);
+  }
+}
+
+// Card grid layout
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+} 

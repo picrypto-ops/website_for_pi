@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Home</title>
+    <title>דף הבית - דף הבית</title>
     <meta name="description" content="">
-    <link rel="canonical" href="https://www.pigroup.com/en/home">
-    <meta property="og:title" content="Home - Home">
+    <link rel="canonical" href="https://www.pigroup.com/he/home">
+    <meta property="og:title" content="דף הבית - דף הבית">
     <meta property="og:description" content="">
-    <meta property="og:url" content="https://www.pigroup.com/en/home">
+    <meta property="og:url" content="https://www.pigroup.com/he/home">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -68,7 +68,7 @@
                 </button>
                 
                 <!-- Part 1: Group name & logo -->
-                <div class="logo-section logo-left">
+                <div class="logo-section logo-right">
                     <img src="assets/images/logo.svg" alt="PI Group Logo">
                     <span class="group-name">PI Group</span>
                 </div>
@@ -78,36 +78,36 @@
                     <ul>
                                                 <li class="active">
                             <a href="/">
-                                Home                            </a>
+                                דף הבית                            </a>
                         </li>
                                                 <li class="">
                             <a href="/investment-banking">
-                                Investment Banking                            </a>
+                                בנקאות השקעות                            </a>
                         </li>
                                                 <li class="">
                             <a href="/asset-management">
-                                Asset Management                            </a>
+                                ניהול נכסים                            </a>
                         </li>
                                                 <li class="">
                             <a href="/team">
-                                Our Team                            </a>
+                                הצוות שלנו                            </a>
                         </li>
                                                 <li class="">
                             <a href="/about">
-                                About Us                            </a>
+                                אודותינו                            </a>
                         </li>
                                                 <li class="">
                             <a href="/contact">
-                                Contact Us                            </a>
+                                צור קשר                            </a>
                         </li>
                                             </ul>
                 </nav>
                 
                 <!-- Part 3: Language switcher -->
-                <div class="language-switcher align-right">
-                    <a href="?page=home&lang=en" class="active">EN</a>
+                <div class="language-switcher align-left">
+                    <a href="?page=home&lang=en" class="">EN</a>
                     <span class="separator">|</span>
-                    <a href="?page=home&lang=he" class="">עב</a>
+                    <a href="?page=home&lang=he" class="active">עב</a>
                 </div>
             </div>
         </div>
@@ -119,14 +119,14 @@
     <!-- Hero Section -->
     <section id="hero" class="hero full-page">
         <!-- Logo in top right for English -->
-        <div class="hero-top-logo right-aligned">
+        <div class="hero-top-logo left-aligned">
             <img src="assets/images/logo.svg" alt="PI Group Logo">
         </div>
         
         <div class="hero-content">
-            <h1>Unwavering Professionalism <br>Exceptional Results</h1>
-            <p class="slogan"></p>
-            <p class="wide-description">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
+            <h1>ברוכים הבאים לקבוצת PI</h1>
+            <p class="slogan">פתרונות פיננסיים חדשניים</p>
+            <p class="wide-description">קבוצת PI היא חברת שירותים פיננסיים מובילה המתמחה בבנקאות השקעות וניהול נכסים.</p>
             <a href="#about-us" class="cta-button"></a>
         </div>
 
@@ -145,14 +145,9 @@
     <!-- Render all page sections using functions -->
         <section id="about-us" class="about-preview full-page-section">
         <div class="container">
-            <h2>About Us</h2>
-            <p>Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.
-Pi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.
-While proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.
-Pi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.
-More recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.
-Through innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.</p>
-            <a href="?page=about&lang=en" class="button">
+            <h2>אודות קבוצת PI</h2>
+            <p>למדו על ההיסטוריה שלנו, הערכים שלנו והמחויבות שלנו לספק שירותים פיננסיים ברמה הגבוהה ביותר.</p>
+            <a href="?page=about&lang=he" class="button">
                 Read More            </a>
         </div>
         
@@ -165,31 +160,31 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
         </section>
             <section id="what-we-do" class="featured-segments full-page-section">
         <div class="container">
-            <h2>What We Do</h2>
-            <p class="section-description">Discover how we leverage decades of successful investing experience to deliver exceptional value for our partners.</p>
+            <h2>מה אנחנו עושים</h2>
+            <p class="section-description">למדו כיצד אנו מגבילים את הניסיון המוצלח בשנות השנים לספק ערך מיוחד לשותפים שלנו.</p>
             
             <div class="segment-grid">
                                     <div class="segment-card">
                         <div class="segment-icon">
                                                             <div class="icon-placeholder"><i class="fa fa-chart-line"></i></div>
                                                     </div>
-                        <h3>Investment Banking</h3>
-                        <p>Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.</p>
-                        <a href="?page=segment&id=investment_banking&lang=en" class="button segment-button">
+                        <h3>מסחר ביטוח</h3>
+                        <p>מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי.</p>
+                        <a href="?page=segment&id=investment_banking&lang=he" class="button segment-button">
                             Learn More                        </a>
                     </div>
                                     <div class="segment-card">
                         <div class="segment-icon">
                                                             <div class="icon-placeholder"><i class="fa fa-chart-line"></i></div>
                                                     </div>
-                        <h3>Asset Management</h3>
-                        <p>Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.</p>
-                        <a href="?page=segment&id=asset_management&lang=en" class="button segment-button">
+                        <h3>ניהול מניות</h3>
+                        <p>מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי.</p>
+                        <a href="?page=segment&id=asset_management&lang=he" class="button segment-button">
                             Learn More                        </a>
                     </div>
                             </div>
             
-            <a href="?page=what-we-do&lang=en" class="button view-all-button">
+            <a href="?page=what-we-do&lang=he" class="button view-all-button">
                 View All Services            </a>
         </div>
         
@@ -209,34 +204,34 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             <div class="product-grid">
                                         <div class="product-card">
                             <div class="product-icon">
-                                                                    <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
+                                                                    <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="פאי פיתוח">
                                                             </div>
-                            <h3>PI Pituach</h3>
-                            <p>Innovate Today, Secure Tomorrow</p>
-                            <a href="?page=product&id=pi_pituach&lang=en" class="button product-button">
+                            <h3>פאי פיתוח</h3>
+                            <p>חדשנות היום, ביטחון למחר</p>
+                            <a href="?page=product&id=pi_pituach&lang=he" class="button product-button">
                                 Learn More                            </a>
                         </div>
                                         <div class="product-card">
                             <div class="product-icon">
-                                                                    <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
+                                                                    <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="פאי סלקט">
                                                             </div>
-                            <h3>PI Select</h3>
-                            <p>Invest With Confidence</p>
-                            <a href="?page=product&id=pi_select&lang=en" class="button product-button">
+                            <h3>פאי סלקט</h3>
+                            <p>השקעה בביטחון</p>
+                            <a href="?page=product&id=pi_select&lang=he" class="button product-button">
                                 Learn More                            </a>
                         </div>
                                         <div class="product-card">
                             <div class="product-icon">
-                                                                    <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="PI Global">
+                                                                    <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="פאי גלובל">
                                                             </div>
-                            <h3>PI Global</h3>
-                            <p>Macro & Derivatives Excellence</p>
-                            <a href="?page=product&id=pi_global&lang=en" class="button product-button">
+                            <h3>פאי גלובל</h3>
+                            <p>מצוינות במאקרו ונגזרים</p>
+                            <a href="?page=product&id=pi_global&lang=he" class="button product-button">
                                 Learn More                            </a>
                         </div>
                             </div>
             
-            <a href="?page=products&lang=en" class="button view-all-button">
+            <a href="?page=products&lang=he" class="button view-all-button">
                 View All Products            </a>
         </div>
         
@@ -263,83 +258,83 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
 
             <div class="team-group featured-team"><h3>Featured Team Members</h3><div class="team-preview-grid">                    <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/aaron_cohen.png" alt="Aron Cohen">
+                                                            <img src="assets/images/team/aaron_cohen.png" alt="אהרן כהן">
                                                     </div>
                         <div class="member-info">
-                            <h3>Aron Cohen</h3>
-                            <p class="position">Founder</p>
+                            <h3>אהרן כהן</h3>
+                            <p class="position">מייסד</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/jonny_kaye.png" alt="Jonny Kaye">
+                                                            <img src="assets/images/team/jonny_kaye.png" alt="גוני קיי">
                                                     </div>
                         <div class="member-info">
-                            <h3>Jonny Kaye</h3>
-                            <p class="position">Founder</p>
+                            <h3>גוני קיי</h3>
+                            <p class="position">מייסד</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/shlomi_cohen.png" alt="Shlomi Cohen">
+                                                            <img src="assets/images/team/shlomi_cohen.png" alt="שלומי כהן">
                                                     </div>
                         <div class="member-info">
-                            <h3>Shlomi Cohen</h3>
-                            <p class="position">Chief Financial Officer</p>
+                            <h3>שלומי כהן</h3>
+                            <p class="position">סמנכ"ל כספים</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/ronen_bitman.png" alt="Ronen Bitman">
+                                                            <img src="assets/images/team/ronen_bitman.png" alt="רונן ביטמן">
                                                     </div>
                         <div class="member-info">
-                            <h3>Ronen Bitman</h3>
-                            <p class="position">Chief Technology Officer</p>
+                            <h3>רונן ביטמן</h3>
+                            <p class="position">מנהל טכנולוגיות ראשי</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/hagit_borohovitz.png" alt="Hagit Borohovitz">
+                                                            <img src="assets/images/team/hagit_borohovitz.png" alt="חגית בורוכוביץ">
                                                     </div>
                         <div class="member-info">
-                            <h3>Hagit Borohovitz</h3>
-                            <p class="position">Chief Legal Officer</p>
+                            <h3>חגית בורוכוביץ</h3>
+                            <p class="position">יועצת משפטית ראשית</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/ronen_elgali.png" alt="Ronen Elgali">
+                                                            <img src="assets/images/team/ronen_elgali.png" alt="רונן אלגלי">
                                                     </div>
                         <div class="member-info">
-                            <h3>Ronen Elgali</h3>
-                            <p class="position">Chief Investment Officer</p>
+                            <h3>רונן אלגלי</h3>
+                            <p class="position">מנהל השקעות ראשי</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/dan_rosenberg.png" alt="Dan Rosenberg">
+                                                            <img src="assets/images/team/dan_rosenberg.png" alt="דן רוזנברג">
                                                     </div>
                         <div class="member-info">
-                            <h3>Dan Rosenberg</h3>
-                            <p class="position">Founder</p>
+                            <h3>דן רוזנברג</h3>
+                            <p class="position">מייסד</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz">
+                                                            <img src="assets/images/team/itai_ruschkewitz.png" alt="איתי רושקביץ">
                                                     </div>
                         <div class="member-info">
-                            <h3>Itay Ruschkewitz</h3>
-                            <p class="position">CEO and Co-Founder</p>
+                            <h3>איתי רושקביץ</h3>
+                            <p class="position">מנכ"ל ומייסד משותף</p>
                         </div>
                     </div>
                                         <div class="team-card">
                         <div class="member-photo">
-                                                            <img src="assets/images/team/buky_katzman.png" alt="Baruch (Buky) Katzman">
+                                                            <img src="assets/images/team/buky_katzman.png" alt="ברוך (בוקי) כצמן">
                                                     </div>
                         <div class="member-info">
-                            <h3>Baruch (Buky) Katzman</h3>
-                            <p class="position">Co-founder</p>
+                            <h3>ברוך (בוקי) כצמן</h3>
+                            <p class="position">מייסד משותף</p>
                         </div>
                     </div>
                     </div></div>                <div id="team-group-founders" class="team-group">
@@ -347,20 +342,20 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                     <div class="team-preview-grid">
                                                                                     <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/aaron_cohen.png" alt="Aron Cohen">
+                                                                                    <img src="assets/images/team/aaron_cohen.png" alt="אהרן כהן">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Aron Cohen</h3>
-                                        <p class="position">Founder</p>
+                                        <h3>אהרן כהן</h3>
+                                        <p class="position">מייסד</p>
                                     </div>
                                 </div>
                                                             <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/jonny_kaye.png" alt="Jonny Kaye">
+                                                                                    <img src="assets/images/team/jonny_kaye.png" alt="גוני קיי">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Jonny Kaye</h3>
-                                        <p class="position">Founder</p>
+                                        <h3>גוני קיי</h3>
+                                        <p class="position">מייסד</p>
                                     </div>
                                 </div>
                                                                         </div>
@@ -370,38 +365,38 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                     <div class="team-preview-grid">
                                                                                     <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/shlomi_cohen.png" alt="Shlomi Cohen">
+                                                                                    <img src="assets/images/team/shlomi_cohen.png" alt="שלומי כהן">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Shlomi Cohen</h3>
-                                        <p class="position">Chief Financial Officer</p>
+                                        <h3>שלומי כהן</h3>
+                                        <p class="position">סמנכ"ל כספים</p>
                                     </div>
                                 </div>
                                                             <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/ronen_bitman.png" alt="Ronen Bitman">
+                                                                                    <img src="assets/images/team/ronen_bitman.png" alt="רונן ביטמן">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Ronen Bitman</h3>
-                                        <p class="position">Chief Technology Officer</p>
+                                        <h3>רונן ביטמן</h3>
+                                        <p class="position">מנהל טכנולוגיות ראשי</p>
                                     </div>
                                 </div>
                                                             <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/hagit_borohovitz.png" alt="Hagit Borohovitz">
+                                                                                    <img src="assets/images/team/hagit_borohovitz.png" alt="חגית בורוכוביץ">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Hagit Borohovitz</h3>
-                                        <p class="position">Chief Legal Officer</p>
+                                        <h3>חגית בורוכוביץ</h3>
+                                        <p class="position">יועצת משפטית ראשית</p>
                                     </div>
                                 </div>
                                                             <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/ronen_elgali.png" alt="Ronen Elgali">
+                                                                                    <img src="assets/images/team/ronen_elgali.png" alt="רונן אלגלי">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Ronen Elgali</h3>
-                                        <p class="position">Chief Investment Officer</p>
+                                        <h3>רונן אלגלי</h3>
+                                        <p class="position">מנהל השקעות ראשי</p>
                                     </div>
                                 </div>
                                                                         </div>
@@ -411,20 +406,20 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                     <div class="team-preview-grid">
                                                                                     <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/dan_rosenberg.png" alt="Dan Rosenberg">
+                                                                                    <img src="assets/images/team/dan_rosenberg.png" alt="דן רוזנברג">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Dan Rosenberg</h3>
-                                        <p class="position">Founder</p>
+                                        <h3>דן רוזנברג</h3>
+                                        <p class="position">מייסד</p>
                                     </div>
                                 </div>
                                                             <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz">
+                                                                                    <img src="assets/images/team/itai_ruschkewitz.png" alt="איתי רושקביץ">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Itay Ruschkewitz</h3>
-                                        <p class="position">CEO and Co-Founder</p>
+                                        <h3>איתי רושקביץ</h3>
+                                        <p class="position">מנכ"ל ומייסד משותף</p>
                                     </div>
                                 </div>
                                                                         </div>
@@ -434,17 +429,17 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                     <div class="team-preview-grid">
                                                                                     <div class="team-card">
                                     <div class="member-photo">
-                                                                                    <img src="assets/images/team/buky_katzman.png" alt="Baruch (Buky) Katzman">
+                                                                                    <img src="assets/images/team/buky_katzman.png" alt="ברוך (בוקי) כצמן">
                                                                             </div>
                                     <div class="member-info">
-                                        <h3>Baruch (Buky) Katzman</h3>
-                                        <p class="position">Co-founder</p>
+                                        <h3>ברוך (בוקי) כצמן</h3>
+                                        <p class="position">מייסד משותף</p>
                                     </div>
                                 </div>
                                                                         </div>
                 </div>
                         
-            <a href="?page=our-team&lang=en" class="button view-all-button">
+            <a href="?page=our-team&lang=he" class="button view-all-button">
                 Meet Our Team            </a>
         </div>
         
@@ -458,8 +453,8 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             <section id="contact-us" class="contact-preview full-page-section">
         <div class="container">
             <div class="section-header">
-                <h2>Contact PI Group</h2>
-                <p class="section-description">Reach out to us for any inquiries or to learn more about our services.</p>
+                <h2>צור קשר עם קבוצת PI</h2>
+                <p class="section-description">פנו אלינו לכל שאלה או כדי ללמוד עוד על השירותים שלנו.</p>
             </div>
             
             <div class="contact-info-grid">
@@ -467,7 +462,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                 
                             </div>
             
-            <a href="?page=contact&lang=en" class="button view-all-button">
+            <a href="?page=contact&lang=he" class="button view-all-button">
                 Get In Touch            </a>
         </div>
     </section>

@@ -2,7 +2,7 @@
     "investment_banking": {
       "pi_pituach": {
         "product_slug": "pi_pituach",
-        "logo": "images/investment_banking/pi_pituach/logo_large.svg",
+        "logo": "assets/images/investment_banking/pi_pituach/logo_large.svg",
         "language_slug": {
           "en": {
             "name": "PI Pituach",
@@ -22,7 +22,7 @@
       },
       "pi_select": {
         "product_slug": "pi_select",
-        "logo": "images/investment_banking/pi_select/logo_large.svg",
+        "logo": "assets/images/investment_banking/pi_select/logo_large.svg",
         "language_slug": {
           "en": {
             "name": "PI Select",
@@ -44,7 +44,7 @@
     "asset_management": {
       "pi_emf": {
         "product_slug": "pi_emf",
-        "logo": "images/asset_management/pi_emf_retired/logo_large.svg",
+        "logo": "assets/images/asset_management/pi_emf_retired/logo_large.svg",
         "language_slug": {
           "en": {
             "name": "PI EMF (retired)",
@@ -64,7 +64,7 @@
       },
       "pi_global": {
         "product_slug": "pi_global",
-        "logo": "images/asset_management/pi_global/logo_large.svg",
+        "logo": "assets/images/asset_management/pi_global/logo_large.svg",
         "language_slug": {
           "en": {
             "name": "PI Global",
@@ -84,7 +84,7 @@
       },
       "pi_equity": {
         "product_slug": "pi_equity",
-        "logo": "images/asset_management/pi_equity/logo_large.svg",
+        "logo": "assets/images/asset_management/pi_equity/logo_large.svg",
         "language_slug": {
           "en": {
             "name": "PI Equity",

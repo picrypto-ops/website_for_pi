@@ -5,6 +5,11 @@
   --text-color: #{variables.$text-color};
   --primary-color: #{variables.$primary-color};
   --secondary-color: #{variables.$secondary-color};
+  --accent-color: #{variables.$accent-color};
+  --text-light: #{variables.$text-light};
+  --text-muted: #{variables.$text-muted};
+  // --section-header: #{variables.$section-header-color};
+  --section-text: #{variables.$section-text-color};
 }
 
 .theme-light {
@@ -12,14 +17,16 @@
   --text-color: #{variables.$text-color};
   --primary-color: #{variables.$primary-color};
   --secondary-color: #{variables.$secondary-color};
+  --accent-color: #{variables.$accent-color};
 }
 
 // Dark theme
 .theme-dark {
-  --bg-color: #{variables.$dark_bg-color};
-  --text-color: #{variables.$dark_text-color};
-  --primary-color: #{variables.$dark_primary-color};
-  --secondary-color: #{variables.$dark_secondary-color};
+  --bg-color: #{variables.$dark-bg-color};
+  --text-color: #{variables.$dark-text-color};
+  --primary-color: #{variables.$dark-primary-color};
+  --secondary-color: #{variables.$dark-secondary-color};
+  --accent-color: #{variables.$dark-primary-color};
 }
 
 // Apply theme variables
@@ -38,5 +45,35 @@ a {
 
 header, footer {
   background-color: var(--secondary-color);
+}
+
+// Add header-specific optimization for mobile
+@media (max-width: 768px) {
+  header {
+    will-change: transform;
+    transform: translateZ(0);
+    
+    // Ensure the hamburger button is always visible when header is visible
+    &.initially-hidden {
+      .mobile-menu-toggle {
+        opacity: 1; // Keep the button visible even when header is hidden
+      }
+    }
+    
+    &:not(.initially-hidden) {
+      .mobile-menu-toggle {
+        display: block !important;
+      }
+    }
+  }
+}
+
+// Add these styles at the end of the file
+body.menu-open {
+  overflow: hidden; // Prevent scrolling when mobile menu is open
+  
+  @media (min-width: 769px) {
+    overflow: auto; // Reset on desktop
+  }
 }
 

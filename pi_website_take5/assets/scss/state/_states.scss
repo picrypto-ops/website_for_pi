@@ -1,11 +1,16 @@
-@use "../base/variables" as variables;;
+@use "../base/variables" as variables;
 
 .is-hidden {
   display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .is-visible {
   display: block;
+  opacity: 1;
+  pointer-events: auto;
+  animation: fadeIn 0.5s forwards;
 }
 
 .is-active {

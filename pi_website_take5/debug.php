@@ -98,6 +98,114 @@ try {
         echo "<p>Created translatable with direct data: " . (($translatable instanceof TranslatableInterface) ? "Yes" : "No") . "</p>";
     }
     
+    // Home helpers specific debug information
+    echo "<h2>Home Sections Debug Information</h2>";
+    
+    // Products Debug
+    echo "<h3>Products Debug</h3>";
+    $productData = TranslatableFactory::getData('products');
+    echo '<div class="debug-container" style="background:#f8f8f8;padding:10px;margin:10px;font-size:12px;">';
+    echo '<p>Product data structure:</p>';
+    echo '<pre>';
+    print_r($productData); // Show full data structure instead of just keys
+    echo '</pre>';
+    echo '</div>';
+    
+    // Extract featured products
+    echo "<h4>Featured Products Debug</h4>";
+    $featuredProducts = [];
+    $counter = 0;
+    
+    if (is_array($productData)) {
+        foreach ($productData as $categorySlug => $categoryProducts) {
+            if (!is_array($categoryProducts)) continue;
+            
+            foreach ($categoryProducts as $productSlug => $product) {
+                if (!is_array($product)) continue;
+                
+                if (isset($product['is_featured']) && $product['is_featured'] === true) {
+                    // Store both the product and its slug
+                    $featuredProducts[] = [
+                        'slug' => $productSlug,
+                        'data' => $product,
+                        'category' => $categorySlug
+                    ];
+                    $counter++;
+                    
+                    // Limit to 3 featured products
+                    if ($counter >= 3) break;
+                }
+            }
+            if ($counter >= 3) break;
+        }
+    }
+
+    echo '<div class="debug-container" style="background:#f8f8f8;padding:10px;margin:10px;font-size:12px;">';
+    echo '<p>Found ' . count($featuredProducts) . ' featured products:</p>';
+    echo '<pre>';
+    print_r($featuredProducts);
+    echo '</pre>';
+    echo '</div>';
+    
+    // Individual product translation debug
+    echo "<h4>Product Translation Debug</h4>";
+    if (!empty($featuredProducts)) {
+        foreach ($featuredProducts as $productInfo) {
+            $productSlug = $productInfo['slug'];
+            $product = $productInfo['data'];
+            
+            // Create a proper translatable for this product
+            $productTranslatable = TranslatableFactory::product($productSlug);
+            
+            echo '<div class="debug-container" style="background:#f8f8f8;padding:10px;margin:10px;font-size:12px;">';
+            echo '<h4>Product Translation Debug: ' . $productSlug . '</h4>';
+            echo '<p>Product data:</p>';
+            echo '<pre>';
+            print_r($product);
+            echo '</pre>';
+            echo '<p>Translated content for en:</p>';
+            echo '<ul>';
+            echo '<li>Name: ' . $productTranslatable->getContent('en', 'name') . '</li>';
+            echo '<li>Slogan: ' . $productTranslatable->getContent('en', 'slogan') . '</li>';
+            echo '</ul>';
+            echo '</div>';
+        }
+    }
+    
+    // Team Debug
+    echo "<h3>Team Debug</h3>";
+    $teamData = TranslatableFactory::getData('team');
+    echo '<div class="debug-container" style="background:#f8f8f8;padding:10px;margin:10px;font-size:12px;">';
+    echo '<p>Team data structure:</p>';
+    echo '<pre>';
+    print_r(array_keys($teamData));
+    echo '</pre>';
+    echo '<p>Team members with display_in_home_page = true:</p>';
+    $count = 0;
+    foreach ($teamData as $groupSlug => $members) {
+        if (!is_array($members)) continue;
+        
+        foreach ($members as $member) {
+            if (isset($member['display_in_home_page']) && $member['display_in_home_page'] === true) {
+                echo '<p>' . (isset($member['name_slug']) ? $member['name_slug'] : 'Unknown') . '</p>';
+                $count++;
+            }
+        }
+    }
+    echo '<p>Total: ' . $count . ' featured members</p>';
+    echo '</div>';
+    
+    // Contact Debug
+    echo "<h3>Contact Debug</h3>";
+    $pagesData = TranslatableFactory::getData('pages');
+    $contactData = isset($pagesData['contact']) ? $pagesData['contact'] : [];
+    echo '<div class="debug-container" style="background:#f8f8f8;padding:10px;margin:10px;font-size:12px;">';
+    echo '<p>Contact data:</p>';
+    echo '<pre>';
+    print_r($contactData);
+    echo '</pre>';
+    echo '</div>';
+    
 } catch (Exception $e) {
     echo "<div style='color:red; padding:10px; border:1px solid red; margin: 10px 0;'>";
     echo "<p><strong>Error:</strong> " . $e->getMessage() . "</p>";

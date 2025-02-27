@@ -1,0 +1,77 @@
+@use "../base/variables" as variables;
+@use "sass:color";
+.breadcrumb-navigation {
+    display: none; // Hide
+    
+  position: fixed;
+  right: variables.$breadcrumb-padding;
+  top: 50%;
+  transform: translateY(-50%);
+  background: variables.$breadcrumb-bg;
+  padding: variables.$breadcrumb-padding;
+  border-radius: 8px;
+  border: variables.$breadcrumb-border;
+  box-shadow: variables.$breadcrumb-shadow;
+  z-index: 900;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: variables.$breadcrumb-gap;
+
+    li {
+      a {
+        color: variables.$breadcrumb-inactive;
+        text-decoration: none;
+        transition: variables.$breadcrumb-transition;
+        font-size: 0.9rem;
+        display: block;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: variables.$primary-color;
+            margin-right: 10px;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        &:hover {
+          color: variables.$breadcrumb-hover;
+          background: rgba(variables.$primary-color, 0.1);
+
+          &:before {
+            opacity: 0.8;
+            transform: scale(1.1);
+          }
+        }
+
+        &.active {
+          color: variables.$breadcrumb-active;
+          font-weight: bold;
+          background: rgba(variables.$primary-color, 0.15);
+
+          &:before {
+            opacity: 1;
+            transform: scale(1.2);
+            background-color: color.adjust(variables.$primary-color, $lightness: -10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .breadcrumb-navigation {
+    display: none; // Hide on mobile
+  }
+} 
