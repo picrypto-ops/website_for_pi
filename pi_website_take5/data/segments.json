@@ -1,6 +1,7 @@
 {
     "investment_banking": {
       "segment_slug": "investment_banking",
+      "icon": "assets/images/investment_banking/icon.svg",
       "language_slug": {
         "en": {
           "name": "Investment Banking",
@@ -17,6 +18,7 @@
     },
     "asset_management": {
       "segment_slug": "asset_management",
+      "icon": "assets/images/asset_management/icon.svg",
       "language_slug": {   
         "en": {
           "name": "Asset Management",

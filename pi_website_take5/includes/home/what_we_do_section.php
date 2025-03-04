@@ -38,8 +38,11 @@ function renderWhatWeDoSection($lang) {
                         </div>
                         <h3><?php echo $segmentTranslatable->getContent($lang, 'name'); ?></h3>
                         <p><?php echo $segmentTranslatable->getContent($lang, 'short_description'); ?></p>
-                        <a href="?page=segment&id=<?php echo $segmentSlug; ?>&lang=<?php echo $lang; ?>" class="button segment-button">
-                            <?php echo TranslatableFactory::general()->getContent($lang, 'learn_more') ?: 'Learn More'; ?>
+                        <a href="?page=segment&id=<?php echo $segmentSlug; ?>&lang=<?php echo $lang; ?>" class="segment-link">
+                            <p class="slogan">
+                                <?php echo TranslatableFactory::general()->getContent($lang, 'view_details', 'View Details'); ?>
+                                <span class="arrow">»</span>
+                            </p>
                         </a>
                     </div>
                 <?php 
@@ -50,9 +53,7 @@ function renderWhatWeDoSection($lang) {
                 ?>
             </div>
             
-            <a href="?page=what-we-do&lang=<?php echo $lang; ?>" class="button view-all-button">
-                <?php echo TranslatableFactory::general()->getContent($lang, 'view_all_services') ?: 'View All Services'; ?>
-            </a>
+            <!-- Removed "View All Services" button as requested -->
         </div>
         
         <?php renderScrollIndicator('products', $lang); ?>

@@ -1,114 +1,387 @@
 {
     "home": {
-      "term_slug": "home",
-      "language_slug": {
-        "en": {
-          "label": "Home"
-        },
-        "he": {
-          "label": "דף הבית"
+        "term_slug": "home",
+        "language_slug": {
+            "en": {
+                "label": "Home"
+            },
+            "he": {
+                "label": "דף הבית"
+            }
         }
-      }
     },
     "investment_banking": {
-      "term_slug": "investment_banking",
-      "language_slug": {
-        "en": {
-          "label": "Investment Banking"
-        },
-        "he": {
-          "label": "בנקאות השקעות"
+        "term_slug": "investment_banking",
+        "language_slug": {
+            "en": {
+                "label": "Investment Banking"
+            },
+            "he": {
+                "label": "בנקאות השקעות"
+            }
         }
-      }
     },
     "asset_management": {
-      "term_slug": "asset_management",
-      "language_slug": {
-        "en": {
-          "label": "Asset Management"
-        },
-        "he": {
-          "label": "ניהול נכסים"
+        "term_slug": "asset_management",
+        "language_slug": {
+            "en": {
+                "label": "Asset Management"
+            },
+            "he": {
+                "label": "ניהול נכסים"
+            }
         }
-      }
     },
     "team": {
-      "term_slug": "team",
-      "language_slug": {
-        "en": {
-          "label": "Our Team"
-        },
-        "he": {
-          "label": "הצוות שלנו"
+        "term_slug": "team",
+        "language_slug": {
+            "en": {
+                "label": "Our Team"
+            },
+            "he": {
+                "label": "הצוות שלנו"
+            }
         }
-      }
     },
     "about": {
-      "term_slug": "about",
-      "language_slug": {
-        "en": {
-          "label": "About Us"
-        },
-        "he": {
-          "label": "אודותינו"
+        "term_slug": "about",
+        "language_slug": {
+            "en": {
+                "label": "About Us"
+            },
+            "he": {
+                "label": "אודותינו"
+            }
         }
-      }
     },
     "contact": {
-      "term_slug": "contact",
-      "language_slug": {
-        "en": {
-          "label": "Contact Us"
-        },
-        "he": {
-          "label": "צור קשר"
+        "term_slug": "contact",
+        "language_slug": {
+            "en": {
+                "label": "Contact Us"
+            },
+            "he": {
+                "label": "צור קשר"
+            }
         }
-      }
     },
     "what_we_do": {
-      "term_slug": "what_we_do",
-      "language_slug": {
-        "en": {
-          "label": "What We Do"
-        },
-        "he": {
-          "label": "מה אנחנו עושים"
+        "term_slug": "what_we_do",
+        "language_slug": {
+            "en": {
+                "label": "What We Do"
+            },
+            "he": {
+                "label": "מה אנחנו עושים"
+            }
         }
-      }
     },
     "our_products": {
-      "term_slug": "our_products",
-      "language_slug": {
-        "en": {
-          "label": "Our Products"
-        },
-        "he": {
-          "label": "המוצרים שלנו"
+        "term_slug": "our_products",
+        "language_slug": {
+            "en": {
+                "label": "Our Products"
+            },
+            "he": {
+                "label": "המוצרים שלנו"
+            }
         }
-      }
     },
     "read_more": {
-      "term_slug": "read_more",
-      "language_slug": {
-        "en": {
-          "label": "Read More"
-        },
-        "he": {
-          "label": "קרא עוד"
+        "term_slug": "read_more",
+        "language_slug": {
+            "en": {
+                "label": "Read More"
+            },
+            "he": {
+                "label": "קרא עוד"
+            }
         }
-      }
+    },
+    "team_group_founders": {
+        "term_slug": "team_group_founders",
+        "language_slug": {
+            "en": {
+                "label": "Founders"
+            },
+            "he": {
+                "label": "מייסדים"
+            }
+        }
+    },
+    "team_group_management": {
+        "term_slug": "team_group_management",
+        "language_slug": {
+            "en": {
+                "label": "Management"
+            },
+            "he": {
+                "label": "הנהלה"
+            }
+        }
+    },
+    "team_group_pi_pituach": {
+        "term_slug": "team_group_pi_pituach",
+        "language_slug": {
+            "en": {
+                "label": "PI Pituach"
+            },
+            "he": {
+                "label": "פאי פיתוח"
+            }
+        }
+    },
+    "team_group_pi_select": {
+        "term_slug": "team_group_pi_select",
+        "language_slug": {
+            "en": {
+                "label": "PI Select"
+            },
+            "he": {
+                "label": "פאי סלקט"
+            }
+        }
     },
     "scroll_down": {
         "term_slug": "scroll_down",
         "language_slug": {
-          "en": {
-            "label": ""
-          },
-          "he": {
-            "label": ""
-          }
+            "en": {
+                "label": ""
+            },
+            "he": {
+                "label": ""
+            }
         }
-      }    
-  }
-  
-  
+    },
+    "group_name": {
+        "term_slug": "group_name",
+        "language_slug": {
+            "en": {
+                "label": "PI Group"
+            },
+            "he": {
+                "label": "קבוצת פאי"
+            }
+        }
+    },
+    "view_details": {
+        "term_slug": "view_details",
+        "language_slug": {
+            "en": {
+                "label": ""
+            },
+            "he": {
+                "label": ""
+            }
+        }
+    },
+    "our_team": {
+        "term_slug": "our_team",
+        "language_slug": {
+            "en": {
+                "label": "Our Team"
+            },
+            "he": {
+                "label": "הצוות שלנו"
+            }
+        }
+    },
+    "team_description": {
+        "term_slug": "team_description",
+        "language_slug": {
+            "en": {
+                "label": "Meet our dedicated professionals who provide exceptional service."
+            },
+            "he": {
+                "label": "הכירו את המומחים המוכחים שמספקים שירות מיוחד."
+            }
+        }
+    },
+    "meet_our_team": {
+        "term_slug": "meet_our_team",
+        "language_slug": {
+            "en": {
+                "label": "Meet Our Team"
+            },
+            "he": {
+                "label": "הכירו את הצוות שלנו"
+            }
+        }
+    },
+    "address": {
+        "term_slug": "address",
+        "language_slug": {
+            "en": {
+                "label": "Address"
+            },
+            "he": {
+                "label": "כתובת"
+            }
+        }
+    },
+    "phone": {
+        "term_slug": "phone",
+        "language_slug": {
+            "en": {
+                "label": "Phone"
+            },
+            "he": {
+                "label": "טלפון"
+            }
+        }
+    },
+    "email": {
+        "term_slug": "email",
+        "language_slug": {
+            "en": {
+                "label": "Email"
+            },
+            "he": {
+                "label": "אימייל"
+            }
+        }
+    },
+    "website": {
+        "term_slug": "website",
+        "language_slug": {
+            "en": {
+                "label": "Website"
+            },
+            "he": {
+                "label": "אתר"
+            }
+        }
+    },
+    "get_in_touch": {
+        "term_slug": "get_in_touch",
+        "language_slug": {
+            "en": {
+                "label": "Get In Touch"
+            },
+            "he": {
+                "label": "צור קשר"
+            }
+        }
+    },
+    "previous_member": {
+        "term_slug": "previous_member",
+        "language_slug": {
+            "en": {
+                "label": "Previous Member"
+            },
+            "he": {
+                "label": "איש צוות קודם"
+            }
+        }
+    },
+    "next_member": {
+        "term_slug": "next_member",
+        "language_slug": {
+            "en": {
+                "label": "Next Member"
+            },
+            "he": {
+                "label": "איש צוות הבא"
+            }
+        }
+    },
+    "no_products": {
+        "term_slug": "no_products",
+        "language_slug": {
+            "en": {
+                "label": "No products available for this segment."
+            },
+            "he": {
+                "label": "לא ניתן למצוא מוצרים בתחום זה"
+            }
+        }
+    },
+    "product_founders": {
+        "term_slug": "product_founders",
+        "language_slug": {
+            "en": {
+                "label": "Founders"
+            },
+            "he": {
+                "label": "מייסדים"
+            }
+        }
+    },
+    "product_team": {
+        "term_slug": "product_team",
+        "language_slug": {
+            "en": {
+                "label": "Product Team"
+            },
+            "he": {
+                "label": "צוות המוצרים"
+            }
+        }
+    },
+    "our_team_title": {
+        "term_slug": "our_team_title",
+        "language_slug": {
+            "en": {
+                "label": "Our Team"
+            },
+            "he": {
+                "label": "הצוות שלנו"
+            }
+        }
+    },
+    "our_team_description": {
+        "term_slug": "our_team_description",
+        "language_slug": {
+            "en": {
+                "label": "Meet the people who make it all happen."
+            },
+            "he": {
+                "label": "הכירו את האנשים שעושים את כל העבודה."
+            }
+        }
+    },
+    "no_team_members": {
+        "term_slug": "no_team_members",
+        "language_slug": {
+            "en": {
+                "label": "No team members available."
+            },
+            "he": {
+                "label": "אין אנשים בצוות."
+            }
+        }
+    },
+    "all_rights_reserved": {
+        "term_slug": "all_rights_reserved",
+        "language_slug": {
+            "en": {
+                "label": "All rights reserved"
+            },
+            "he": {
+                "label": "כל הזכויות שמורות"
+            }
+        }
+    },
+    "featured_products": {
+        "term_slug": "featured_products",
+        "language_slug": {
+            "en": {
+                "label": "Featured Products"
+            },
+            "he": {
+                "label": "מוצרים נבחרים"
+            }
+        }
+    },
+    "featured_products_description": {
+        "term_slug": "featured_products_description",
+        "language_slug": {
+            "en": {
+                "label": "Discover our premium financial products designed to meet your needs."
+            },
+            "he": {
+                "label": "גלו את המוצרים הפיננסים הנסחרים שלנו שעוצבו למלא את הצרכים שלכם."
+            }
+        }
+    }
+}

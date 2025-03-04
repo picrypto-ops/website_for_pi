@@ -39,4 +39,327 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 2rem 0;
+}
+
+// Cards Module - Styling for all card components
+
+// Common card styles
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  height: 100%;
+  
+  &:hover, &:focus {
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+// Base card styles
+%card-base {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  position: relative;
+  isolation: isolate;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: -1;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.01);
+    
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+// Product Cards
+.product-card {
+  @extend %card-base;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: 4px solid variables.$primary-color;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 1;
+  }
+  
+  &:hover {
+    &::before {
+      transform: translateY(200%);
+    }
+    
+    .product-icon {
+      transform: scale(1.05) rotate(5deg);
+    }
+  }
+  
+  .product-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: variables.$header-text-color;
+    transition: color 0.3s ease;
+  }
+  
+  p {
+    color: variables.$text-color;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+}
+
+// Product grid layout - 2 products per row
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin: 30px 0;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Team Cards
+.team-card {
+  @extend %card-base;
+  overflow: hidden;
+  text-align: center;
+  
+  .member-photo {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.2) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+  }
+  
+  &:hover {
+    .member-photo {
+      &::after {
+        opacity: 1;
+      }
+      
+      img {
+        transform: scale(1.08);
+      }
+    }
+    
+    .member-info {
+      transform: translateY(-5px);
+      
+      h3 {
+        color: variables.$primary-color;
+      }
+    }
+  }
+  
+  .member-info {
+    padding: 20px;
+    background: #fff;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    h3 {
+      margin: 0 0 5px;
+      font-size: 1.3rem;
+      color: variables.$header-text-color;
+      transition: color 0.3s ease;
+    }
+    
+    .position {
+      margin: 0;
+      color: variables.$text-color;
+      font-style: italic;
+    }
+  }
+  
+  // Founder card variations
+  &.founder-card {
+    text-align: center;
+    
+    img {
+      height: 160px;
+      width: 160px;
+      border-radius: 50%;
+      margin: 25px auto 15px;
+      border: 3px solid #f8f8f8;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+                  border-color 0.3s ease;
+    }
+    
+    &:hover img {
+      transform: scale(1.05) rotate(5deg);
+      border-color: variables.$primary-color;
+    }
+  }
+}
+
+// Team grid layout
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  margin: 30px 0;
+  
+  // Founders grid specific styling
+  &.founders-grid {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin: 40px 0;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 40px;
+  }
+}
+
+// Segment Cards
+.segment-card {
+  @extend %card-base;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 4px solid variables.$primary-color;
+  
+  .segment-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  &:hover {
+    .segment-icon {
+      transform: scale(1.1) rotate(8deg);
+    }
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: variables.$header-text-color;
+  }
+  
+  p {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    text-align: center;
+    color: variables.$text-color;
+  }
+}
+
+// Single team member profile
+.member-profile {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  margin-bottom: 3rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+  
+  .member-image {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .member-info {
+    h1 {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+    
+    .member-title {
+      color: #666;
+      font-size: 1.25rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// Member navigation
+.member-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  
+  a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: #000;
+    }
+  }
 } 

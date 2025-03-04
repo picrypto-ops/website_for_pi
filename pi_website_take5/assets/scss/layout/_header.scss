@@ -21,26 +21,100 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap;
   }
 
+  /* Hide the mobile menu toggle button by default (for desktop) */
+  .mobile-menu-toggle {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: none !important; // Hidden by default
+    outline: none;
+    transition: all 0.3s ease;
+    
+    @media (max-width: 767px) {
+      display: flex !important;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 30px;
+      height: 24px;
+    }
+    
+    .menu-icon {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      
+      .bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        margin-bottom: 5px;
+        background-color: variables.$text-color;
+        border-radius: 2px;
+        transform-origin: center;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    
+    &.active {
+      .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      
+      .bar:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  }
+
+  // Section 1: Logo & Group Name
   .logo-section {
     display: flex;
     align-items: center;
+    margin-right: 2rem; // Add more spacing in LTR mode
     
-    img {
-      max-width: variables.$logo-size;
-      margin-right: 1rem;
+    .logo-link {
+      text-decoration: none;
     }
     
-    .group-name {
-      font-weight: variables.$nav-font-weight;
-      font-size: variables.$group-name-size;
-      color: variables.$nav-link-color;
+    .logo-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+      
+      img {
+        max-width: variables.$logo-size;
+        margin-right: 1.5rem; // Increased spacing between logo and group name
+      }
+      
+      .group-name {
+        font-weight: normal;
+        font-size: variables.$group-name-size;
+        color: variables.$nav-link-color;
+        white-space: nowrap;
+      }
     }
   }
 
+  // Section 2: Main Navigation
   .main-nav {
-    margin: 0 variables.$nav-gap;
+    flex: 1;
+    display: flex;
+    justify-content: center; // Center menu items
+    margin: 0 1.5rem; // Add spacing on both sides
     
     ul {
       list-style-type: none;
@@ -52,7 +126,8 @@ header {
         a {
           color: variables.$nav-link-color;
           text-decoration: none;
-          font-weight: bold;
+          font-weight: variables.$nav-font-weight;
+          font-size: variables.$header-font-size;
 
           &:hover {
             color: variables.$nav-link-hover;
@@ -67,14 +142,19 @@ header {
     }
   }
 
+  // Section 3: Language Switcher
   .language-switcher {
     display: flex;
     align-items: center;
     gap: variables.$lang-switcher-gap;
+    position: relative;
+    white-space: nowrap;
+    margin-left: 2rem; // Add spacing in LTR mode
 
     a {
       color: variables.$nav-link-color;
       text-decoration: none;
+      font-size: variables.$header-font-size;
 
       &:hover {
         color: variables.$nav-link-hover;
@@ -89,16 +169,61 @@ header {
     
     .separator {
       color: variables.$nav-link-color;
+      font-size: variables.$header-font-size;
     }
+  }
+}
+
+/* LTR (English) Layout */
+html[dir="ltr"] {
+  .header-content {
+    flex-direction: row;
+  }
+  
+  .logo-section {
+    order: 1;
+    margin-right: 2rem;
+    margin-left: 0;
+  }
+  
+  .main-nav {
+    order: 2;
+  }
+  
+  .language-switcher {
+    order: 3;
+    margin-left: 2rem;
+    margin-right: 0;
+  }
+}
+
+/* RTL (Hebrew) Layout */
+html[dir="rtl"] {
+  .header-content {
+    flex-direction: row-reverse;
+  }
+  
+  .logo-section {
+    order: 3;
+    margin-left: 2rem;
+    margin-right: 0;
     
-    &.align-right {
-      margin-left: auto;
+    .logo-container {
+      img {
+        margin-right: 0;
+        margin-left: 1.5rem; // Mirror the spacing
+      }
     }
-    
-    &.align-left {
-      margin-right: auto;
-      order: -1;
-    }
+  }
+  
+  .main-nav {
+    order: 2;
+  }
+  
+  .language-switcher {
+    order: 1;
+    margin-right: 2rem;
+    margin-left: 0;
   }
 }
 
@@ -107,16 +232,7 @@ body:not(.home-page) {
   padding-top: calc(variables.$header-height + (variables.$header-padding * 2));
 }
 
-// RTL language adjustments
-html[dir="rtl"] {
-  .logo-section {
-    img {
-      margin-right: 0;
-      margin-left: 1rem;
-    }
-  }
-}
-
+// Mobile responsive styles
 @media (max-width: 768px) {
   header {
     padding: 10px 0;
@@ -126,8 +242,9 @@ html[dir="rtl"] {
       position: relative;
     }
     
+    /* Show the mobile menu toggle on mobile screens */
     .mobile-menu-toggle {
-      display: block;
+      display: block !important; /* Override the desktop hide */
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -233,6 +350,7 @@ html[dir="rtl"] {
       .logo-section {
         margin: 0 auto;
         padding: 0 44px;
+        order: 2;
       }
       
       .language-switcher {
@@ -243,10 +361,12 @@ html[dir="rtl"] {
         
         html[dir="ltr"] & {
           right: 15px;
+          order: 3;
         }
         
         html[dir="rtl"] & {
           left: 15px;
+          order: 1;
         }
       }
       
@@ -257,6 +377,7 @@ html[dir="rtl"] {
         transition: max-height 0.4s ease;
         margin: 0;
         background-color: variables.$header-bg-color;
+        order: 4;
         
         &.open {
           max-height: 500px;
@@ -302,24 +423,20 @@ html[dir="rtl"] {
           }
         }
       }
-    }
-    
-    .mobile-menu-toggle {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1550;
       
-      &.active {
+      /* Mobile menu toggle - active state adjustments */
+      .mobile-menu-toggle.active {
         position: fixed;
         top: 25px;
         
         html[dir="ltr"] & {
-          left: 15px;
+          left: auto;
+          right: 15px;
         }
         
         html[dir="rtl"] & {
-          right: 15px;
+          right: auto;
+          left: 15px;
         }
       }
     }

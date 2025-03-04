@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import { vertexShader, fragmentShader } from './shaders.js';
 
 const rootStyles = getComputedStyle(document.documentElement);
 const SEPARATION_X = parseFloat(rootStyles.getPropertyValue('--separation-x')) || 200;
@@ -69,26 +70,18 @@ function createSVGTexture(svgString, callback) {
 
 // Initialize the scene after the texture is loaded
 createSVGTexture(svg, (texture) => {
-    const vertexshader_element_id = document.getElementById('vertexshader');
-    const fragmentshader_element_id = document.getElementById('fragmentshader');
-    if (vertexshader_element_id && fragmentshader_element_id) {
+    shaderMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            color: { value: new THREE.Color(PARTICLE_COLOR) }, // Fixed color from CSS
+            pointTexture: { value: texture } // Pass the SVG texture
+        },
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        transparent: true
+    });
 
-        shaderMaterial = new THREE.ShaderMaterial({
-            uniforms: {
-                color: { value: new THREE.Color(PARTICLE_COLOR) }, // Fixed color from CSS
-                pointTexture: { value: texture } // Pass the SVG texture
-            },
-            vertexShader: vertexshader_element_id.textContent,
-            fragmentShader: fragmentshader_element_id.textContent,
-            transparent: true
-        });
-    
-
-        init();
-        animate();
-    } else {
-        console.error('vertex or shader element not found');
-    }
+    init();
+    animate();
 });
 
 function init() {

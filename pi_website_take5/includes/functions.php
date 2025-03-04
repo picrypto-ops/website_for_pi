@@ -26,7 +26,7 @@ function loadJsonData($file) {
  * @param string $key The translation key
  * @return string The translated text or the key itself if not found
  */
-function getTranslation($key) {
+function notused_getTranslation($key) {
     global $translations;
     return isset($translations[$key]) ? $translations[$key] : $key;
 }
@@ -37,7 +37,7 @@ function getTranslation($key) {
  * @param string $page Current page
  * @return string HTML for breadcrumbs
  */
-function generateBreadcrumbs($page) {
+function notused_generateBreadcrumbs($page) {
     global $lang;
     $generalData = loadJsonData('general');
     $breadcrumbs = '<div class="breadcrumbs">';
@@ -199,7 +199,7 @@ function ensureWebPVersion($src) {
  * @param string $key Content key
  * @return string Localized content or key if not found
  */
-function getLocalizedContent($data, $lang, $key) {
+function notused_getLocalizedContent($data, $lang, $key) {
     if (isset($data['language_slug'][$lang][$key])) {
         return $data['language_slug'][$lang][$key];
     } elseif (isset($data[$lang][$key])) {
@@ -210,18 +210,19 @@ function getLocalizedContent($data, $lang, $key) {
 }
 
 /**
- * Get translated content from a data structure using the new OO approach
+ * Get translated content from a data structure using the OO approach
  * 
  * @param array $data The data structure containing translations
  * @param string $lang The language code
  * @param string $key The content key
- * @return string The translated content or empty string if not found
+ * @param string $default Default value if no translation is found
+ * @return string The translated content or default if not found
  */
-function getTranslatedContent($data, $lang, $key) {
+function getTranslatedContent($data, $lang, $key, $default = '') {
     // First check if data is null or not an array to avoid errors
     if ($data === null || !is_array($data)) {
         if (TranslatableFactory::$debug) error_log("getTranslatedContent: Data is null or not an array");
-        return '';
+        return $default;
     }
     
     // Debug data type
@@ -235,11 +236,11 @@ function getTranslatedContent($data, $lang, $key) {
         error_log("getTranslatedContent: Detected data type: $dataType for key: $key");
     }
     
-    // Use our new factory to create the appropriate translatable object
+    // Use our factory to create the appropriate translatable object
     $translatable = TranslatableFactory::createFromData($data);
     
     // Get the content using the translatable object
-    $result = $translatable->getContent($lang, $key);
+    $result = $translatable->getContent($lang, $key, $default);
     
     if (TranslatableFactory::$debug) {
         error_log("getTranslatedContent: Result for lang: $lang, key: $key is: " . substr($result, 0, 50) . (strlen($result) > 50 ? "..." : ""));
@@ -257,7 +258,7 @@ function getTranslatedContent($data, $lang, $key) {
  * @param string $key Content key
  * @return string|null Content or null if not found
  */
-function getContentByType($type, $id, $lang, $key) {
+function notused_getContentByType($type, $id, $lang, $key) {
     switch ($type) {
         case 'segment':
             $segments = loadJsonData('segments');
@@ -315,7 +316,7 @@ function getContentByType($type, $id, $lang, $key) {
  * @param string $type Data type (segments, products, team, etc.)
  * @return array Array of items
  */
-function getAllItems($type) {
+function notused_getAllItems($type) {
     switch ($type) {
         case 'segments':
             return loadJsonData('segments');
@@ -340,7 +341,7 @@ function getAllItems($type) {
  * @param string $type Data type (products, team, etc.)
  * @return array Array of featured items
  */
-function getFeaturedItems($type) {
+function notused_getFeaturedItems($type) {
     $result = [];
     
     switch ($type) {
@@ -374,7 +375,7 @@ function getFeaturedItems($type) {
  * @param string $key The content key
  * @return string|null The page content or null if not found
  */
-function getPageContent($pageSlug, $lang, $key) {
+function notused_getPageContent($pageSlug, $lang, $key) {
     $pages = loadJsonData('pages');
     
     if (isset($pages[$pageSlug])) {
@@ -384,3 +385,4 @@ function getPageContent($pageSlug, $lang, $key) {
     return null;
 }
 
+// todo: remove all the notused functions & why getTranslatedContent is used

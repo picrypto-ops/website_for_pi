@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> PI Group. <?php echo TranslatableFactory::general()->getContent($lang, 'all_rights_reserved') ?: 'All rights reserved'; ?>.</p>
+                <p>&copy; <?php echo date('Y'); ?> PI Group. <?php echo TranslatableFactory::general()->getContent($lang, 'all_rights_reserved', 'All rights reserved'); ?>.</p>
             </div>
         </div>
     </footer>

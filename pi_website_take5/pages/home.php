@@ -22,10 +22,10 @@ $homeTranslatable = TranslatableFactory::page('home');
         </div>
         
         <div class="hero-content">
-            <h1><?php echo $homeTranslatable->getContent($lang, 'title'); ?></h1>
-            <p class="slogan"><?php echo $homeTranslatable->getContent($lang, 'slogan'); ?></p>
-            <p class="wide-description"><?php echo $homeTranslatable->getContent($lang, 'home_description'); ?></p>
-            <a href="#about-us" class="cta-button"><?php echo TranslatableFactory::general()->getContent($lang, 'learn_more'); ?></a>
+            <h1><?php echo $homeTranslatable->getContent($lang, 'title', 'Welcome to PI Group'); ?></h1>
+            <p class="slogan"><?php echo $homeTranslatable->getContent($lang, 'slogan', 'Financial Excellence'); ?></p>
+            <p class="wide-description"><?php echo $homeTranslatable->getContent($lang, 'home_description', 'Your trusted partner in financial services.'); ?></p>
+            <a href="#about-us" class="cta-button"><?php echo TranslatableFactory::general()->getContent($lang, 'learn_more', 'Learn More'); ?></a>
         </div>
 
         <!-- ThreeJS container positioned at bottom 30% -->

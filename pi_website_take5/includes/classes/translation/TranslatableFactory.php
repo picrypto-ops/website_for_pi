@@ -252,6 +252,28 @@ class TranslatableFactory {
             $productKey = array_key_first($productKey);
         }
         
+        // Load all products data
+        $allProducts = self::loadDataInternal('products');
+        $productData = null;
+        
+        // Search for the product in the nested structure
+        if (!empty($productKey) && is_array($allProducts)) {
+            foreach ($allProducts as $categorySlug => $categoryProducts) {
+                if (!is_array($categoryProducts)) continue;
+                
+                if (isset($categoryProducts[$productKey])) {
+                    $productData = $categoryProducts[$productKey];
+                    break;
+                }
+            }
+        }
+        
+        // If product was found, create a translatable from the data
+        if ($productData) {
+            return new ProductTranslatable($productData);
+        }
+        
+        // Fallback to old method (might not work due to nesting)
         return self::createFromFile('product', 'products', $productKey);
     }
     
@@ -268,6 +290,43 @@ class TranslatableFactory {
         }
         
         return self::createFromFile('segment', 'segments', $segmentKey);
+    }
+    
+    /**
+     * Get translatable for team member content with automatic data loading
+     * 
+     * @param string $memberKey The team member key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function teamMember($memberKey) {
+        if (is_array($memberKey)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for memberKey parameter, using first array key");
+            $memberKey = array_key_first($memberKey);
+        }
+        
+        // Load all team data
+        $allTeam = self::loadDataInternal('team');
+        $memberData = null;
+        
+        // Search for the member in the nested team structure
+        if (!empty($memberKey) && is_array($allTeam)) {
+            foreach ($allTeam as $groupSlug => $groupMembers) {
+                if (!is_array($groupMembers)) continue;
+                
+                if (isset($groupMembers[$memberKey])) {
+                    $memberData = $groupMembers[$memberKey];
+                    break;
+                }
+            }
+        }
+        
+        // If member was found, create a translatable from the data
+        if ($memberData) {
+            return new TeamTranslatable($memberData);
+        }
+        
+        // Fallback to old method
+        return self::createFromFile('team', 'team', $memberKey);
     }
     
     /**
@@ -315,5 +374,16 @@ class TranslatableFactory {
             echo "<strong>TranslatableFactory Debug:</strong> " . htmlspecialchars($message);
             echo "</div>";
         }
+    }
+    
+    /**
+     * Debug method to check if a key exists in general.json
+     * 
+     * @param string $key The key to check
+     * @return bool True if the key exists, false otherwise
+     */
+    public static function KeyExists($file, $key) {
+        $data = self::loadDataInternal($file);
+        return isset($data[$key]);
     }
 } 

@@ -59,7 +59,7 @@ try {
         echo "<p>Created translatable object: " . (($translatable instanceof TranslatableInterface) ? "Yes" : "No") . "</p>";
         
         if ($translatable instanceof TranslatableInterface) {
-            echo "<p>Content for label: " . $translatable->getContent('en', 'label') . "</p>";
+            echo "<p>Content for label: " . $translatable->getContent('en', 'label', 'Default Label') . "</p>";
         }
     }
 } catch (Exception $e) {

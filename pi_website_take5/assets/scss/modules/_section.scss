@@ -1,0 +1,143 @@
+// Section Layout
+
+// Page section styling
+.full-page-section {
+  padding: 4rem 0;
+}
+
+// Ensure minimum page height for content areas (fixes issue #8)
+#main-content {
+  min-height: calc(100vh - 70px - 150px); // Viewport height minus header and footer heights
+  display: flex;
+  flex-direction: column;
+  
+  > section {
+    flex: 1;
+  }
+}
+
+// Specific section styling
+.segment {
+  padding: 3rem 0;
+  
+  .segment-description {
+    margin-bottom: 3rem;
+  }
+}
+
+// Section common styling
+.section {
+  padding: 60px 0;
+  
+  @media (max-width: 768px) {
+    padding: 40px 0;
+  }
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #3d7edb;
+  }
+}
+
+// Product page sections
+.product {
+  padding: 40px 0;
+  
+  @media (max-width: 768px) {
+    padding: 20px 0;
+  }
+}
+
+.product-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.product-logo {
+  flex: 0 0 auto;
+  margin-right: 30px;
+  width: 150px;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  @media (max-width: 768px) {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+.product-title {
+  flex: 1;
+  
+  h1 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+}
+
+.product-slogan {
+  color: #666;
+  font-size: 1.25rem;
+  margin-top: 0;
+}
+
+.product-description {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  color: #444;
+  
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+}
+
+// Team Groups
+.team-group {
+  margin-bottom: 3rem;
+  
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.our-team-preview {
+  background-color: #f9f9f9;
+  padding: 60px 0;
+}
+
+.contact-preview,
+.featured-segments,
+.featured-products,
+.our-team {
+  padding: 4rem 0;
+} 

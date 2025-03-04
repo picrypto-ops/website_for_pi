@@ -12,54 +12,20 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
-    <script src="assets/js/main.js" defer></script>
-        <script type="module" src="assets/js/pi_bg_wave.js"></script>
-        <!-- Vertex Shader -->
-    <script type="x-shader/x-vertex" id="vertexshader">
-        precision mediump float;
-
-        attribute float scale;
-
-        void main() {
-            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = scale * (450.0 / -mvPosition.z);
-            gl_Position = projectionMatrix * mvPosition;
-        }
-    </script>
-
-    <!-- Fragment Shader -->
-    <script type="x-shader/x-fragment" id="fragmentshader">
-        precision mediump float;
-
-        uniform sampler2D pointTexture;
-        uniform vec3 color;
-
-        varying float vDigitIndex;
-
-        void main() {
-            vec4 texColor = texture2D(pointTexture, vec2(gl_PointCoord.x,1.0-gl_PointCoord.y));
-            if (texColor.a < 0.1) discard; // Discard transparent pixels
-            gl_FragColor = vec4(color, 1.0) * texColor;
-        }
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="assets/js/pi_bg_wave.js" type="module"></script>
-</head>
+    <script type="module" src="assets/js/main.js"></script>
+    <script src="assets/js/menu.js" defer></script>
+    <script src="assets/js/language-switcher.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module" src="assets/js/pi_bg_wave.js"></script>
+    </head>
 <body class="home-page">
     <header id="site-header" class="home-header initially-hidden">
         <div class="container">
             <div class="header-content">
-                <!-- Simplify the button but keep the inline handler for now -->
+                <!-- Mobile menu toggle button for screens < 768px -->
                 <button class="mobile-menu-toggle" 
                     aria-label="Toggle navigation menu" 
-                    aria-expanded="false"
-                    onclick="
-                        this.classList.toggle('active');
-                        document.querySelector('.main-nav').classList.toggle('open');
-                        document.body.classList.toggle('menu-open');
-                        return false;
-                    ">
+                    aria-expanded="false">
                     <span class="menu-icon">
                         <span class="bar"></span>
                         <span class="bar"></span>
@@ -67,47 +33,51 @@
                     </span>
                 </button>
                 
-                <!-- Part 1: Group name & logo -->
-                <div class="logo-section logo-left">
-                    <img src="assets/images/logo.svg" alt="PI Group Logo">
-                    <span class="group-name">PI Group</span>
+                <!-- Section 1: Logo & Group name -->
+                <div class="logo-section">
+                    <a href="?page=home&lang=en" class="logo-link">
+                        <div class="logo-container">
+                            <img src="assets/images/logo_small.svg" alt="PI Group Logo">
+                            <span class="group-name">PI Group</span>
+                        </div>
+                    </a>
                 </div>
                 
-                <!-- Part 2: Menu -->
+                <!-- Section 2: Main Navigation Menu -->
                 <nav class="main-nav">
                     <ul>
                                                 <li class="active">
-                            <a href="/">
+                            <a href="?page=home&lang=en">
                                 Home                            </a>
                         </li>
                                                 <li class="">
-                            <a href="/investment-banking">
+                            <a href="?page=segment&id=investment_banking&lang=en">
                                 Investment Banking                            </a>
                         </li>
                                                 <li class="">
-                            <a href="/asset-management">
+                            <a href="?page=segment&id=asset_management&lang=en">
                                 Asset Management                            </a>
                         </li>
                                                 <li class="">
-                            <a href="/team">
+                            <a href="?page=our-team&lang=en">
                                 Our Team                            </a>
                         </li>
                                                 <li class="">
-                            <a href="/about">
+                            <a href="?page=about&lang=en">
                                 About Us                            </a>
                         </li>
                                                 <li class="">
-                            <a href="/contact">
+                            <a href="?page=contact&lang=en">
                                 Contact Us                            </a>
                         </li>
                                             </ul>
                 </nav>
                 
-                <!-- Part 3: Language switcher -->
-                <div class="language-switcher align-right">
-                    <a href="?page=home&lang=en" class="active">EN</a>
+                <!-- Section 3: Language Switcher -->
+                <div class="language-switcher">
+                                        <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a>
                     <span class="separator">|</span>
-                    <a href="?page=home&lang=he" class="">עב</a>
+                    <a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>
                 </div>
             </div>
         </div>
@@ -127,7 +97,7 @@
             <h1>Unwavering Professionalism <br>Exceptional Results</h1>
             <p class="slogan"></p>
             <p class="wide-description">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
-            <a href="#about-us" class="cta-button"></a>
+            <a href="#about-us" class="cta-button">Learn More</a>
         </div>
 
         <!-- ThreeJS container positioned at bottom 30% -->
@@ -171,26 +141,31 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             <div class="segment-grid">
                                     <div class="segment-card">
                         <div class="segment-icon">
-                                                            <div class="icon-placeholder"><i class="fa fa-chart-line"></i></div>
+                                                            <img src="assets/images/investment_banking/icon.svg" alt="Investment Banking">
                                                     </div>
                         <h3>Investment Banking</h3>
                         <p>Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.</p>
-                        <a href="?page=segment&id=investment_banking&lang=en" class="button segment-button">
-                            Learn More                        </a>
+                        <a href="?page=segment&id=investment_banking&lang=en" class="segment-link">
+                            <p class="slogan">
+                                                                <span class="arrow">»</span>
+                            </p>
+                        </a>
                     </div>
                                     <div class="segment-card">
                         <div class="segment-icon">
-                                                            <div class="icon-placeholder"><i class="fa fa-chart-line"></i></div>
+                                                            <img src="assets/images/asset_management/icon.svg" alt="Asset Management">
                                                     </div>
                         <h3>Asset Management</h3>
                         <p>Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.</p>
-                        <a href="?page=segment&id=asset_management&lang=en" class="button segment-button">
-                            Learn More                        </a>
+                        <a href="?page=segment&id=asset_management&lang=en" class="segment-link">
+                            <p class="slogan">
+                                                                <span class="arrow">»</span>
+                            </p>
+                        </a>
                     </div>
                             </div>
             
-            <a href="?page=what-we-do&lang=en" class="button view-all-button">
-                View All Services            </a>
+            <!-- Removed "View All Services" button as requested -->
         </div>
         
             <div class="scroll-indicator" data-parent-section="what-we-do">
@@ -207,37 +182,48 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             
             <!-- Featured Products Grid -->
             <div class="product-grid">
-                                        <div class="product-card">
-                            <div class="product-icon">
-                                                                    <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
-                                                            </div>
-                            <h3>PI Pituach</h3>
-                            <p>Innovate Today, Secure Tomorrow</p>
-                            <a href="?page=product&id=pi_pituach&lang=en" class="button product-button">
-                                Learn More                            </a>
-                        </div>
-                                        <div class="product-card">
-                            <div class="product-icon">
-                                                                    <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
-                                                            </div>
-                            <h3>PI Select</h3>
-                            <p>Invest With Confidence</p>
-                            <a href="?page=product&id=pi_select&lang=en" class="button product-button">
-                                Learn More                            </a>
-                        </div>
-                                        <div class="product-card">
-                            <div class="product-icon">
-                                                                    <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="PI Global">
-                                                            </div>
-                            <h3>PI Global</h3>
-                            <p>Macro & Derivatives Excellence</p>
-                            <a href="?page=product&id=pi_global&lang=en" class="button product-button">
-                                Learn More                            </a>
-                        </div>
+                                        <a href="?page=product&id=pi_pituach&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                            <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
+                                                                    </div>
+                                <div class="product-text">
+                                    <h3>PI Pituach</h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                Innovate Today, Secure Tomorrow                                <span class="arrow">»</span>
+                            </p>
+                        </a>
+                                        <a href="?page=product&id=pi_select&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                            <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
+                                                                    </div>
+                                <div class="product-text">
+                                    <h3>PI Select</h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                Invest With Confidence                                <span class="arrow">»</span>
+                            </p>
+                        </a>
+                                        <a href="?page=product&id=pi_global&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                            <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="PI Global">
+                                                                    </div>
+                                <div class="product-text">
+                                    <h3>PI Global</h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                Macro & Derivatives Excellence                                <span class="arrow">»</span>
+                            </p>
+                        </a>
                             </div>
             
-            <a href="?page=products&lang=en" class="button view-all-button">
-                View All Products            </a>
+            <!-- Removed "View All Products" button as requested -->
         </div>
         
             <div class="scroll-indicator" data-parent-section="products">
@@ -252,194 +238,131 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             <h2>Our Team</h2>
             <p class="section-description">Meet our dedicated professionals who provide exceptional service.</p>
 
-            <div class="breadcrumb-nav">
+            <div class="team-navigation">
                 <ul class="team-nav">
-                                            <li><a href="#team-group-founders">Founders</a></li>
-                                            <li><a href="#team-group-management">Management</a></li>
-                                            <li><a href="#team-group-pi_pituach">Pi pituach</a></li>
-                                            <li><a href="#team-group-pi_select">Pi select</a></li>
+                                            <li><a href="#team-group-founders" class="team-group-link">Founders</a></li>
+                                            <li><a href="#team-group-management" class="team-group-link">Management</a></li>
+                                            <li><a href="#team-group-pi_pituach" class="team-group-link">PI Pituach</a></li>
+                                            <li><a href="#team-group-pi_select" class="team-group-link">PI Select</a></li>
                                     </ul>
             </div>
-
-            <div class="team-group featured-team"><h3>Featured Team Members</h3><div class="team-preview-grid">                    <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/aaron_cohen.png" alt="Aron Cohen">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Aron Cohen</h3>
-                            <p class="position">Founder</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/jonny_kaye.png" alt="Jonny Kaye">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Jonny Kaye</h3>
-                            <p class="position">Founder</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/shlomi_cohen.png" alt="Shlomi Cohen">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Shlomi Cohen</h3>
-                            <p class="position">Chief Financial Officer</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/ronen_bitman.png" alt="Ronen Bitman">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Ronen Bitman</h3>
-                            <p class="position">Chief Technology Officer</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/hagit_borohovitz.png" alt="Hagit Borohovitz">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Hagit Borohovitz</h3>
-                            <p class="position">Chief Legal Officer</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/ronen_elgali.png" alt="Ronen Elgali">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Ronen Elgali</h3>
-                            <p class="position">Chief Investment Officer</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/dan_rosenberg.png" alt="Dan Rosenberg">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Dan Rosenberg</h3>
-                            <p class="position">Founder</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Itay Ruschkewitz</h3>
-                            <p class="position">CEO and Co-Founder</p>
-                        </div>
-                    </div>
-                                        <div class="team-card">
-                        <div class="member-photo">
-                                                            <img src="assets/images/team/buky_katzman.png" alt="Baruch (Buky) Katzman">
-                                                    </div>
-                        <div class="member-info">
-                            <h3>Baruch (Buky) Katzman</h3>
-                            <p class="position">Co-founder</p>
-                        </div>
-                    </div>
-                    </div></div>                <div id="team-group-founders" class="team-group">
+            
+                            <div id="team-group-founders" class="team-group">
                     <h3>Founders</h3>
-                    <div class="team-preview-grid">
+                    <div class="team-grid">
                                                                                     <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/aaron_cohen.png" alt="Aron Cohen">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Aron Cohen</h3>
-                                        <p class="position">Founder</p>
-                                    </div>
+                                    <a href="?page=team-member&id=aaron-cohen&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/aaron_cohen.png" alt="Aron Cohen">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Aron Cohen</h3>
+                                            <p class="position">Founder</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                             <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/jonny_kaye.png" alt="Jonny Kaye">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Jonny Kaye</h3>
-                                        <p class="position">Founder</p>
-                                    </div>
+                                    <a href="?page=team-member&id=jonny-kaye&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/jonny_kaye.png" alt="Jonny Kaye">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Jonny Kaye</h3>
+                                            <p class="position">Founder</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                                         </div>
                 </div>
                             <div id="team-group-management" class="team-group">
                     <h3>Management</h3>
-                    <div class="team-preview-grid">
+                    <div class="team-grid">
                                                                                     <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/shlomi_cohen.png" alt="Shlomi Cohen">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Shlomi Cohen</h3>
-                                        <p class="position">Chief Financial Officer</p>
-                                    </div>
+                                    <a href="?page=team-member&id=shlomi-cohen&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/shlomi_cohen.png" alt="Shlomi Cohen">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Shlomi Cohen</h3>
+                                            <p class="position">Chief Financial Officer</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                             <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/ronen_bitman.png" alt="Ronen Bitman">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Ronen Bitman</h3>
-                                        <p class="position">Chief Technology Officer</p>
-                                    </div>
+                                    <a href="?page=team-member&id=ronen-bitman&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/ronen_bitman.png" alt="Ronen Bitman">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Ronen Bitman</h3>
+                                            <p class="position">Chief Technology Officer</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                             <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/hagit_borohovitz.png" alt="Hagit Borohovitz">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Hagit Borohovitz</h3>
-                                        <p class="position">Chief Legal Officer</p>
-                                    </div>
+                                    <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/hagit_borohovitz.png" alt="Hagit Borohovitz">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Hagit Borohovitz</h3>
+                                            <p class="position">Chief Legal Officer</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                             <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/ronen_elgali.png" alt="Ronen Elgali">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Ronen Elgali</h3>
-                                        <p class="position">Chief Investment Officer</p>
-                                    </div>
+                                    <a href="?page=team-member&id=ronen-elgali&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/ronen_elgali.png" alt="Ronen Elgali">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Ronen Elgali</h3>
+                                            <p class="position">Chief Investment Officer</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                                         </div>
                 </div>
                             <div id="team-group-pi_pituach" class="team-group">
-                    <h3>Pi pituach</h3>
-                    <div class="team-preview-grid">
+                    <h3>PI Pituach</h3>
+                    <div class="team-grid">
                                                                                     <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/dan_rosenberg.png" alt="Dan Rosenberg">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Dan Rosenberg</h3>
-                                        <p class="position">Founder</p>
-                                    </div>
+                                    <a href="?page=team-member&id=dan-rosenberg&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/dan_rosenberg.png" alt="Dan Rosenberg">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Dan Rosenberg</h3>
+                                            <p class="position">Founder</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                             <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Itay Ruschkewitz</h3>
-                                        <p class="position">CEO and Co-Founder</p>
-                                    </div>
+                                    <a href="?page=team-member&id=itai-ruschkewitz&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Itay Ruschkewitz</h3>
+                                            <p class="position">CEO and Co-Founder</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                                         </div>
                 </div>
                             <div id="team-group-pi_select" class="team-group">
-                    <h3>Pi select</h3>
-                    <div class="team-preview-grid">
+                    <h3>PI Select</h3>
+                    <div class="team-grid">
                                                                                     <div class="team-card">
-                                    <div class="member-photo">
-                                                                                    <img src="assets/images/team/buky_katzman.png" alt="Baruch (Buky) Katzman">
-                                                                            </div>
-                                    <div class="member-info">
-                                        <h3>Baruch (Buky) Katzman</h3>
-                                        <p class="position">Co-founder</p>
-                                    </div>
+                                    <a href="?page=team-member&id=buky-katzman&lang=en" class="team-member-link">
+                                        <div class="member-photo">
+                                                                                            <img src="assets/images/team/buky_katzman.png" alt="Baruch (Buky) Katzman">
+                                                                                    </div>
+                                        <div class="member-info">
+                                            <h3>Baruch (Buky) Katzman</h3>
+                                            <p class="position">Co-founder</p>
+                                        </div>
+                                    </a>
                                 </div>
                                                                         </div>
                 </div>
@@ -455,6 +378,93 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
         </a>
     </div>
         </section>
+    
+    <!-- Add CSS for the team grid to the page -->
+    <style>
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+        
+        .team-card {
+            flex: 0 0 calc(25% - 15px); /* Show 4 cards per row */
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .team-card {
+                flex: 0 0 calc(33.33% - 14px); /* 3 per row on medium screens */
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .team-card {
+                flex: 0 0 calc(50% - 10px); /* 2 per row on smaller screens */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .team-card {
+                flex: 0 0 100%; /* 1 per row on mobile */
+            }
+        }
+        
+        .team-navigation {
+            margin-bottom: 2rem;
+        }
+        
+        .team-nav {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .team-nav li a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .team-nav li a:hover, 
+        .team-nav li a.active {
+            background-color: #0056b3;
+            color: white;
+        }
+        
+        .team-member-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .team-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+    </style>
             <section id="contact-us" class="contact-preview full-page-section">
         <div class="container">
             <div class="section-header">
@@ -463,11 +473,44 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             </div>
             
             <div class="contact-info-grid">
+                                <div class="contact-card address">
+                    <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+                    <div class="contact-info">
+                        <h3>Address</h3>
+                        <p>123 Main St, Anytown, USA</p>
+                    </div>
+                </div>
                                 
+                <!-- Phone card -->
+                                    <div class="contact-card phone">
+                        <div class="icon"><i class="fa fa-phone"></i></div>
+                        <div class="contact-info">
+                            <h3>Phone</h3>
+                            <p>+123 456 7890</p>
+                        </div>
+                    </div>
+                                
+                <!-- Email card -->
+                                    <div class="contact-card email">
+                        <div class="icon"><i class="fa fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <h3>Email</h3>
+                            <p><a href="mailto:info@pigroup.com">info@pigroup.com</a></p>
+                        </div>
+                    </div>
+                                
+                <!-- Website card -->
+                                    <div class="contact-card website">
+                        <div class="icon"><i class="fa fa-globe"></i></div>
+                        <div class="contact-info">
+                            <h3>Website</h3>
+                            <p><a href="https://www.pigroup.com" target="_blank">https://www.pigroup.com</a></p>
+                        </div>
+                    </div>
                                 
                             </div>
             
-            <a href="?page=contact&lang=en" class="button view-all-button">
+            <a href="?page=contact&lang=en" class="button contact-button">
                 Get In Touch            </a>
         </div>
     </section>

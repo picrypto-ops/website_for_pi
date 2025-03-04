@@ -20,6 +20,7 @@ $nav-link-color: $text-light;
 // Header Colors
 $header-bg-color: $secondary-color;
 $header-text-color: $nav-link-color;
+$pages-header-text-color: $text-color;
 
 // UI Element Colors
 $button-primary: $accent-color;
@@ -64,12 +65,13 @@ $header-transition: transform 0.3s ease;
 
 // Logo
 $logo-size: 40px;
-$group-name-size: 1.2rem;
+$group-name-size: 1.5rem;
 
 // Navigation
 $nav-gap: 2rem;
-$nav-font-weight: bold;
+$nav-font-weight: normal;
 $nav-transition: color 0.3s ease;
+$header-font-size: 18px;
 
 // Language Switcher
 $lang-switcher-gap: 0.5rem;

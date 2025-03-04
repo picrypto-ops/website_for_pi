@@ -42,7 +42,7 @@ function renderScrollIndicator($targetSectionId, $lang) {
     ?>
     <div class="scroll-indicator" data-parent-section="<?php echo $currentSection; ?>">
         <a href="#<?php echo $targetSectionId; ?>" class="scroll-down" data-target="<?php echo $targetSectionId; ?>">
-            <span class="sr-only"><?php echo $generalTranslatable->getContent($lang, 'scroll_down') ?: ''; ?></span>
+            <span class="sr-only"><?php echo $generalTranslatable->getContent($lang, 'scroll_down', 'Scroll Down'); ?></span>
             <i class="arrow-down"></i>
         </a>
     </div>

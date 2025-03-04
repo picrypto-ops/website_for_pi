@@ -1,18 +1,22 @@
+@use 'base/variables';
 @use 'base/reset';
 @use 'base/typography';
+@use 'base/animations';
 
 // Layout
+@use 'layout/grid';
 @use 'layout/header';
 @use 'layout/footer';
-@use 'layout/grid';
 
 // Modules
 @use 'modules/buttons';
-@use 'modules/forms';
+@use 'modules/section';
 @use 'modules/navigation';
 @use 'modules/breadcrumbs';
 @use 'modules/cards';
 @use 'modules/home';
+@use 'modules/forms';
+@use 'modules/segment';
 
 // State
 @use 'state/states';
