@@ -37,11 +37,11 @@ function renderWhatWeDoSection($lang) {
                             <?php endif; ?>
                         </div>
                         <h3><?php echo $segmentTranslatable->getContent($lang, 'name'); ?></h3>
-                        <p><?php echo $segmentTranslatable->getContent($lang, 'short_description'); ?></p>
+                        <p><?php echo $segmentTranslatable->getContent($lang, 'home_description'); ?></p>
                         <a href="?page=segment&id=<?php echo $segmentSlug; ?>&lang=<?php echo $lang; ?>" class="segment-link">
                             <p class="slogan">
                                 <?php echo TranslatableFactory::general()->getContent($lang, 'view_details', 'View Details'); ?>
-                                <span class="arrow">»</span>
+                                <!-- <span class="arrow"><?php echo TranslatableFactory::general()->getContent($lang, 'arrow', '»'); ?></span>                                 -->
                             </p>
                         </a>
                     </div>

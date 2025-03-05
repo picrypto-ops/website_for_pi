@@ -25,17 +25,18 @@ $teamGroups = array_keys($allTeam);
                 <div class="team-group">
                     <h2><?php echo $groupName; ?></h2>
                     <div class="team-grid">
-                        <?php foreach ($groupMembers as $memberSlug => $member): ?>
-                            <?php $memberTranslatable = TranslatableFactory::teamMember($memberSlug); ?>
-                            <a href="?page=team-member&id=<?php echo $memberSlug; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                        <?php foreach ($groupMembers as $index => $member): ?>
+                            <?php if (!is_array($member) || !isset($member['name_slug'])) continue; ?>
+                            <?php $memberTranslatable = TranslatableFactory::createFromData($member); ?>
+                            <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
                                 <div class="team-card">
                                     <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
-                                        <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $memberSlug); ?>">
+                                        <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>" width="166" height="169" class="team-member-photo">
                                     <?php else: ?>
-                                        <div class="photo-placeholder"><i class="fa fa-user-circle"></i></div>
+                                        <div class="photo-placeholder" style="width: 166px; height: 169px;"><i class="fa fa-user-circle"></i></div>
                                     <?php endif; ?>
                                     <div class="team-info">
-                                        <h3><?php echo $memberTranslatable->getContent($lang, 'name', $memberSlug); ?></h3>
+                                        <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
                                         <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
                                         <?php if ($memberTranslatable->hasContent($lang, 'short_bio')): ?>
                                             <p class="short-bio"><?php echo $memberTranslatable->getContent($lang, 'short_bio', ''); ?></p>

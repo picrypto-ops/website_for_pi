@@ -30,6 +30,45 @@
         left: 5%;
       }
     }
+    
+    .hero-language-switcher {
+      position: absolute;
+      top: 3rem;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      &.left-aligned {
+        left: 5%;
+      }
+      
+      &.right-aligned {
+        right: 5%;
+      }
+      
+      a {
+        color: variables.$hero-text-color;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        
+        &:hover {
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: underline;
+        }
+        
+        &.active {
+          font-weight: bold;
+        }
+      }
+      
+      .separator {
+        color: variables.$hero-text-color;
+        font-size: 1rem;
+      }
+    }
 
     .hero-content {
       width: 50%;
@@ -60,6 +99,7 @@
       
       .cta-button {
         animation: fadeInUp 1.6s ease-out;
+        display: none; // Hide the Learn More button
       }
     }
 
@@ -230,19 +270,6 @@
       color: #666;
       line-height: 1.4;
       position: relative;
-      
-      .arrow {
-        position: absolute;
-        right: -0.3rem;
-        bottom: -1rem;
-        font-size: 1.8rem;
-        color: black;
-        transition: transform 0.3s ease;
-      }
-      
-      &:hover .arrow {
-        transform: translateX(4px);
-      }
     }
   }
 
@@ -549,6 +576,18 @@ html {
       .hero-top-logo img {
         width: 60px;
       }
+      
+      .hero-language-switcher {
+        top: 1.5rem;
+        
+        &.left-aligned {
+          left: 1rem;
+        }
+        
+        &.right-aligned {
+          right: 1rem;
+        }
+      }
     }
     
     .segment-grid,
@@ -842,19 +881,6 @@ html {
       color: #666;
       line-height: 1.4;
       position: relative;
-      
-      .arrow {
-        position: absolute;
-        right: -0.3rem;
-        bottom: -1rem;
-        font-size: 1.8rem;
-        color: black;
-        transition: transform 0.3s ease;
-      }
-      
-      &:hover .arrow {
-        transform: translateX(4px);
-      }
     }
   }
 }
@@ -939,25 +965,15 @@ html[dir="rtl"] {
         text-align: left;
       }
     }
-
-    .slogan .arrow {
-      left: 2rem;
-      right: auto;
-      transform: rotate(180deg);
-      
-      &:hover {
-        transform: rotate(180deg) translateX(-4px);
-      }
-    }
   }
   
   .segment-card {
     .segment-link {
       .slogan .arrow {
-        left: 2rem;
+        text-align: left;
+        left: 0rem;
         right: auto;
         transform: rotate(180deg);
-        
         &:hover {
           transform: rotate(180deg) translateX(-4px);
         }

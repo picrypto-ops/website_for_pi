@@ -93,6 +93,13 @@
             <img src="assets/images/logo.svg" alt="PI Group Logo">
         </div>
         
+        <!-- Language Switcher positioned at top left/right depending on language -->
+        <div class="hero-language-switcher left-aligned">
+                        <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a>
+            <span class="separator">|</span>
+            <a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>
+        </div>
+        
         <div class="hero-content">
             <h1>Unwavering Professionalism <br>Exceptional Results</h1>
             <p class="slogan"></p>
@@ -147,7 +154,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                         <p>Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.</p>
                         <a href="?page=segment&id=investment_banking&lang=en" class="segment-link">
                             <p class="slogan">
-                                                                <span class="arrow">»</span>
+                                                                <!-- <span class="arrow">»</span>                                 -->
                             </p>
                         </a>
                     </div>
@@ -159,7 +166,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                         <p>Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.</p>
                         <a href="?page=segment&id=asset_management&lang=en" class="segment-link">
                             <p class="slogan">
-                                                                <span class="arrow">»</span>
+                                                                <!-- <span class="arrow">»</span>                                 -->
                             </p>
                         </a>
                     </div>
@@ -192,8 +199,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                 </div>
                             </div>
                             <p class="slogan">
-                                Innovate Today, Secure Tomorrow                                <span class="arrow">»</span>
-                            </p>
+                                Innovate Today, Secure Tomorrow                            </p>
                         </a>
                                         <a href="?page=product&id=pi_select&lang=en" class="product-card">
                             <div class="product-content">
@@ -205,8 +211,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                 </div>
                             </div>
                             <p class="slogan">
-                                Invest With Confidence                                <span class="arrow">»</span>
-                            </p>
+                                Invest With Confidence                            </p>
                         </a>
                                         <a href="?page=product&id=pi_global&lang=en" class="product-card">
                             <div class="product-content">
@@ -218,8 +223,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                 </div>
                             </div>
                             <p class="slogan">
-                                Macro & Derivatives Excellence                                <span class="arrow">»</span>
-                            </p>
+                                Macro & Derivatives Excellence                            </p>
                         </a>
                             </div>
             
@@ -253,7 +257,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                                                     <div class="team-card">
                                     <a href="?page=team-member&id=aaron-cohen&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/aaron_cohen.png" alt="Aron Cohen">
+                                                                                            <img src="assets/images/team/aaron_cohen.png" alt="aaron-cohen">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Aron Cohen</h3>
@@ -264,7 +268,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                             <div class="team-card">
                                     <a href="?page=team-member&id=jonny-kaye&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/jonny_kaye.png" alt="Jonny Kaye">
+                                                                                            <img src="assets/images/team/jonny_kaye.png" alt="jonny-kaye">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Jonny Kaye</h3>
@@ -280,7 +284,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                                                     <div class="team-card">
                                     <a href="?page=team-member&id=shlomi-cohen&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/shlomi_cohen.png" alt="Shlomi Cohen">
+                                                                                            <img src="assets/images/team/shlomi_cohen.png" alt="shlomi-cohen">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Shlomi Cohen</h3>
@@ -291,7 +295,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                             <div class="team-card">
                                     <a href="?page=team-member&id=ronen-bitman&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/ronen_bitman.png" alt="Ronen Bitman">
+                                                                                            <img src="assets/images/team/ronen_bitman.png" alt="ronen-bitman">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Ronen Bitman</h3>
@@ -302,7 +306,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                             <div class="team-card">
                                     <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/hagit_borohovitz.png" alt="Hagit Borohovitz">
+                                                                                            <img src="assets/images/team/hagit_borohovitz.png" alt="hagit-borohovitz">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Hagit Borohovitz</h3>
@@ -313,7 +317,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                             <div class="team-card">
                                     <a href="?page=team-member&id=ronen-elgali&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/ronen_elgali.png" alt="Ronen Elgali">
+                                                                                            <img src="assets/images/team/ronen_elgali.png" alt="ronen-elgali">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Ronen Elgali</h3>
@@ -329,7 +333,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                                                     <div class="team-card">
                                     <a href="?page=team-member&id=dan-rosenberg&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/dan_rosenberg.png" alt="Dan Rosenberg">
+                                                                                            <img src="assets/images/team/dan_rosenberg.png" alt="dan-rosenberg">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Dan Rosenberg</h3>
@@ -340,7 +344,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                             <div class="team-card">
                                     <a href="?page=team-member&id=itai-ruschkewitz&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz">
+                                                                                            <img src="assets/images/team/itai_ruschkewitz.png" alt="itai-ruschkewitz">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Itay Ruschkewitz</h3>
@@ -356,7 +360,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                                                                     <div class="team-card">
                                     <a href="?page=team-member&id=buky-katzman&lang=en" class="team-member-link">
                                         <div class="member-photo">
-                                                                                            <img src="assets/images/team/buky_katzman.png" alt="Baruch (Buky) Katzman">
+                                                                                            <img src="assets/images/team/buky_katzman.png" alt="buky-katzman">
                                                                                     </div>
                                         <div class="member-info">
                                             <h3>Baruch (Buky) Katzman</h3>
@@ -500,13 +504,6 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                     </div>
                                 
                 <!-- Website card -->
-                                    <div class="contact-card website">
-                        <div class="icon"><i class="fa fa-globe"></i></div>
-                        <div class="contact-info">
-                            <h3>Website</h3>
-                            <p><a href="https://www.pigroup.com" target="_blank">https://www.pigroup.com</a></p>
-                        </div>
-                    </div>
                                 
                             </div>
             

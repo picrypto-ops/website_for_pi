@@ -164,6 +164,17 @@
             }
         }
     },
+    "arrow": {
+        "term_slug": "arrow",
+        "language_slug": {
+            "en": {
+                "label": "»"
+            },
+            "he": {
+                "label": "«"
+            }
+        }
+    },
     "view_details": {
         "term_slug": "view_details",
         "language_slug": {

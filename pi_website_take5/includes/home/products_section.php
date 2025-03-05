@@ -51,25 +51,12 @@ function renderProductsSection($lang) {
                     // If no featured products found, show example placeholders
                     if (empty($featuredProducts)) {
                         // Display placeholders if no products are found
-                        for ($i = 1; $i <= 3; $i++):
-                ?>
-                        <a href="#" class="product-card">
-                            <div class="product-content">
-                                <div class="product-icon">
-                                    <div class="icon-placeholder"><i class="fa fa-briefcase"></i></div>
-                                </div>
-                                <div class="product-text">
-                                    <h3>Premium Investment <?php echo $i; ?></h3>
-                                    <p>This premium investment product offers excellent return potential with managed risk levels.</p>
-                                </div>
-                            </div>
-                            <div class="card-link">
-                                <?php echo TranslatableFactory::general()->getContent($lang, 'read_more', 'Learn More'); ?>
-                                <span class="arrow">→</span>
-                            </div>
-                        </a>
-                <?php 
-                        endfor;
+                            // No valid segment ID found
+                            header("HTTP/1.0 404 Not Found");
+                            echo "<h1>404 - Segment Not Found</h1>";
+                            echo "<p>The requested segment does not exist.</p>";
+                            echo "<p><a href='index.php'>Return to homepage</a></p>";
+                            exit;
                     } else {
                         // Display actual featured products
                         foreach ($featuredProducts as $productInfo): 
@@ -94,7 +81,6 @@ function renderProductsSection($lang) {
                             </div>
                             <p class="slogan">
                                 <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
-                                <span class="arrow">»</span>
                             </p>
                         </a>
                 <?php 

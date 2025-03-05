@@ -61,6 +61,35 @@ document.addEventListener('DOMContentLoaded', function() {
     mainNav.classList.toggle('open');
     document.body.classList.toggle('menu-open');
     
+    // Explicitly set position of toggle button in active state
+    if (!isOpen) {
+      // When opening menu, fix the toggle button position based on direction
+      const isRTL = document.documentElement.dir === 'rtl';
+      
+      // Set fixed position at the top
+      menuToggle.style.position = 'fixed';
+      menuToggle.style.top = '25px';
+      menuToggle.style.zIndex = '2000';
+      
+      // Set left/right based on direction
+      if (isRTL) {
+        // For RTL (Hebrew) - position on the right
+        menuToggle.style.right = '15px';
+        menuToggle.style.left = 'auto';
+      } else {
+        // For LTR (English) - position on the left
+        menuToggle.style.left = '15px';
+        menuToggle.style.right = 'auto';
+      }
+    } else {
+      // When closing, reset inline styles
+      menuToggle.style.position = '';
+      menuToggle.style.top = '';
+      menuToggle.style.left = '';
+      menuToggle.style.right = '';
+      menuToggle.style.zIndex = '';
+    }
+    
     // Update ARIA
     menuToggle.setAttribute('aria-expanded', (!isOpen).toString());
     

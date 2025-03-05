@@ -181,8 +181,8 @@
       
       .arrow {
         position: absolute;
-        right: 1.5rem;
-        bottom: 0.5rem;
+        right: -0.3rem;
+        bottom: -1rem;
         font-size: 1.8rem;
         color: black;
         transition: transform 0.3s ease;
@@ -190,6 +190,18 @@
       
       &:hover .arrow {
         transform: translateX(4px);
+      }
+      
+      // Add RTL support for arrow positioning
+      html[dir="rtl"] & {
+        .arrow {
+          right: auto;
+          left: -0.3rem;
+        }
+        
+        &:hover .arrow {
+          transform: translateX(-4px); // Flip the direction for RTL
+        }
       }
     }
   }

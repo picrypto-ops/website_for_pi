@@ -256,14 +256,6 @@ body:not(.home-page) {
       padding: 10px;
       cursor: pointer;
       
-      html[dir="ltr"] & {
-        left: 15px;
-      }
-      
-      html[dir="rtl"] & {
-        right: 15px;
-      }
-      
       .menu-icon {
         position: relative;
         display: block;
@@ -296,16 +288,6 @@ body:not(.home-page) {
       }
       
       &.active {
-        html[dir="ltr"] & {
-          left: auto;
-          right: 15px;
-        }
-        
-        html[dir="rtl"] & {
-          right: auto;
-          left: 15px;
-        }
-        
         .bar:nth-child(1) {
           transform: rotate(45deg);
           top: 18px;
@@ -343,14 +325,52 @@ body:not(.home-page) {
       }
     }
     
+    /* LTR positioning - toggle button on left */
+    html[dir="ltr"] & .mobile-menu-toggle {
+      left: 15px;
+      right: auto;
+    }
+    
+    /* RTL positioning - toggle button on right */
+    html[dir="rtl"] & .mobile-menu-toggle {
+      right: 15px;
+      left: auto;
+    }
+    
+    /* Active state (X button) positioning - always stays in same position */
+    .mobile-menu-toggle.active {
+      position: fixed !important;
+      top: 25px !important;
+      z-index: 2000 !important;
+    }
+    
+    /* LTR active positioning - X button on left */
+    html[dir="ltr"] & .mobile-menu-toggle.active {
+      left: 15px !important;
+      right: auto !important;
+    }
+    
+    /* RTL active positioning - X button on right */
+    html[dir="rtl"] & .mobile-menu-toggle.active {
+      right: 15px !important;
+      left: auto !important;
+    }
+    
     .header-content {
       flex-wrap: wrap;
       justify-content: center;
       
       .logo-section {
-        margin: 0 auto;
-        padding: 0 44px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
         order: 2;
+        
+        .logo-container {
+          justify-content: center;
+        }
       }
       
       .language-switcher {
@@ -358,6 +378,7 @@ body:not(.home-page) {
         top: 50%;
         transform: translateY(-50%);
         z-index: 1510;
+        margin: 0;
         
         html[dir="ltr"] & {
           right: 15px;
@@ -421,22 +442,6 @@ body:not(.home-page) {
               background-color: rgba(255, 255, 255, 0.15);
             }
           }
-        }
-      }
-      
-      /* Mobile menu toggle - active state adjustments */
-      .mobile-menu-toggle.active {
-        position: fixed;
-        top: 25px;
-        
-        html[dir="ltr"] & {
-          left: auto;
-          right: 15px;
-        }
-        
-        html[dir="rtl"] & {
-          right: auto;
-          left: 15px;
         }
       }
     }

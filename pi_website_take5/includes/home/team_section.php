@@ -62,7 +62,7 @@ function renderTeamSection($lang) {
                                     <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="team-member-link">
                                         <div class="member-photo">
                                             <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
-                                                <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>">
+                                                <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name_slug', $member['name_slug']); ?>">
                                             <?php else: ?>
                                                 <div class="photo-placeholder"><i class="fa fa-user-circle"></i></div>
                                             <?php endif; ?>

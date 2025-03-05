@@ -9,14 +9,7 @@
 @use 'layout/footer';
 
 // Modules
-@use 'modules/buttons';
-@use 'modules/section';
-@use 'modules/navigation';
-@use 'modules/breadcrumbs';
-@use 'modules/cards';
-@use 'modules/home';
-@use 'modules/forms';
-@use 'modules/segment';
+@use 'modules';
 
 // State
 @use 'state/states';

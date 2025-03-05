@@ -1,81 +1,180 @@
 {
-    "home": {
-      "page_slug": "home",
-      "language_slug": {
-        "en": {
-          "title": "Unwavering Professionalism <br>Exceptional Results",
-          "slogan": "",
-          "home_description": "Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments."
-        },
-        "he": {
-          "title": "ברוכים הבאים לקבוצת PI",
-          "slogan": "פתרונות פיננסיים חדשניים",
-          "home_description": "קבוצת PI היא חברת שירותים פיננסיים מובילה המתמחה בבנקאות השקעות וניהול נכסים."
-        }
+  "home": {
+    "page_slug": "home",
+    "language_slug": {
+      "en": {
+        "title": "Unwavering Professionalism <br>Exceptional Results",
+        "slogan": "",
+        "home_description": "Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments."
+      },
+      "he": {
+        "title": "ברוכים הבאים לקבוצת PI",
+        "slogan": "פתרונות פיננסיים חדשניים",
+        "home_description": "קבוצת PI היא חברת שירותים פיננסיים מובילה המתמחה בבנקאות השקעות וניהול נכסים."
       }
-    },
-    "about": {
-      "page_slug": "about",
-      "language_slug": {
-        "en": {
-          "title": "About Us",
-          "slogan": "",
-          "home_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.\nPi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.\nWhile proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.\nPi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.\nMore recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.\nThrough innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.",
-          "short_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.\nPi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.\nWhile proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.\nPi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.\nMore recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.\nThrough innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities."
-        },
-        "he": {
-          "title": "אודות קבוצת PI",
-          "slogan": "מצוינות בפיננסים",
-          "home_description": "למדו על ההיסטוריה שלנו, הערכים שלנו והמחויבות שלנו לספק שירותים פיננסיים ברמה הגבוהה ביותר.",
-          "short_description": "למדו על ההיסטוריה שלנו, הערכים שלנו והמחויבות שלנו לספק שירותים פיננסיים ברמה הגבוהה ביותר."
-        }
-      }
-    },
-    "what_we_do": {
-      "page_slug": "what_we_do",
-      "language_slug": {
-        "en": {
-          "title": "What We Do",
-          "home_description": "Discover how we leverage decades of successful investing experience to deliver exceptional value for our partners.",
-          "short_description": "Discover how we leverage decades of successful investing experience to deliver exceptional value for our partners."
-        },
-        "he": {
-          "title": "מה אנחנו עושים",
-          "home_description": "למדו כיצד אנו מגבילים את הניסיון המוצלח בשנות השנים לספק ערך מיוחד לשותפים שלנו.",
-          "short_description": "למדו כיצד אנו מגבילים את הניסיון המוצלח בשנות השנים לספק ערך מיוחד לשותפים שלנו."
-        }
-      }
-    },
-    
-    "contact": {
-      "page_slug": "contact",
-      "language_slug": {
-        "en": {
-          "title": "Contact PI Group",
-          "slogan": "Get in Touch",
-          "home_description": "Reach out to us for any inquiries or to learn more about our services.",
-          "short_description": "Reach out to us for any inquiries or to learn more about our services.",
-          "contact_details": {
-            "address": "123 Main St, Anytown, USA",
-            "phone": "+123 456 7890",
-            "email": "info@pigroup.com",
-            "website": "https://www.pigroup.com"
+    }
+  },
+  
+  "about": {
+    "page_slug": "about",
+    "language_slug": {
+      "en": {
+        "title": "About Us",
+        "slogan": "",
+        "home_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.\nPi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.\nWhile proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.\nPi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.\nMore recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.\nThrough innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.",
+        "short_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.\nPi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.\nWhile proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.\nPi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.\nMore recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.\nThrough innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.",
+        "company_history_heading": "Our History",
+        "our_values_heading": "Our Values",
+        "our_mission_heading": "Our Mission",
+        "company_history": [
+          {
+            "year": "2000",
+            "title": "Foundation",
+            "description": "Our company was founded with a vision to provide innovative financial solutions."
+          },
+          {
+            "year": "2005",
+            "title": "Expansion",
+            "description": "We expanded our services to cover a wider range of financial needs."
+          },
+          [
+            {
+              "year": "2010",
+              "title": "Global Reach",
+              "description": "Our services expanded internationally, serving clients across the globe."
+            }
+          ],
+          {
+            "year": "2015",
+            "title": "Innovation",
+            "description": "We introduced cutting-edge financial technologies to enhance our services."
+          },
+          {
+            "year": "2020",
+            "title": "Sustainability Focus",
+            "description": "We committed to sustainable and responsible financial practices."
           }
-        },
-        "he": {
-          "title": "צור קשר עם קבוצת PI",
-          "slogan": "צרו איתנו קשר",
-          "home_description": "פנו אלינו לכל שאלה או כדי ללמוד עוד על השירותים שלנו.",
-          "short_description": "פנו אלינו לכל שאלה או כדי ללמוד עוד על השירותים שלנו.",
-          "contact_details": {
-            "address": "123 Main St, Anytown, USA",
-            "phone": "+123 456 7890",
-            "email": "info@pigroup.com",
-            "website": "https://www.pigroup.com"
+        ],
+        "our_values": [
+          {
+            "title": "Integrity",
+            "description": "We uphold the highest standards of integrity in all our actions."
+          },
+          {
+            "title": "Innovation",
+            "description": "We constantly innovate to provide cutting-edge financial solutions."
+          },
+          {
+            "title": "Client Focus",
+            "description": "Our clients\" success is at the heart of everything we do."
+          },
+          {
+            "title": "Excellence",
+            "description": "We strive for excellence in all aspects of our work."
           }
+        ],
+        "our_mission": [
+          {
+            "mission": "To provide our clients with exceptional value through innovation, adaptability, and deep market expertise."
+          }
+        ]
+      },
+      "he": {
+        "title": "אודות קבוצת PI",
+        "slogan": "מצוינות בפיננסים",
+        "home_description": "למדו על ההיסטוריה שלנו, הערכים שלנו והמחויבות שלנו לספק שירותים פיננסיים ברמה הגבוהה ביותר.",
+        "short_description": "למדו על ההיסטוריה שלנו, הערכים שלנו והמחויבות שלנו לספק שירותים פיננסיים ברמה הגבוהה ביותר.",
+        "company_history_heading": "היסטוריה שלנו",
+        "our_values_heading": "הערכים שלנו",
+        "our_mission_heading": "המחויבות שלנו",
+        "company_history": [
+          {
+            "year": "1999",
+            "event": "נוסדה על ידי ארון קונה ויוני קיי"
+          }
+        ],
+        "our_values": [
+          {
+            "value": "מצוינות",
+            "description": "אנו מציבים תחת כל מצב מצוין ומציבים את השירות שלנו במקום הראשון."
+          }
+        ],
+        "our_mission": [
+          {
+            "mission": "לספק שירותים פיננסיים מיוחדים ומצוינים לכל אחד מהשותפים שלנו."
+          }
+        ]
+      }
+    }
+  },
+  "what_we_do": {
+    "page_slug": "what_we_do",
+    "language_slug": {
+      "en": {
+        "title": "What We Do",
+        "home_description": "Discover how we leverage decades of successful investing experience to deliver exceptional value for our partners.",
+        "short_description": "Discover how we leverage decades of successful investing experience to deliver exceptional value for our partners."
+      },
+      "he": {
+        "title": "מה אנחנו עושים",
+        "home_description": "למדו כיצד אנו מגבילים את הניסיון המוצלח בשנות השנים לספק ערך מיוחד לשותפים שלנו.",
+        "short_description": "למדו כיצד אנו מגבילים את הניסיון המוצלח בשנות השנים לספק ערך מיוחד לשותפים שלנו."
+      }
+    }
+  },
+  "contact": {
+    "page_slug": "contact",
+    "language_slug": {
+      "en": {
+        "title": "Contact PI Group",
+        "slogan": "Get in Touch",
+        "home_description": "Reach out to us for any inquiries or to learn more about our services.",
+        "short_description": "Reach out to us for any inquiries or to learn more about our services.",
+        "form_heading": "Send Us a Message",
+        "name_label": "Name",
+        "email_label": "Email",
+        "subject_label": "Subject",
+        "message_label": "Message",
+        "submit_button": "Send",
+        "our_info_heading": "Contact Information",
+        "our_info_phone_label": "Phone",
+        "our_info_email_label": "Email",
+        "our_info_address_label": "Address",
+        "our_info_map_label": "Map",
+        "our_info_website_label": "Website",
+        "contact_details": {
+          "address": "123 Main St, Anytown, USA",
+          "phone": "+123 456 7890",
+          "email": "info@pigroup.com",
+          "website_link": "https://www.pigroup.com",
+          "map_link": "https://www.google.com/maps"
+        }
+      },
+      "he": {
+        "title": "צור קשר עם קבוצת PI",
+        "slogan": "צרו איתנו קשר",
+        "home_description": "פנו אלינו לכל שאלה או כדי ללמוד עוד על השירותים שלנו.",
+        "short_description": "פנו אלינו לכל שאלה או כדי ללמוד עוד על השירותים שלנו.",
+        "form_heading": "שלחו לנו הודעה",
+        "name_label": "שם",
+        "email_label": "אימייל",
+        "subject_label": "נושא",
+        "message_label": "הודעה",
+        "submit_button": "שלח",
+        "our_info_heading": "פרטי התיחסות",
+        "our_info_phone_label": "טלפון",
+        "our_info_email_label": "אימייל",
+        "our_info_address_label": "כתובת",
+        "our_info_map_label": "מפה",
+        "our_info_website_label": "אתר",
+        "contact_details": {
+          "address": "123 Main St, Anytown, USA",
+          "phone": "+123 456 7890",
+          "email": "info@pigroup.com",
+          "website_link": "https://www.pigroup.com",
+          "map_link": "https://www.google.com/maps"
         }
       }
     }
   }
-  
-  
+}

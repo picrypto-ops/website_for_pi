@@ -2,6 +2,7 @@
 $segmentId = isset($_GET['id']) ? $_GET['id'] : '';
 $segments = TranslatableFactory::getData('segments');
 $products = TranslatableFactory::getData('products');
+$general = TranslatableFactory::getData('general');
 
 $segment = null;
 if (!empty($segmentId) && isset($segments[$segmentId])) {
@@ -31,12 +32,11 @@ $segmentTranslatable = TranslatableFactory::segment($segmentId);
 <section class="segment">
     <div class="container">
         <h1><?php echo $segmentTranslatable->getContent($lang, 'name', $segment['segment_slug']); ?></h1>
-        <p class="lead"><?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Business segment information.'); ?></p>
         <div class="segment-description">
-            <?php echo $segmentTranslatable->getContent($lang, 'long_description', 'Detailed information about this business segment.'); ?>
+            <?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
         </div>
 
-        <h2><?php echo TranslatableFactory::general()->getContent($lang, 'our_products', 'Our Products'); ?></h2>
+        <h3><?php echo TranslatableFactory::general()->getContent($lang, 'our_products', 'Our Products'); ?></h3>
         <div class="product-grid">
             <?php if (empty($segmentProducts)): ?>
                 <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_products', 'No products available for this segment.'); ?></p>
@@ -60,7 +60,6 @@ $segmentTranslatable = TranslatableFactory::segment($segmentId);
                         </div>
                         <p class="slogan">
                             <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
-                            <span class="arrow">»</span>
                         </p>
                     </a>
                 <?php endforeach; ?>

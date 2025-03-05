@@ -21,6 +21,27 @@ $homeTranslatable = TranslatableFactory::page('home');
             <img src="assets/images/logo.svg" alt="PI Group Logo">
         </div>
         
+        <!-- Language Switcher positioned at top left/right depending on language -->
+        <div class="hero-language-switcher <?php echo $lang === 'he' ? 'right-aligned' : 'left-aligned'; ?>">
+            <?php
+            // Get current URL parameters
+            $currentParams = $_GET;
+            
+            // Create EN link with all current parameters except for lang
+            $enParams = $currentParams;
+            $enParams['lang'] = 'en';
+            $enLink = '?' . http_build_query($enParams);
+            
+            // Create HE link with all current parameters except for lang
+            $heParams = $currentParams;
+            $heParams['lang'] = 'he';
+            $heLink = '?' . http_build_query($heParams);
+            ?>
+            <a href="<?php echo $enLink; ?>" class="lang-switch <?php echo $lang === 'en' ? 'active' : ''; ?>" data-lang="en">EN</a>
+            <span class="separator">|</span>
+            <a href="<?php echo $heLink; ?>" class="lang-switch <?php echo $lang === 'he' ? 'active' : ''; ?>" data-lang="he">עב</a>
+        </div>
+        
         <div class="hero-content">
             <h1><?php echo $homeTranslatable->getContent($lang, 'title', 'Welcome to PI Group'); ?></h1>
             <p class="slogan"><?php echo $homeTranslatable->getContent($lang, 'slogan', 'Financial Excellence'); ?></p>

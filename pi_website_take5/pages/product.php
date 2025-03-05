@@ -133,7 +133,7 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
             <div class="team-grid founders-grid">
                 <?php foreach ($founderTeam as $memberKey => $member): ?>
                     <?php $memberTranslatable = TranslatableFactory::createFromData($member); ?>
-                    <a href="?page=team-member&id=<?php echo $memberKey; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                    <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
                         <div class="team-card founder-card">
                             <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
                                 <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>">
@@ -155,7 +155,7 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
             <div class="team-grid">
                 <?php foreach ($productTeam as $memberKey => $member): ?>
                     <?php $memberTranslatable = TranslatableFactory::createFromData($member); ?>
-                    <a href="?page=team-member&id=<?php echo $memberKey; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                    <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
                         <div class="team-card">
                             <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
                                 <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>">
