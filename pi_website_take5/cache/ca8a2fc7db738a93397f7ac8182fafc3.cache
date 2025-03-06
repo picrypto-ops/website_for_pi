@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Team-member</title>
+    <title>Home - Segment</title>
     <meta name="description" content="Financial Management Professionals">
-    <link rel="canonical" href="https://www.pigroup.com/en/team-member">
-    <meta property="og:title" content="Home - Team-member">
+    <link rel="canonical" href="https://www.pigroup.com/en/segment">
+    <meta property="og:title" content="Home - Segment">
     <meta property="og:description" content="Financial Management Professionals">
-    <meta property="og:url" content="https://www.pigroup.com/en/team-member">
+    <meta property="og:url" content="https://www.pigroup.com/en/segment">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -16,7 +16,7 @@
     <script src="assets/js/menu.js" defer></script>
     <script src="assets/js/language-switcher.js" defer></script>
     </head>
-<body class="team-member-page">
+<body class="segment-page">
     <header id="site-header" class="">
         <div class="container">
             <div class="header-content">
@@ -73,9 +73,9 @@
                 
                 <!-- Section 3: Language Switcher -->
                 <div class="language-switcher">
-                                        <a href="?page=team-member&id=itai-ruschkewitz&lang=en" class="lang-switch active" data-lang="en">EN</a>
+                                        <a href="?page=segment&id=asset_management&lang=en" class="lang-switch active" data-lang="en">EN</a>
                     <span class="separator">|</span>
-                    <a href="?page=team-member&id=itai-ruschkewitz&lang=he" class="lang-switch " data-lang="he">עב</a>
+                    <a href="?page=segment&id=asset_management&lang=he" class="lang-switch " data-lang="he">עב</a>
                 </div>
             </div>
         </div>
@@ -83,31 +83,52 @@
     <main id="main-content">
 
 
+<section class="segment">
+    <div class="container">
+        <h1>Asset Management</h1>
+        <div class="segment-description">
+            Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver consistent, positive returns, and to date, none of our funds have experienced a losing year. Pi has always maintained a significant investment in the funds we manage for our partners.        </div>
 
-<section class="team-member-page">
-    <div class="member-container">
-                    <a href="?page=team-member&id=dan-rosenberg&lang=en" class="member-navigation-button prev-button" title="Previous Member">
-                <span class="arrow-icon">»</span>
-            </a>
-                
-        <div class="member-profile professional-card">
-            <div class="member-image-container">
-                                    <img src="assets/images/team/itai_ruschkewitz.png" alt="Itay Ruschkewitz" class="member-image">
+        <h3>Our Products</h3>
+        <div class="product-grid">
+                                                <a href="?page=product&id=pi_emf&lang=en" class="product-card">
+                        <div class="product-content">
+                            <div class="product-icon">
+                                                                    <img src="assets/images/asset_management/pi_emf_retired/logo_large.svg" alt="PI EMF (retired)">
+                                                            </div>
+                            <div class="product-text">
+                                <h3>PI EMF (retired)</h3>
                             </div>
-            
-            <div class="member-info">
-                <h1>Itay Ruschkewitz</h1>
-                <p class="member-title">CEO and Co-Founder</p>
-                <div class="member-bio">
-                    Owner and CEO of Complex, a financial consulting firm, where he serves as an advisor to a wide range of leading entities in the Israeli economy, including banks, insurance companies, and financial institutions. Has extensive experience in formulating strategies and financing plans, developing new financial instruments in the Israeli capital market, raising financing, leading transactions, and issuing complex instruments, including securitizations, private debt, and complex bonds such as CoCo. Represents Allianz Global Investors, the investment arm of Allianz, in Israel. Previously served as a partner at PwC Israel and before that as a partner at Giza Singer Even.                </div>
-                
+                        </div>
+                        <p class="slogan">
+                            Mastering Market Discrepancies                        </p>
+                    </a>
+                                    <a href="?page=product&id=pi_global&lang=en" class="product-card">
+                        <div class="product-content">
+                            <div class="product-icon">
+                                                                    <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="PI Global">
+                                                            </div>
+                            <div class="product-text">
+                                <h3>PI Global</h3>
                             </div>
-        </div>
-        
-                    <a href="?page=team-member&id=buky-katzman&lang=en" class="member-navigation-button next-button" title="Next Member">
-                <span class="arrow-icon">»</span>
-            </a>
-            </div>
+                        </div>
+                        <p class="slogan">
+                            Macro & Derivatives Excellence                        </p>
+                    </a>
+                                    <a href="?page=product&id=pi_equity&lang=en" class="product-card">
+                        <div class="product-content">
+                            <div class="product-icon">
+                                                                    <img src="assets/images/asset_management/pi_equity/logo_large.svg" alt="PI Equity">
+                                                            </div>
+                            <div class="product-text">
+                                <h3>PI Equity</h3>
+                            </div>
+                        </div>
+                        <p class="slogan">
+                            Cultivating Israeli Business Gems                        </p>
+                    </a>
+                                    </div>
+    </div>
 </section>
 
 </main>

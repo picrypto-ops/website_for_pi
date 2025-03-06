@@ -104,7 +104,8 @@
             <h1>Unwavering Professionalism <br>Exceptional Results</h1>
             <p class="slogan"></p>
             <p class="wide-description">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
-            <a href="#about-us" class="cta-button">Learn More</a>
+                        <a href="#segment-investment_banking" class="cta-button">
+                Learn More            </a>
         </div>
 
         <!-- ThreeJS container positioned at bottom 30% -->
@@ -112,7 +113,7 @@
         
         <!-- Render scroll indicator with function -->
             <div class="scroll-indicator" data-parent-section="hero">
-        <a href="#about-us" class="scroll-down" data-target="about-us">
+        <a href="#segment-investment_banking" class="scroll-down" data-target="segment-investment_banking">
             <span class="sr-only"></span>
             <i class="arrow-down"></i>
         </a>
@@ -120,76 +121,16 @@
         </section>
 
     <!-- Render all page sections using functions -->
-        <section id="about-us" class="about-preview full-page-section">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.
-Pi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.
-While proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.
-Pi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.
-More recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.
-Through innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.</p>
-            <a href="?page=about&lang=en" class="button">
-                Read More            </a>
-        </div>
         
-            <div class="scroll-indicator" data-parent-section="about-us">
-        <a href="#what-we-do" class="scroll-down" data-target="what-we-do">
-            <span class="sr-only"></span>
-            <i class="arrow-down"></i>
-        </a>
-    </div>
-        </section>
-            <section id="what-we-do" class="featured-segments full-page-section">
+    <section id="segment-investment_banking" class="segment full-page-section">
         <div class="container">
-            <h2>What We Do</h2>
-            <p class="section-description">Discover how we leverage decades of successful investing experience to deliver exceptional value for our partners.</p>
-            
-            <div class="segment-grid">
-                                    <div class="segment-card">
-                        <div class="segment-icon">
-                                                            <img src="assets/images/investment_banking/icon.svg" alt="Investment Banking">
-                                                    </div>
-                        <h3>Investment Banking</h3>
-                        <p>Providing tailored financial products and services to meet the needs of institutional clients and the Israeli capital market.</p>
-                        <a href="?page=segment&id=investment_banking&lang=en" class="segment-link">
-                            <p class="slogan">
-                                                                <!-- <span class="arrow">»</span>                                 -->
-                            </p>
-                        </a>
-                    </div>
-                                    <div class="segment-card">
-                        <div class="segment-icon">
-                                                            <img src="assets/images/asset_management/icon.svg" alt="Asset Management">
-                                                    </div>
-                        <h3>Asset Management</h3>
-                        <p>Delivering exceptional risk-adjusted returns through innovative investment strategies across various asset classes.</p>
-                        <a href="?page=segment&id=asset_management&lang=en" class="segment-link">
-                            <p class="slogan">
-                                                                <!-- <span class="arrow">»</span>                                 -->
-                            </p>
-                        </a>
-                    </div>
-                            </div>
-            
-            <!-- Removed "View All Services" button as requested -->
-        </div>
-        
-            <div class="scroll-indicator" data-parent-section="what-we-do">
-        <a href="#products" class="scroll-down" data-target="products">
-            <span class="sr-only"></span>
-            <i class="arrow-down"></i>
-        </a>
-    </div>
-        </section>
-            <section id="products" class="featured-products full-page-section">
-        <div class="container">
-            <h2>Featured Products</h2>
-            <p class="section-description">Discover our premium financial products designed to meet your needs.</p>
-            
-            <!-- Featured Products Grid -->
+            <h2>Investment Banking</h2>
+            <div class="segment-section-description">
+                Our investment banking services are tailored to advise and support exceptional financial innovators and dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth. In the past, we have invested alongside our partners in every deal we have structured.            </div>
+
+            <h3>Our Products</h3>
             <div class="product-grid">
-                                        <a href="?page=product&id=pi_pituach&lang=en" class="product-card">
+                                                            <a href="?page=product&id=pi_pituach&lang=en" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
                                                                             <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
@@ -201,7 +142,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                             <p class="slogan">
                                 Innovate Today, Secure Tomorrow                            </p>
                         </a>
-                                        <a href="?page=product&id=pi_select&lang=en" class="product-card">
+                                            <a href="?page=product&id=pi_select&lang=en" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
                                                                             <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
@@ -213,7 +154,43 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                             <p class="slogan">
                                 Invest With Confidence                            </p>
                         </a>
-                                        <a href="?page=product&id=pi_global&lang=en" class="product-card">
+                                                </div>
+            
+            <div class="back-to-segments">
+                <a href="#hero" class="back-link">
+                    Back to Home                </a>
+            </div>
+        </div>
+        
+            <div class="scroll-indicator" data-parent-section="segment-investment_banking">
+        <a href="#segment-asset_management" class="scroll-down" data-target="segment-asset_management">
+            <span class="sr-only"></span>
+            <i class="arrow-down"></i>
+        </a>
+    </div>
+        </section>
+        
+    <section id="segment-asset_management" class="segment full-page-section">
+        <div class="container">
+            <h2>Asset Management</h2>
+            <div class="segment-section-description">
+                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver consistent, positive returns, and to date, none of our funds have experienced a losing year. Pi has always maintained a significant investment in the funds we manage for our partners.            </div>
+
+            <h3>Our Products</h3>
+            <div class="product-grid">
+                                                            <a href="?page=product&id=pi_emf&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                            <img src="assets/images/asset_management/pi_emf_retired/logo_large.svg" alt="PI EMF (retired)">
+                                                                    </div>
+                                <div class="product-text">
+                                    <h3>PI EMF (retired)</h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                Mastering Market Discrepancies                            </p>
+                        </a>
+                                            <a href="?page=product&id=pi_global&lang=en" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
                                                                             <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="PI Global">
@@ -225,147 +202,209 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                             <p class="slogan">
                                 Macro & Derivatives Excellence                            </p>
                         </a>
+                                            <a href="?page=product&id=pi_equity&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                            <img src="assets/images/asset_management/pi_equity/logo_large.svg" alt="PI Equity">
+                                                                    </div>
+                                <div class="product-text">
+                                    <h3>PI Equity</h3>
+                                </div>
                             </div>
+                            <p class="slogan">
+                                Cultivating Israeli Business Gems                            </p>
+                        </a>
+                                                </div>
             
-            <!-- Removed "View All Products" button as requested -->
+            <div class="back-to-segments">
+                <a href="#hero" class="back-link">
+                    Back to Home                </a>
+            </div>
         </div>
         
-            <div class="scroll-indicator" data-parent-section="products">
+            <div class="scroll-indicator" data-parent-section="segment-asset_management">
         <a href="#team" class="scroll-down" data-target="team">
             <span class="sr-only"></span>
             <i class="arrow-down"></i>
         </a>
     </div>
         </section>
-            <section id="team" class="our-team-preview full-page-section">
+        
+        <section id="team" class="our-team-preview full-page-section">
         <div class="container">
             <h2>Our Team</h2>
             <p class="section-description">Meet our dedicated professionals who provide exceptional service.</p>
 
             <div class="team-navigation">
                 <ul class="team-nav">
-                                            <li><a href="#team-group-founders" class="team-group-link">Founders</a></li>
                                             <li><a href="#team-group-management" class="team-group-link">Management</a></li>
-                                            <li><a href="#team-group-pi_pituach" class="team-group-link">PI Pituach</a></li>
-                                            <li><a href="#team-group-pi_select" class="team-group-link">PI Select</a></li>
+                                            <li><a href="#team-group-operations" class="team-group-link">Operations</a></li>
+                                            <li><a href="#team-group-investments" class="team-group-link">Investments</a></li>
                                     </ul>
             </div>
             
-                            <div id="team-group-founders" class="team-group">
-                    <h3>Founders</h3>
-                    <div class="team-grid">
-                                                                                    <div class="team-card">
-                                    <a href="?page=team-member&id=aaron-cohen&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/aaron_cohen.png" alt="aaron-cohen">
-                                                                                    </div>
-                                        <div class="member-info">
-                                            <h3>Aron Cohen</h3>
-                                            <p class="position">Founder</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=jonny-kaye&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/jonny_kaye.png" alt="jonny-kaye">
-                                                                                    </div>
-                                        <div class="member-info">
-                                            <h3>Jonny Kaye</h3>
-                                            <p class="position">Founder</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                                                        </div>
-                </div>
                             <div id="team-group-management" class="team-group">
                     <h3>Management</h3>
                     <div class="team-grid">
                                                                                     <div class="team-card">
-                                    <a href="?page=team-member&id=shlomi-cohen&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/shlomi_cohen.png" alt="shlomi-cohen">
-                                                                                    </div>
+                                    <a href="?page=team-member&id=aaron-cohen&lang=en" class="team-member-link">
                                         <div class="member-info">
-                                            <h3>Shlomi Cohen</h3>
-                                            <p class="position">Chief Financial Officer</p>
-                                        </div>
+                                            <h3>Aron Cohen</h3>
+                                                                                            <p class="position">Founder</p>
+                                                                                    </div>
                                     </a>
                                 </div>
                                                             <div class="team-card">
-                                    <a href="?page=team-member&id=ronen-bitman&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/ronen_bitman.png" alt="ronen-bitman">
-                                                                                    </div>
+                                    <a href="?page=team-member&id=jonny-kaye&lang=en" class="team-member-link">
                                         <div class="member-info">
-                                            <h3>Ronen Bitman</h3>
-                                            <p class="position">Chief Technology Officer</p>
-                                        </div>
+                                            <h3>Jonny Kaye</h3>
+                                                                                            <p class="position">Founder</p>
+                                                                                    </div>
                                     </a>
                                 </div>
                                                             <div class="team-card">
-                                    <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/hagit_borohovitz.png" alt="hagit-borohovitz">
-                                                                                    </div>
-                                        <div class="member-info">
-                                            <h3>Hagit Borohovitz</h3>
-                                            <p class="position">Chief Legal Officer</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=ronen-elgali&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/ronen_elgali.png" alt="ronen-elgali">
-                                                                                    </div>
-                                        <div class="member-info">
-                                            <h3>Ronen Elgali</h3>
-                                            <p class="position">Chief Investment Officer</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                                                        </div>
-                </div>
-                            <div id="team-group-pi_pituach" class="team-group">
-                    <h3>PI Pituach</h3>
-                    <div class="team-grid">
-                                                                                    <div class="team-card">
                                     <a href="?page=team-member&id=dan-rosenberg&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/dan_rosenberg.png" alt="dan-rosenberg">
-                                                                                    </div>
                                         <div class="member-info">
                                             <h3>Dan Rosenberg</h3>
-                                            <p class="position">Founder</p>
-                                        </div>
+                                                                                            <div class="product-roles">
+                                                                                                            <p class="role">
+                                                            Trader - PI Pituach                                                        </p>
+                                                                                                    </div>
+                                                                                                                                </div>
                                     </a>
                                 </div>
                                                             <div class="team-card">
                                     <a href="?page=team-member&id=itai-ruschkewitz&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/itai_ruschkewitz.png" alt="itai-ruschkewitz">
-                                                                                    </div>
                                         <div class="member-info">
                                             <h3>Itay Ruschkewitz</h3>
-                                            <p class="position">CEO and Co-Founder</p>
-                                        </div>
+                                                                                            <div class="product-roles">
+                                                                                                            <p class="role">
+                                                            Chief Executive Officer - PI Pituach                                                        </p>
+                                                                                                    </div>
+                                                                                                                                </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=buky-katzman&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Baruch (Buky) Katzman</h3>
+                                                                                            <div class="product-roles">
+                                                                                                            <p class="role">
+                                                            Chief Executive Officer - PI Select                                                        </p>
+                                                                                                            <p class="role">
+                                                            Investor Relation - PI Equity                                                        </p>
+                                                                                                    </div>
+                                                                                                                                </div>
                                     </a>
                                 </div>
                                                                         </div>
                 </div>
-                            <div id="team-group-pi_select" class="team-group">
-                    <h3>PI Select</h3>
+                            <div id="team-group-operations" class="team-group">
+                    <h3>Operations</h3>
                     <div class="team-grid">
                                                                                     <div class="team-card">
-                                    <a href="?page=team-member&id=buky-katzman&lang=en" class="team-member-link">
-                                        <div class="member-photo">
-                                                                                            <img src="assets/images/team/buky_katzman.png" alt="buky-katzman">
-                                                                                    </div>
+                                    <a href="?page=team-member&id=shlomi-cohen&lang=en" class="team-member-link">
                                         <div class="member-info">
-                                            <h3>Baruch (Buky) Katzman</h3>
-                                            <p class="position">Co-founder</p>
-                                        </div>
+                                            <h3>Shlomi Cohen</h3>
+                                                                                            <p class="position">Chief Financial Officer</p>
+                                                                                    </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=ronen-bitman&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Ronen Bitman</h3>
+                                                                                            <p class="position">Chief Technology Officer</p>
+                                                                                    </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Hagit Borohovitz</h3>
+                                                                                            <p class="position">Chief Legal Officer</p>
+                                                                                    </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=moriel-cohen&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Moriel Cohen</h3>
+                                                                                            <p class="position">Investor Relations</p>
+                                                                                    </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=marina-kazar&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Marina Kazar</h3>
+                                                                                            <p class="position">Accountant</p>
+                                                                                    </div>
+                                    </a>
+                                </div>
+                                                                        </div>
+                </div>
+                            <div id="team-group-investments" class="team-group">
+                    <h3>Investments</h3>
+                    <div class="team-grid">
+                                                                                    <div class="team-card">
+                                    <a href="?page=team-member&id=ronen-elgali&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Ronen Elgali</h3>
+                                                                                            <p class="position">Chief Investment Officer</p>
+                                                                                    </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=asaf-shaul&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Asaf Shaul</h3>
+                                                                                            <p class="position">Investment Analyst</p>
+                                                                                    </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=mor-katz-avrahami&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Mor Katz Avrahami</h3>
+                                                                                            <div class="product-roles">
+                                                                                                            <p class="role">
+                                                            Analyst - PI Pituach                                                        </p>
+                                                                                                    </div>
+                                                                                                                                </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=darina-reznikov&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Darina Reznikov</h3>
+                                                                                            <div class="product-roles">
+                                                                                                            <p class="role">
+                                                            Director - PI Pituach                                                        </p>
+                                                                                                    </div>
+                                                                                                                                </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=dolev-trogman&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Dolev Trogman</h3>
+                                                                                            <div class="product-roles">
+                                                                                                            <p class="role">
+                                                            Portfolio Manager - PI Global                                                        </p>
+                                                                                                    </div>
+                                                                                                                                </div>
+                                    </a>
+                                </div>
+                                                            <div class="team-card">
+                                    <a href="?page=team-member&id=daniel-cohen&lang=en" class="team-member-link">
+                                        <div class="member-info">
+                                            <h3>Daniel Cohen</h3>
+                                                                                            <div class="product-roles">
+                                                                                                            <p class="role">
+                                                            Trader - PI Global                                                        </p>
+                                                                                                    </div>
+                                                                                                                                </div>
                                     </a>
                                 </div>
                                                                         </div>
@@ -376,7 +415,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
         </div>
         
             <div class="scroll-indicator" data-parent-section="team">
-        <a href="#contact-us" class="scroll-down" data-target="contact-us">
+        <a href="#about-us" class="scroll-down" data-target="about-us">
             <span class="sr-only"></span>
             <i class="arrow-down"></i>
         </a>
@@ -469,6 +508,26 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
     </style>
+            <section id="about-us" class="about-preview full-page-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.
+Pi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.
+While proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.
+Pi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.
+More recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.
+Through innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.</p>
+            <a href="?page=about&lang=en" class="button">
+                Read More            </a>
+        </div>
+        
+            <div class="scroll-indicator" data-parent-section="about-us">
+        <a href="#contact-us" class="scroll-down" data-target="contact-us">
+            <span class="sr-only"></span>
+            <i class="arrow-down"></i>
+        </a>
+    </div>
+        </section>
             <section id="contact-us" class="contact-preview full-page-section">
         <div class="container">
             <div class="section-header">
@@ -510,16 +569,22 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             <a href="?page=contact&lang=en" class="button contact-button">
                 Get In Touch            </a>
         </div>
-    </section>
+        
+            <div class="scroll-indicator" data-parent-section="contact-us">
+        <a href="#hero" class="scroll-down" data-target="hero">
+            <span class="sr-only"></span>
+            <i class="arrow-down"></i>
+        </a>
+    </div>
+        </section>
         
     <!-- Breadcrumb navigation for direct section access -->
     <nav class="breadcrumb-navigation">
         <ul>
             <li><a href="#hero">Home</a></li>
-            <li><a href="#about-us">About</a></li>
-            <li><a href="#what-we-do">Services</a></li>
-            <li><a href="#products">Products</a></li>
+            <li><a href="#segment-investment_banking">Segments</a></li>
             <li><a href="#team">Team</a></li>
+            <li><a href="#about-us">About</a></li>
             <li><a href="#contact-us">Contact</a></li>
         </ul>
     </nav>

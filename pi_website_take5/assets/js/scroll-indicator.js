@@ -57,7 +57,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show indicator only if current section is not contact-us and is valid
         if (currentSection && currentSection !== 'contact-us') {
-            const currentIndicator = document.querySelector(`.scroll-indicator[data-parent-section="${currentSection}"]`);
+            // Find the indicator for the current section
+            let currentIndicator = document.querySelector(`.scroll-indicator[data-parent-section="${currentSection}"]`);
+            
+            // If no exact match, check if it's a segment section
+            if (!currentIndicator && currentSection.startsWith('segment-')) {
+                // Try to find a generic segment indicator
+                currentIndicator = document.querySelector(`.scroll-indicator[data-parent-section="${currentSection}"]`);
+            }
+            
             if (currentIndicator) {
                 currentIndicator.classList.add('is-visible');
                 currentIndicator.style.opacity = '1';
@@ -66,14 +74,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Add click event listeners to all scroll indicators
+    scrollIndicators.forEach(indicator => {
+        const link = indicator.querySelector('a.scroll-down');
+        if (link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Smooth scroll to the target
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                    
+                    // Update indicators after scrolling
+                    setTimeout(updateScrollIndicators, 1000);
+                }
+            });
+        }
+    });
+    
     // Throttle function to limit how often a function runs
     function throttle(func, limit) {
         let inThrottle;
         return function() {
             const args = arguments;
-            const context = this;
             if (!inThrottle) {
-                func.apply(context, args);
+                func.apply(this, args);
                 inThrottle = true;
                 setTimeout(() => inThrottle = false, limit);
             }

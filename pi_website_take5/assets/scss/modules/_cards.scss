@@ -168,70 +168,18 @@
 .team-card {
   @extend %card-base;
   overflow: hidden;
-  text-align: center;
-  
-  // Team member photo with fixed dimensions
-  .team-member-photo {
-    width: 166px;
-    height: 169px;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  .photo-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f5f5f5;
-    margin: 0 auto;
-    
-    i {
-      font-size: 80px;
-      color: #ddd;
-    }
-  }
-  
-  .member-photo {
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.2) 100%
-      );
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-  }
+  border-left: 4px solid variables.$primary-color;
+  background: linear-gradient(to right, rgba(variables.$primary-color, 0.05), transparent 30%);
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
+  position: relative;
   
   &:hover {
-    .member-photo {
-      &::after {
-        opacity: 1;
-      }
-      
-      img {
-        transform: scale(1.08);
-      }
-    }
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     
     .member-info {
-      transform: translateY(-5px);
-      
       h3 {
         color: variables.$primary-color;
       }
@@ -240,41 +188,45 @@
   
   .member-info {
     padding: 20px;
-    background: #fff;
-    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background: transparent;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease;
     
     h3 {
-      margin: 0 0 5px;
+      margin: 0 0 10px;
       font-size: 1.3rem;
       color: variables.$header-text-color;
       transition: color 0.3s ease;
+      position: relative;
+      padding-bottom: 12px;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: variables.$primary-color;
+      }
     }
     
     .position {
       margin: 0;
       color: variables.$text-color;
       font-style: italic;
+      font-size: 0.9rem;
     }
   }
   
   // Founder card variations
   &.founder-card {
-    text-align: center;
-    
-    img {
-      height: 160px;
-      width: 160px;
-      border-radius: 50%;
-      margin: 25px auto 15px;
-      border: 3px solid #f8f8f8;
-      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
-                  border-color 0.3s ease;
-    }
-    
-    &:hover img {
-      transform: scale(1.05) rotate(5deg);
-      border-color: variables.$primary-color;
-    }
+    text-align: left;
+    background: linear-gradient(135deg, rgba(variables.$primary-color, 0.08) 0%, rgba(variables.$primary-color, 0.03) 100%);
+    border-left: 5px solid variables.$primary-color;
   }
 }
 

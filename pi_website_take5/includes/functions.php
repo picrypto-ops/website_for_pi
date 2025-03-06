@@ -7,6 +7,7 @@ require_once __DIR__ . '/classes/translation/PageTranslatable.php';
 require_once __DIR__ . '/classes/translation/ProductTranslatable.php';
 require_once __DIR__ . '/classes/translation/SegmentTranslatable.php';
 require_once __DIR__ . '/classes/translation/TeamTranslatable.php';
+require_once __DIR__ . '/classes/translation/TeamMemberEnhanced.php';
 require_once __DIR__ . '/classes/translation/TranslatableFactory.php';
 
 /**
@@ -20,96 +21,6 @@ function loadJsonData($file) {
     return TranslatableFactory::loadData($file);
 }
 
-/**
- * Get translation for a key
- * 
- * @param string $key The translation key
- * @return string The translated text or the key itself if not found
- */
-function notused_getTranslation($key) {
-    global $translations;
-    return isset($translations[$key]) ? $translations[$key] : $key;
-}
-
-/**
- * Generate breadcrumbs for navigation
- * 
- * @param string $page Current page
- * @return string HTML for breadcrumbs
- */
-function notused_generateBreadcrumbs($page) {
-    global $lang;
-    $generalData = loadJsonData('general');
-    $breadcrumbs = '<div class="breadcrumbs">';
-    
-    // Home link
-    $homeTranslatable = TranslatableFactory::create('general', $generalData['home']);
-    $breadcrumbs .= '<a href="?page=home&lang=' . $lang . '">' . $homeTranslatable->getContent($lang, 'label') . '</a>';
-    
-    if ($page !== 'home') {
-        $breadcrumbs .= ' &gt; ';
-        if (isset($generalData[$page])) {
-            $pageTranslatable = TranslatableFactory::create('general', $generalData[$page]);
-            $breadcrumbs .= $pageTranslatable->getContent($lang, 'label');
-        } else {
-            // Handle subpages like product or segment
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                if ($page === 'segment') {
-                    $segments = loadJsonData('segments');
-                    if (isset($segments[$id])) {
-                        $whatWeDoTranslatable = TranslatableFactory::create('general', $generalData['what_we_do']);
-                        $segmentTranslatable = TranslatableFactory::create('segment', $segments[$id]);
-                        
-                        $breadcrumbs .= '<a href="?page=what-we-do&lang=' . $lang . '">' . 
-                                      $whatWeDoTranslatable->getContent($lang, 'label') . '</a> &gt; ' .
-                                      $segmentTranslatable->getContent($lang, 'name');
-                    }
-                } elseif ($page === 'product') {
-                    $products = loadJsonData('products');
-                    foreach ($products as $segmentSlug => $segmentProducts) {
-                        if (isset($segmentProducts[$id])) {
-                            $segments = loadJsonData('segments');
-                            $whatWeDoTranslatable = TranslatableFactory::create('general', $generalData['what_we_do']);
-                            $segmentTranslatable = TranslatableFactory::create('segment', $segments[$segmentSlug]);
-                            $productTranslatable = TranslatableFactory::create('product', $segmentProducts[$id]);
-                            
-                            $breadcrumbs .= '<a href="?page=what-we-do&lang=' . $lang . '">' . 
-                                          $whatWeDoTranslatable->getContent($lang, 'label') . '</a> &gt; ' .
-                                          '<a href="?page=segment&id=' . $segmentSlug . '&lang=' . $lang . '">' .
-                                          $segmentTranslatable->getContent($lang, 'name') . '</a> &gt; ' .
-                                          $productTranslatable->getContent($lang, 'name');
-                            break;
-                        }
-                    }
-                } elseif ($page === 'team-member') {
-                    $team = loadJsonData('team');
-                    $found = false;
-                    foreach ($team as $groupKey => $members) {
-                        foreach ($members as $member) {
-                            if (isset($member['name_slug']) && $member['name_slug'] === $id) {
-                                $teamTranslatable = TranslatableFactory::create('general', $generalData['team']);
-                                $memberTranslatable = TranslatableFactory::create('team', $member);
-                                
-                                $breadcrumbs .= '<a href="?page=our-team&lang=' . $lang . '">' . 
-                                              $teamTranslatable->getContent($lang, 'label') . '</a> &gt; ' .
-                                              $memberTranslatable->getContent($lang, 'name');
-                                $found = true;
-                                break;
-                            }
-                        }
-                        if ($found) break;
-                    }
-                }
-            } else {
-                $breadcrumbs .= ucfirst(str_replace('-', ' ', $page));
-            }
-        }
-    }
-    
-    $breadcrumbs .= '</div>';
-    return $breadcrumbs;
-}
 
 /**
  * Sanitize user input
@@ -192,24 +103,6 @@ function ensureWebPVersion($src) {
 }
 
 /**
- * Get localized content from data structure
- * 
- * @param array $data Data array
- * @param string $lang Language code
- * @param string $key Content key
- * @return string Localized content or key if not found
- */
-function notused_getLocalizedContent($data, $lang, $key) {
-    if (isset($data['language_slug'][$lang][$key])) {
-        return $data['language_slug'][$lang][$key];
-    } elseif (isset($data[$lang][$key])) {
-        return $data[$lang][$key];
-    } else {
-        return $key;
-    }
-}
-
-/**
  * Get translated content from a data structure using the OO approach
  * 
  * @param array $data The data structure containing translations
@@ -247,142 +140,6 @@ function getTranslatedContent($data, $lang, $key, $default = '') {
     }
     
     return $result;
-}
-
-/**
- * Get content from a specific data structure type using OO approach
- * 
- * @param string $type Data type (segment, product, team, etc.)
- * @param string $id Item ID
- * @param string $lang Language code
- * @param string $key Content key
- * @return string|null Content or null if not found
- */
-function notused_getContentByType($type, $id, $lang, $key) {
-    switch ($type) {
-        case 'segment':
-            $segments = loadJsonData('segments');
-            if (isset($segments[$id])) {
-                $translatable = TranslatableFactory::create('segment', $segments[$id]);
-                return $translatable->getContent($lang, $key);
-            }
-            break;
-            
-        case 'product':
-            $products = loadJsonData('products');
-            foreach ($products as $segmentProducts) {
-                if (isset($segmentProducts[$id])) {
-                    $translatable = TranslatableFactory::create('product', $segmentProducts[$id]);
-                    return $translatable->getContent($lang, $key);
-                }
-            }
-            break;
-            
-        case 'team':
-            $team = loadJsonData('team');
-            foreach ($team as $group) {
-                foreach ($group as $member) {
-                    if (isset($member['name_slug']) && $member['name_slug'] === $id) {
-                        $translatable = TranslatableFactory::create('team', $member);
-                        return $translatable->getContent($lang, $key);
-                    }
-                }
-            }
-            break;
-            
-        case 'page':
-            $pages = loadJsonData('pages');
-            if (isset($pages[$id])) {
-                $translatable = TranslatableFactory::create('page', $pages[$id]);
-                return $translatable->getContent($lang, $key);
-            }
-            break;
-            
-        case 'general':
-            $general = loadJsonData('general');
-            if (isset($general[$id])) {
-                $translatable = TranslatableFactory::create('general', $general[$id]);
-                return $translatable->getContent($lang, $key);
-            }
-            break;
-    }
-    
-    return null;
-}
-
-/**
- * Get all items of a specific type
- * 
- * @param string $type Data type (segments, products, team, etc.)
- * @return array Array of items
- */
-function notused_getAllItems($type) {
-    switch ($type) {
-        case 'segments':
-            return loadJsonData('segments');
-            
-        case 'products':
-            return loadJsonData('products');
-            
-        case 'team':
-            return loadJsonData('team');
-            
-        case 'pages':
-            return loadJsonData('pages');
-            
-        default:
-            return [];
-    }
-}
-
-/**
- * Get featured items of a specific type
- * 
- * @param string $type Data type (products, team, etc.)
- * @return array Array of featured items
- */
-function notused_getFeaturedItems($type) {
-    $result = [];
-    
-    switch ($type) {
-        case 'products':
-            $products = loadJsonData('products');
-            foreach ($products as $segmentSlug => $segmentProducts) {
-                foreach ($segmentProducts as $productSlug => $product) {
-                    if (isset($product['is_featured']) && $product['is_featured']) {
-                        $result[$productSlug] = $product;
-                    }
-                }
-            }
-            break;
-            
-        case 'team':
-            $team = loadJsonData('team');
-            if (isset($team['founders'])) {
-                $result = array_slice($team['founders'], 0, 3); // First 3 founders
-            }
-            break;
-    }
-    
-    return $result;
-}
-
-/**
- * Get specific page content
- * 
- * @param string $pageSlug The page slug
- * @param string $lang The language code
- * @param string $key The content key
- * @return string|null The page content or null if not found
- */
-function notused_getPageContent($pageSlug, $lang, $key) {
-    $pages = loadJsonData('pages');
-    
-    if (isset($pages[$pageSlug])) {
-        return getTranslatedContent($pages[$pageSlug], $lang, $key);
-    }
-    
-    return null;
 }
 
 // todo: remove all the notused functions & why getTranslatedContent is used

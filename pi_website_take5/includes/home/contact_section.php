@@ -7,9 +7,10 @@
  * Renders the Contact section
  * 
  * @param string $lang Current language code
+ * @param string $nextSectionId ID of the next section to scroll to
  * @return void
  */
-function renderContactSection($lang) {
+function renderContactSection($lang, $nextSectionId = 'hero') {
     $contactPage = TranslatableFactory::page('contact');
     ?>
     <section id="contact-us" class="contact-preview full-page-section">
@@ -77,6 +78,8 @@ function renderContactSection($lang) {
                 <?php echo TranslatableFactory::general()->getContent($lang, 'get_in_touch', 'Get In Touch'); ?>
             </a>
         </div>
+        
+        <?php renderScrollIndicator($nextSectionId, $lang, 'contact-us'); ?>
     </section>
     <?php
 } 

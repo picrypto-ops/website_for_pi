@@ -142,7 +142,40 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
                             <?php endif; ?>
                             <div class="team-info">
                                 <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
-                                <p><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
+                                <?php
+                                // Check if this member should display product roles
+                                $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                                
+                                if ($displayProductRoles) {
+                                    // Get position which will be an array of roles when display_product_roles is true
+                                    $positions = $memberTranslatable->getContent($lang, 'position', []);
+                                    
+                                    if (is_array($positions) && !empty($positions)) {
+                                        echo '<div class="product-roles">';
+                                        foreach ($positions as $role) {
+                                            echo '<p class="role">';
+                                            
+                                            $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                            $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                            // todo: format the output to be more readable
+                                            if (!empty($roleTitle) && !empty($productName)) {
+                                                echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
+                                            } elseif (!empty($roleTitle)) {
+                                                echo htmlspecialchars(ucfirst($roleTitle));
+                                            } elseif (!empty($productName)) {
+                                                echo htmlspecialchars($productName);
+                                            }
+                                            
+                                            echo '</p>';
+                                        }
+                                        echo '</div>';
+                                    } else {
+                                        echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                    }
+                                } else {
+                                    echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </a>
@@ -154,17 +187,45 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
             <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'product_team', 'Product Team'); ?></h2>
             <div class="team-grid">
                 <?php foreach ($productTeam as $memberKey => $member): ?>
-                    <?php $memberTranslatable = TranslatableFactory::createFromData($member); ?>
+                    <?php $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']); ?>
                     <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
                         <div class="team-card">
-                            <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
-                                <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>">
-                            <?php else: ?>
-                                <div class="photo-placeholder"><i class="fa fa-user-circle"></i></div>
-                            <?php endif; ?>
                             <div class="team-info">
                                 <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
-                                <p><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
+                                <?php
+                                // Check if this member should display product roles
+                                $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                                
+                                if ($displayProductRoles) {
+                                    // Get position which will be an array of roles when display_product_roles is true
+                                    $positions = $memberTranslatable->getContent($lang, 'position', []);
+                                    
+                                    if (is_array($positions) && !empty($positions)) {
+                                        echo '<div class="product-roles">';
+                                        foreach ($positions as $role) {
+                                            echo '<p class="role">';
+                                            
+                                            $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                            $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                            
+                                            if (!empty($roleTitle) && !empty($productName)) {
+                                                echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
+                                            } elseif (!empty($roleTitle)) {
+                                                echo htmlspecialchars(ucfirst($roleTitle));
+                                            } elseif (!empty($productName)) {
+                                                echo htmlspecialchars($productName);
+                                            }
+                                            
+                                            echo '</p>';
+                                        }
+                                        echo '</div>';
+                                    } else {
+                                        echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                    }
+                                } else {
+                                    echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </a>

@@ -1,0 +1,103 @@
+dolev-trogman | en
+asset_management | pi_global - portfolio manager
+
+
+==================================================
+
+daniel-cohen | en
+asset_management | pi_global - trader
+
+
+==================================================
+
+jonny-kaye | en
+asset_management | pi_equity - chief investment officer
+asset_management | pi_select - chief investment officer
+
+
+==================================================
+
+eli-afek | en
+asset_management | pi_equity - trader
+
+
+==================================================
+
+buky-katzman | en
+investment_banking | pi_select - investor relation
+asset_management | pi_equity - investor relation
+
+
+==================================================
+
+aaron-cohen | en
+investment_banking | pi_pituach - chairman
+
+
+==================================================
+
+itai-ruschkewitz | en
+investment_banking | pi_pituach - cheif executive officer
+
+
+==================================================
+
+dan-rosenberg | en
+investment_banking | pi_pituach - trader
+
+
+==================================================
+
+darina-reznikov | en
+investment_banking | pi_pituach - director
+
+
+==================================================
+
+mor-katz-avrahami | en
+investment_banking | pi_pituach - analyst
+
+
+==================================================
+
+ronen-bitman | en
+operations | N/A - chief technology officer
+
+
+==================================================
+
+shlomi-cohen | en
+operations | N/A - chief financial officer
+
+
+==================================================
+
+hagit-borohovitz | en
+operations | N/A - chief legal officer
+
+
+==================================================
+
+moriel-cohen | en
+operations | N/A - investor relations
+
+
+==================================================
+
+marina-kazar | en
+operations | N/A - accountant
+
+
+==================================================
+
+asaf-shaul | en
+analytics | N/A - analyst
+
+
+==================================================
+
+ronen-elgali | en
+analytics | N/A - analyst
+
+
+==================================================

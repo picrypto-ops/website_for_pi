@@ -1,0 +1,264 @@
+{
+    "team_products": [
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_global",
+            "name_slug": "dolev-trogman",
+            "language_slug": {
+                "en": {
+                    "title": "Portfolio Manager"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_global",
+            "name_slug": "daniel-cohen",
+            "language_slug": {
+                "en": {
+                    "title": "Trader"
+                },
+                "he": {
+                    "title": "מסחר"
+                }
+            }
+        },
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_equity",
+            "name_slug": "jonny-kaye",
+            "language_slug": {
+                "en": {
+                    "title": "Chief investment officer"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_equity",
+            "name_slug": "eli-afek",
+            "language_slug": {
+                "en": {
+                    "title": "Trader"
+                },
+                "he": {
+                    "title": "מסחר"
+                }
+            }
+        },
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_emf",
+            "name_slug": null,
+            "language_slug": {
+                "en": {
+                    "title": null
+                },
+                "he": {
+                    "title": null
+                }
+            }
+        },
+        {
+            "segment_slug": "investment_banking",
+            "product_slug": "pi_select",
+            "name_slug": "buky-katzman",
+            "language_slug": {
+                "en": {
+                    "title": "Chief Executive Officer"
+                },
+                "he": {
+                    "title": "רטרטית משקיעים"
+                }
+            }
+        },
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_equity",
+            "name_slug": "buky-katzman",
+            "language_slug": {
+                "en": {
+                    "title": "Investor Relation"
+                },
+                "he": {
+                    "title": "רטרטית משקיעים"
+                }
+            }
+        },        
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_select",
+            "name_slug": "jonny-kaye",
+            "language_slug": {
+                "en": {
+                    "title": "Chief Investment Officer"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "investment_banking",
+            "product_slug": "pi_pituach",
+            "name_slug": "aaron-cohen",
+            "language_slug": {
+                "en": {
+                    "title": "Chairman"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "investment_banking",
+            "product_slug": "pi_pituach",
+            "name_slug": "itai-ruschkewitz",
+            "language_slug": {
+                "en": {
+                    "title": "Chief Executive Officer"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "investment_banking",
+            "product_slug": "pi_pituach",
+            "name_slug": "dan-rosenberg",
+            "language_slug": {
+                "en": {
+                    "title": "Trader"
+                },
+                "he": {
+                    "title": "מסחר"
+                }
+            }
+        },
+        {
+            "segment_slug": "investment_banking",
+            "product_slug": "pi_pituach",
+            "name_slug": "darina-reznikov",
+            "language_slug": {
+                "en": {
+                    "title": "Director"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "investment_banking",
+            "product_slug": "pi_pituach",
+            "name_slug": "mor-katz-avrahami",
+            "language_slug": {
+                "en": {
+                    "title": "Analyst"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "operations",
+            "product_slug": null,
+            "name_slug": "ronen-bitman",
+            "language_slug": {
+                "en": {
+                    "title": "Chief Technology Officer"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "operations",
+            "product_slug": null,
+            "name_slug": "shlomi-cohen",
+            "language_slug": {
+                "en": {
+                    "title": "Chief Financial Officer"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "operations",
+            "product_slug": null,
+            "name_slug": "hagit-borohovitz",
+            "language_slug": {
+                "en": {
+                    "title": "Chief Legal Officer"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "operations",
+            "product_slug": null,
+            "name_slug": "moriel-cohen",
+            "language_slug": {
+                "en": {
+                    "title": "Investor Relations"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "operations",
+            "product_slug": null,
+            "name_slug": "marina-kazar",
+            "language_slug": {
+                "en": {
+                    "title": "Accountant"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "analytics",
+            "product_slug": null,
+            "name_slug": "asaf-shaul",
+            "language_slug": {
+                "en": {
+                    "title": "Analyst"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+        },
+        {
+            "segment_slug": "analytics",
+            "product_slug": null,
+            "name_slug": "ronen-elgali",
+            "language_slug": {
+                "en": { 
+                    "title": "Analyst"
+                },
+                "he": {
+                    "title": "מנהל תיק נכסים"
+                }
+            }
+         }
+    ]
+} 

@@ -7,9 +7,10 @@
  * Renders the Team section
  * 
  * @param string $lang Current language code
+ * @param string $nextSectionId ID of the next section to scroll to
  * @return void
  */
-function renderTeamSection($lang) {
+function renderTeamSection($lang, $nextSectionId = 'about-us') {
     $teamData = TranslatableFactory::getData('team');
     ?>
     <section id="team" class="our-team-preview full-page-section">
@@ -56,20 +57,46 @@ function renderTeamSection($lang) {
                                 if (!isset($member['name_slug'])) continue;
                                 
                                 // Get the correct translatable for a team member
-                                $memberTranslatable = TranslatableFactory::createFromData($member);
+                                $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']);
                             ?>
                                 <div class="team-card">
                                     <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="team-member-link">
-                                        <div class="member-photo">
-                                            <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
-                                                <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name_slug', $member['name_slug']); ?>">
-                                            <?php else: ?>
-                                                <div class="photo-placeholder"><i class="fa fa-user-circle"></i></div>
-                                            <?php endif; ?>
-                                        </div>
                                         <div class="member-info">
                                             <h3><?php echo $memberTranslatable->getContent($lang, 'name', 'Team Member'); ?></h3>
-                                            <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Financial Professional'); ?></p>
+                                            <?php
+                                            // Check if this member should display product roles
+                                            $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                                            
+                                            if ($displayProductRoles):
+                                                // Get position which will be an array of roles when display_product_roles is true
+                                                $positions = $memberTranslatable->getContent($lang, 'position', []);
+                                                
+                                                if (is_array($positions) && !empty($positions)):
+                                            ?>
+                                                <div class="product-roles">
+                                                    <?php foreach ($positions as $role): ?>
+                                                        <p class="role">
+                                                            <?php 
+                                                            $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                                            $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                                            // todo: format the output to be more readable
+                                                            if (!empty($roleTitle) && !empty($productName)) {
+                                                                echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
+                                                            } elseif (!empty($roleTitle)) {
+                                                                echo htmlspecialchars(ucfirst($roleTitle));
+                                                            } elseif (!empty($productName)) {
+                                                                echo htmlspecialchars($productName);
+                                                            }
+                                                            ?>
+                                                        </p>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php else: ?>
+                                                <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Financial Professional'); ?></p>
+                                            <?php endif; ?>
+                                            <?php else: ?>
+                                                <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Financial Professional'); ?></p>
+                                            <?php endif; ?>
                                         </div>
                                     </a>
                                 </div>
@@ -84,7 +111,7 @@ function renderTeamSection($lang) {
             </a>
         </div>
         
-        <?php renderScrollIndicator('contact-us', $lang); ?>
+        <?php renderScrollIndicator($nextSectionId, $lang, 'team'); ?>
     </section>
     
     <!-- Add CSS for the team grid to the page -->

@@ -24,6 +24,7 @@ require_once 'includes/classes/translation/PageTranslatable.php';
 require_once 'includes/classes/translation/ProductTranslatable.php';
 require_once 'includes/classes/translation/SegmentTranslatable.php';
 require_once 'includes/classes/translation/TeamTranslatable.php';
+require_once 'includes/classes/translation/TeamMemberEnhanced.php';
 require_once 'includes/classes/translation/TranslatableFactory.php';
 
 // Enable direct browser output for TranslatableFactory
@@ -44,8 +45,88 @@ $classes = [
     'ProductTranslatable',
     'SegmentTranslatable',
     'TeamTranslatable',
+    'TeamMemberEnhanced',
     'TranslatableFactory'
 ];
+
+    // Debug function to print team member content
+    function debugTeamMemberContent() {
+        echo "<h3>Team Member Enhanced Debug</h3>";
+        $teamData = TranslatableFactory::getData('team');
+        
+        if (!$teamData || !is_array($teamData)) {
+            echo "<p>No team data available</p>";
+            return;
+        }
+        
+        echo "<div style='max-height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin: 10px 0;'>";
+        foreach ($teamData as $groupKey => $members) {
+            if (!is_array($members)) continue;
+            
+            echo "<h4>Group: " . htmlspecialchars($groupKey) . "</h4>";
+            
+            foreach ($members as $member) {
+                if (!is_array($member) || !isset($member['name_slug'])) continue;
+                
+                $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']);
+                echo "<pre>";
+                print_r($memberTranslatable);
+                echo "</pre>";
+                echo "<div style='margin-bottom: 15px; padding: 10px; background: #f5f5f5;'>";
+                echo "<h5>Member: " . htmlspecialchars($member['name_slug']) . "</h5>";
+                
+                // Display basic properties
+                echo "<ul>";
+                echo "<li>Name (EN): " . htmlspecialchars($memberTranslatable->getContent('en', 'name', 'N/A')) . "</li>";
+                echo "<li>Position (EN): " . htmlspecialchars($memberTranslatable->getContent('en', 'position', 'N/A')) . "</li>";
+                echo "<li>Bio (EN): " . substr(htmlspecialchars($memberTranslatable->getContent('en', 'bio', 'N/A')), 0, 100) . "...</li>";
+                
+                // Display product roles if available
+                $displayProductRoles = $memberTranslatable->getContent('en', 'display_product_roles', false);
+                $productRoles = $memberTranslatable->getContent('en', 'product_roles', []);
+                
+                if ($displayProductRoles && !empty($productRoles)) {
+                    echo "<li>Product Roles: " . count($productRoles) . " roles found</li>";
+                    echo "<ul style='margin-left: 20px;'>";
+                    foreach ($productRoles as $role) {
+                        echo "<li>";
+                        echo "Role in multiple languages:";
+                        echo "<ul style='margin-left: 20px;'>";
+                        
+                        if (isset($role['language_slug']) && is_array($role['language_slug'])) {
+                            foreach ($role['language_slug'] as $langCode => $langData) {
+                                echo "<li><strong>" . htmlspecialchars($langCode) . "</strong>: ";
+                                
+                                // Product name in this language
+                                $productName = isset($role['product_data']['language_slug'][$langCode]['name']) 
+                                    ? htmlspecialchars($role['product_data']['language_slug'][$langCode]['name']) 
+                                    : 'N/A';
+                                
+                                // Role title in this language
+                                $roleTitle = isset($langData['title']) 
+                                    ? htmlspecialchars($langData['title']) 
+                                    : 'N/A';
+                                
+                                echo "Product: <em>" . $productName . "</em>, ";
+                                echo "Title: <em>" . $roleTitle . "</em>";
+                                echo "</li>";
+                            }
+                        } else {
+                            echo "<li>No language data available</li>";
+                        }
+                        
+                        echo "</ul>";
+                        echo "</li>";
+                    }
+                    echo "</ul>";
+                }
+                
+                echo "</ul>";
+                echo "</div>";
+            }
+        }
+        echo "</div>";
+    }
 
 echo "<ul>";
 foreach ($classes as $class) {
@@ -215,5 +296,138 @@ try {
 }
 
 echo "<h2>PHP Error Log Path</h2>";
+
+// Debug team member enhanced content
+// debugTeamMemberContent();
+
+// Add specific debug for Buky Katzman
+echo "<h2>Detailed Debug for Buky Katzman</h2>";
+function debugBukyKatzman() {
+    $memberKey = 'buky-katzman';
+    echo "<h3>Detailed TeamMemberEnhanced Data for '{$memberKey}'</h3>";
+    
+    echo "<div style='margin: 20px 0; padding: 15px; background-color: #ffffcc; border-left: 5px solid #ffcc00;'>";
+    echo "<strong>🛠️ Implementation Note:</strong> The code has been updated to fix the product_name association in the position attribute. ";
+    echo "Now comparing the results before and after the changes.</div>";
+    
+    // Get TeamMemberEnhanced instance
+    $memberTranslatable = TranslatableFactory::teamMemberEnhanced($memberKey);
+    
+    // Get raw team member data
+    $allTeam = TranslatableFactory::getData('team');
+    $memberData = null;
+    
+    // Find the member data
+    foreach ($allTeam as $groupSlug => $members) {
+        if (!is_array($members)) continue;
+        
+        foreach ($members as $member) {
+            if (isset($member['name_slug']) && $member['name_slug'] === $memberKey) {
+                $memberData = $member;
+                echo "<p>Found in group: <strong>{$groupSlug}</strong></p>";
+                break 2;
+            }
+        }
+    }
+    
+    // Get team_products data
+    $teamProducts = TranslatableFactory::getData('teams_products');
+    $memberRoles = [];
+    
+    if (isset($teamProducts['team_products']) && is_array($teamProducts['team_products'])) {
+        foreach ($teamProducts['team_products'] as $role) {
+            if (isset($role['name_slug']) && $role['name_slug'] === $memberKey) {
+                $memberRoles[] = $role;
+            }
+        }
+    }
+    
+    // Get products data
+    $productsData = TranslatableFactory::getData('products');
+    
+    echo '<div class="debug-container" style="background:#f5f5f5;padding:15px;margin:15px;border-radius:5px;">';
+    
+    // Show member data
+    echo '<h4>Raw Member Data from team.json:</h4>';
+    echo '<pre style="background:#fff;padding:10px;border-radius:3px;max-height:300px;overflow:auto;">';
+    print_r($memberData);
+    echo '</pre>';
+    
+    // Show team_products data for this member
+    echo '<h4>Raw Roles Data from teams_products.json:</h4>';
+    echo '<pre style="background:#fff;padding:10px;border-radius:3px;max-height:300px;overflow:auto;">';
+    print_r($memberRoles);
+    echo '</pre>';
+    
+    // Show relevant products data
+    echo '<h4>Available Products Data:</h4>';
+    $relevantProducts = [];
+    foreach ($memberRoles as $role) {
+        if (!isset($role['product_slug']) || $role['product_slug'] === null) continue;
+        $productSlug = $role['product_slug'];
+        $segmentSlug = $role['segment_slug'] ?? null;
+        
+        if ($segmentSlug && isset($productsData[$segmentSlug][$productSlug])) {
+            $relevantProducts[$productSlug] = $productsData[$segmentSlug][$productSlug];
+        }
+    }
+    
+    echo '<pre style="background:#fff;padding:10px;border-radius:3px;max-height:300px;overflow:auto;">';
+    print_r($relevantProducts);
+    echo '</pre>';
+    
+    // Display processed data as used in templates
+    echo '<h4>English Content:</h4>';
+    echo '<div style="background:#fff;padding:10px;border-radius:3px;margin-bottom:15px;">';
+    
+    // Basic info
+    echo '<p><strong>Name:</strong> ' . $memberTranslatable->getContent('en', 'name', 'N/A') . '</p>';
+    echo '<p><strong>display_product_roles:</strong> ' . ($memberTranslatable->getContent('en', 'display_product_roles', false) ? 'true' : 'false') . '</p>';
+    
+    // Get the position attribute
+    $position = $memberTranslatable->getContent('en', 'position', 'N/A');
+    
+    echo '<p><strong>Position attribute output:</strong></p>';
+    echo '<pre style="background:#f8f8f8;padding:10px;border-radius:3px;">';
+    var_export($position);
+    echo '</pre>';
+    
+    // Get the full content
+    echo '<p><strong>Full content:</strong></p>';
+    echo '<pre style="background:#f8f8f8;padding:10px;border-radius:3px;">';
+    print_r($memberTranslatable->getAllContent('en'));
+    echo '</pre>';
+    
+    echo '</div>';
+    
+    // Display Hebrew content
+    echo '<h4>Hebrew Content:</h4>';
+    echo '<div style="background:#fff;padding:10px;border-radius:3px;">';
+    
+    // Basic info
+    echo '<p><strong>Name:</strong> ' . $memberTranslatable->getContent('he', 'name', 'N/A') . '</p>';
+    echo '<p><strong>display_product_roles:</strong> ' . ($memberTranslatable->getContent('he', 'display_product_roles', false) ? 'true' : 'false') . '</p>';
+    
+    // Get the position attribute
+    $position = $memberTranslatable->getContent('he', 'position', 'N/A');
+    
+    echo '<p><strong>Position attribute output:</strong></p>';
+    echo '<pre style="background:#f8f8f8;padding:10px;border-radius:3px;">';
+    var_export($position);
+    echo '</pre>';
+    
+    // Get the full content
+    echo '<p><strong>Full content:</strong></p>';
+    echo '<pre style="background:#f8f8f8;padding:10px;border-radius:3px;">';
+    print_r($memberTranslatable->getAllContent('he'));
+    echo '</pre>';
+    
+    echo '</div>';
+    
+    echo '</div>';
+}
+
+debugBukyKatzman();
+
 echo "<p>Error log path: " . ini_get('error_log') . "</p>";
 echo "<p>This is where detailed debug logs from TranslatableFactory are being written.</p>"; 

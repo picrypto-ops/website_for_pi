@@ -26,7 +26,7 @@ if (!$member) {
 }
 
 // Get translatable for this team member
-$memberTranslatable = TranslatableFactory::createFromData($member);
+$memberTranslatable = TranslatableFactory::teamMemberEnhanced($memberId);
 
 // Create a flat array of all team members from all groups
 $allMembers = [];
@@ -89,7 +89,45 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
             
             <div class="member-info">
                 <h1><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h1>
-                <p class="member-title"><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
+                
+                <?php
+                // Check if this member should display product roles
+                $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                
+                if ($displayProductRoles):
+                    // Get position which will be an array of roles when display_product_roles is true
+                    $positions = $memberTranslatable->getContent($lang, 'position', []);
+                    
+                    if (is_array($positions) && !empty($positions)):
+                ?>
+                    <div class="product-roles-section">
+                        <h3><?php echo TranslatableFactory::general()->getContent($lang, 'member_roles', 'Roles'); ?></h3>
+                        <div class="product-roles">
+                            <?php foreach ($positions as $role): ?>
+                                <div class="role">
+                                    <?php 
+                                    $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                    $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                    // todo: format the output to be more readable
+                                    if (!empty($roleTitle) && !empty($productName)) {
+                                        echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
+                                    } elseif (!empty($roleTitle)) {
+                                        echo htmlspecialchars(ucfirst($roleTitle));
+                                    } elseif (!empty($productName)) {
+                                        echo htmlspecialchars($productName);
+                                    }
+                                    ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <p class="member-title"><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
+                <?php endif; ?>
+                <?php else: ?>
+                    <p class="member-title"><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
+                <?php endif; ?>
+                
                 <div class="member-bio">
                     <?php echo $memberTranslatable->getContent($lang, 'bio', 'Biography information not available.'); ?>
                 </div>

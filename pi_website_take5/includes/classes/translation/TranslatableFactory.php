@@ -330,6 +330,112 @@ class TranslatableFactory {
     }
     
     /**
+     * Get translatable for enhanced team member content with product roles
+     * 
+     * @param string $memberKey The team member key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function teamMemberEnhanced($memberKey) {
+        if (is_array($memberKey)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for memberKey parameter, using first array key");
+            $memberKey = array_key_first($memberKey);
+        }
+        
+        // Load all team data
+        $allTeam = self::loadDataInternal('team');
+        $memberData = null;
+        
+        // Search for the member in the nested team structure
+        if (!empty($memberKey) && is_array($allTeam)) {
+            foreach ($allTeam as $groupSlug => $groupMembers) {
+                if (!is_array($groupMembers)) continue;
+                
+                foreach ($groupMembers as $member) {
+                    if (isset($member['name_slug']) && $member['name_slug'] === $memberKey) {
+                        $memberData = $member;
+                        break 2;
+                    }
+                }
+            }
+        }
+        
+        if ($memberData === null) {
+            if (self::$debug) error_log("TranslatableFactory: Team member with key '$memberKey' not found");
+            return new TeamMemberEnhanced([], []);
+        }
+        
+        // Load team_products data to get roles
+        $teamProducts = self::loadDataInternal('teams_products');
+        $productRoles = [];
+        
+        if (isset($teamProducts['team_products']) && is_array($teamProducts['team_products'])) {
+            foreach ($teamProducts['team_products'] as $role) {
+                if (isset($role['name_slug']) && $role['name_slug'] === $memberKey) {
+                    $productRoles[] = $role;
+                }
+            }
+        }
+        
+        // Get all product and segment data for reference
+        $products = self::loadDataInternal('products');
+        $segments = self::loadDataInternal('segments');
+        
+        // Enhance product roles with product and segment data
+        $enhancedRoles = [];
+        foreach ($productRoles as $role) {
+            $enhancedRole = $role;
+            
+            // Add product data if available
+            if (isset($role['product_slug']) && $role['product_slug'] !== null) {
+                $productFound = false;
+                
+                // Products are nested by segment, so we need to search differently
+                foreach ($products as $segmentSlug => $segmentProducts) {
+                    if (!is_array($segmentProducts)) continue;
+                    
+                    foreach ($segmentProducts as $productSlug => $product) {
+                        if ($productSlug === $role['product_slug']) {
+                            $enhancedRole['product_data'] = $product;
+                            $productFound = true;
+                            break 2;
+                        }
+                    }
+                }
+                
+                // If not found in nested structure, try flat search
+                if (!$productFound) {
+                    foreach ($products as $productKey => $product) {
+                        if (is_array($product) && isset($product['product_slug']) && $product['product_slug'] === $role['product_slug']) {
+                            $enhancedRole['product_data'] = $product;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // Add segment data if available
+            if (isset($role['segment_slug']) && $role['segment_slug'] !== null) {
+                foreach ($segments as $segment) {
+                    if (isset($segment['segment_slug']) && $segment['segment_slug'] === $role['segment_slug']) {
+                        $enhancedRole['segment_data'] = $segment;
+                        break;
+                    }
+                }
+            }
+            
+            $enhancedRoles[] = $enhancedRole;
+        }
+        
+        // Check if the member has display_product_roles flag
+        $displayProductRoles = isset($memberData['display_product_roles']) ? $memberData['display_product_roles'] : false;
+        
+        // If display_product_roles is false, we will still return the roles but they won't be displayed
+        $memberData['display_product_roles'] = $displayProductRoles;
+        
+        return new TeamMemberEnhanced($memberData, $enhancedRoles);
+    }
+    
+    /**
      * Detect the type of data and create appropriate translatable
      * 
      * @param array $data The data to analyze

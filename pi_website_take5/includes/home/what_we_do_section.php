@@ -7,11 +7,18 @@
  * Renders the What We Do section with segment cards
  * 
  * @param string $lang Current language code
+ * @param string $nextSectionId ID of the next section to scroll to
  * @return void
  */
-function renderWhatWeDoSection($lang) {
+function renderWhatWeDoSection($lang, $nextSectionId = null) {
     $whatWeDoTranslatable = TranslatableFactory::page('what_we_do');
     $segmentData = TranslatableFactory::getData('segments');
+    
+    // If nextSectionId is not provided, default to the first segment or team section
+    if ($nextSectionId === null) {
+        $nextSectionId = is_array($segmentData) && !empty($segmentData) ? 
+            'segment-' . array_key_first($segmentData) : 'team';
+    }
     ?>
     <section id="what-we-do" class="featured-segments full-page-section">
         <div class="container">
@@ -56,7 +63,7 @@ function renderWhatWeDoSection($lang) {
             <!-- Removed "View All Services" button as requested -->
         </div>
         
-        <?php renderScrollIndicator('products', $lang); ?>
+        <?php renderScrollIndicator($nextSectionId, $lang, 'what-we-do'); ?>
     </section>
     <?php
 } 
