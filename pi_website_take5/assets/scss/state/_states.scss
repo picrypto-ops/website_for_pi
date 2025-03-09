@@ -23,3 +23,31 @@
   pointer-events: none;
 }
 
+// Menu-specific states
+body.menu-open {
+  overflow: hidden; // Prevent scrolling when menu is open
+  position: relative;
+  
+  // Add an overlay behind the menu but above other content
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999; // Below the menu but above other content
+    pointer-events: none;
+  }
+  
+  // Don't apply overlay on desktop
+  @media (min-width: 769px) {
+    overflow: auto;
+    
+    &::after {
+      display: none;
+    }
+  }
+}
+

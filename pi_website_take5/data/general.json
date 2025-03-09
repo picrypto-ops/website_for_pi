@@ -394,5 +394,16 @@
                 "label": "גלו את המוצרים הפיננסים הנסחרים שלנו שעוצבו למלא את הצרכים שלכם."
             }
         }
+    },
+    "back_to_team": {
+        "term_slug": "back_to_team",
+        "language_slug": {
+            "en": {
+                "label": "Back to Team"
+            },
+            "he": {
+                "label": "חזרה לצוות"
+            }
+        }
     }
 }

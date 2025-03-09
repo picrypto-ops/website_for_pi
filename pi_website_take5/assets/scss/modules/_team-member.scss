@@ -126,12 +126,15 @@
     }
     
     &:hover, &:focus {
-        transform: translateY(-50%) scale(1.1);
+        transform: translateY(-10%) scale(1.02);
     }
 }
 
 .next-button {
     right: 0;
+    &:hover, &:focus {
+        transform: translateY(-10%) scale(1.02);
+    }        
 }
 
 .rtl .prev-button {

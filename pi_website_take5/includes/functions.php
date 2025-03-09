@@ -1,4 +1,17 @@
 <?php
+/**
+ * PI Website Functions
+ * 
+ * This file contains various helper functions used throughout the website.
+ * 
+ * Key functionalities:
+ * - Translation handling (via TranslatableFactory)
+ * - UI/UX helper functions
+ * - Input sanitization
+ * - Language switching (renderLanguageSwitcher)
+ * - Responsive image generation
+ */
+
 // Ensure all translation class files are included
 require_once __DIR__ . '/classes/translation/TranslatableInterface.php';
 require_once __DIR__ . '/classes/translation/AbstractTranslatable.php';
@@ -41,6 +54,50 @@ function sanitizeInput($input) {
  */
 function isActiveMenu($currentPage, $menuItem) {
     return $currentPage === $menuItem ? 'active' : '';
+}
+
+/**
+ * Generate language switcher HTML
+ * 
+ * @param string $lang Current language (en or he)
+ * @param array $additionalClasses Additional CSS classes for the language switcher container
+ * @param bool $includeWrapper Whether to include the outer wrapper div (default true)
+ * @return string HTML for the language switcher
+ */
+function renderLanguageSwitcher($lang, $additionalClasses = '', $includeWrapper = true) {
+    // Validate language
+    $lang = in_array($lang, ['en', 'he']) ? $lang : 'en';
+    
+    // Get current URL parameters
+    $currentParams = $_GET;
+    
+    // Create EN link with all current parameters except for lang
+    $enParams = $currentParams;
+    $enParams['lang'] = 'en';
+    $enLink = '?' . http_build_query($enParams);
+    
+    // Create HE link with all current parameters except for lang
+    $heParams = $currentParams;
+    $heParams['lang'] = 'he';
+    $heLink = '?' . http_build_query($heParams);
+    
+    // Build inner HTML
+    $innerHtml = '<a href="' . $enLink . '" class="lang-switch ' . ($lang === 'en' ? 'active' : '') . '" data-lang="en">EN</a>';
+    $innerHtml .= '<span class="separator">|</span>';
+    $innerHtml .= '<a href="' . $heLink . '" class="lang-switch ' . ($lang === 'he' ? 'active' : '') . '" data-lang="he">עב</a>';
+    
+    // Return content with or without wrapper
+    if ($includeWrapper) {
+        // Additional classes for the container
+        $classAttribute = 'language-switcher';
+        if (!empty($additionalClasses)) {
+            $classAttribute .= ' ' . trim($additionalClasses);
+        }
+        
+        return '<div class="' . $classAttribute . '">' . $innerHtml . '</div>';
+    } else {
+        return $innerHtml;
+    }
 }
 
 /**

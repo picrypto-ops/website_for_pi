@@ -71,26 +71,13 @@
             "name_slug": "buky-katzman",
             "language_slug": {
                 "en": {
-                    "title": "Chief Executive Officer"
+                    "title": "co-founder"
                 },
                 "he": {
-                    "title": "רטרטית משקיעים"
+                    "title": "מייסד משותף"
                 }
             }
         },
-        {
-            "segment_slug": "asset_management",
-            "product_slug": "pi_equity",
-            "name_slug": "buky-katzman",
-            "language_slug": {
-                "en": {
-                    "title": "Investor Relation"
-                },
-                "he": {
-                    "title": "רטרטית משקיעים"
-                }
-            }
-        },        
         {
             "segment_slug": "asset_management",
             "product_slug": "pi_select",
@@ -136,10 +123,10 @@
             "name_slug": "dan-rosenberg",
             "language_slug": {
                 "en": {
-                    "title": "Trader"
+                    "title": "Co-Founder and Director"
                 },
                 "he": {
-                    "title": "מסחר"
+                    "title": "מייסד משותף ודירקטור"
                 }
             }
         },

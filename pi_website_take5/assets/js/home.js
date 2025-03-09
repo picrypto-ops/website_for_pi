@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const activeLink = document.querySelector(`.breadcrumb-navigation a[href="#${currentSectionId}"]`);
             if (activeLink) {
                 activeLink.classList.add('active');
-                console.log('Active section:', currentSectionId);
             }
             
             // Update team navigation if in team section

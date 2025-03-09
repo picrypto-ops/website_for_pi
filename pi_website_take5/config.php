@@ -16,5 +16,6 @@ define('SMTP_USER', 'your_email@example.com');
 define('SMTP_PASS', 'your_email_password');
 
 // Other configuration settings
-define('GOOGLE_MAPS_API_KEY', 'your_google_maps_api_key');
+// We're using OpenStreetMap which doesn't require an API key
+// define('GOOGLE_MAPS_API_KEY', 'your_google_maps_api_key');
 

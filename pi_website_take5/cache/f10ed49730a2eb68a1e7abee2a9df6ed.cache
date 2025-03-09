@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Home - Home</title>
+    <title>דף הבית - דף הבית</title>
     <meta name="description" content="">
-    <link rel="canonical" href="https://www.pigroup.com/en/home">
-    <meta property="og:title" content="Home - Home">
+    <link rel="canonical" href="https://www.pigroup.com/he/home">
+    <meta property="og:title" content="דף הבית - דף הבית">
     <meta property="og:description" content="">
-    <meta property="og:url" content="https://www.pigroup.com/en/home">
+    <meta property="og:url" content="https://www.pigroup.com/he/home">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -35,10 +35,10 @@
                 
                 <!-- Section 1: Logo & Group name -->
                 <div class="logo-section">
-                    <a href="?page=home&lang=en" class="logo-link">
+                    <a href="?page=home&lang=he" class="logo-link">
                         <div class="logo-container">
                             <img src="assets/images/logo_small.svg" alt="PI Group Logo">
-                            <span class="group-name">PI Group</span>
+                            <span class="group-name">קבוצת פאי</span>
                         </div>
                     </a>
                 </div>
@@ -47,34 +47,34 @@
                 <nav class="main-nav">
                     <ul>
                                                 <li class="active">
-                            <a href="?page=home&lang=en">
-                                Home                            </a>
+                            <a href="?page=home&lang=he">
+                                דף הבית                            </a>
                         </li>
                                                 <li class="">
-                            <a href="?page=segment&id=investment_banking&lang=en">
-                                Investment Banking                            </a>
+                            <a href="?page=segment&id=investment_banking&lang=he">
+                                בנקאות השקעות                            </a>
                         </li>
                                                 <li class="">
-                            <a href="?page=segment&id=asset_management&lang=en">
-                                Asset Management                            </a>
+                            <a href="?page=segment&id=asset_management&lang=he">
+                                ניהול נכסים                            </a>
                         </li>
                                                 <li class="">
-                            <a href="?page=our-team&lang=en">
-                                Our Team                            </a>
+                            <a href="?page=our-team&lang=he">
+                                הצוות שלנו                            </a>
                         </li>
                                                 <li class="">
-                            <a href="?page=about&lang=en">
-                                About Us                            </a>
+                            <a href="?page=about&lang=he">
+                                אודותינו                            </a>
                         </li>
                                                 <li class="">
-                            <a href="?page=contact&lang=en">
-                                Contact Us                            </a>
+                            <a href="?page=contact&lang=he">
+                                צור קשר                            </a>
                         </li>
                                             </ul>
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?page=home&lang=en" class="lang-switch " data-lang="en">EN</a><span class="separator">|</span><a href="?page=home&lang=he" class="lang-switch active" data-lang="he">עב</a></div>            </div>
         </div>
     </header>
     <main id="main-content">
@@ -84,18 +84,18 @@
     <!-- Hero Section -->
     <section id="hero" class="hero full-page">
         <!-- Logo in top right for English -->
-        <div class="hero-top-logo right-aligned">
+        <div class="hero-top-logo left-aligned">
             <img src="assets/images/logo.svg" alt="PI Group Logo">
         </div>
         
         <!-- Language Switcher positioned at top left/right depending on language -->
-        <div class="hero-language-switcher left-aligned">
-            <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
+        <div class="hero-language-switcher right-aligned">
+            <a href="?page=home&lang=en" class="lang-switch " data-lang="en">EN</a><span class="separator">|</span><a href="?page=home&lang=he" class="lang-switch active" data-lang="he">עב</a>        </div>
         
         <div class="hero-content">
-            <h1>Unwavering Professionalism <br>Exceptional Results</h1>
-            <p class="slogan"></p>
-            <p class="wide-description">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
+            <h1>ברוכים הבאים לקבוצת PI</h1>
+            <p class="slogan">פתרונות פיננסיים חדשניים</p>
+            <p class="wide-description">קבוצת PI היא חברת שירותים פיננסיים מובילה המתמחה בבנקאות השקעות וניהול נכסים.</p>
                         <a href="#segment-investment_banking" class="cta-button">
                 Learn More            </a>
         </div>
@@ -116,35 +116,35 @@
         
     <section id="segment-investment_banking" class="segment full-page-section">
         <div class="container">
-            <h2>Investment Banking</h2>
+            <h2>מסחר ביטוח</h2>
             <div class="segment-section-description">
-                Our investment banking services are tailored to advise and support exceptional financial innovators and dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth. In the past, we have invested alongside our partners in every deal we have structured.            </div>
+                מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי.            </div>
 
-            <h3>Our Products</h3>
+            <h3>המוצרים שלנו</h3>
             <div class="product-grid">
-                                                            <a href="?page=product&id=pi_pituach&lang=en" class="product-card">
+                                                            <a href="?page=product&id=pi_pituach&lang=he" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
-                                                                            <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
+                                                                            <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="פאי פיתוח">
                                                                     </div>
                                 <div class="product-text">
-                                    <h3>PI Pituach</h3>
+                                    <h3>פאי פיתוח</h3>
                                 </div>
                             </div>
                             <p class="slogan">
-                                Innovate Today, Secure Tomorrow                            </p>
+                                חדשנות היום, ביטחון למחר                            </p>
                         </a>
-                                            <a href="?page=product&id=pi_select&lang=en" class="product-card">
+                                            <a href="?page=product&id=pi_select&lang=he" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
-                                                                            <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
+                                                                            <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="פאי סלקט">
                                                                     </div>
                                 <div class="product-text">
-                                    <h3>PI Select</h3>
+                                    <h3>פאי סלקט</h3>
                                 </div>
                             </div>
                             <p class="slogan">
-                                Invest With Confidence                            </p>
+                                השקעה בביטחון                            </p>
                         </a>
                                                 </div>
             
@@ -164,47 +164,47 @@
         
     <section id="segment-asset_management" class="segment full-page-section">
         <div class="container">
-            <h2>Asset Management</h2>
+            <h2>ניהול מניות</h2>
             <div class="segment-section-description">
-                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver consistent, positive returns, and to date, none of our funds have experienced a losing year. Pi has always maintained a significant investment in the funds we manage for our partners.            </div>
+                מציע פתרונות פיננסיים מיוחדים שמטפלים בצרכים של לקוחות מסחריים ושוק ההון הישראלי.            </div>
 
-            <h3>Our Products</h3>
+            <h3>המוצרים שלנו</h3>
             <div class="product-grid">
-                                                            <a href="?page=product&id=pi_emf&lang=en" class="product-card">
+                                                            <a href="?page=product&id=pi_emf&lang=he" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
-                                                                            <img src="assets/images/asset_management/pi_emf_retired/logo_large.svg" alt="PI EMF (retired)">
+                                                                            <img src="assets/images/asset_management/pi_emf_retired/logo_large.svg" alt="פאי EMF (בדימוס)">
                                                                     </div>
                                 <div class="product-text">
-                                    <h3>PI EMF (retired)</h3>
+                                    <h3>פאי EMF (בדימוס)</h3>
                                 </div>
                             </div>
                             <p class="slogan">
-                                Mastering Market Discrepancies                            </p>
+                                שליטה בפערי שוק                            </p>
                         </a>
-                                            <a href="?page=product&id=pi_global&lang=en" class="product-card">
+                                            <a href="?page=product&id=pi_global&lang=he" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
-                                                                            <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="PI Global">
+                                                                            <img src="assets/images/asset_management/pi_global/logo_large.svg" alt="פאי גלובל">
                                                                     </div>
                                 <div class="product-text">
-                                    <h3>PI Global</h3>
+                                    <h3>פאי גלובל</h3>
                                 </div>
                             </div>
                             <p class="slogan">
-                                Macro & Derivatives Excellence                            </p>
+                                מצוינות במאקרו ונגזרים                            </p>
                         </a>
-                                            <a href="?page=product&id=pi_equity&lang=en" class="product-card">
+                                            <a href="?page=product&id=pi_equity&lang=he" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
-                                                                            <img src="assets/images/asset_management/pi_equity/logo_large.svg" alt="PI Equity">
+                                                                            <img src="assets/images/asset_management/pi_equity/logo_large.svg" alt="פאי אקוויטי">
                                                                     </div>
                                 <div class="product-text">
-                                    <h3>PI Equity</h3>
+                                    <h3>פאי אקוויטי</h3>
                                 </div>
                             </div>
                             <p class="slogan">
-                                Cultivating Israeli Business Gems                            </p>
+                                טיפוח יהלומי עסקים ישראליים                            </p>
                         </a>
                                                 </div>
             
@@ -224,73 +224,73 @@
         
         <section id="team" class="our-team-preview full-page-section">
         <div class="container">
-            <h2 class="section-title">Our Team</h2>
-            <p class="section-description">Meet our dedicated professionals who provide exceptional service.</p>
+            <h2 class="section-title">הצוות שלנו</h2>
+            <p class="section-description">הכירו את המומחים המוכחים שמספקים שירות מיוחד.</p>
 
             <div class="team-navigation">
                 <ul class="team-nav">
-                                            <li><a href="#team-group-management" class="team-group-link">Management</a></li>
+                                            <li><a href="#team-group-management" class="team-group-link">הנהלה</a></li>
                                             <li><a href="#team-group-operations" class="team-group-link">Operations</a></li>
                                             <li><a href="#team-group-investments" class="team-group-link">Investments</a></li>
                                     </ul>
             </div>
             
                             <div id="team-group-management" class="team-section">
-                    <h3 class="section-title">Management</h3>
+                    <h3 class="section-title">הנהלה</h3>
                     <div class="team-grid">
-                                                                                    <a href="?page=team-member&id=aaron-cohen&lang=en" class="card-link">
+                                                                                    <a href="?page=team-member&id=aaron-cohen&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Aron Cohen</h3>
-                                                                                            <p class="position">Founder</p>
+                                            <h3>אהרן כהן</h3>
+                                                                                            <p class="position">מייסד</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=jonny-kaye&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=jonny-kaye&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Jonny Kaye</h3>
-                                                                                            <p class="position">Founder</p>
+                                            <h3>גוני קיי</h3>
+                                                                                            <p class="position">מייסד</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=dan-rosenberg&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=dan-rosenberg&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Dan Rosenberg</h3>
+                                            <h3>דן רוזנברג</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Pituach</span><span class="role-title">Co-Founder and Director</span>                                                        </div>
+                                                            <span class="product-name">פאי פיתוח</span><span class="role-title">מייסד משותף ודירקטור</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=itai-ruschkewitz&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=itai-ruschkewitz&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Itay Ruschkewitz</h3>
+                                            <h3>איתי רושקביץ</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Pituach</span><span class="role-title">Chief Executive Officer</span>                                                        </div>
+                                                            <span class="product-name">פאי פיתוח</span><span class="role-title">מנהל תיק נכסים</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=buky-katzman&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=buky-katzman&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Baruch (Buky) Katzman</h3>
+                                            <h3>ברוך (בוקי) כצמן</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Select</span><span class="role-title">Co-founder</span>                                                        </div>
+                                                            <span class="product-name">פאי סלקט</span><span class="role-title">מייסד משותף</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
@@ -302,51 +302,51 @@
                             <div id="team-group-operations" class="team-section">
                     <h3 class="section-title">Operations</h3>
                     <div class="team-grid">
-                                                                                    <a href="?page=team-member&id=shlomi-cohen&lang=en" class="card-link">
+                                                                                    <a href="?page=team-member&id=shlomi-cohen&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Shlomi Cohen</h3>
-                                                                                            <p class="position">Chief Financial Officer</p>
+                                            <h3>שלומי כהן</h3>
+                                                                                            <p class="position">סמנכ"ל כספים</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=ronen-bitman&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=ronen-bitman&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Ronen Bitman</h3>
-                                                                                            <p class="position">Chief Technology Officer</p>
+                                            <h3>רונן ביטמן</h3>
+                                                                                            <p class="position">מנהל טכנולוגיות ראשי</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=hagit-borohovitz&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Hagit Borohovitz</h3>
-                                                                                            <p class="position">Chief Legal Officer</p>
+                                            <h3>חגית בורוכוביץ</h3>
+                                                                                            <p class="position">יועצת משפטית ראשית</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=moriel-cohen&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=moriel-cohen&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Moriel Cohen</h3>
-                                                                                            <p class="position">Investor Relations</p>
+                                            <h3>מוריאל כהן</h3>
+                                                                                            <p class="position">מנהלת קשרי לקוחות</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=marina-kazar&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=marina-kazar&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Marina Kazar</h3>
-                                                                                            <p class="position">Accountant</p>
+                                            <h3>מרינה קאזר</h3>
+                                                                                            <p class="position">מנהלת חשבונות</p>
                                                                                         
 
                                         </div>
@@ -357,72 +357,72 @@
                             <div id="team-group-investments" class="team-section">
                     <h3 class="section-title">Investments</h3>
                     <div class="team-grid">
-                                                                                    <a href="?page=team-member&id=ronen-elgali&lang=en" class="card-link">
+                                                                                    <a href="?page=team-member&id=ronen-elgali&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Ronen Elgali</h3>
-                                                                                            <p class="position">Chief Investment Officer</p>
+                                            <h3>רונן אלגלי</h3>
+                                                                                            <p class="position">מנהל השקעות ראשי</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=asaf-shaul&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=asaf-shaul&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Asaf Shaul</h3>
-                                                                                            <p class="position">Investment Analyst</p>
+                                            <h3>אסף שאול</h3>
+                                                                                            <p class="position">אנליסט השקעות</p>
                                                                                         
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=mor-katz-avrahami&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=mor-katz-avrahami&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Mor Katz Avrahami</h3>
+                                            <h3>מור כץ אברהמי</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Pituach</span><span class="role-title">Analyst</span>                                                        </div>
+                                                            <span class="product-name">פאי פיתוח</span><span class="role-title">מנהל תיק נכסים</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=darina-reznikov&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=darina-reznikov&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Darina Reznikov</h3>
+                                            <h3>דרינה רזניבוק</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Pituach</span><span class="role-title">Director</span>                                                        </div>
+                                                            <span class="product-name">פאי פיתוח</span><span class="role-title">מנהל תיק נכסים</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=dolev-trogman&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=dolev-trogman&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Dolev Trogman</h3>
+                                            <h3>דולב טרוגמן</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Global</span><span class="role-title">Portfolio Manager</span>                                                        </div>
+                                                            <span class="product-name">פאי גלובל</span><span class="role-title">מנהל תיק נכסים</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=daniel-cohen&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=daniel-cohen&lang=he" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Daniel Cohen</h3>
+                                            <h3>דניאל כהן</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Global</span><span class="role-title">Trader</span>                                                        </div>
+                                                            <span class="product-name">פאי גלובל</span><span class="role-title">מסחר</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
@@ -433,8 +433,8 @@
                 </div>
                         
             <div class="view-all-container">
-                <a href="?page=our-team&lang=en" class="view-all-button">
-                    Meet Our Team                </a>
+                <a href="?page=our-team&lang=he" class="view-all-button">
+                    הכירו את הצוות שלנו                </a>
             </div>
         </div>
         
@@ -531,15 +531,10 @@
     </style>
             <section id="about-us" class="about-preview full-page-section">
         <div class="container">
-            <h2>About Us</h2>
-            <p>Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.
-Pi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.
-While proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.
-Pi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.
-More recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.
-Through innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.</p>
-            <a href="?page=about&lang=en" class="button">
-                Read More            </a>
+            <h2>אודות קבוצת PI</h2>
+            <p>למדו על ההיסטוריה שלנו, הערכים שלנו והמחויבות שלנו לספק שירותים פיננסיים ברמה הגבוהה ביותר.</p>
+            <a href="?page=about&lang=he" class="button">
+                קרא עוד            </a>
         </div>
         
             <div class="scroll-indicator" data-parent-section="about-us">
@@ -552,8 +547,8 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
             <section id="contact-us" class="contact-preview full-page-section">
         <div class="container">
             <div class="section-header">
-                <h2>Contact PI Group</h2>
-                <p class="section-description">Reach out to us for any inquiries or to learn more about our services.</p>
+                <h2>צור קשר עם קבוצת PI</h2>
+                <p class="section-description">פנו אלינו לכל שאלה או כדי ללמוד עוד על השירותים שלנו.</p>
             </div>
             
             <div class="home-contact-content">
@@ -568,9 +563,9 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                         <div class="contact-card address">
                         <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
                         <div class="contact-info">
-                            <h3>Address</h3>
-                            <p>18, Raoul Wallenberg, Tel Aviv, Israel</p>
-                                                            <p>Zipcode: 6971001</p>
+                            <h3>כתובת</h3>
+                            <p>ראול ולנברג 18, עתידים, תל אביב, ישראל</p>
+                                                            <p>מיקוד: 6971001</p>
                                                     </div>
                     </div>
                                         
@@ -578,9 +573,9 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                         <div class="contact-card phone">
                         <div class="icon"><i class="fa fa-phone"></i></div>
                         <div class="contact-info">
-                            <h3>Phone</h3>
+                            <h3>טלפון</h3>
                             <p><a href="tel:+97233732090">+972-3-3732090</a></p>
-                                                            <p>Fax: +972-3-3732102</p>
+                                                            <p>פקס: +972-3-3732102</p>
                                                     </div>
                     </div>
                                         
@@ -588,8 +583,8 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                         <div class="contact-card email">
                         <div class="icon"><i class="fa fa-envelope"></i></div>
                         <div class="contact-info">
-                            <h3>Email</h3>
-                            <p><a href="mailto:info@pi-hf.com">info@pi-hf.com</a></p>
+                            <h3>אימייל</h3>
+                            <p><a href="mailto:info@pigroup.com">info@pigroup.com</a></p>
                         </div>
                     </div>
                                         
@@ -597,15 +592,15 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                                         <div class="contact-card website">
                         <div class="icon"><i class="fa fa-globe"></i></div>
                         <div class="contact-info">
-                            <h3>Website</h3>
-                            <p><a href="https://www.pi-hf.com" target="_blank">https://www.pi-hf.com</a></p>
+                            <h3>אתר</h3>
+                            <p><a href="https://www.pigroup.com" target="_blank">https://www.pigroup.com</a></p>
                         </div>
                     </div>
                                     </div>
             </div>
             
-            <a href="?page=contact&lang=en" class="button contact-button">
-                Get In Touch            </a>
+            <a href="?page=contact&lang=he" class="button contact-button">
+                צור קשר            </a>
         </div>
         
             <div class="scroll-indicator" data-parent-section="contact-us">
@@ -685,7 +680,7 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 PI Group. All rights reserved.</p>
+                <p>&copy; 2025 PI Group. כל הזכויות שמורות.</p>
             </div>
         </div>
     </footer>

@@ -94,25 +94,7 @@ $defaultDescription = 'Financial Management Professionals';
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher">
-                    <?php
-                    // Get current URL parameters
-                    $currentParams = $_GET;
-                    
-                    // Create EN link with all current parameters except for lang
-                    $enParams = $currentParams;
-                    $enParams['lang'] = 'en';
-                    $enLink = '?' . http_build_query($enParams);
-                    
-                    // Create HE link with all current parameters except for lang
-                    $heParams = $currentParams;
-                    $heParams['lang'] = 'he';
-                    $heLink = '?' . http_build_query($heParams);
-                    ?>
-                    <a href="<?php echo $enLink; ?>" class="lang-switch <?php echo $lang === 'en' ? 'active' : ''; ?>" data-lang="en">EN</a>
-                    <span class="separator">|</span>
-                    <a href="<?php echo $heLink; ?>" class="lang-switch <?php echo $lang === 'he' ? 'active' : ''; ?>" data-lang="he">עב</a>
-                </div>
+                <?php echo renderLanguageSwitcher($lang); ?>
             </div>
         </div>
     </header>

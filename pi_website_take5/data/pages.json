@@ -138,16 +138,22 @@
         "submit_button": "Send",
         "our_info_heading": "Contact Information",
         "our_info_phone_label": "Phone",
+        "our_info_fax_label": "Fax",
         "our_info_email_label": "Email",
         "our_info_address_label": "Address",
         "our_info_map_label": "Map",
         "our_info_website_label": "Website",
+        "our_info_zipcode_label": "Zipcode",
         "contact_details": {
-          "address": "123 Main St, Anytown, USA",
-          "phone": "+123 456 7890",
-          "email": "info@pigroup.com",
-          "website_link": "https://www.pigroup.com",
-          "map_link": "https://www.google.com/maps"
+          "address": "18, Raoul Wallenberg, Tel Aviv, Israel",
+          "zipcode": "6971001",
+          "phone": "+972-3-3732090",
+          "fax": "+972-3-3732102",
+          "email": "info@pi-hf.com",
+          "website_link": "https://www.pi-hf.com",
+          "map_link": "https://www.openstreetmap.org/?mlat=32.109608&mlon=34.837384#map=21/32.109608/34.837384",
+          "lat": 32.109608,
+          "lng": 34.837384
         }
       },
       "he": {
@@ -163,16 +169,22 @@
         "submit_button": "שלח",
         "our_info_heading": "פרטי התיחסות",
         "our_info_phone_label": "טלפון",
+        "our_info_fax_label": "פקס",
         "our_info_email_label": "אימייל",
         "our_info_address_label": "כתובת",
         "our_info_map_label": "מפה",
         "our_info_website_label": "אתר",
+        "our_info_zipcode_label": "מיקוד",
         "contact_details": {
-          "address": "123 Main St, Anytown, USA",
-          "phone": "+123 456 7890",
+          "address": "ראול ולנברג 18, עתידים, תל אביב, ישראל",
+          "zipcode": "6971001",
+          "phone": "+972-3-3732090",
+          "fax": "+972-3-3732102",
           "email": "info@pigroup.com",
           "website_link": "https://www.pigroup.com",
-          "map_link": "https://www.google.com/maps"
+          "map_link": "https://www.openstreetmap.org/?mlat=32.109608&mlon=34.837384#map=21/32.109608/34.837384",
+          "lat": 32.109608,
+          "lng": 34.837384
         }
       }
     }

@@ -71,7 +71,7 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
 
 <section class="team-member-page">
     <div class="container">
-        <div class="navigation-breadcrumb">
+        <div class="navigation-breadcrumb<?php echo $isRTL ? ' rtl' : ''; ?>">
             <a href="?page=our-team&lang=<?php echo $lang; ?>" class="back-link">
                 <span class="back-arrow">←</span> 
                 <?php echo TranslatableFactory::general()->getContent($lang, 'back_to_team', 'Back to Team'); ?>

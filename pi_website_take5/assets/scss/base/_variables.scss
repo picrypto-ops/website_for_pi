@@ -110,3 +110,9 @@ $footer-logo-size: 50px;
 $footer-text-size: 1.1rem;
 $footer-bottom-margin: 2rem;
 $footer-link-gap: 1.5rem;
+
+// Responsive Breakpoints
+$mobile-breakpoint: 767px;       // Mobile devices
+$tablet-min: 768px;              // Minimum width for tablets
+$tablet-max: 950px;              // Maximum width for tablets
+$desktop-min: 951px;             // Minimum width for desktops

@@ -34,7 +34,7 @@ header {
     outline: none;
     transition: all 0.3s ease;
     
-    @media (max-width: 767px) {
+    @media (max-width: variables.$mobile-breakpoint) {
       display: flex !important;
       flex-direction: column;
       justify-content: space-between;
@@ -232,8 +232,74 @@ body:not(.home-page) {
   padding-top: calc(variables.$header-height + (variables.$header-padding * 2));
 }
 
-// Mobile responsive styles
-@media (max-width: 768px) {
+// Medium-sized screen responsive adjustments
+@media (min-width: variables.$tablet-min) and (max-width: variables.$tablet-max) {
+  header {
+    .header-content {
+      // Reduce margins between elements to prevent language selector from being cut off
+      .logo-section {
+        margin-right: 0.75rem;
+        
+        .logo-container {
+          img {
+            max-width: calc(variables.$logo-size - 5px);
+            margin-right: 1rem; // Reduce spacing between logo and group name
+          }
+          
+          .group-name {
+            font-size: calc(variables.$group-name-size - 0.1rem);
+          }
+        }
+      }
+      
+      .main-nav {
+        margin: 0 0.75rem; // Reduce side margins
+        
+        // Reduce spacing between nav items
+        ul {
+          gap: 0.75rem;
+          
+          li a {
+            padding: 0 0.25rem;
+            font-size: calc(variables.$header-font-size - 0.05rem);
+          }
+        }
+      }
+      
+      .language-switcher {
+        margin-left: 0.75rem;
+        margin-right: 0;
+        
+        a, .separator {
+          font-size: calc(variables.$header-font-size - 0.05rem);
+        }
+      }
+    }
+  }
+  
+  // RTL adjustments for medium screens
+  html[dir="rtl"] {
+    header .header-content {
+      .logo-section {
+        margin-left: 0.75rem;
+        margin-right: 0;
+        
+        .logo-container img {
+          margin-left: 1rem; // Reduce spacing for RTL
+          margin-right: 0;
+        }
+      }
+      
+      .language-switcher {
+        margin-right: 0.75rem;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+// Mobile media query using variable
+@media (max-width: variables.$mobile-breakpoint) {
   header {
     padding: 10px 0;
     
@@ -395,38 +461,53 @@ body:not(.home-page) {
         width: 100%;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.4s ease;
+        transition: all 0.4s ease;
         margin: 0;
         background-color: variables.$header-bg-color;
         order: 4;
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        z-index: -1;
         
         &.open {
-          max-height: 500px;
+          max-height: calc(100vh - 60px);
           margin-top: 15px;
           padding-bottom: 10px;
+          padding-top: 10px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          position: absolute;
-          top: 100%;
+          position: fixed;
+          top: 60px;
           left: 0;
           right: 0;
           width: 100%;
-          z-index: 1500;
+          z-index: 9999;
+          display: block;
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+          overflow-y: auto;
         }
         
         ul {
           flex-direction: column;
           gap: 0;
           margin: 0;
-          padding: 0;
+          padding: 0 15px;
           
           li {
             width: 100%;
+            margin-bottom: 5px;
             
             a {
               padding: 12px 15px;
               display: block;
               border-bottom: 1px solid rgba(255, 255, 255, 0.1);
               transition: background-color 0.2s ease;
+              color: white;
               
               &:hover {
                 background-color: rgba(255, 255, 255, 0.1);
