@@ -1,0 +1,180 @@
+/**
+ * Header Component - BEM Implementation
+ * 
+ * Site header with navigation and branding.
+ */
+
+@use "../base/variables" as vars;
+@use "../base/mixins" as mix;
+
+.site-header {
+  background-color: mix.component-color('header.background');
+  color: mix.component-color('header.text');
+  padding: mix.component-color('header.padding') 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: mix.component-color('header.transition');
+  box-shadow: mix.component-color('header.shadow');
+
+  @include mix.modifier('hidden') {
+    transform: translateY(-100%);
+  }
+
+  @include mix.element('content') {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  @include mix.element('mobile-toggle') {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: none;
+    outline: none;
+    transition: all 0.3s ease;
+    
+    @include mix.media-breakpoint('small') {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 30px;
+      height: 24px;
+    }
+    
+    @include mix.element('icon') {
+      display: block;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    @include mix.element('bar') {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: mix.component-color('header.text');
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    
+    @include mix.modifier('active') {
+      @at-root .site-header__mobile-toggle--active {
+        .site-header__mobile-toggle__bar {
+          &:nth-child(1) {
+            transform: translateY(10px) rotate(45deg);
+          }
+          
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          
+          &:nth-child(3) {
+            transform: translateY(-10px) rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+
+  @include mix.element('logo') {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: mix.component-color('header.text');
+    
+    &:hover {
+      text-decoration: none;
+    }
+    
+    @include mix.element('image') {
+      width: mix.component-color('logo.size');
+      height: auto;
+    }
+    
+    @include mix.element('text') {
+      font-size: mix.component-color('logo.group-name-size');
+      font-weight: bold;
+    }
+  }
+
+  @include mix.element('nav') {
+    @include mix.media-breakpoint('small') {
+      display: none;
+      
+      @include mix.modifier('active') {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: mix.component-color('header.height');
+        left: 0;
+        width: 100%;
+        background-color: mix.component-color('header.background');
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+    }
+    
+    @include mix.media-breakpoint('medium') {
+      display: flex;
+      gap: mix.component-color('nav.gap');
+    }
+    
+    @include mix.element('item') {
+      list-style: none;
+      
+      @include mix.media-breakpoint('small') {
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    
+    @include mix.element('link') {
+      color: mix.component-color('nav.link');
+      font-weight: mix.component-color('nav.font-weight');
+      font-size: mix.component-color('nav.font-size');
+      text-decoration: none;
+      transition: mix.component-color('nav.transition');
+      
+      &:hover {
+        color: mix.component-color('nav.link-hover');
+        text-decoration: none;
+      }
+      
+      @include mix.modifier('active') {
+        font-weight: bold;
+        border-bottom: 2px solid mix.component-color('nav.link');
+      }
+    }
+  }
+
+  @include mix.element('actions') {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+    @include mix.media-breakpoint('small') {
+      display: none;
+      
+      @include mix.modifier('active') {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 10px;
+        margin-top: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+} 

@@ -1,0 +1,128 @@
+/**
+ * Typography - BEM Implementation
+ * 
+ * Basic typography styles.
+ * These styles don't use BEM as they apply to HTML elements directly.
+ */
+
+@use "sass:map";
+@use "variables" as vars;
+@use "mixins" as mix;
+
+// Base typography styles
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: map.get(vars.$text, 'primary');
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  line-height: 1.2;
+  color: map.get(vars.$text, 'primary');
+}
+
+h1 {
+  font-size: 2.5rem;
+  
+  @include mix.media-breakpoint('medium') {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  
+  @include mix.media-breakpoint('medium') {
+    font-size: 2.5rem;
+  }
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: map.get(vars.$text, 'link');
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Helper text classes
+.text {
+  &-center {
+    text-align: center;
+  }
+  
+  &-right {
+    text-align: right;
+  }
+  
+  &-left {
+    text-align: left;
+  }
+  
+  &-uppercase {
+    text-transform: uppercase;
+  }
+  
+  &-lowercase {
+    text-transform: lowercase;
+  }
+  
+  &-capitalize {
+    text-transform: capitalize;
+  }
+  
+  &-bold {
+    font-weight: bold;
+  }
+  
+  &-italic {
+    font-style: italic;
+  }
+  
+  &-muted {
+    color: map.get(vars.$text, 'muted');
+  }
+  
+  &-primary {
+    color: map.get(vars.$color, 'primary');
+  }
+  
+  &-secondary {
+    color: map.get(vars.$color, 'secondary');
+  }
+  
+  &-small {
+    font-size: 0.875em;
+  }
+  
+  &-large {
+    font-size: 1.25em;
+  }
+} 

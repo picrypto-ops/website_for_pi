@@ -1,0 +1,28 @@
+/**
+ * Main SCSS File - BEM Implementation
+ * 
+ * This file imports all other SCSS components using the BEM methodology
+ * for class naming to prevent conflicts and improve code organization.
+ */
+
+// Base styles
+@use 'base/variables' as vars;
+@use 'base/mixins' as mix;
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/animations';
+@use 'base/accessibility';
+
+// Layout styles
+@use 'layout/grid';
+@use 'layout/header';
+@use 'layout/footer';
+
+// Modules (components)
+@use 'modules/index';
+
+// State styles
+@use 'state/states';
+
+// Theme styles
+@use 'themes/theme'; 

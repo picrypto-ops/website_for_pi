@@ -125,46 +125,42 @@
   // Product grid layout
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin: 1rem 0;
+    justify-content: center;
     
-    @supports (grid-template-columns: subgrid) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
     // Center last row items when odd number of cards
     &:has(> :last-child:nth-child(3n-1)) {
-      > :last-child {
-        grid-column-end: -2;
+      > :last-child:nth-child(3n-1) {
+        grid-column: 2;
+        justify-self: center;
       }
     }
     
     &:has(> :last-child:nth-child(3n-2)) {
-      > :last-child {
+      > :last-child:nth-child(3n-2) {
         grid-column: 2;
+        justify-self: center;
       }
     }
     
     @media (max-width: 1200px) {
-      grid-template-columns: repeat(2, minmax(390px, 1fr));
-      justify-content: center;
+      grid-template-columns: repeat(2, 1fr);
       
       &:has(> :last-child:nth-child(odd)) {
-        > :last-child {
-          grid-column: 1 / -1;
+        > :last-child:nth-child(odd) {
+          grid-column: 1 / span 2;
           justify-self: center;
-          max-width: 390px;
         }
       }
     }
     
     @media (max-width: 800px) {
-      grid-template-columns: minmax(390px, 1fr);
+      grid-template-columns: 1fr;
       
       > * {
         justify-self: center;
-        max-width: 390px;
       }
     }
   }
@@ -172,6 +168,7 @@
   .product-card {
     width: 100%;
     max-width: 390px;
+    min-width: 390px;
     justify-self: center;
     background: #fff;
     border-radius: 12px;

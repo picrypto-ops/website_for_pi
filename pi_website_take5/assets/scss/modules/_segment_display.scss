@@ -44,10 +44,11 @@
   }
   
   .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     margin-bottom: 3rem;
+    justify-content: center;
     
     .product-card {
       background-color: var(--color-white);
@@ -60,6 +61,11 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      width: 300px;
+      max-width: 300px;
+      min-height: 200px;
+      margin: 0;
+      flex: 0 0 auto;
       
       &:hover {
         transform: translateY(-5px);
@@ -141,7 +147,6 @@
     }
     
     .product-grid {
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 1.5rem;
     }
   }
@@ -156,7 +161,7 @@
     }
     
     .product-grid {
-      grid-template-columns: 1fr;
+      justify-content: center;
     }
   }
 } 

@@ -1,0 +1,140 @@
+/**
+ * Variables - BEM Implementation
+ * 
+ * Global variables for colors, dimensions, and other reusable values.
+ * This file doesn't directly use BEM naming since it contains only variables,
+ * but it's organized to support our BEM implementation.
+ */
+
+@use "sass:color";
+@use "sass:map";
+
+// Brand Colors
+$color: (
+  'primary': #4A6B9F,     // Darker professional blue
+  'secondary': #7297C5,   // Medium blue
+  'accent': #2C5282,      // Dark blue for emphasis
+  'background': #f5f5f5,  // Light gray
+  'card': #FFFFFF,        // Card background
+  'shadow': rgba(0, 0, 0, 0.1),
+  'shadow-hover': rgba(0, 0, 0, 0.15)
+);
+
+// Text Colors
+$text: (
+  'primary': #1A1A1A,     // Near black
+  'light': #FFFFFF,       // White for dark backgrounds
+  'muted': #64748B,       // Muted text
+  'link': map.get($color, 'primary')  // Link color
+);
+
+// Component-specific colors
+$component: (
+  // Hero component
+  'hero': (
+    'background': map.get($color, 'primary'),
+    'text': map.get($text, 'light')
+  ),
+  
+  // Header component
+  'header': (
+    'background': map.get($color, 'secondary'),
+    'text': map.get($text, 'light'),
+    'pages-text': map.get($text, 'primary'),
+    'height': 60px,
+    'padding': 1rem,
+    'shadow': 0 2px 4px rgba(0, 0, 0, 0.1),
+    'transition': transform 0.3s ease
+  ),
+  
+  // Button component
+  'button': (
+    'primary': map.get($color, 'accent'),
+    'hover': color.adjust(map.get($color, 'accent'), $lightness: -10%),
+    'text': map.get($text, 'light')
+  ),
+  
+  // Navigation component
+  'nav': (
+    'link': map.get($text, 'light'),
+    'link-hover': color.adjust(map.get($text, 'light'), $lightness: -10%),
+    'active': map.get($color, 'primary'),
+    'gap': 2rem,
+    'font-weight': normal,
+    'transition': color 0.3s ease,
+    'font-size': 18px
+  ),
+  
+  // Scroll indicator
+  'scroll-indicator': (
+    'background': rgba(map.get($color, 'accent'), 0.8),
+    'hover': rgba(map.get($color, 'accent'), 1)
+  ),
+  
+  // Breadcrumb component
+  'breadcrumb': (
+    'active': map.get($color, 'primary'),
+    'inactive': #CBD5E1,
+    'hover': #64748B,
+    'padding': 1rem,
+    'background': rgba(map.get($color, 'background'), 0.9),
+    'border': 1px solid rgba(map.get($color, 'primary'), 0.1),
+    'shadow': 0 2px 4px rgba(0, 0, 0, 0.1),
+    'gap': 1rem,
+    'transition': all 0.3s ease
+  ),
+  
+  // Section component
+  'section': (
+    'header': map.get($color, 'primary'),
+    'text': #555,
+    'background-light': rgba(map.get($color, 'primary'), 0.05)
+  ),
+  
+  // Card component
+  'card': (
+    'background': map.get($color, 'card'),
+    'border-radius': 8px,
+    'padding': 1.5rem,
+    'margin': 1rem,
+    'shadow': 0 2px 4px map.get($color, 'shadow'),
+    'hover-shadow': 0 4px 8px map.get($color, 'shadow-hover'),
+    'transition': all 0.3s ease
+  ),
+  
+  // Footer component
+  'footer': (
+    'background': map.get($color, 'secondary'),
+    'text': map.get($text, 'light'),
+    'link': map.get($text, 'light'),
+    'link-hover-opacity': 0.8,
+    'border-top': 1px solid rgba(map.get($text, 'light'), 0.1),
+    'padding-y': 2rem,
+    'padding-x': 20px,
+    'max-width': 1200px,
+    'logo-size': 50px,
+    'text-size': 1.1rem,
+    'bottom-margin': 2rem,
+    'link-gap': 1.5rem
+  ),
+  
+  // Logo component
+  'logo': (
+    'size': 40px,
+    'group-name-size': 1.5rem
+  ),
+  
+  // Language switcher component
+  'lang-switcher': (
+    'gap': 0.5rem,
+    'active-weight': bold
+  )
+);
+
+// Dark theme colors (to be used with theme modifier classes)
+$theme-dark: (
+  'background': #1a1a1a,
+  'text': #f5f5f5,
+  'primary': #4a90e2,
+  'secondary': #2c3e50
+); 

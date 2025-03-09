@@ -12,7 +12,7 @@ $defaultDescription = 'Financial Management Professionals';
 <html lang="<?php echo $lang; ?>" dir="<?php echo $lang === 'he' ? 'rtl' : 'ltr'; ?>">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title><?php echo isset($generalData['home']) ? getTranslatedContent($generalData['home'], $lang, 'label') : $defaultTitle; ?> - <?php echo isset($generalData[$page]) ? getTranslatedContent($generalData[$page], $lang, 'label') : ucfirst($page); ?></title>
     <meta name="description" content="<?php echo isset($generalData[$page]) ? getTranslatedContent($generalData[$page], $lang, 'description') : $defaultDescription; ?>">
     <link rel="canonical" href="<?php echo defined('BASE_URL') ? BASE_URL . '/' . $lang . '/' . $page : '/'; ?>">

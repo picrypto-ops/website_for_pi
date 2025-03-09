@@ -1,0 +1,129 @@
+/**
+ * Footer Component - BEM Implementation
+ * 
+ * Site footer with navigation, contact information, and copyright.
+ */
+
+@use "sass:map";
+@use "../base/variables" as vars;
+@use "../base/mixins" as mix;
+
+.site-footer {
+  background-color: map.get(vars.$component, 'footer.background');
+  color: map.get(vars.$component, 'footer.text');
+  padding: map.get(vars.$component, 'footer.padding-y') map.get(vars.$component, 'footer.padding-x');
+  border-top: map.get(vars.$component, 'footer.border-top');
+  
+  @include mix.element('content') {
+    max-width: map.get(vars.$component, 'footer.max-width');
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    
+    @include mix.media-breakpoint('medium') {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+  
+  @include mix.element('section') {
+    margin-bottom: map.get(vars.$component, 'footer.bottom-margin');
+    
+    @include mix.media-breakpoint('medium') {
+      flex: 1;
+      min-width: 200px;
+      padding-right: 2rem;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  @include mix.element('title') {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  @include mix.element('logo') {
+    display: block;
+    margin-bottom: 1rem;
+    
+    img {
+      max-width: map.get(vars.$component, 'footer.logo-size');
+      height: auto;
+    }
+  }
+  
+  @include mix.element('text') {
+    margin-bottom: 1rem;
+    font-size: map.get(vars.$component, 'footer.text-size');
+  }
+  
+  @include mix.element('nav') {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  @include mix.element('nav-item') {
+    list-style: none;
+  }
+  
+  @include mix.element('link') {
+    color: map.get(vars.$component, 'footer.link');
+    text-decoration: none;
+    transition: opacity 0.2s;
+    
+    &:hover {
+      opacity: map.get(vars.$component, 'footer.link-hover-opacity');
+      text-decoration: none;
+    }
+  }
+  
+  @include mix.element('social') {
+    display: flex;
+    gap: map.get(vars.$component, 'footer.link-gap');
+    margin-top: 1rem;
+  }
+  
+  @include mix.element('social-link') {
+    font-size: 1.5rem;
+    color: map.get(vars.$component, 'footer.link');
+    transition: opacity 0.2s;
+    
+    &:hover {
+      opacity: map.get(vars.$component, 'footer.link-hover-opacity');
+    }
+  }
+  
+  @include mix.element('bottom') {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    
+    @include mix.media-breakpoint('medium') {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  
+  @include mix.element('copyright') {
+    margin-bottom: 1rem;
+    
+    @include mix.media-breakpoint('medium') {
+      margin-bottom: 0;
+    }
+  }
+  
+  @include mix.element('legal') {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+} 

@@ -1,0 +1,126 @@
+/**
+ * Mixins - BEM Implementation
+ * 
+ * Utility mixins to help implement BEM methodology consistently.
+ * These mixins make it easier to create elements and modifiers.
+ */
+
+@use "sass:map";
+@use "sass:string";
+@use "sass:list";
+@use "sass:meta";
+@use "variables" as vars;
+
+// BEM Element Helper
+// Usage: @include element('header') { ... }
+// Outputs: &__header { ... }
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+// BEM Modifier Helper
+// Usage: @include modifier('highlighted') { ... }
+// Outputs: &--highlighted { ... }
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
+
+// Responsive breakpoints
+$breakpoints: (
+  'small': 576px,
+  'medium': 768px,
+  'large': 992px,
+  'xlarge': 1200px
+);
+
+// Media query helper
+// Usage: @include media-breakpoint('medium') { ... }
+@mixin media-breakpoint($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$breakpoint}. Available breakpoints are: #{map.keys($breakpoints)}";
+  }
+}
+
+// Map get deep for accessing nested maps
+// Usage: map-get-deep($component, 'card.background')
+@function map-get-deep($map, $keys) {
+  $keys: if(meta.type-of($keys) == 'list', $keys, str-explode($keys, '.'));
+  $key: list.nth($keys, 1);
+  $length: list.length($keys);
+  $value: map.get($map, $key);
+  
+  @if $length > 1 {
+    $restOfKeys: ();
+    @for $i from 2 through $length {
+      $restOfKeys: list.append($restOfKeys, list.nth($keys, $i));
+    }
+    @return map-get-deep($value, $restOfKeys);
+  } @else {
+    @return $value;
+  }
+}
+
+// Helper function to split strings by delimiter
+@function str-explode($string, $delimiter) {
+  $result: ();
+  $length: string.length($string);
+  $lastIndex: 0;
+  
+  @for $i from 1 through $length {
+    $char: string.slice($string, $i, $i);
+    
+    @if $char == $delimiter {
+      $result: list.append($result, string.slice($string, $lastIndex + 1, $i - 1));
+      $lastIndex: $i;
+    } @else if $i == $length {
+      $result: list.append($result, string.slice($string, $lastIndex + 1, $i));
+    }
+  }
+  
+  @return if(list.length($result) > 0, $result, ($string,));
+}
+
+// Component color helper
+// Usage: component-color('button.primary')
+@function component-color($key) {
+  @return map-get-deep(vars.$component, $key);
+}
+
+// Gets a color from the color map
+// Usage: color('primary')
+@function color($key) {
+  @if map.has-key(vars.$color, $key) {
+    @return map.get(vars.$color, $key);
+  } @else {
+    @error "Key '#{$key}' not found in $color map.";
+    @return null;
+  }
+}
+
+// Gets a text color from the text map
+// Usage: text-color('muted')
+@function text-color($key) {
+  @if map.has-key(vars.$text, $key) {
+    @return map.get(vars.$text, $key);
+  } @else {
+    @error "Key '#{$key}' not found in $text map.";
+    @return null;
+  }
+}
+
+// Clearfix mixin
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+} 

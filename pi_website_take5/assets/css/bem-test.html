@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEM Styles Test</title>
+    <link rel="stylesheet" href="style-bem.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__content">
+            <a href="#" class="site-header__logo">
+                <img src="../img/logo.png" alt="Logo" class="site-header__logo__image">
+                <span class="site-header__logo__text">Company Name</span>
+            </a>
+            <nav class="site-header__nav">
+                <ul>
+                    <li class="site-header__nav__item">
+                        <a href="#" class="site-header__nav__link site-header__nav__link--active">Home</a>
+                    </li>
+                    <li class="site-header__nav__item">
+                        <a href="#" class="site-header__nav__link">About</a>
+                    </li>
+                    <li class="site-header__nav__item">
+                        <a href="#" class="site-header__nav__link">Services</a>
+                    </li>
+                    <li class="site-header__nav__item">
+                        <a href="#" class="site-header__nav__link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="home__hero">
+            <div class="home__hero__content">
+                <h1 class="home__hero__title">Welcome to Our Website</h1>
+                <p class="home__hero__subtitle">We provide the best services for our clients.</p>
+                <div class="home__hero__actions">
+                    <a href="#" class="button button--primary">Get Started</a>
+                    <a href="#" class="button button--secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__content">
+            <p>© 2023 Company Name. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

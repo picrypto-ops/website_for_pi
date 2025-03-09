@@ -1,0 +1,115 @@
+/**
+ * Grid System - BEM Implementation
+ * 
+ * Grid layout utilities built with BEM naming conventions.
+ */
+
+@use "sass:map";
+@use "../base/variables" as vars;
+@use "../base/mixins" as mix;
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  
+  // Responsive grid with auto-fit
+  @include mix.modifier('auto-fit') {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  // Responsive grid with auto-fill
+  @include mix.modifier('auto-fill') {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  // Column count modifiers
+  @for $i from 1 through 12 {
+    @include mix.modifier('cols-#{$i}') {
+      grid-template-columns: repeat($i, 1fr);
+    }
+  }
+  
+  // Responsive column counts
+  @each $breakpoint, $width in mix.$breakpoints {
+    @include mix.media-breakpoint($breakpoint) {
+      @for $i from 1 through 12 {
+        @include mix.modifier('#{$breakpoint}-cols-#{$i}') {
+          grid-template-columns: repeat($i, 1fr);
+        }
+      }
+    }
+  }
+  
+  // Gap modifiers
+  @include mix.modifier('gap-none') {
+    gap: 0;
+  }
+  
+  @include mix.modifier('gap-sm') {
+    gap: 0.5rem;
+  }
+  
+  @include mix.modifier('gap-md') {
+    gap: 1rem;
+  }
+  
+  @include mix.modifier('gap-lg') {
+    gap: 2rem;
+  }
+  
+  @include mix.modifier('gap-xl') {
+    gap: 3rem;
+  }
+  
+  // Cell span modifiers
+  @include mix.element('cell') {
+    min-width: 0; // Prevent overflow
+    
+    // Column span
+    @for $i from 1 through 12 {
+      @include mix.modifier('span-#{$i}') {
+        grid-column: span $i;
+      }
+    }
+    
+    // Row span
+    @for $i from 1 through 12 {
+      @include mix.modifier('row-span-#{$i}') {
+        grid-row: span $i;
+      }
+    }
+    
+    // Responsive spans
+    @each $breakpoint, $width in mix.$breakpoints {
+      @include mix.media-breakpoint($breakpoint) {
+        @for $i from 1 through 12 {
+          @include mix.modifier('#{$breakpoint}-span-#{$i}') {
+            grid-column: span $i;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Container for grid and other content
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  
+  @include mix.modifier('fluid') {
+    max-width: none;
+  }
+  
+  @include mix.modifier('narrow') {
+    max-width: 800px;
+  }
+  
+  @include mix.modifier('wide') {
+    max-width: 1400px;
+  }
+} 

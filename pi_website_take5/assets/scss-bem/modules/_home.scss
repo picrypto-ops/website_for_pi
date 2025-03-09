@@ -1,0 +1,278 @@
+/**
+ * Home Page Component - BEM Implementation
+ * 
+ * Styles specific to the home page components and sections.
+ */
+
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+.home {
+  // Main container for the home page content
+  @include element('container') {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  // Hero section
+  @include element('hero') {
+    height: 100vh;
+    background-color: component-color('hero.background');
+    color: component-color('hero.text');
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 5%;
+    
+    @include element('logo') {
+      position: absolute;
+      top: 3rem;
+      z-index: 5;
+      
+      @include modifier('right') {
+        right: 5%;
+      }
+      
+      @include modifier('left') {
+        left: 5%;
+      }
+      
+      img {
+        width: 80px;
+      }
+    }
+    
+    @include element('language-switcher') {
+      position: absolute;
+      top: 3rem;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: component-color('lang-switcher.gap');
+      
+      @include modifier('left') {
+        left: 5%;
+      }
+      
+      @include modifier('right') {
+        right: 5%;
+      }
+      
+      a {
+        color: component-color('hero.text');
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+        
+        &:hover {
+          opacity: 0.8;
+        }
+        
+        @include modifier('active') {
+          font-weight: component-color('lang-switcher.active-weight');
+          border-bottom: 1px solid component-color('hero.text');
+        }
+      }
+    }
+    
+    @include element('content') {
+      max-width: 600px;
+      z-index: 2;
+    }
+    
+    @include element('title') {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      
+      @include media-breakpoint('medium') {
+        font-size: 3.5rem;
+      }
+      
+      @include media-breakpoint('large') {
+        font-size: 4rem;
+      }
+    }
+    
+    @include element('subtitle') {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      
+      @include media-breakpoint('medium') {
+        font-size: 1.5rem;
+      }
+    }
+    
+    @include element('actions') {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    @include element('scroll-indicator') {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      z-index: 5;
+      
+      @include element('icon') {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: component-color('scroll-indicator.background');
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: component-color('hero.text');
+        transition: background-color 0.3s ease;
+        
+        &:hover {
+          background-color: component-color('scroll-indicator.hover');
+        }
+      }
+      
+      @include element('text') {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @include element('background') {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      
+      img, video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      @include element('overlay') {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+      }
+    }
+  }
+
+  // Features section
+  @include element('features') {
+    padding: 5rem 0;
+    background-color: color('background');
+    
+    @include element('title') {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: component-color('section.header');
+      font-size: 2.5rem;
+    }
+    
+    @include element('grid') {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      
+      @include media-breakpoint('medium') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @include media-breakpoint('large') {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    @include element('item') {
+      text-align: center;
+      padding: 2rem;
+      border-radius: component-color('card.border-radius');
+      background-color: component-color('card.background');
+      box-shadow: component-color('card.shadow');
+      transition: component-color('card.transition');
+      
+      &:hover {
+        box-shadow: component-color('card.hover-shadow');
+        transform: translateY(-5px);
+      }
+      
+      @include element('icon') {
+        font-size: 3rem;
+        color: color('primary');
+        margin-bottom: 1rem;
+      }
+      
+      @include element('title') {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: text-color('primary');
+      }
+      
+      @include element('text') {
+        color: component-color('section.text');
+      }
+    }
+  }
+
+  // About section
+  @include element('about') {
+    padding: 5rem 0;
+    background-color: component-color('section.background-light');
+    
+    @include element('container') {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      
+      @include media-breakpoint('large') {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    
+    @include element('content') {
+      flex: 1;
+      
+      @include media-breakpoint('large') {
+        padding-right: 3rem;
+      }
+    }
+    
+    @include element('title') {
+      font-size: 2.5rem;
+      color: component-color('section.header');
+      margin-bottom: 1.5rem;
+    }
+    
+    @include element('text') {
+      color: component-color('section.text');
+      margin-bottom: 2rem;
+    }
+    
+    @include element('image') {
+      flex: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+} 

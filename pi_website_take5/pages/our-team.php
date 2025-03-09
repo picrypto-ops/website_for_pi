@@ -7,7 +7,7 @@ $teamGroups = array_keys($allTeam);
 
 <section class="our-team">
     <div class="container">
-        <h1><?php echo TranslatableFactory::general()->getContent($lang, 'our_team_title', 'Our Team'); ?></h1>
+        <h1 class="page-title"><?php echo TranslatableFactory::general()->getContent($lang, 'our_team_title', 'Our Team'); ?></h1>
         <p class="lead"><?php echo TranslatableFactory::general()->getContent($lang, 'our_team_description', 'Meet the people who make it all happen.'); ?></p>
 
         <?php if (empty($teamGroups)): ?>
@@ -22,8 +22,8 @@ $teamGroups = array_keys($allTeam);
                 $groupName = TranslatableFactory::general()->getContent($lang, "team_group_{$groupSlug}", ucfirst(str_replace('_', ' ', $groupSlug)));
                 ?>
                 
-                <div class="team-group">
-                    <h2><?php echo $groupName; ?></h2>
+                <div class="team-section">
+                    <h2 class="section-title"><?php echo $groupName; ?></h2>
                     <div class="team-grid">
                         <?php foreach ($groupMembers as $index => $member): ?>
                             <?php if (!is_array($member) || !isset($member['name_slug'])) continue; ?>
@@ -44,20 +44,20 @@ $teamGroups = array_keys($allTeam);
                                             if (is_array($positions) && !empty($positions)) {
                                                 echo '<div class="product-roles">';
                                                 foreach ($positions as $role) {
-                                                    echo '<p class="role">';
+                                                    echo '<div class="role">';
                                                     
                                                     $roleTitle = isset($role['title']) ? $role['title'] : '';
                                                     $productName = isset($role['product_name']) ? $role['product_name'] : '';
-                                                    // todo: format the output to be more readable
-                                                    if (!empty($roleTitle) && !empty($productName)) {
-                                                        echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
-                                                    } elseif (!empty($roleTitle)) {
-                                                        echo htmlspecialchars(ucfirst($roleTitle));
-                                                    } elseif (!empty($productName)) {
-                                                        echo htmlspecialchars($productName);
+                                                    
+                                                    if (!empty($productName)) {
+                                                        echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
                                                     }
                                                     
-                                                    echo '</p>';
+                                                    if (!empty($roleTitle)) {
+                                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                    }
+                                                    
+                                                    echo '</div>';
                                                 }
                                                 echo '</div>';
                                             } else {
@@ -71,6 +71,22 @@ $teamGroups = array_keys($allTeam);
                                         <?php if ($memberTranslatable->hasContent($lang, 'short_bio')): ?>
                                             <p class="short-bio"><?php echo $memberTranslatable->getContent($lang, 'short_bio', ''); ?></p>
                                         <?php endif; ?>
+
+                                        <?php 
+                                        // Display credentials or expertise if available
+                                        if ($memberTranslatable->hasContent($lang, 'expertise')): 
+                                            $expertise = $memberTranslatable->getContent($lang, 'expertise', []);
+                                            if (!empty($expertise) && is_array($expertise)):
+                                        ?>
+                                            <div class="expertise-tags">
+                                                <?php foreach ($expertise as $skill): ?>
+                                                    <span class="expertise-tag"><?php echo htmlspecialchars($skill); ?></span>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php 
+                                            endif;
+                                        endif; 
+                                        ?>
                                     </div>
                                 </div>
                             </a>

@@ -1,0 +1,9 @@
+/**
+ * Layout Index - BEM Implementation
+ * 
+ * This file forwards all layout files to be imported by main.scss.
+ */
+
+@forward 'header';
+@forward 'footer';
+@forward 'grid'; 

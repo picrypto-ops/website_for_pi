@@ -15,7 +15,7 @@ function renderTeamSection($lang, $nextSectionId = 'about-us') {
     ?>
     <section id="team" class="our-team-preview full-page-section">
         <div class="container">
-            <h2><?php echo TranslatableFactory::general()->getContent($lang, 'our_team', 'Our Team'); ?></h2>
+            <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'our_team', 'Our Team'); ?></h2>
             <p class="section-description"><?php echo TranslatableFactory::general()->getContent($lang, 'team_description', 'Meet our dedicated professionals who provide exceptional service.'); ?></p>
 
             <div class="team-navigation">
@@ -25,32 +25,32 @@ function renderTeamSection($lang, $nextSectionId = 'about-us') {
                     $teamGroups = array_keys($teamData);
                     
                     // Display team group links
-                    foreach ($teamGroups as $groupKey):
+                    foreach ($teamGroups as $groupKey) {
                         if (!is_array($teamData[$groupKey])) continue;
                         
                         $groupLabel = TranslatableFactory::general()->getContent($lang, 'team_group_' . $groupKey, ucfirst(str_replace('_', ' ', $groupKey)));
                     ?>
                         <li><a href="#team-group-<?php echo $groupKey; ?>" class="team-group-link"><?php echo $groupLabel; ?></a></li>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </ul>
             </div>
             
             <?php
             // Display team members by group without limiting to 4
-            foreach ($teamData as $groupKey => $members):
+            foreach ($teamData as $groupKey => $members) {
                 if (!is_array($members)) continue;
                 
                 // Get translatable for group label
                 $groupLabel = TranslatableFactory::general()->getContent($lang, 'team_group_' . $groupKey, ucfirst(str_replace('_', ' ', $groupKey)));
             ?>
-                <div id="team-group-<?php echo $groupKey; ?>" class="team-group">
-                    <h3><?php echo $groupLabel; ?></h3>
+                <div id="team-group-<?php echo $groupKey; ?>" class="team-section">
+                    <h3 class="section-title"><?php echo $groupLabel; ?></h3>
                     <div class="team-grid">
-                        <?php if (empty($members)): ?>
+                        <?php if (empty($members)) { ?>
                             <div class="no-data-message">No team members found for this group.</div>
-                        <?php else: ?>
+                        <?php } else { ?>
                             <?php 
-                            foreach ($members as $index => $member): 
+                            foreach ($members as $index => $member) { 
                                 if (!is_array($member)) continue;
                                 
                                 // Skip if no name_slug
@@ -59,93 +59,92 @@ function renderTeamSection($lang, $nextSectionId = 'about-us') {
                                 // Get the correct translatable for a team member
                                 $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']);
                             ?>
-                                <div class="team-card">
-                                    <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="team-member-link">
-                                        <div class="member-info">
+                                <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3><?php echo $memberTranslatable->getContent($lang, 'name', 'Team Member'); ?></h3>
                                             <?php
                                             // Check if this member should display product roles
                                             $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
                                             
-                                            if ($displayProductRoles):
+                                            if ($displayProductRoles) {
                                                 // Get position which will be an array of roles when display_product_roles is true
                                                 $positions = $memberTranslatable->getContent($lang, 'position', []);
                                                 
-                                                if (is_array($positions) && !empty($positions)):
+                                                if (is_array($positions) && !empty($positions)) {
                                             ?>
                                                 <div class="product-roles">
-                                                    <?php foreach ($positions as $role): ?>
-                                                        <p class="role">
+                                                    <?php foreach ($positions as $role) { ?>
+                                                        <div class="role">
                                                             <?php 
                                                             $roleTitle = isset($role['title']) ? $role['title'] : '';
                                                             $productName = isset($role['product_name']) ? $role['product_name'] : '';
-                                                            // todo: format the output to be more readable
-                                                            if (!empty($roleTitle) && !empty($productName)) {
-                                                                echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
-                                                            } elseif (!empty($roleTitle)) {
-                                                                echo htmlspecialchars(ucfirst($roleTitle));
-                                                            } elseif (!empty($productName)) {
-                                                                echo htmlspecialchars($productName);
+                                                            
+                                                            if (!empty($productName)) {
+                                                                echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
+                                                            }
+                                                            
+                                                            if (!empty($roleTitle)) {
+                                                                echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
                                                             }
                                                             ?>
-                                                        </p>
-                                                    <?php endforeach; ?>
+                                                        </div>
+                                                    <?php } ?>
                                                 </div>
-                                            <?php else: ?>
+                                            <?php } else { ?>
                                                 <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Financial Professional'); ?></p>
-                                            <?php endif; ?>
-                                            <?php else: ?>
+                                            <?php } ?>
+                                            <?php } else { ?>
                                                 <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Financial Professional'); ?></p>
-                                            <?php endif; ?>
+                                            <?php } ?>
+                                            
+
                                         </div>
-                                    </a>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                                    </div>
+                                </a>
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php } ?>
             
-            <a href="?page=our-team&lang=<?php echo $lang; ?>" class="button view-all-button">
-                <?php echo TranslatableFactory::general()->getContent($lang, 'meet_our_team', 'Meet Our Team'); ?>
-            </a>
+            <div class="view-all-container">
+                <a href="?page=our-team&lang=<?php echo $lang; ?>" class="view-all-button">
+                    <?php echo TranslatableFactory::general()->getContent($lang, 'meet_our_team', 'Meet Our Team'); ?>
+                </a>
+            </div>
         </div>
         
         <?php renderScrollIndicator($nextSectionId, $lang, 'team'); ?>
     </section>
     
-    <!-- Add CSS for the team grid to the page -->
+    <!-- Add additional CSS for the team grid to the page -->
     <style>
-        .team-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: flex-start;
+        .our-team-preview .section-title {
+            position: relative;
+            font-size: 1.8rem;
+            color: #1a3a5f;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            font-weight: 600;
         }
         
-        .team-card {
-            flex: 0 0 calc(25% - 15px); /* Show 4 cards per row */
-            margin-bottom: 20px;
-            box-sizing: border-box;
+        .our-team-preview .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 60px;
+            background: linear-gradient(90deg, #0056b3, #007bff);
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .team-card {
-                flex: 0 0 calc(33.33% - 14px); /* 3 per row on medium screens */
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .team-card {
-                flex: 0 0 calc(50% - 10px); /* 2 per row on smaller screens */
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .team-card {
-                flex: 0 0 100%; /* 1 per row on mobile */
-            }
+        .our-team-preview .section-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 30px;
+            max-width: 800px;
         }
         
         .team-navigation {
@@ -163,41 +162,43 @@ function renderTeamSection($lang, $nextSectionId = 'about-us') {
         .team-nav li a {
             display: inline-block;
             padding: 8px 15px;
-            background-color: #f5f5f5;
+            background-color: #f8fafc;
             border-radius: 4px;
             text-decoration: none;
-            color: #333;
+            color: #1a3a5f;
             transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
         }
         
         .team-nav li a:hover, 
         .team-nav li a.active {
             background-color: #0056b3;
             color: white;
+            border-color: #0056b3;
         }
         
-        .team-member-link {
-            display: block;
+        .view-all-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .view-all-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0056b3;
+            color: white;
             text-decoration: none;
-            color: inherit;
+            border-radius: 4px;
+            font-weight: 500;
             transition: all 0.3s ease;
+            border: none;
         }
         
-        .team-member-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .team-card {
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .team-card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        .view-all-button:hover {
+            background-color: #003d80;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
     </style>
     <?php

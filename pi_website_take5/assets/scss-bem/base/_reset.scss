@@ -1,0 +1,63 @@
+/**
+ * Reset - BEM Implementation
+ * 
+ * Basic resets and default styles.
+ * These styles don't use BEM as they apply to HTML elements directly.
+ */
+
+@use "sass:map";
+@use "variables" as vars;
+@use "mixins" as mix;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: map.get(vars.$text, 'primary');
+  background-color: map.get(vars.$color, 'background');
+  overflow-x: hidden;
+}
+
+img, 
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: map.get(vars.$text, 'link');
+  text-decoration: none;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+ul, ol {
+  list-style-position: inside;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+} 

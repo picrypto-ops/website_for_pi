@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Home - Home</title>
     <meta name="description" content="">
     <link rel="canonical" href="https://www.pigroup.com/en/home">
@@ -75,9 +75,9 @@
                 
                 <!-- Section 3: Language Switcher -->
                 <div class="language-switcher">
-                                        <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a>
+                                        <a href="?page=home&lang=en" class="lang-switch active" data-lang="en">EN</a>
                     <span class="separator">|</span>
-                    <a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>
+                    <a href="?page=home&lang=he" class="lang-switch " data-lang="he">עב</a>
                 </div>
             </div>
         </div>
@@ -95,9 +95,9 @@
         
         <!-- Language Switcher positioned at top left/right depending on language -->
         <div class="hero-language-switcher left-aligned">
-                        <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a>
+                        <a href="?page=home&lang=en" class="lang-switch active" data-lang="en">EN</a>
             <span class="separator">|</span>
-            <a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>
+            <a href="?page=home&lang=he" class="lang-switch " data-lang="he">עב</a>
         </div>
         
         <div class="hero-content">
@@ -232,7 +232,7 @@
         
         <section id="team" class="our-team-preview full-page-section">
         <div class="container">
-            <h2>Our Team</h2>
+            <h2 class="section-title">Our Team</h2>
             <p class="section-description">Meet our dedicated professionals who provide exceptional service.</p>
 
             <div class="team-navigation">
@@ -243,175 +243,209 @@
                                     </ul>
             </div>
             
-                            <div id="team-group-management" class="team-group">
-                    <h3>Management</h3>
+                            <div id="team-group-management" class="team-section">
+                    <h3 class="section-title">Management</h3>
                     <div class="team-grid">
-                                                                                    <div class="team-card">
-                                    <a href="?page=team-member&id=aaron-cohen&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                    <a href="?page=team-member&id=aaron-cohen&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Aron Cohen</h3>
                                                                                             <p class="position">Founder</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=jonny-kaye&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=jonny-kaye&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Jonny Kaye</h3>
                                                                                             <p class="position">Founder</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=dan-rosenberg&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=dan-rosenberg&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Dan Rosenberg</h3>
                                                                                             <div class="product-roles">
-                                                                                                            <p class="role">
-                                                            Trader - PI Pituach                                                        </p>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Pituach</span><span class="role-title">Trader</span>                                                        </div>
                                                                                                     </div>
-                                                                                                                                </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=itai-ruschkewitz&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=itai-ruschkewitz&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Itay Ruschkewitz</h3>
                                                                                             <div class="product-roles">
-                                                                                                            <p class="role">
-                                                            Chief Executive Officer - PI Pituach                                                        </p>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Pituach</span><span class="role-title">Chief Executive Officer</span>                                                        </div>
                                                                                                     </div>
-                                                                                                                                </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=buky-katzman&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=buky-katzman&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Baruch (Buky) Katzman</h3>
                                                                                             <div class="product-roles">
-                                                                                                            <p class="role">
-                                                            Chief Executive Officer - PI Select                                                        </p>
-                                                                                                            <p class="role">
-                                                            Investor Relation - PI Equity                                                        </p>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Select</span><span class="role-title">Chief Executive Officer</span>                                                        </div>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Equity</span><span class="role-title">Investor Relation</span>                                                        </div>
                                                                                                     </div>
-                                                                                                                                </div>
-                                    </a>
-                                </div>
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
                                                                         </div>
                 </div>
-                            <div id="team-group-operations" class="team-group">
-                    <h3>Operations</h3>
+                            <div id="team-group-operations" class="team-section">
+                    <h3 class="section-title">Operations</h3>
                     <div class="team-grid">
-                                                                                    <div class="team-card">
-                                    <a href="?page=team-member&id=shlomi-cohen&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                    <a href="?page=team-member&id=shlomi-cohen&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Shlomi Cohen</h3>
                                                                                             <p class="position">Chief Financial Officer</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=ronen-bitman&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=ronen-bitman&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Ronen Bitman</h3>
                                                                                             <p class="position">Chief Technology Officer</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Hagit Borohovitz</h3>
                                                                                             <p class="position">Chief Legal Officer</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=moriel-cohen&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=moriel-cohen&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Moriel Cohen</h3>
                                                                                             <p class="position">Investor Relations</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=marina-kazar&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=marina-kazar&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Marina Kazar</h3>
                                                                                             <p class="position">Accountant</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
                                                                         </div>
                 </div>
-                            <div id="team-group-investments" class="team-group">
-                    <h3>Investments</h3>
+                            <div id="team-group-investments" class="team-section">
+                    <h3 class="section-title">Investments</h3>
                     <div class="team-grid">
-                                                                                    <div class="team-card">
-                                    <a href="?page=team-member&id=ronen-elgali&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                    <a href="?page=team-member&id=ronen-elgali&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Ronen Elgali</h3>
                                                                                             <p class="position">Chief Investment Officer</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=asaf-shaul&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=asaf-shaul&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Asaf Shaul</h3>
                                                                                             <p class="position">Investment Analyst</p>
-                                                                                    </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=mor-katz-avrahami&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                        
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=mor-katz-avrahami&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Mor Katz Avrahami</h3>
                                                                                             <div class="product-roles">
-                                                                                                            <p class="role">
-                                                            Analyst - PI Pituach                                                        </p>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Pituach</span><span class="role-title">Analyst</span>                                                        </div>
                                                                                                     </div>
-                                                                                                                                </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=darina-reznikov&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=darina-reznikov&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Darina Reznikov</h3>
                                                                                             <div class="product-roles">
-                                                                                                            <p class="role">
-                                                            Director - PI Pituach                                                        </p>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Pituach</span><span class="role-title">Director</span>                                                        </div>
                                                                                                     </div>
-                                                                                                                                </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=dolev-trogman&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=dolev-trogman&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Dolev Trogman</h3>
                                                                                             <div class="product-roles">
-                                                                                                            <p class="role">
-                                                            Portfolio Manager - PI Global                                                        </p>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Global</span><span class="role-title">Portfolio Manager</span>                                                        </div>
                                                                                                     </div>
-                                                                                                                                </div>
-                                    </a>
-                                </div>
-                                                            <div class="team-card">
-                                    <a href="?page=team-member&id=daniel-cohen&lang=en" class="team-member-link">
-                                        <div class="member-info">
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=daniel-cohen&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
                                             <h3>Daniel Cohen</h3>
                                                                                             <div class="product-roles">
-                                                                                                            <p class="role">
-                                                            Trader - PI Global                                                        </p>
+                                                                                                            <div class="role">
+                                                            <span class="product-name">PI Global</span><span class="role-title">Trader</span>                                                        </div>
                                                                                                     </div>
-                                                                                                                                </div>
-                                    </a>
-                                </div>
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
                                                                         </div>
                 </div>
                         
-            <a href="?page=our-team&lang=en" class="button view-all-button">
-                Meet Our Team            </a>
+            <div class="view-all-container">
+                <a href="?page=our-team&lang=en" class="view-all-button">
+                    Meet Our Team                </a>
+            </div>
         </div>
         
             <div class="scroll-indicator" data-parent-section="team">
@@ -422,38 +456,33 @@
     </div>
         </section>
     
-    <!-- Add CSS for the team grid to the page -->
+    <!-- Add additional CSS for the team grid to the page -->
     <style>
-        .team-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: flex-start;
+        .our-team-preview .section-title {
+            position: relative;
+            font-size: 1.8rem;
+            color: #1a3a5f;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            font-weight: 600;
         }
         
-        .team-card {
-            flex: 0 0 calc(25% - 15px); /* Show 4 cards per row */
-            margin-bottom: 20px;
-            box-sizing: border-box;
+        .our-team-preview .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 60px;
+            background: linear-gradient(90deg, #0056b3, #007bff);
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .team-card {
-                flex: 0 0 calc(33.33% - 14px); /* 3 per row on medium screens */
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .team-card {
-                flex: 0 0 calc(50% - 10px); /* 2 per row on smaller screens */
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .team-card {
-                flex: 0 0 100%; /* 1 per row on mobile */
-            }
+        .our-team-preview .section-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 30px;
+            max-width: 800px;
         }
         
         .team-navigation {
@@ -471,41 +500,43 @@
         .team-nav li a {
             display: inline-block;
             padding: 8px 15px;
-            background-color: #f5f5f5;
+            background-color: #f8fafc;
             border-radius: 4px;
             text-decoration: none;
-            color: #333;
+            color: #1a3a5f;
             transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
         }
         
         .team-nav li a:hover, 
         .team-nav li a.active {
             background-color: #0056b3;
             color: white;
+            border-color: #0056b3;
         }
         
-        .team-member-link {
-            display: block;
+        .view-all-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .view-all-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0056b3;
+            color: white;
             text-decoration: none;
-            color: inherit;
+            border-radius: 4px;
+            font-weight: 500;
             transition: all 0.3s ease;
+            border: none;
         }
         
-        .team-member-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        
-        .team-card {
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-        
-        .team-card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        .view-all-button:hover {
+            background-color: #003d80;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
     </style>
             <section id="about-us" class="about-preview full-page-section">

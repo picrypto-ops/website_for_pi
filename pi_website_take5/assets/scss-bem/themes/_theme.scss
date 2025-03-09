@@ -1,0 +1,137 @@
+/**
+ * Theme - BEM Implementation
+ * 
+ * Theme variations for the website.
+ * These use BEM modifiers to apply different themes.
+ */
+
+@use "sass:map";
+@use "sass:color";
+@use "../base/variables" as *;
+@use "../base/mixins" as *;
+
+// Dark theme
+.theme--dark {
+  background-color: map.get($theme-dark, 'background');
+  color: map.get($theme-dark, 'text');
+  
+  a {
+    color: map.get($theme-dark, 'primary');
+    
+    &:hover {
+      color: color.adjust(map.get($theme-dark, 'primary'), $lightness: 10%);
+    }
+  }
+  
+  .site-header {
+    background-color: map.get($theme-dark, 'secondary');
+    
+    @include element('logo') {
+      color: map.get($theme-dark, 'text');
+    }
+    
+    @include element('nav') {
+      @include element('link') {
+        color: map.get($theme-dark, 'text');
+        
+        &:hover {
+          color: color.adjust(map.get($theme-dark, 'text'), $lightness: 20%);
+        }
+      }
+    }
+  }
+  
+  .site-footer {
+    background-color: color.adjust(map.get($theme-dark, 'secondary'), $lightness: -5%);
+    color: map.get($theme-dark, 'text');
+  }
+  
+  .home {
+    @include element('hero') {
+      background-color: map.get($theme-dark, 'primary');
+    }
+    
+    @include element('features') {
+      background-color: color.adjust(map.get($theme-dark, 'background'), $lightness: 5%);
+      
+      @include element('item') {
+        background-color: color.adjust(map.get($theme-dark, 'background'), $lightness: 10%);
+        color: map.get($theme-dark, 'text');
+        
+        @include element('title') {
+          color: map.get($theme-dark, 'primary');
+        }
+      }
+    }
+    
+    @include element('about') {
+      background-color: color.adjust(map.get($theme-dark, 'background'), $lightness: 3%);
+    }
+  }
+  
+  // Button themes
+  .button {
+    @include modifier('primary') {
+      background-color: map.get($theme-dark, 'primary');
+      color: map.get($theme-dark, 'text');
+      
+      &:hover {
+        background-color: color.adjust(map.get($theme-dark, 'primary'), $lightness: 10%);
+      }
+    }
+    
+    @include modifier('secondary') {
+      background-color: map.get($theme-dark, 'secondary');
+      color: map.get($theme-dark, 'text');
+      
+      &:hover {
+        background-color: color.adjust(map.get($theme-dark, 'secondary'), $lightness: 10%);
+      }
+    }
+  }
+}
+
+// High contrast theme for accessibility
+.theme--high-contrast {
+  background-color: #000;
+  color: #fff;
+  
+  a {
+    color: #ffff00;
+    
+    &:hover, &:focus {
+      color: #fff;
+      background-color: #000;
+      outline: 2px solid #ffff00;
+    }
+  }
+  
+  .site-header {
+    background-color: #000;
+    border-bottom: 2px solid #fff;
+    
+    @include element('nav') {
+      @include element('link') {
+        color: #fff;
+        
+        &:hover, &:focus {
+          background-color: #fff;
+          color: #000;
+        }
+        
+        @include modifier('active') {
+          background-color: #fff;
+          color: #000;
+        }
+      }
+    }
+  }
+  
+  .button {
+    border: 2px solid #fff;
+    
+    &:focus {
+      outline: 2px solid #ffff00;
+    }
+  }
+} 

@@ -69,87 +69,133 @@ $isRTL = ($lang === 'he');
 $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
 ?>
 
-
 <section class="team-member-page">
-    <div class="member-container<?php echo $isRTL ? ' rtl' : ''; ?>">
-        <?php if (!$isFirst): ?>
-            <a href="?page=team-member&id=<?php echo $prevMemberId; ?>&lang=<?php echo $lang; ?>" class="member-navigation-button prev-button" title="<?php echo TranslatableFactory::general()->getContent($lang, 'previous_member', 'Previous Member'); ?>">
-                <span class="arrow-icon"><?php echo $arrowChar; ?></span>
+    <div class="container">
+        <div class="navigation-breadcrumb">
+            <a href="?page=our-team&lang=<?php echo $lang; ?>" class="back-link">
+                <span class="back-arrow">←</span> 
+                <?php echo TranslatableFactory::general()->getContent($lang, 'back_to_team', 'Back to Team'); ?>
             </a>
-        <?php endif; ?>
+        </div>
         
-        <div class="member-profile professional-card">
-            <div class="member-image-container">
-                <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
-                    <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>" class="member-image">
-                <?php else: ?>
-                    <div class="photo-placeholder"><i class="fa fa-user-circle"></i></div>
-                <?php endif; ?>
-            </div>
-            
-            <div class="member-info">
-                <h1><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h1>
+        <div class="member-container<?php echo $isRTL ? ' rtl' : ''; ?>">
+            <div class="member-profile-card">
+                <div class="member-header">
+                    <div class="member-title-section">
+                        <h1 class="member-name"><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h1>
+                        
+                        <?php
+                        // Check if this member should display product roles
+                        $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                        
+                        if ($displayProductRoles) {
+                            // Get position which will be an array of roles when display_product_roles is true
+                            $positions = $memberTranslatable->getContent($lang, 'position', []);
+                            
+                            if (is_array($positions) && !empty($positions)) {
+                                $firstRole = reset($positions);
+                                $primaryRoleTitle = isset($firstRole['title']) ? ucfirst($firstRole['title']) : '';
+                                $primaryProductName = isset($firstRole['product_name']) ? $firstRole['product_name'] : '';
+                                
+                                if (!empty($primaryRoleTitle) && !empty($primaryProductName)) {
+                                    echo '<p class="primary-role">' . htmlspecialchars($primaryRoleTitle) . ' - ' . htmlspecialchars($primaryProductName) . '</p>';
+                                } elseif (!empty($primaryRoleTitle)) {
+                                    echo '<p class="primary-role">' . htmlspecialchars($primaryRoleTitle) . '</p>';
+                                } elseif (!empty($primaryProductName)) {
+                                    echo '<p class="primary-role">' . htmlspecialchars($primaryProductName) . '</p>';
+                                }
+                            } else {
+                                echo '<p class="primary-role">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                            }
+                        } else {
+                            echo '<p class="primary-role">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                        }
+                        ?>
+                    </div>
+                </div>
                 
-                <?php
-                // Check if this member should display product roles
-                $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
-                
-                if ($displayProductRoles):
-                    // Get position which will be an array of roles when display_product_roles is true
-                    $positions = $memberTranslatable->getContent($lang, 'position', []);
+                <div class="member-content">
+                    <div class="member-bio">
+                        <?php echo $memberTranslatable->getContent($lang, 'bio', 'Biography information not available.'); ?>
+                    </div>
                     
-                    if (is_array($positions) && !empty($positions)):
-                ?>
-                    <div class="product-roles-section">
-                        <h3><?php echo TranslatableFactory::general()->getContent($lang, 'member_roles', 'Roles'); ?></h3>
+                    <?php if ($displayProductRoles && is_array($positions) && count($positions) > 1) { ?>
+                    <div class="member-roles-section">
+                        <h3 class="section-subtitle"><?php echo TranslatableFactory::general()->getContent($lang, 'member_roles', 'Roles'); ?></h3>
                         <div class="product-roles">
-                            <?php foreach ($positions as $role): ?>
+                            <?php foreach ($positions as $index => $role) { 
+                                if ($index === 0) continue; // Skip first role which is already displayed
+                            ?>
                                 <div class="role">
                                     <?php 
                                     $roleTitle = isset($role['title']) ? $role['title'] : '';
                                     $productName = isset($role['product_name']) ? $role['product_name'] : '';
-                                    // todo: format the output to be more readable
-                                    if (!empty($roleTitle) && !empty($productName)) {
-                                        echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
-                                    } elseif (!empty($roleTitle)) {
-                                        echo htmlspecialchars(ucfirst($roleTitle));
-                                    } elseif (!empty($productName)) {
-                                        echo htmlspecialchars($productName);
+                                    
+                                    if (!empty($productName)) {
+                                        echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
+                                    }
+                                    
+                                    if (!empty($roleTitle)) {
+                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
                                     }
                                     ?>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php } ?>
                         </div>
                     </div>
-                <?php else: ?>
-                    <p class="member-title"><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
-                <?php endif; ?>
-                <?php else: ?>
-                    <p class="member-title"><?php echo $memberTranslatable->getContent($lang, 'position', 'Team Member'); ?></p>
-                <?php endif; ?>
-                
-                <div class="member-bio">
-                    <?php echo $memberTranslatable->getContent($lang, 'bio', 'Biography information not available.'); ?>
-                </div>
-                
-                <?php if (isset($member['credentials']) && is_array($member['credentials'])): ?>
-                <div class="team-credentials">
-                    <?php foreach ($member['credentials'] as $credential => $value): ?>
-                    <div class="credential-item">
-                        <div class="credential-label"><?php echo ucfirst(str_replace('_', ' ', $credential)); ?>:</div>
-                        <div class="credential-value"><?php echo $value; ?></div>
+                    <?php } ?>
+                    
+                    <?php 
+                    // Display expertise/skills if available
+                    if ($memberTranslatable->hasContent($lang, 'expertise')) { 
+                        $expertise = $memberTranslatable->getContent($lang, 'expertise', []);
+                        if (!empty($expertise) && is_array($expertise)) {
+                    ?>
+                    <div class="member-expertise-section">
+                        <h3 class="section-subtitle"><?php echo TranslatableFactory::general()->getContent($lang, 'expertise', 'Areas of Expertise'); ?></h3>
+                        <div class="expertise-tags">
+                            <?php foreach ($expertise as $skill) { ?>
+                                <span class="expertise-tag"><?php echo htmlspecialchars($skill); ?></span>
+                            <?php } ?>
+                        </div>
                     </div>
-                    <?php endforeach; ?>
+                    <?php 
+                        }
+                    } 
+                    ?>
+                    
+                    <?php if (isset($member['credentials']) && is_array($member['credentials']) && !empty($member['credentials'])) { ?>
+                    <div class="member-credentials-section">
+                        <h3 class="section-subtitle"><?php echo TranslatableFactory::general()->getContent($lang, 'credentials', 'Credentials'); ?></h3>
+                        <div class="credentials-list">
+                            <?php foreach ($member['credentials'] as $credential => $value) { ?>
+                            <div class="credential-item">
+                                <div class="credential-label"><?php echo ucfirst(str_replace('_', ' ', $credential)); ?>:</div>
+                                <div class="credential-value"><?php echo $value; ?></div>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
-                <?php endif; ?>
+            </div>
+            
+            <div class="member-navigation">
+                <?php if (!$isFirst) { ?>
+                <a href="?page=team-member&id=<?php echo $prevMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button prev-button">
+                    <span class="nav-icon">←</span>
+                    <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'previous', 'Previous'); ?></span>
+                </a>
+                <?php } ?>
+                
+                <?php if (!$isLast) { ?>
+                <a href="?page=team-member&id=<?php echo $nextMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button next-button">
+                    <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'next', 'Next'); ?></span>
+                    <span class="nav-icon">→</span>
+                </a>
+                <?php } ?>
             </div>
         </div>
-        
-        <?php if (!$isLast): ?>
-            <a href="?page=team-member&id=<?php echo $nextMemberId; ?>&lang=<?php echo $lang; ?>" class="member-navigation-button next-button" title="<?php echo TranslatableFactory::general()->getContent($lang, 'next_member', 'Next Member'); ?>">
-                <span class="arrow-icon"><?php echo $arrowChar; ?></span>
-            </a>
-        <?php endif; ?>
     </div>
 </section>
 

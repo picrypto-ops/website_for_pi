@@ -1,0 +1,12 @@
+/**
+ * Base Index - BEM Implementation
+ * 
+ * This file forwards all base files to be imported by main.scss.
+ */
+
+@forward 'variables';
+@forward 'mixins';
+@forward 'reset';
+@forward 'typography';
+@forward 'animations';
+@forward 'accessibility'; 
