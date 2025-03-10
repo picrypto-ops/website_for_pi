@@ -1,4 +1,4 @@
-@use "../base/variables" as variables;;
+@use "../base/variables" as variables;
 
 .main-nav {
   ul {
@@ -27,7 +27,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: variables.$mobile-breakpoint) {
   .main-nav {
     ul {
       flex-direction: column;

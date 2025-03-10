@@ -9,7 +9,7 @@ title:
 Innovative Financial Products
 
 description: 
-Pi Pituach specializes in creating innovative financial products for management and risk transfer, catering to financial institutions and banks. The firm also designs bespoke investment products, developing tailored financing solutions, for institutional clients and the Israeli capital market. The company operates through several subsidiaries, including Pi Deposits and Pi Plus, both of which are publicly traded entities on the Tel Aviv Stock Exchange. In the past year, Pi Deposits successfully issued three series of bonds backed by deposits totaling 7.5 billion NIS.
+Pi Pituach specializes in creating, structuring, and distributing innovative financial products for a wide variety of financial institutions in Israel.<br><br>Established in 2023 by Itai Ruschkewitz , Dan Rosenberg, and Pi, Pi Pituach is at the forefront of financial engineering in the Israeli capital markets.  The partners of Pi Pituach have over 50 years of combined experience in complex financial engineering, deal making, and regulatory knowhow.<br><br>The company operates through several subsidiaries, including Pi Deposits and Pi Plus, both of which are publicly traded entities on the Tel Aviv Stock Exchange. In the past year, Pi Deposits successfully issued three series of bonds backed by deposits totaling 7.5 billion NIS.
 
 
 ==================================================
@@ -25,7 +25,7 @@ title:
 Exclusive Investment Opportunities
 
 description: 
-For over three decades, Pi has been fortunate to participate in many of Israel's most promising investment opportunities—spanning private and public companies, managed funds, and real estate. In partnership with our longtime friend and esteemed commercial lawyer, Buky Katzman, we have launched Pi Select—a boutique platform designed to offer select foreign investors the opportunity to co-invest alongside us in high-potential Israeli ventures. We are excited to share our insights, experience, and network with like-minded investors who see the unique opportunities Israel has to offer.
+For over three decades, Pi has been fortunate to participate in some of Israel's most promising investment opportunities—spanning private and public companies, managed funds, and real estate.<br><br> In partnership with our longtime friend and esteemed commercial lawyer, Buky Katzman, we have launched Pi Select—a boutique platform designed to offer select foreign investors the opportunity to co-invest alongside us in high-potential Israeli ventures
 
 
 ==================================================
@@ -73,7 +73,7 @@ title:
 Israeli Equity Hedge Fund
 
 description: 
-The Pi Equity hedge fund diligently finds, thoroughly understands, meticulously monitors and carefully invests in a small number of exceptional public businesses, primarily in the Israeli capital markets.
+Pi Equity seeks to find, understand, and manage a small number of exceptional medium term investments in publicly listed companies primarily in the Israeli capital market. Our aim is to generate attractive equity like returns for our investors in the coming decades.
 
 
 ==================================================

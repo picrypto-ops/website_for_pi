@@ -199,4 +199,32 @@ function getTranslatedContent($data, $lang, $key, $default = '') {
     return $result;
 }
 
+/**
+ * Format content with HTML
+ * 
+ * This function ensures HTML content is properly displayed,
+ * preserving all HTML tags (like <br>) and converting newlines to <br> tags
+ * where appropriate.
+ * 
+ * @param string $content The content to format
+ * @param bool $convertNewlines Whether to convert newlines to <br> tags
+ * @return string Formatted content ready for display
+ */
+function formatHtmlContent($content, $convertNewlines = true) {
+    if (empty($content)) {
+        return '';
+    }
+    
+    // Preserve HTML tags by not encoding them
+    $formatted = $content;
+    
+    // Convert newlines to <br> tags if requested
+    if ($convertNewlines) {
+        // Replace newlines that aren't already preceded by a <br> tag
+        $formatted = preg_replace('/(?<!\<br\>)\n/', '<br>', $formatted);
+    }
+    
+    return $formatted;
+}
+
 // todo: remove all the notused functions & why getTranslatedContent is used

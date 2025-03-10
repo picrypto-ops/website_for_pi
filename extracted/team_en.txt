@@ -1,4 +1,4 @@
-team | management | en
+team | founders | en
 name: Aron Cohen
 position: Founder
 short_bio: 
@@ -7,7 +7,7 @@ bio: Aron Cohen co founded in 1999 the Pi group. Cohen has a BA and MBA from Bar
 
 ==================================================
 
-team | management | en
+team | founders | en
 name: Jonny Kaye
 position: Founder
 short_bio: 
@@ -20,7 +20,7 @@ team | management | en
 name: Dan Rosenberg
 position: Founder
 short_bio: Co-founder and Director at Pi Pituach Group, with over 20 years of experience in derivative trading and risk management in banks and investment firms.
-bio: Co-Founder and Director at Pi Pituach Group, which includes Pi Deposits and Pi Plus, both reporting companies issuing deposit-backed bonds on the Tel Aviv Stock Exchange. Served as a senior trader at the Pi SPC hedge fund since 2010. With over 20 years of experience in trading derivative instruments and complex interest rate transactions, possesses unique expertise in pricing sophisticated financial instruments and managing risks associated with them. Previously held the position of senior interest rate trader in the trading room of Bank Hapoalim.
+bio: Co-Founder and Director at Pi Pituach Group, which issues deposit-backed bonds on the Tel Aviv Stock Exchange.<br><br> Dan has over 20 years of experience in trading derivative instruments of FX and interest rates.<br>He served as a senior trader at the Pi SPC hedge fund since 2010 and previously held the position of senior interest rate trader in the trading room of Bank Hapoalim.
 
 
 ==================================================
@@ -29,7 +29,7 @@ team | management | en
 name: Itay Ruschkewitz
 position: CEO and Co-Founder
 short_bio: CEO and Co-Founder of Pi Pituach Financial Instruments Development Group.
-bio: Owner and CEO of Complex, a financial consulting firm, where he serves as an advisor to a wide range of leading entities in the Israeli economy, including banks, insurance companies, and financial institutions. Has extensive experience in formulating strategies and financing plans, developing new financial instruments in the Israeli capital market, raising financing, leading transactions, and issuing complex instruments, including securitizations, private debt, and complex bonds such as CoCo. Represents Allianz Global Investors, the investment arm of Allianz, in Israel. Previously served as a partner at PwC Israel and before that as a partner at Giza Singer Even.
+bio: CEO and Co-Founder of Pi Pi Pituach Group, which issues deposit-backed bonds on the Tel Aviv Stock Exchange.<br><br> Owner and CEO of Complex, a financial consulting firm providing advisory services to a wide range of leading entities in the Israeli economy, including banks, insurance companies, and financial institutions. Represents Allianz Global Investors, the investment arm of Allianz, in the Israeli market. Previously served as a partner at PwC Israel.<br><br> Itai is a Certified Public Accountant (CPA) and licensed attorney, holding a master’s degree in financial mathematics.
 
 
 ==================================================
@@ -90,7 +90,7 @@ bio: Marina....
 
 team | investments | en
 name: Ronen Elgali
-position: Chief Investment Officer
+position: Cheif Investment Analyst
 short_bio: Elgali Ronen brings 30+ years of managing funds and investment expertise, specializing in company analysis, valuation, and developing investment strategies.
 bio: Throughout his career, Ronen has gained significant expertise in hedge fund management, company analysis, and valuations, while holding senior positions in leading investment firms. His skills include in-depth analysis of financial reports, building financial models, and analyzing market trends for informed investment decisions. At Sphera, where he worked for 10 years, Ronen joined in its early days and established and managed the research department, developed unique research approaches, and managed the small-cap equity fund. At Alpha and Mor, he was involved in restructuring efforts that led to significant growth in assets under management. Currently, at the Pi Group, Ronen serves as the Chief Investment Officer, where he analyzes and builds financial models for companies and provides professional investment advice.
 
@@ -119,7 +119,7 @@ team | investments | en
 name: Darina Reznikov
 position: Director
 short_bio: Director at Pi Deposits and Structured Products Ltd. and Pi Plus Deposits Ltd. Manager at Complex, a financial consulting firm.
-bio: Director at Pi Deposits and Structured Products Ltd. and Pi Plus Deposits Ltd. Manager at Complex, a financial consulting firm advising a wide range of leading entities in the Israeli market. Brings extensive experience in financial consulting, supporting companies in complex financing transactions and executing significant strategic financial initiatives. Specializes in developing, modeling, and issuing innovative and complex financial instruments, conducting advanced valuations, and formulating business plans. Holds deep expertise in regulatory capital instruments for banks and insurance companies, as well as in the regulatory frameworks. Previously served as an analyst in the Complex Finance Department at PwC and prior to that, in the Markets Division at the Bank of Israel. Holds a bachelor's degree in economics and business administration and an MBA with a specialization in Finance, both with honors from the Hebrew University of Jerusalem.
+bio: Director at Pi Deposits and Structured Products Ltd. and Pi Plus Deposits Ltd. Manager at Complex, a financial consulting firm advising a wide range of leading entities in the Israeli market. Brings extensive experience in financial consulting, supporting companies in complex financing transactions and executing significant strategic financial initiatives. Specializes in developing, modeling, and issuing innovative and complex financial instruments, conducting advanced valuations, and formulating business plans. Holds deep expertise in regulatory capital instruments for banks and insurance companies, as well as in the regulatory frameworks. Previously served as an analyst in the Complex Finance Department at PwC and prior to that, in the Markets Division at the Bank of Israel. Holds a bachelor’s degree in economics and business administration and an MBA with a specialization in Finance, both with honors from the Hebrew University of Jerusalem.
 
 
 ==================================================
@@ -127,8 +127,8 @@ bio: Director at Pi Deposits and Structured Products Ltd. and Pi Plus Deposits L
 team | investments | en
 name: Dolev Trogman
 position: Portfolio Manager
-short_bio: Dolev Trogman, Portfolio Manager at PI Group. Extensive experience in portfolio management and investment analysis.
-bio: Dolev Trogman, Portfolio Manager at PI Group. Extensive experience in portfolio management and investment analysis.
+short_bio: Dolev Trogman, an experienced Investment manager with 13 years of financial markets experience at HSBC, Brevan Howard, JPMorgan, PI.
+bio: Dolev Trogman brings 13 years of Investment experience to the table. He began his career in 2012 as an equity derivatives analyst at HSBC in Paris and from 2013 as an interest rates analyst at Brevan Howard. From 2014 to 2018 Dolev worked as an Emerging Market FX Option trader at JPMorgan London. In 2018, he joined PI Spc as a Macro Portfolio Manager. Dolev holds an MSc in Financial Markets from Paris Dauphine University, complementing his practical experience with strong academic credentials.
 
 
 ==================================================

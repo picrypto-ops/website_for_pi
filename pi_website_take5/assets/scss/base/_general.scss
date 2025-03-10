@@ -3,3 +3,12 @@ body {
     background-color: variables.$background-color;
     color: variables.$text-color;
   }
+
+// General styles for the entire site
+
+html, body {
+  overflow-x: hidden; // Prevent horizontal scrolling on all devices
+  position: relative; // Needed for some mobile browsers
+  width: 100%;
+  max-width: 100%;
+}

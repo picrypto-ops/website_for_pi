@@ -1,103 +1,102 @@
 dolev-trogman | en
-asset_management | pi_global - portfolio manager
+asset_management | pi_global - Fund Manager
 
 
 ==================================================
 
 daniel-cohen | en
-asset_management | pi_global - trader
+asset_management | pi_global - Trader
 
 
 ==================================================
 
 jonny-kaye | en
-asset_management | pi_equity - chief investment officer
-asset_management | pi_select - chief investment officer
+asset_management | pi_equity - Chief investment officer
+asset_management | pi_select - Chief Investment Officer
 
 
 ==================================================
 
 eli-afek | en
-asset_management | pi_equity - trader
+asset_management | pi_equity - Trader
 
 
 ==================================================
 
 buky-katzman | en
-investment_banking | pi_select - investor relation
-asset_management | pi_equity - investor relation
+investment_banking | pi_select - co-founder
 
 
 ==================================================
 
 aaron-cohen | en
-investment_banking | pi_pituach - chairman
+investment_banking | pi_pituach - Chairman
 
 
 ==================================================
 
 itai-ruschkewitz | en
-investment_banking | pi_pituach - cheif executive officer
+investment_banking | pi_pituach - Chief Executive Officer
 
 
 ==================================================
 
 dan-rosenberg | en
-investment_banking | pi_pituach - trader
+investment_banking | pi_pituach - Co-Founder and Director
 
 
 ==================================================
 
 darina-reznikov | en
-investment_banking | pi_pituach - director
+investment_banking | pi_pituach - Director
 
 
 ==================================================
 
 mor-katz-avrahami | en
-investment_banking | pi_pituach - analyst
+investment_banking | pi_pituach - Analyst
 
 
 ==================================================
 
 ronen-bitman | en
-operations | N/A - chief technology officer
+operations | N/A - Chief Technology Officer
 
 
 ==================================================
 
 shlomi-cohen | en
-operations | N/A - chief financial officer
+operations | N/A - Chief Financial Officer
 
 
 ==================================================
 
 hagit-borohovitz | en
-operations | N/A - chief legal officer
+operations | N/A - Chief Legal Officer
 
 
 ==================================================
 
 moriel-cohen | en
-operations | N/A - investor relations
+operations | N/A - Investor Relations
 
 
 ==================================================
 
 marina-kazar | en
-operations | N/A - accountant
+operations | N/A - Accountant
 
 
 ==================================================
 
 asaf-shaul | en
-analytics | N/A - analyst
+analytics | N/A - Analyst
 
 
 ==================================================
 
 ronen-elgali | en
-analytics | N/A - analyst
+analytics | N/A - Cheif Investment Analyst
 
 
 ==================================================

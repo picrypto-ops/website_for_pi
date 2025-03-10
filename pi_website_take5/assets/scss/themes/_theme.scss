@@ -43,8 +43,11 @@ a {
   background-color: var(--primary-color);
 }
 
-header, footer {
+header{
   background-color: var(--secondary-color);
+}
+footer {
+  background-color: var(--bg-color);
 }
 
 // Add header-specific optimization for mobile

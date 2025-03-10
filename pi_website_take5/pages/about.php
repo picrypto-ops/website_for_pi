@@ -23,61 +23,76 @@ global $lang;
 
 <section class="about-us">
     <div class="container">
-        <h1><?php echo $aboutTranslatable->getContent($lang, 'title'); ?></h1>
-        <p class="slogan"><?php echo $aboutTranslatable->getContent($lang, 'slogan'); ?></p>
-        <p class="lead"><?php echo $aboutTranslatable->getContent($lang, 'short_description'); ?></p>
+        <h1><?php echo $aboutTranslatable->getHtmlContent($lang, 'title'); ?></h1>
+        <p class="slogan"><?php echo $aboutTranslatable->getHtmlContent($lang, 'slogan'); ?></p>
+        <p class="lead content-with-html"><?php echo $aboutTranslatable->getHtmlContent($lang, 'short_description'); ?></p>
         
         <div class="about-content">
             <div class="company-history">
-                <h2><?php echo $aboutTranslatable->getContent($lang, 'company_history_heading', 'Our History'); ?></h2>
+                <?php 
+                $history = $aboutTranslatable->getAllContent($lang)['company_history'] ?? [];
+                if (!empty($history)): 
+                ?>
+                <h2><?php echo $aboutTranslatable->getHtmlContent($lang, 'company_history_heading', 'Our History'); ?></h2>
                 <ul class="timeline">
                     <?php 
-                    $history = $aboutTranslatable->getAllContent($lang)['company_history'] ?? [];
                     foreach ($history as $item): 
                     ?>
                         <li class="timeline-item">
                             <span class="year"><?php echo $item['year'] ?? ''; ?></span>
                             <p class="event"><?php echo $item['title'] ?? ''; ?></p>
-                            <p class="event"><?php echo $item['description'] ?? ''; ?></p>
+                            <p class="event content-with-html"><?php echo formatHtmlContent($item['description'] ?? ''); ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
+                <?php endif; ?>
             </div>
         </div>
 
-        <h2><?php echo $aboutTranslatable->getContent($lang, 'our_values_heading', 'Our Values'); ?></h2>
+        <?php 
+        $values = $aboutTranslatable->getAllContent($lang)['our_values'] ?? [];
+        if (!empty($values)): 
+        ?>
+        <h2><?php echo $aboutTranslatable->getHtmlContent($lang, 'our_values_heading', 'Our Values'); ?></h2>
         <ul class="values-list">
-            <?php 
-            $values = $aboutTranslatable->getAllContent($lang)['our_values'] ?? [];
-            foreach ($values as $value): 
-            ?>
+            <?php foreach ($values as $value): ?>
                 <li>
                     <h3><?php echo $value['title'] ?? ''; ?></h3>
-                    <p><?php echo $value['description'] ?? ''; ?></p>
+                    <p class="content-with-html"><?php echo formatHtmlContent($value['description'] ?? ''); ?></p>
                 </li>
             <?php endforeach; ?>
         </ul>
-        <ul class="values-list">
-            <?php 
-            $values = $aboutTranslatable->getAllContent($lang)['values'] ?? [];
-            foreach ($values as $value): 
-            ?>
-                <li>
-                    <h3><?php echo $value['title'] ?? ''; ?></h3>
-                    <p><?php echo $value['description'] ?? ''; ?></p>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php endif; ?>
 
-        <h2><?php echo $aboutTranslatable->getContent($lang, 'our_mission_heading', 'Our Mission'); ?></h2>
+        <?php 
+        $values = $aboutTranslatable->getAllContent($lang)['values'] ?? [];
+        if (!empty($values)): 
+        ?>
+        <ul class="values-list">
+            <?php 
+            foreach ($values as $value): 
+            ?>
+                <li>
+                    <h3><?php echo $value['title'] ?? ''; ?></h3>
+                    <p class="content-with-html"><?php echo formatHtmlContent($value['description'] ?? ''); ?></p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+
+        <?php 
+        $missions = $aboutTranslatable->getAllContent($lang)['our_mission'] ?? [];
+        if (!empty($missions)): 
+        ?>
+        <h2><?php echo $aboutTranslatable->getHtmlContent($lang, 'our_mission_heading', 'Our Mission'); ?></h2>
         <div class="mission-statement">
             <?php 
-            $missions = $aboutTranslatable->getAllContent($lang)['our_mission'] ?? [];
             foreach ($missions as $mission): 
             ?>
-                <p><?php echo $mission['mission'] ?? ''; ?></p>
+                <p class="content-with-html"><?php echo formatHtmlContent($mission['mission'] ?? ''); ?></p>
             <?php endforeach; ?>
         </div>
+        <?php endif; ?>
     </div>
 </section>
 

@@ -21,63 +21,11 @@
       "en": {
         "title": "About Us",
         "slogan": "",
-        "home_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.\nPi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.\nWhile proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.\nPi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.\nMore recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.\nThrough innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.",
-        "short_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.\nPi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.\nWhile proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.\nPi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.\nMore recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.\nThrough innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.",
+        "home_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.<br><br>Pi's journey began when Aron and Jonny recognized significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.<br><br>While proprietary trading and investing have always been at Pi's core, PI gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first ETF, the Hadas, raising over 2 billion  ILS. Two years later, in 2005, PI launched the Shacharit, Israel's first listed structured product.  In total, during the following couple of years Pi issued over 3 billion ILS worth of products.<br><br>Pi also played a pioneering role in Israel's hedge fund industry. In 2004, PI established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.<br><br>In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with Pi to create Pi Crypto, a boutique investment house specializing in the Crypto and blockchain space.<br><br>More recently, in 2023, Pi co-founded Pi Pituach, a firm specializing in financial product structuring and securitization capitalizing.  In 2024, Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations issued over 7.5 billion ILS in bonds primarily bought by Israeli money market funds.",
+        "short_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.<br><br>Pi's journey began when Aron and Jonny recognized significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.<br><br>While proprietary trading and investing have always been at Pi's core, PI gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first ETF, the Hadas, raising over 2 billion  ILS. Two years later, in 2005, PI launched the Shacharit, Israel's first listed structured product.  In total, during the following couple of years Pi issued over 3 billion ILS worth of products.<br><br>Pi also played a pioneering role in Israel's hedge fund industry. In 2004, PI established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.<br><br>In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with Pi to create Pi Crypto, a boutique investment house specializing in the Crypto and blockchain space.<br><br>More recently, in 2023, Pi co-founded Pi Pituach, a firm specializing in financial product structuring and securitization capitalizing.  In 2024, Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations issued over 7.5 billion ILS in bonds primarily bought by Israeli money market funds.",
         "company_history_heading": "Our History",
         "our_values_heading": "Our Values",
-        "our_mission_heading": "Our Mission",
-        "company_history": [
-          {
-            "year": "2000",
-            "title": "Foundation",
-            "description": "Our company was founded with a vision to provide innovative financial solutions."
-          },
-          {
-            "year": "2005",
-            "title": "Expansion",
-            "description": "We expanded our services to cover a wider range of financial needs."
-          },
-          [
-            {
-              "year": "2010",
-              "title": "Global Reach",
-              "description": "Our services expanded internationally, serving clients across the globe."
-            }
-          ],
-          {
-            "year": "2015",
-            "title": "Innovation",
-            "description": "We introduced cutting-edge financial technologies to enhance our services."
-          },
-          {
-            "year": "2020",
-            "title": "Sustainability Focus",
-            "description": "We committed to sustainable and responsible financial practices."
-          }
-        ],
-        "our_values": [
-          {
-            "title": "Integrity",
-            "description": "We uphold the highest standards of integrity in all our actions."
-          },
-          {
-            "title": "Innovation",
-            "description": "We constantly innovate to provide cutting-edge financial solutions."
-          },
-          {
-            "title": "Client Focus",
-            "description": "Our clients\" success is at the heart of everything we do."
-          },
-          {
-            "title": "Excellence",
-            "description": "We strive for excellence in all aspects of our work."
-          }
-        ],
-        "our_mission": [
-          {
-            "mission": "To provide our clients with exceptional value through innovation, adaptability, and deep market expertise."
-          }
-        ]
+        "our_mission_heading": "Our Mission"
       },
       "he": {
         "title": "אודות קבוצת PI",

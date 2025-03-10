@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" style="overflow-x: hidden; max-width: 100vw;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -18,10 +18,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script type="module" src="assets/js/pi_bg_wave.js"></script>
     </head>
-<body class="home-page">
-    <header id="site-header" class="home-header initially-hidden">
-        <div class="container">
-            <div class="header-content">
+<body class="home-page" style="overflow-x: hidden; max-width: 100vw;">
+    <header id="site-header" class="home-header initially-hidden no-overflow" style="overflow-x: hidden; max-width: 100vw; width: 100%;">
+        <div class="container" style="overflow-x: hidden; max-width: 100%;">
+            <div class="header-content" style="overflow-x: hidden; max-width: 100%;">
                 <!-- Mobile menu toggle button for screens < 768px -->
                 <button class="mobile-menu-toggle" 
                     aria-label="Toggle navigation menu" 
@@ -34,11 +34,11 @@
                 </button>
                 
                 <!-- Section 1: Logo & Group name -->
-                <div class="logo-section">
+                <div class="logo-section" style="overflow-x: hidden; max-width: 100%;">
                     <a href="?page=home&lang=en" class="logo-link">
-                        <div class="logo-container">
-                            <img src="assets/images/logo_small.svg" alt="PI Group Logo">
-                            <span class="group-name">PI Group</span>
+                        <div class="logo-container" style="overflow-x: hidden; max-width: 100%;">
+                            <img src="assets/images/logo_small.svg" alt="PI Group Logo" style="max-width: 30px;">
+                            <span class="group-name" style="white-space: normal; overflow-wrap: break-word; max-width: calc(100vw - 100px);">PI Group</span>
                         </div>
                     </a>
                 </div>
@@ -74,10 +74,10 @@
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=home&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
         </div>
     </header>
-    <main id="main-content">
+    <main id="main-content" style="overflow-x: hidden; max-width: 100vw;">
 
 
 <div class="home-page">
@@ -90,12 +90,47 @@
         
         <!-- Language Switcher positioned at top left/right depending on language -->
         <div class="hero-language-switcher left-aligned">
-            <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
+            <a href="?page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=home&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
+        
+        <!-- Clean, minimal hero menu -->
+        <div class="hero-menu right-aligned">
+            <button class="hero-menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+            </button>
+            <nav class="hero-nav">
+                <ul>
+                                        <li>
+                        <a href="?page=home&lang=en">
+                            Home                        </a>
+                    </li>
+                                        <li>
+                        <a href="?page=segment&id=investment_banking&lang=en">
+                            Investment Banking                        </a>
+                    </li>
+                                        <li>
+                        <a href="?page=segment&id=asset_management&lang=en">
+                            Asset Management                        </a>
+                    </li>
+                                        <li>
+                        <a href="?page=our-team&lang=en">
+                            Our Team                        </a>
+                    </li>
+                                        <li>
+                        <a href="?page=about&lang=en">
+                            About Us                        </a>
+                    </li>
+                                        <li>
+                        <a href="?page=contact&lang=en">
+                            Contact Us                        </a>
+                    </li>
+                                    </ul>
+            </nav>
+        </div>
         
         <div class="hero-content">
             <h1>Unwavering Professionalism <br>Exceptional Results</h1>
             <p class="slogan"></p>
-            <p class="wide-description">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
+            <p class="wide-description content-with-html">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
                         <a href="#segment-investment_banking" class="cta-button">
                 Learn More            </a>
         </div>
@@ -166,7 +201,7 @@
         <div class="container">
             <h2>Asset Management</h2>
             <div class="segment-section-description">
-                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver consistent, positive returns, and to date, none of our funds have experienced a losing year. Pi has always maintained a significant investment in the funds we manage for our partners.            </div>
+                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver exceptional risk adjusted returns, and to date, none of our funds have experienced a losing year. Pi has always maintained a significant investment in the funds we manage for our partners.            </div>
 
             <h3>Our Products</h3>
             <div class="product-grid">
@@ -229,14 +264,15 @@
 
             <div class="team-navigation">
                 <ul class="team-nav">
+                                            <li><a href="#team-group-founders" class="team-group-link">Founders</a></li>
                                             <li><a href="#team-group-management" class="team-group-link">Management</a></li>
                                             <li><a href="#team-group-operations" class="team-group-link">Operations</a></li>
                                             <li><a href="#team-group-investments" class="team-group-link">Investments</a></li>
                                     </ul>
             </div>
             
-                            <div id="team-group-management" class="team-section">
-                    <h3 class="section-title">Management</h3>
+                            <div id="team-group-founders" class="team-section">
+                    <h3 class="section-title">Founders</h3>
                     <div class="team-grid">
                                                                                     <a href="?page=team-member&id=aaron-cohen&lang=en" class="card-link">
                                     <div class="team-card">
@@ -258,7 +294,12 @@
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=dan-rosenberg&lang=en" class="card-link">
+                                                                        </div>
+                </div>
+                            <div id="team-group-management" class="team-section">
+                    <h3 class="section-title">Management</h3>
+                    <div class="team-grid">
+                                                                                    <a href="?page=team-member&id=dan-rosenberg&lang=en" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Dan Rosenberg</h3>
@@ -361,7 +402,7 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Ronen Elgali</h3>
-                                                                                            <p class="position">Chief Investment Officer</p>
+                                                                                            <p class="position">Cheif Investment Analyst</p>
                                                                                         
 
                                         </div>
@@ -409,7 +450,7 @@
                                             <h3>Dolev Trogman</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Global</span><span class="role-title">Portfolio Manager</span>                                                        </div>
+                                                            <span class="product-name">PI Global</span><span class="role-title">Fund Manager</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
@@ -532,12 +573,7 @@
             <section id="about-us" class="about-preview full-page-section">
         <div class="container">
             <h2>About Us</h2>
-            <p>Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.
-Pi's journey began with Aron and Jonny recognizing significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.
-While proprietary trading and investing have always been at Pi's core, we gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first structured product, the Hadas, raising 600 million ILS. Two years later, in 2005, we launched the Shacharit, Israel's first ETF, raising an additional 600 million ILS.
-Pi also played a pioneering role in Israel's hedge fund industry. In 2004, we established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.
-More recently, in 2023, we co-founded Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations. Since its launch, Pi Pituach has issued over 7.5 billion ILS in bonds for Israeli money market funds.
-Through innovation, adaptability, and deep market expertise, Pi continues to seek and seize exceptional investment opportunities.</p>
+            <p>Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.<br><br>Pi's journey began when Aron and Jonny recognized significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.<br><br>While proprietary trading and investing have always been at Pi's core, PI gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first ETF, the Hadas, raising over 2 billion  ILS. Two years later, in 2005, PI launched the Shacharit, Israel's first listed structured product.  In total, during the following couple of years Pi issued over 3 billion ILS worth of products.<br><br>Pi also played a pioneering role in Israel's hedge fund industry. In 2004, PI established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.<br><br>In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with Pi to create Pi Crypto, a boutique investment house specializing in the Crypto and blockchain space.<br><br>More recently, in 2023, Pi co-founded Pi Pituach, a firm specializing in financial product structuring and securitization capitalizing.  In 2024, Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations issued over 7.5 billion ILS in bonds primarily bought by Israeli money market funds.</p>
             <a href="?page=about&lang=en" class="button">
                 Read More            </a>
         </div>
@@ -667,15 +703,14 @@ Through innovation, adaptability, and deep market expertise, Pi continues to see
 <!-- JavaScript for functionality -->
 <script src="assets/js/home.js"></script>
 <script src="assets/js/scroll-indicator.js"></script>
+<script src="assets/js/hero-menu.js"></script>
 
 </main>
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="assets/images/logo.svg" alt="PI Group Logo">
-                    <p class="footer-text">PI Group Financial Services</p>
-                </div>
+                                    </div>
                 <div class="footer-links">
                     <ul>
                                             </ul>

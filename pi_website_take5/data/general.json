@@ -362,6 +362,18 @@
             }
         }
     },
+    "footer_text": {
+        "term_slug": "footer_text",
+        "language_slug": {
+            "en": {
+                "label": ""
+            },
+            "he": {
+                "label": ""
+            }
+        }
+    },
+    
     "all_rights_reserved": {
         "term_slug": "all_rights_reserved",
         "language_slug": {

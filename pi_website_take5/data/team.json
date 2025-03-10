@@ -1,5 +1,5 @@
 {
-    "management": [
+    "founders": [
         {
             "name_slug": "aaron-cohen",
             "photo": "assets/images/team/aaron_cohen.png",
@@ -41,7 +41,9 @@
                     "bio": "יוני קיי הוא מומחה בשווקים פיננסיים עם 30 שנות ניסיון, בעל תואר ראשון בהצטיינות יתרה ותואר שני במנהל עסקים מאוניברסיטת הרווארד. הקריירה שלו החלה בבורסות המסחר בשיקגו בשנות ה-90, ולאחר מכן בתפקידי הנהלה בדסק הנגזרים של Batuha. קיי היה שותף-מייסד של PI Finance בשנת 1999 והקים את Equilibrium Market Making בשנת 2002. משנת 2006 עד 2021, הוא ניהל את PI Spc, קרן מאקרו שהגיעה לשיא של 300 מיליון דולר בנכסים מנוהלים."
                 }
             }
-        },
+        }
+    ],
+    "management": [
         {
             "name_slug": "dan-rosenberg",
             "photo": "assets/images/team/dan_rosenberg.png",
@@ -53,7 +55,7 @@
                     "name": "Dan Rosenberg",
                     "position": "Founder",
                     "short_bio": "Co-founder and Director at Pi Pituach Group, with over 20 years of experience in derivative trading and risk management in banks and investment firms.",
-                    "bio": "Co-Founder and Director at Pi Pituach Group, which includes Pi Deposits and Pi Plus, both reporting companies issuing deposit-backed bonds on the Tel Aviv Stock Exchange. Served as a senior trader at the Pi SPC hedge fund since 2010. With over 20 years of experience in trading derivative instruments and complex interest rate transactions, possesses unique expertise in pricing sophisticated financial instruments and managing risks associated with them. Previously held the position of senior interest rate trader in the trading room of Bank Hapoalim."
+                    "bio": "Co-Founder and Director at Pi Pituach Group, which issues deposit-backed bonds on the Tel Aviv Stock Exchange.<br><br> Dan has over 20 years of experience in trading derivative instruments of FX and interest rates.<br>He served as a senior trader at the Pi SPC hedge fund since 2010 and previously held the position of senior interest rate trader in the trading room of Bank Hapoalim."
                 },
                 "he": {
                     "name": "דן רוזנברג",
@@ -73,8 +75,8 @@
                 "en": {
                     "name": "Itay Ruschkewitz",
                     "position": "CEO and Co-Founder",
-                    "short_bio": "CEO and Co-Founder of Pi Pituach Financial Instruments Development Group.",
-                    "bio": "CEO and Co-Founder of Pi Financial Instruments Development Ltd., which includes Pi Deposits and Structured Products Ltd. and Pi Plus Deposits Ltd, both reporting companies issuing deposit-backed bonds on the Tel Aviv Stock Exchange. CEO and Founder of Complex, a financial consulting firm providing advisory services to a wide range of leading entities in the Israeli market, including banks, insurance companies, and financial institutions. Possesses extensive experience in formulating strategies and financing plans, developing innovative financial instruments for the Israeli capital market, raising funds, leading transactions, and issuing complex instruments, including securitizations, private debt, and sophisticated bonds such as CoCo. Represents Allianz Global Investors, the investment arm of Allianz, in the Israeli market. Previously served as a partner at PwC Israel and, prior to that, as a partner at Giza Singer Even. Certified Public Accountant (CPA) and licensed attorney, holding a master’s degree in financial mathematics"
+                    "short_bio": "CEO and Co-Founder of Pi Pituach Group.",
+                    "bio": "CEO and Co-Founder of Pi Pi Pituach Group, which issues deposit-backed bonds on the Tel Aviv Stock Exchange.<br><br> Owner and CEO of Complex, a financial consulting firm providing advisory services to a wide range of leading entities in the Israeli economy, including banks, insurance companies, and financial institutions. Represents Allianz Global Investors, the investment arm of Allianz, in the Israeli market. Previously served as a partner at PwC Israel.<br><br> Itai is a Certified Public Accountant (CPA) and licensed attorney, holding a master’s degree in financial mathematics"
                 },
                 "he": {
                     "name": "איתי רושקביץ",
@@ -159,14 +161,14 @@
                 "en": {
                     "name": "Hagit Borohovitz",
                     "position": "Chief Legal Officer",
-                    "short_bio": "Hagit Borohovitz, with over 15 years of legal expertise in financial markets, leads our legal and compliance operations.",
-                    "bio": "Hagit Borohovitz brings over 15 years of legal expertise in financial markets and regulatory compliance. She began her career at Herzog Fox & Neeman, one of Israel's premier law firms, specializing in securities and financial regulation. Prior to joining PI, she served as legal counsel for several major investment firms. Borohovitz holds an LLB from Tel Aviv University and an LLM in Corporate Law from NYU School of Law."
+                    "short_bio": "brings over 10 years of legal expertise, specializing in investment fund operations and compliance management.",
+                    "bio": "Hagit Borohovitz has over 10 years of experience in law, specializing in the establishment and operation of investment funds. She has been with the PI Group since 2018, serving as a legal advisor and operations manager. Currently, she serves as the COO of PI Development, where she is responsible for overseeing operational processes, managing financial procedures, and ensuring regulatory compliance. With her extensive experience and deep understanding of legal and operational matters, she continues to lead the group towards operational efficiency and success."
                 },
                 "he": {
                     "name": "חגית בורוכוביץ",
                     "position": "יועצת משפטית ראשית",
-                    "short_bio": "עורכת דין, המתמחה בהקמה ותפעול קרנות השקעה זרות וישראליות. בעלת ניסיון רחב בניהול תהליכים תפעוליים מורכבים, מו\"מ עם ספקים ויועמ\"ש בינלאומיים להבטחת עמידה בתקני רגולציה מחמירים.",
-                    "bio": "עורכת דין עם ניסיון של מעל 10 שנים, בעלת התמחות בהקמה ותפעול קרנות השקעה זרות וישראליות. משנת 2018 משמשת בקבוצת פאי כיועצת משפטית ומנהלת תפעול, עם אחריות כוללת על תחום התפעול של החברה. בעלת ניסיון נרחב בניהול תהליכים תפעוליים מורכבים, מו\"מ מול ספקים זרים וישראלים ועריכת חוזים בתחום ההשקעות. מכהנת כדירקטורית בשתי קרנות בקבוצת פאי מאז 2020, עם אחריות על ניהול תהליכים פיננסיים, עמידה ברגולציות ופתיחת חשבונות במוסדות פיננסיים בארץ ובחו\"ל. בעלת ניסיון בשיתוף פעולה עם עורכי דין זרים ויועצים משפטיים. מאז 2023 מכהנת כסמנכ\"ל תפעול בפאי פיתוח."
+                    "short_bio": "חגית בורוחוביץ בעלת מעל 10 שנות ניסיון במשפט, בעלת התמחות בהקמה ותפעול קרנות השקעה.",
+                    "bio": "חגית בורוכוביץ בעלת מעל 10 שנות ניסיון במשפט, בעלת התמחות בהקמה ותפעול קרנות השקעה. היא משמשת בקבוצת פאי מאז 2018 כיועצת משפטית ומנהלת תפעול. כיום, היא משמשת כסמנכ\"ל תפעול בפאי פיתוח, שם היא אחראית על ניהול תהליכים תפעוליים, ניהול הליכים פיננסיים ועמידה ברגולציות. עם ניסיונה הרב והבנתה העמוקה בעניינים משפטיים ותפעוליים, היא ממשיכה להוביל את הקבוצה ליעילות תפעולית והצלחה."
                 }
             }
         },
@@ -223,13 +225,13 @@
             "language_slug": {
                 "en": {
                     "name": "Ronen Elgali",
-                    "position": "Chief Investment Officer",
+                    "position": "Cheif Investment Analyst",
                     "short_bio": "Elgali Ronen brings 30+ years of managing funds and investment expertise, specializing in company analysis, valuation, and developing investment strategies.",
-                    "bio": "Throughout his career, Ronen has gained significant expertise in hedge fund management, company analysis, and valuations, while holding senior positions in leading investment firms. His skills include in-depth analysis of financial reports, building financial models, and analyzing market trends for informed investment decisions. At Sphera, where he worked for 10 years, Ronen joined in its early days and established and managed the research department, developed unique research approaches, and managed the small-cap equity fund. At Alpha and Mor, he was involved in restructuring efforts that led to significant growth in assets under management. Currently, at the Pi Group, Ronen serves as the Chief Investment Officer, where he analyzes and builds financial models for companies and provides professional investment advice."
+                    "bio": "Throughout his career, Ronen has gained significant expertise in hedge fund management, company analysis, and valuations, while holding senior positions in leading investment firms. His skills include in-depth analysis of financial reports, building financial models, and analyzing market trends for informed investment decisions. At Sphera, where he worked for 10 years, Ronen joined in its early days and established and managed the research department, developed unique research approaches, and managed the small-cap equity fund. At Alpha and Mor, he was involved in restructuring efforts that led to significant growth in assets under management. Currently, at the Pi Group, Ronen serves as the Chief Analyst Officer, where he analyzes and builds financial models for companies and provides professional investment advice."
                 },
                 "he": {
                     "name": "רונן אלגלי",
-                    "position": "מנהל השקעות ראשי",
+                    "position": "אנליסט השקעות ראשי",
                     "short_bio": "אלגאלי רונן הוא מנהל השקעות ראשי בעל ניסיון עשיר בניהול קרנות והשקעות בשוק ההון. הוא מתמחה בניתוח חברות, הערכות שווי, ופיתוח אסטרטגיות השקעה, תוך שימוש במומחיותו בכלכלה ומימון לניהול יעיל של נכסים ויצירת ערך למשקיעים.",
                     "bio": "אלגאלי רונן הינו מנהל השקעות ראשי בעל ניסיון עשיר בתחום הפיננסים והשקעות, המגובה ברקע אקדמי איתן בכלכלה ומנהל עסקים. במהלך הקריירה שלו, צבר רונן מומחיות משמעותית בניהול קרנות גידור, ניתוח חברות והערכות שווי, תוך כדי מילוי תפקידים בכירים בחברות השקעה מובילות. יכולותיו כוללות ניתוח מעמיק של דוחות כספיים, בניית מודלים פיננסיים וניתוח מגמות שוק לקבלת החלטות השקעה מושכלות. בספירה, רונן הקים וניהל את מחלקת המחקר, פיתח גישות מחקר ייחודיות וניהל את קרן המניות הקטנות, באלפא ובמור עסק בשיקום שהוביל לצמיחה משמעותית בנכסים המנוהלים. כיום בקבוצת פאי משמש רונן כמנהל השקעות ראשי, שם הוא מנתח ובונה מודל"
                 }
@@ -266,8 +268,8 @@
                 "en": {
                     "name": "Mor Katz Avrahami",
                     "position": "Analyst",
-                    "short_bio": "Analyst at Pi Financial Instruments Development Group. Consultant at Complex, a financial consulting firm.",
-                    "bio": "Consultant at Complex, a financial consulting firm advising a wide range of leading entities in the Israeli economy. Extensive experience in regulatory consulting for financial institutions, supporting complex financial processes, formulating financing plans, and modeling advanced valuations. Expert in the fields of payments solutions and clearing infrastructures. Expert in banking regulations related to capital and liquidity, as well as the implementation of international trade regulations within Israeli banks. Previously worked as an attorney at the Israel Competition Authority in the Markets Division, specializing in financial sectors. Licensed attorney, holding an LL.B. (magna cum laude) and an MBA from Reichman University."
+                    "short_bio": "Mor Katz Avrahami is an Analyst at Pi Pituach group, and a consultant at Complex, a financial consulting firm.",
+                    "bio": "Mor Katz Avrahami brings extensive expertise in financial consulting, specializing in regulatory compliance and complex financial process management. Mor has a deep understanding of payment systems, banking regulations, and international trade compliance, having advised numerous leading Israeli entities. With a strong background in finance and law, she continues to drive strategic financial planning and regulatory adherence in her role."
                 },
                 "he": {
                     "name": "מור כץ אברהמי",
@@ -287,8 +289,8 @@
                 "en": {
                     "name": "Darina Reznikov",
                     "position": "Director",
-                    "short_bio": "Director at Pi Deposits and Structured Products Ltd. and Pi Plus Deposits Ltd. Manager at Complex, a financial consulting firm.",
-                    "bio": "Director at Pi Deposits and Structured Products Ltd. and Pi Plus Deposits Ltd. Manager at Complex, a financial consulting firm advising a wide range of leading entities in the Israeli market. Brings extensive experience in financial consulting, supporting companies in complex financing transactions and executing significant strategic financial initiatives. Specializes in developing, modeling, and issuing innovative and complex financial instruments, conducting advanced valuations, and formulating business plans. Holds deep expertise in regulatory capital instruments for banks and insurance companies, as well as in the regulatory frameworks. Previously served as an analyst in the Complex Finance Department at PwC and prior to that, in the Markets Division at the Bank of Israel. Holds a bachelor’s degree in economics and business administration and an MBA with a specialization in Finance, both with honors from the Hebrew University of Jerusalem."
+                    "short_bio": "Darina Reznikov is a Director at Pi Pituach group and a manager at Complex, a financial consulting firm.",
+                    "bio": "Darina Reznikov brings extensive expertise in financial consulting, specializing in strategic financial planning and complex transaction management. With a strong background in economic analysis and financial modeling, she advises leading Israeli entities on innovative financing solutions and regulatory compliance. Her experience spans roles at PwC and the Bank of Israel, and she continues to drive financial innovation and strategic growth in her current roles."
                 },
                 "he": {
                     "name": "דרינה רזניבוק",

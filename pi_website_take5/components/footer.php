@@ -3,8 +3,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="assets/images/logo.svg" alt="PI Group Logo">
-                    <p class="footer-text">PI Group Financial Services</p>
+                    <?php 
+                    $footerText = TranslatableFactory::general()->getContent($lang, 'footer_text', 'PI Group Financial Services');
+                    if (!empty($footerText)): 
+                    ?>
+                        <img src="assets/images/logo.svg" alt="PI Group Logo">
+                        <p class="footer-text"><?php echo $footerText; ?></p>
+                    <?php endif; ?>
                 </div>
                 <div class="footer-links">
                     <ul>

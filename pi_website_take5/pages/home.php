@@ -11,6 +11,9 @@ include_once 'pages/home_sections/helpers.php';
 
 // Get home translatable for hero section
 $homeTranslatable = TranslatableFactory::page('home');
+
+// Get menu data
+$menuData = TranslatableFactory::getData('menus') ?: [];
 ?>
 
 <div class="home-page">
@@ -26,10 +29,53 @@ $homeTranslatable = TranslatableFactory::page('home');
             <?php echo renderLanguageSwitcher($lang, '', false); ?>
         </div>
         
+        <!-- Clean, minimal hero menu -->
+        <div class="hero-menu <?php echo $lang === 'he' ? 'left-aligned' : 'right-aligned'; ?>">
+            <button class="hero-menu-toggle" aria-label="<?php echo TranslatableFactory::general()->getHtmlContent($lang, 'menu_toggle', 'Toggle Menu'); ?>">
+                <span></span>
+            </button>
+            <nav class="hero-nav">
+                <ul>
+                    <?php
+                    if (isset($menuData['main_menu'])):
+                        foreach ($menuData['main_menu'] as $item):
+                            // Check if this is a segment page (investment_banking or asset_management)
+                            $isSegment = in_array($item['main_page_slug'], ['investment_banking', 'asset_management']);
+                            
+                            // Check if this is the team page
+                            $isTeam = $item['main_page_slug'] === 'team';
+                            
+                            // Check if this is the home page
+                            $isHome = $item['main_page_slug'] === 'home';
+                            
+                            // Generate the correct URL
+                            if ($isHome) {
+                                $url = "?page=home&lang={$lang}";
+                            } elseif ($isSegment) {
+                                $url = "?page=segment&id={$item['main_page_slug']}&lang={$lang}";
+                            } elseif ($isTeam) {
+                                $url = "?page=our-team&lang={$lang}";
+                            } else {
+                                $url = strpos($item['url'], '/') === 0 ? "?page=".ltrim($item['url'], '/')."&lang={$lang}" : $item['url'];
+                            }
+                    ?>
+                    <li>
+                        <a href="<?php echo $url; ?>">
+                            <?php echo getTranslatedContent($item, $lang, 'label'); ?>
+                        </a>
+                    </li>
+                    <?php 
+                        endforeach;
+                    endif;
+                    ?>
+                </ul>
+            </nav>
+        </div>
+        
         <div class="hero-content">
-            <h1><?php echo $homeTranslatable->getContent($lang, 'title', 'Welcome to PI Group'); ?></h1>
-            <p class="slogan"><?php echo $homeTranslatable->getContent($lang, 'slogan', 'Financial Excellence'); ?></p>
-            <p class="wide-description"><?php echo $homeTranslatable->getContent($lang, 'home_description', 'Your trusted partner in financial services.'); ?></p>
+            <h1><?php echo $homeTranslatable->getHtmlContent($lang, 'title', 'Welcome to PI Group'); ?></h1>
+            <p class="slogan"><?php echo $homeTranslatable->getHtmlContent($lang, 'slogan', 'Financial Excellence'); ?></p>
+            <p class="wide-description content-with-html"><?php echo $homeTranslatable->getHtmlContent($lang, 'home_description', 'Your trusted partner in financial services.'); ?></p>
             <?php
             // Point CTA to the first segment
             $segments = TranslatableFactory::getData('segments');
@@ -37,7 +83,7 @@ $homeTranslatable = TranslatableFactory::page('home');
                 'segment-' . array_key_first($segments) : 'team';
             ?>
             <a href="#<?php echo $firstSegmentId; ?>" class="cta-button">
-                <?php echo TranslatableFactory::general()->getContent($lang, 'learn_more', 'Learn More'); ?>
+                <?php echo TranslatableFactory::general()->getHtmlContent($lang, 'learn_more', 'Learn More'); ?>
             </a>
         </div>
 
@@ -92,4 +138,5 @@ $homeTranslatable = TranslatableFactory::page('home');
 <!-- JavaScript for functionality -->
 <script src="assets/js/home.js"></script>
 <script src="assets/js/scroll-indicator.js"></script>
+<script src="assets/js/hero-menu.js"></script>
 

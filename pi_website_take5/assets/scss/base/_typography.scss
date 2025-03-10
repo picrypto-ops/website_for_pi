@@ -30,3 +30,47 @@ a {
   }
 }
 
+// HTML content formatting
+.content-with-html {
+  // Ensure line breaks are properly displayed
+  br {
+    display: block;
+    margin: 0.5rem 0;
+  }
+  
+  // Ensure paragraphs have proper spacing
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  // Proper spacing for nested lists
+  ul, ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  // Proper emphasis styling
+  em, i {
+    font-style: italic;
+  }
+  
+  // Proper strong styling
+  strong, b {
+    font-weight: bold;
+  }
+  
+  // Proper link styling within content
+  a {
+    color: variables.$primary-color;
+    text-decoration: underline;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
