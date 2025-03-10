@@ -1,0 +1,1299 @@
+
+================================================================================
+FILE: asset_management_icons.js
+PATH: pi_website_take5\assets\js\asset_management_icons.js
+================================================================================
+
+/**
+ * Asset Management Icons Handler
+ * Handles dynamic loading and manipulation of SVG icons for asset management section
+ */
+
+class AssetManagementIcons {
+    constructor() {
+        this.iconBasePath = '/assets/images/asset_management/';
+        this.icons = {
+            handLeft: 'hand_left.svg',
+            handRight: 'hand_right.svg',
+            combined: 'icon.svg'
+        };
+    }
+
+    /**
+     * Load an SVG icon and inject it into the specified element
+     * @param {string} iconName - Name of the icon to load (key from this.icons)
+     * @param {HTMLElement} targetElement - Element to inject the SVG into
+     * @return {Promise} - Promise that resolves when the SVG is loaded
+     */
+    loadIcon(iconName, targetElement) {
+        if (!this.icons[iconName]) {
+            console.error(`Icon ${iconName} not found`);
+            return Promise.reject(new Error(`Icon ${iconName} not found`));
+        }
+
+        const iconPath = this.iconBasePath + this.icons[iconName];
+        
+        return fetch(iconPath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load icon: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(svgContent => {
+                targetElement.innerHTML = svgContent;
+                return targetElement.querySelector('svg');
+            })
+            .catch(error => {
+                console.error('Error loading SVG:', error);
+                throw error;
+            });
+    }
+
+    /**
+     * Initialize icons for asset management section
+     * @param {Object} options - Configuration options
+     */
+    init(options = {}) {
+        const defaults = {
+            leftHandSelector: '.left-hand-icon',
+            rightHandSelector: '.right-hand-icon',
+            combinedSelector: '.combined-hands-icon'
+        };
+
+        const config = {...defaults, ...options};
+
+        // Initialize left hand icons
+        document.querySelectorAll(config.leftHandSelector).forEach(element => {
+            this.loadIcon('handLeft', element);
+        });
+
+        // Initialize right hand icons
+        document.querySelectorAll(config.rightHandSelector).forEach(element => {
+            this.loadIcon('handRight', element);
+        });
+
+        // Initialize combined icons
+        document.querySelectorAll(config.combinedSelector).forEach(element => {
+            this.loadIcon('combined', element);
+        });
+    }
+}
+
+// Export the class
+export default AssetManagementIcons; 
+
+
+================================================================================
+FILE: hero-menu.js
+PATH: pi_website_take5\assets\js\hero-menu.js
+================================================================================
+
+/**
+ * Hero Menu Handler
+ * 
+ * Handles the functionality for the minimal hero menu:
+ * - Toggle menu visibility on mobile
+ * - Accessibility features
+ * - Close menu on outside click
+ * - Support for RTL/LTR languages
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get elements
+  const heroMenuToggle = document.querySelector('.hero-menu-toggle');
+  const heroNav = document.querySelector('.hero-nav');
+  
+  // Exit if elements don't exist
+  if (!heroMenuToggle || !heroNav) {
+    return;
+  }
+  
+  // ARIA setup
+  heroMenuToggle.setAttribute('aria-expanded', 'false');
+  heroMenuToggle.setAttribute('aria-controls', 'hero-nav-menu');
+  heroNav.setAttribute('id', 'hero-nav-menu');
+  
+  // Toggle menu function
+  function toggleHeroMenu(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    
+    const isOpen = heroNav.classList.contains('visible');
+    
+    // Toggle states
+    heroMenuToggle.classList.toggle('active');
+    heroNav.classList.toggle('visible');
+    
+    // Update ARIA
+    heroMenuToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+  }
+  
+  // Add click handler to toggle button
+  heroMenuToggle.addEventListener('click', toggleHeroMenu);
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const isOpen = heroNav.classList.contains('visible');
+    
+    if (isOpen && 
+        !event.target.closest('.hero-menu-toggle') && 
+        !event.target.closest('.hero-nav')) {
+      toggleHeroMenu();
+    }
+  });
+  
+  // Close menu when ESC key is pressed
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && 
+        heroNav.classList.contains('visible')) {
+      toggleHeroMenu();
+    }
+  });
+  
+  // Add accessibility navigation to menu items
+  const menuLinks = heroNav.querySelectorAll('a');
+  menuLinks.forEach((link, index) => {
+    // Allow keyboard navigation
+    link.addEventListener('keydown', function(e) {
+      // Handle last item to close menu on tab
+      if (e.key === 'Tab' && index === menuLinks.length - 1 && !e.shiftKey) {
+        setTimeout(() => {
+          if (heroNav.classList.contains('visible')) {
+            toggleHeroMenu();
+          }
+        }, 0);
+      }
+    });
+  });
+  
+  // Handle hash changes for smooth scrolling to sections
+  const navLinks = heroNav.querySelectorAll('a[href^="#"]');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Close menu if it's open
+      if (heroNav.classList.contains('visible')) {
+        toggleHeroMenu();
+      }
+    });
+  });
+}); 
+
+
+================================================================================
+FILE: home.js
+PATH: pi_website_take5\assets\js\home.js
+================================================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the PI background wave
+    if (typeof initPiBgWave === 'function') {
+        initPiBgWave();
+    }
+    
+    // Get header for scroll calculations
+    const header = document.getElementById('site-header');
+    const headerHeight = header ? header.offsetHeight : 0;
+    
+    // Show header on scroll past the hero section
+    const heroSection = document.querySelector('.hero.full-page');
+    
+    if (header && heroSection) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY >= heroSection.offsetHeight - 100) {
+                header.classList.remove('initially-hidden');
+            } else {
+                header.classList.add('initially-hidden');
+            }
+        });
+    }
+    
+    // Update breadcrumb navigation based on scroll position
+    const updateBreadcrumbNavigation = function() {
+        const sections = document.querySelectorAll('.full-page-section, .hero.full-page');
+        const breadcrumbLinks = document.querySelectorAll('.breadcrumb-navigation a');
+        const teamLinks = document.querySelectorAll('.team-nav a');
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+        
+        // Find which section is currently most visible
+        let currentSectionId = '';
+        let maxVisibleAmount = 0;
+        
+        sections.forEach(section => {
+            if (!section.id) return;
+            
+            const rect = section.getBoundingClientRect();
+            const visibleTop = Math.max(0, rect.top);
+            const visibleBottom = Math.min(windowHeight, rect.bottom);
+            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+            const visibilityPercentage = visibleHeight / windowHeight;
+            
+            if (visibilityPercentage > maxVisibleAmount) {
+                maxVisibleAmount = visibilityPercentage;
+                currentSectionId = section.id;
+            }
+        });
+        
+        // Clear all active states
+        breadcrumbLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Update active state for current section
+        if (currentSectionId) {
+            const activeLink = document.querySelector(`.breadcrumb-navigation a[href="#${currentSectionId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Update team navigation if in team section
+            if (currentSectionId === 'team') {
+                // Find which team group is in view
+                const teamGroups = document.querySelectorAll('.team-group');
+                let currentTeamGroupId = '';
+                
+                teamGroups.forEach(group => {
+                    const rect = group.getBoundingClientRect();
+                    if (rect.top <= windowHeight/2 && rect.bottom >= windowHeight/2) {
+                        currentTeamGroupId = group.id;
+                    }
+                });
+                
+                if (currentTeamGroupId) {
+                    teamLinks.forEach(link => {
+                        const href = link.getAttribute('href').substring(1);
+                        if (href === currentTeamGroupId) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        }
+    };
+    
+    // Update scroll indicators visibility when scrolling
+    const updateScrollIndicators = function() {
+        const sections = document.querySelectorAll('.full-page-section, .hero.full-page');
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+        
+        sections.forEach((section, index) => {
+            const scrollIndicator = section.querySelector('.scroll-indicator');
+            if (!scrollIndicator) return;
+            
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            // Hide scroll indicator on team section since it's scrollable
+            if (section.id === 'team') {
+                scrollIndicator.style.opacity = '1';
+                // Show indicator only when at the bottom of the team section
+                const teamBottom = sectionTop + sectionHeight - windowHeight;
+                if (scrollY >= teamBottom - 50) {
+                    scrollIndicator.style.opacity = '1';
+                } else {
+                    scrollIndicator.style.opacity = '0';
+                }
+            } 
+            // Otherwise show when section is in view
+            else if (scrollY >= sectionTop - headerHeight && 
+                scrollY < sectionTop + sectionHeight - windowHeight) {
+                scrollIndicator.style.opacity = '1';
+            } else {
+                scrollIndicator.style.opacity = '0';
+            }
+            
+            // Always hide on last section
+            if (index === sections.length - 1) {
+                if (scrollIndicator) scrollIndicator.style.opacity = '0';
+            }
+        });
+    };
+    
+    // Initial call to both functions
+    updateBreadcrumbNavigation();
+    updateScrollIndicators();
+    
+    // Call on scroll
+    window.addEventListener('scroll', function() {
+        updateBreadcrumbNavigation();
+        updateScrollIndicators();
+    });
+    
+    // Improved smooth scrolling with header offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            if (targetId) {
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Calculate position with header offset
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    // Smooth scroll with header offset
+                    window.scrollTo({
+                        top: targetPosition - headerHeight,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL without scrolling
+                    history.pushState(null, null, '#' + targetId);
+                }
+            }
+        });
+    });
+    
+    // Add animated class to scroll buttons
+    document.querySelectorAll('.scroll-down').forEach(button => {
+        button.classList.add('animated');
+    });
+    
+    // Add scroll helper for team section
+    const teamSection = document.querySelector('#team');
+    if (teamSection) {
+        const teamContent = teamSection.querySelector('.team-preview-grid');
+        if (teamContent) {
+            // Wrap team content in scrollable container
+            const wrapper = document.createElement('div');
+            wrapper.className = 'team-content-wrapper';
+            
+            const scrollableContainer = document.createElement('div');
+            scrollableContainer.className = 'team-scrollable-container';
+            
+            // Move the team content into the scrollable container
+            teamContent.parentNode.insertBefore(wrapper, teamContent);
+            wrapper.appendChild(scrollableContainer);
+            scrollableContainer.appendChild(teamContent);
+            
+            // Add scroll helper message
+            const scrollHelper = document.createElement('div');
+            scrollHelper.className = 'scroll-helper';
+            scrollHelper.innerHTML = '<span class="scroll-text">Scroll to see more team members</span>';
+            wrapper.appendChild(scrollHelper);
+            
+            // Hide helper when scrolled to bottom
+            scrollableContainer.addEventListener('scroll', function() {
+                const isAtBottom = this.scrollHeight - this.scrollTop <= this.clientHeight + 50;
+                scrollHelper.style.opacity = isAtBottom ? '0' : '0.7';
+            });
+        }
+    }
+    
+    // Add to the existing DOMContentLoaded event listener
+    window.addEventListener('scroll', updateBreadcrumbNavigation);
+    window.addEventListener('load', updateBreadcrumbNavigation);
+}); 
+
+
+================================================================================
+FILE: language-switcher.js
+PATH: pi_website_take5\assets\js\language-switcher.js
+================================================================================
+
+/**
+ * Language switcher handler
+ * Preserves page position when switching languages
+ */
+document.addEventListener('DOMContentLoaded', function() {
+  const langSwitchers = document.querySelectorAll('.lang-switch');
+  
+  // Store current URL including hash
+  function getCurrentUrlWithHash() {
+    return window.location.pathname + window.location.search + window.location.hash;
+  }
+  
+  // Store both scroll position and URL sections
+  function storeCurrentPosition() {
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
+    const currentUrl = getCurrentUrlWithHash();
+    const sections = document.querySelectorAll('section[id], div[id]');
+    
+    // Find which section is currently in view
+    let activeSection = null;
+    let minDistance = Infinity;
+    
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const distanceFromTop = Math.abs(rect.top);
+      
+      if (distanceFromTop < minDistance) {
+        minDistance = distanceFromTop;
+        activeSection = section.id;
+      }
+    });
+    
+    // Store all the information
+    sessionStorage.setItem('scrollData', JSON.stringify({
+      scrollPos,
+      currentUrl,
+      activeSection,
+      timestamp: Date.now()
+    }));
+  }
+  
+  langSwitchers.forEach(switcher => {
+    switcher.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Store position information before navigation
+      storeCurrentPosition();
+      
+      // Navigate to the new URL
+      window.location.href = this.getAttribute('href');
+    });
+  });
+  
+  // Restore scroll position on page load
+  function restoreScrollPosition() {
+    const scrollDataStr = sessionStorage.getItem('scrollData');
+    
+    if (!scrollDataStr) return;
+    
+    try {
+      const scrollData = JSON.parse(scrollDataStr);
+      
+      // Only restore if it's a recent navigation (within 10 seconds)
+      if (Date.now() - scrollData.timestamp > 10000) {
+        sessionStorage.removeItem('scrollData');
+        return;
+      }
+      
+      // Try to scroll to section first if available
+      if (scrollData.activeSection) {
+        const section = document.getElementById(scrollData.activeSection);
+        if (section) {
+          section.scrollIntoView({ behavior: 'instant' });
+          sessionStorage.removeItem('scrollData');
+          return;
+        }
+      }
+      
+      // Fall back to scroll position
+      window.scrollTo(0, scrollData.scrollPos);
+      
+      // Remove the stored data
+      sessionStorage.removeItem('scrollData');
+    } catch (e) {
+      console.error('Error restoring scroll position:', e);
+      sessionStorage.removeItem('scrollData');
+    }
+  }
+  
+  // Use both DOMContentLoaded and window.onload for more reliable restoration
+  if (document.readyState === 'complete') {
+    setTimeout(restoreScrollPosition, 100);
+  } else {
+    window.addEventListener('load', function() {
+      setTimeout(restoreScrollPosition, 100);
+    });
+  }
+}); 
+
+
+================================================================================
+FILE: main.js
+PATH: pi_website_take5\assets\js\main.js
+================================================================================
+
+/**
+ * Main JavaScript file
+ * Initializes all components and modules for the website
+ */
+
+import AssetManagementIcons from './asset_management_icons.js';
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Mobile menu toggle
+  const menuToggle = document.querySelector(".menu-toggle")
+  const nav = document.querySelector("nav ul")
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      nav.classList.toggle("show")
+    })
+  }
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault()
+
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth",
+      })
+    })
+  })
+
+  // Form validation
+  const contactForm = document.querySelector("#contact-form")
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault()
+      if (validateForm()) {
+        // Submit the form
+        this.submit()
+      }
+    })
+  }
+
+  // Initialize Asset Management Icons
+  const assetManagementIcons = new AssetManagementIcons();
+  assetManagementIcons.init({
+    // Override default selectors if needed
+    leftHandSelector: '.asset-management-left-hand',
+    rightHandSelector: '.asset-management-right-hand',
+    combinedSelector: '.asset-management-combined-hands'
+  });
+
+  // Make cards clickable
+  function handleCardClick(event) {
+    const card = event.currentTarget;
+    const link = card.querySelector('a');
+    if (link && !event.target.closest('a')) {
+      link.click();
+    }
+  }
+
+  // Add click handlers to all cards
+  const cards = document.querySelectorAll('.product-card, .team-card, .segment-card');
+  cards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', handleCardClick);
+    
+    // Prevent double click on links inside cards
+    const links = card.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+  });
+
+  // Initialize lazy loading for images
+  if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target
+          image.src = image.dataset.src
+          image.classList.remove("lazy")
+          imageObserver.unobserve(image)
+        }
+      })
+    })
+
+    document.querySelectorAll("img.lazy").forEach((img) => {
+      imageObserver.observe(img)
+    })
+  } else {
+    // Fallback for browsers that don't support IntersectionObserver
+    document.querySelectorAll("img.lazy").forEach((img) => {
+      img.src = img.dataset.src
+      img.classList.remove("lazy")
+    })
+  }
+});
+
+// Form validation functions
+function validateForm() {
+  const form = document.querySelector("#contact-form")
+  const nameInput = form.querySelector("#name")
+  const emailInput = form.querySelector("#email")
+  const subjectInput = form.querySelector("#subject")
+  const messageInput = form.querySelector("#message")
+
+  let isValid = true
+
+  if (nameInput.value.trim() === "") {
+    showError(nameInput, "Name is required")
+    isValid = false
+  } else {
+    clearError(nameInput)
+  }
+
+  if (emailInput.value.trim() === "") {
+    showError(emailInput, "Email is required")
+    isValid = false
+  } else if (!isValidEmail(emailInput.value)) {
+    showError(emailInput, "Please enter a valid email address")
+    isValid = false
+  } else {
+    clearError(emailInput)
+  }
+
+  if (subjectInput.value.trim() === "") {
+    showError(subjectInput, "Subject is required")
+    isValid = false
+  } else {
+    clearError(subjectInput)
+  }
+
+  if (messageInput.value.trim() === "") {
+    showError(messageInput, "Message is required")
+    isValid = false
+  } else {
+    clearError(messageInput)
+  }
+
+  return isValid
+}
+
+function showError(input, message) {
+  const formGroup = input.closest(".form-group")
+  const error = formGroup.querySelector(".error-message") || document.createElement("div")
+  error.className = "error-message"
+  error.textContent = message
+  if (!formGroup.querySelector(".error-message")) {
+    formGroup.appendChild(error)
+  }
+  input.classList.add("error")
+}
+
+function clearError(input) {
+  const formGroup = input.closest(".form-group")
+  const error = formGroup.querySelector(".error-message")
+  if (error) {
+    formGroup.removeChild(error)
+  }
+  input.classList.remove("error")
+}
+
+function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return re.test(email)
+}
+
+
+
+
+================================================================================
+FILE: menu.js
+PATH: pi_website_take5\assets\js\menu.js
+================================================================================
+
+/**
+ * Consolidated Menu Handler
+ * 
+ * This file combines all menu-related functionality:
+ * - Mobile menu toggle
+ * - Accessibility features
+ * - Menu closing behaviors
+ * - Responsive handling
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get elements
+  const menuToggle = document.querySelector('.mobile-menu-toggle');
+  const mainNav = document.querySelector('.main-nav');
+  
+  if (!menuToggle || !mainNav) {
+    return;
+  }
+  
+  // Initialize menu state based on screen size
+  function initMenuState() {
+    // Don't override menu state if a toggle is in progress
+    if (window.isMenuToggleInProgress) {
+      return;
+    }
+    
+    if (window.innerWidth <= 767) {
+      // Mobile view - hide menu
+      mainNav.style.maxHeight = '0px';
+      mainNav.style.overflow = 'hidden';
+      mainNav.style.opacity = '0';
+      mainNav.style.visibility = 'hidden';
+      mainNav.classList.remove('open');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    } else {
+      // Desktop view - show menu
+      mainNav.style.maxHeight = '';
+      mainNav.style.overflow = '';
+      mainNav.style.opacity = '';
+      mainNav.style.visibility = '';
+      mainNav.classList.remove('open'); // Ensure mobile classes are removed
+      document.body.classList.remove('menu-open');
+    }
+  }
+  
+  // Initial setup
+  initMenuState();
+  
+  // Set ARIA attributes
+  menuToggle.setAttribute('aria-controls', 'main-nav-menu');
+  mainNav.setAttribute('id', 'main-nav-menu');
+  
+  // Toggle menu function
+  function toggleMenu(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    
+    // Only handle toggle for mobile devices - adjust breakpoint to match CSS
+    if (window.innerWidth > 767) {
+      return;
+    }
+    
+    // Prevent multiple rapid toggles
+    if (window.isMenuToggleInProgress) {
+      return;
+    }
+    
+    // Set flag to prevent multiple toggles
+    window.isMenuToggleInProgress = true;
+    
+    const isOpen = mainNav.classList.contains('open');
+    
+    // Toggle states
+    menuToggle.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+    
+    // Explicitly set position of toggle button in active state
+    if (!isOpen) {
+      // When opening menu, fix the toggle button position based on direction
+      const isRTL = document.documentElement.dir === 'rtl';
+      
+      // Add open class immediately
+      mainNav.classList.add('open');
+      
+      // Set fixed position at the top
+      menuToggle.style.position = 'fixed';
+      menuToggle.style.top = '25px';
+      menuToggle.style.zIndex = '10000'; // Higher z-index to ensure button is visible
+      
+      // Set left/right based on direction
+      if (isRTL) {
+        // For RTL (Hebrew) - position on the right
+        menuToggle.style.right = '15px';
+        menuToggle.style.left = 'auto';
+      } else {
+        // For LTR (English) - position on the left
+        menuToggle.style.left = '15px';
+        menuToggle.style.right = 'auto';
+      }
+      
+      // Handle height animation for mobile only - show immediately
+      mainNav.style.visibility = 'visible';
+      mainNav.style.opacity = '1';
+      mainNav.style.maxHeight = '100vh';
+      mainNav.style.zIndex = '9999'; // Ensure menu is on top when visible
+      
+      // Update ARIA
+      menuToggle.setAttribute('aria-expanded', 'true');
+      
+      // Allow new toggles after animation completes
+      setTimeout(function() {
+        window.isMenuToggleInProgress = false;
+      }, 500);
+    } else {
+      // For closing, start animation then remove class at the end
+      
+      // Start closing animation
+      mainNav.style.maxHeight = '0px';
+      mainNav.style.opacity = '0';
+      
+      // Wait for animation to complete before removing classes and visibility
+      setTimeout(function() {
+        // When closing, reset inline styles
+        menuToggle.style.position = '';
+        menuToggle.style.top = '';
+        menuToggle.style.left = '';
+        menuToggle.style.right = '';
+        menuToggle.style.zIndex = '';
+        
+        // Remove class after animation completes
+        mainNav.classList.remove('open');
+        
+        // Finally hide the menu
+        mainNav.style.visibility = 'hidden';
+        mainNav.style.zIndex = '-1'; // Move it behind other elements
+        
+        // Update ARIA
+        menuToggle.setAttribute('aria-expanded', 'false');
+        
+        // Allow new toggles
+        window.isMenuToggleInProgress = false;
+      }, 400); // Just before the transition completes
+    }
+  }
+  
+  // Add click handler to toggle button
+  menuToggle.addEventListener('click', function(e) {
+    toggleMenu(e);
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (window.innerWidth <= 767 && 
+        mainNav.classList.contains('open') && 
+        !event.target.closest('.mobile-menu-toggle') && 
+        !event.target.closest('.main-nav')) {
+      toggleMenu();
+    }
+  });
+  
+  // Close menu when ESC key is pressed
+  document.addEventListener('keydown', function(event) {
+    if (window.innerWidth <= 767 && 
+        event.key === 'Escape' && 
+        mainNav.classList.contains('open')) {
+      toggleMenu();
+    }
+  });
+  
+  // Track window width to detect threshold crossing
+  let previousWindowWidth = window.innerWidth;
+  
+  // Handle window resize with debounce to avoid excessive calls
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    // Clear previous timeout
+    clearTimeout(resizeTimer);
+    
+    // Set a new timeout to execute the function after 250ms
+    resizeTimer = setTimeout(function() {
+      const currentWindowWidth = window.innerWidth;
+      
+      // Only reset menu if we cross the mobile/desktop threshold (767px)
+      const wasMobile = previousWindowWidth <= 767;
+      const isMobile = currentWindowWidth <= 767;
+      
+      // Only reinitialize if we've crossed the threshold
+      if (wasMobile !== isMobile) {
+        initMenuState();
+      }
+      
+      // Update previous window width
+      previousWindowWidth = currentWindowWidth;
+    }, 250);
+  });
+}); 
+
+
+================================================================================
+FILE: pi_bg_wave.js
+PATH: pi_website_take5\assets\js\pi_bg_wave.js
+================================================================================
+
+import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import { vertexShader, fragmentShader } from './shaders.js';
+
+const rootStyles = getComputedStyle(document.documentElement);
+const SEPARATION_X = parseFloat(rootStyles.getPropertyValue('--separation-x')) || 200;
+const SEPARATION_Y = parseFloat(rootStyles.getPropertyValue('--separation-y')) || 400;
+const AMOUNTX = parseInt(rootStyles.getPropertyValue('--count-row')) || 40;
+const AMOUNTY = parseInt(rootStyles.getPropertyValue('--count-col')) || 25;
+const SPEED = parseFloat(rootStyles.getPropertyValue('--particle-speed')) || 0.04;
+const PARTICLE_SIZE = parseFloat(rootStyles.getPropertyValue('--particle-size')) || 4;
+const PARTICLE_COLOR = rootStyles.getPropertyValue('--particle-color').trim() || '#bacde4';
+let camera, scene, renderer, shaderMaterial, particles;
+let count = 0;
+
+
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerWidth / 2;
+var mouseX = 0, mouseY = -400;
+
+
+// Your SVG as a string
+const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg 
+    width="154px" 
+    height="240px" 
+    viewBox="0 0 154 240" 
+    version="1.1" 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g 
+        id="Pi-Group" 
+        stroke="none" 
+        stroke-width="1" 
+        fill="none" 
+        fill-rule="evenodd">
+        <g id="Group" 
+            transform="translate(0.999047, 0.544741)" 
+            fill="#FFFFFF">
+            <path 
+                d="M149.872952,35.4552592 L39.8089057,40.9032171 C27.7457427,42.1152525 18.3095751,45.5467114 11.500403,51.1975939 C-0.333020599,61.0180662 0.00191479463,73.2325363 0.00191479463,79.2900801 C0.00191479463,85.0373066 1.62565636,98.8121876 12.9639409,108.276606 C19.6594839,113.865584 26.9175708,116.843383 34.7382016,117.210004 C38.319661,117.34403 41.0407114,117.228881 42.9013531,116.864556 C44.7619947,116.50023 46.671869,115.593643 48.6309759,114.144795 C49.0132543,113.782531 49.2350354,113.521548 49.2963193,113.361848 C49.4468795,112.969501 49.4705079,112.582361 49.4705079,112.340048 C49.4705079,111.949789 49.0930872,111.68414 48.3382459,111.543101 C44.6341197,112.074399 41.0207197,112.340048 37.4980457,112.340048 C35.2932553,112.340048 32.0023684,112.079129 29.4598536,111.543101 C28.4466844,111.329498 26.9588819,110.764882 24.9964461,109.849253 C20.7842307,107.601129 17.6402472,104.707361 15.5644955,101.16795 C13.8796993,98.2951653 13.0592415,96.1545168 12.3475509,93.1688588 C11.1256137,88.0426332 11.1750678,82.2087312 11.500403,79.2900801 C11.9999852,74.8082219 13.1999985,66.3469328 18.8651357,59.2193271 C21.0352215,56.4890284 21.9749324,55.2639557 25.4390057,53.0405303 C25.9184471,52.7327994 29.1626082,50.6307878 33.4020289,49.2364415 C36.9858709,48.0577151 41.5620562,47.5301469 42.9013531,47.5301469 C44.4928995,47.5301469 46.6735095,47.4879311 49.2963193,48.0800656 C49.6890959,48.1687402 50.2650988,48.3438501 51.0243279,48.6053954 C51.5569594,48.7799202 51.9788044,48.9902689 52.289863,49.2364415 C52.524876,49.4224314 52.7764019,49.6153438 53.0584956,50.0593226 C53.1015324,50.1270568 53.1632872,50.2210602 53.2067598,50.3909119 C53.2187578,50.4377893 53.2434685,50.5553276 53.2808919,50.743527 C53.3034119,50.8914553 53.3177904,51.0103846 53.3240272,51.1003147 C53.3302641,51.1902449 53.332631,51.3127687 53.3311279,51.4678863 L53.3311279,165.134434 C53.2832986,165.557637 53.229421,165.849437 53.1694951,166.009833 C52.9756932,166.528556 52.8079842,167.097386 52.6134842,167.550625 C51.6881149,169.70699 50.740822,171.05463 49.9492804,171.912599 C49.3403254,172.572658 48.0913838,173.629738 47.3669124,173.999874 C46.642441,174.370009 46.4378368,174.504877 45.8332829,174.731016 C45.666085,174.793558 45.2938386,174.905672 44.9690012,174.993503 C44.7649675,175.04867 44.4763119,175.080223 44.1030342,175.088161 L41.1173253,175.005568 C40.7112732,175.02393 40.4325343,175.047974 40.2811087,175.077698 C40.1296832,175.107422 39.9722822,175.168991 39.8089057,175.262406 C39.5219149,175.457575 39.3045692,175.645642 39.1568684,175.826606 C38.7208808,176.360783 38.3045672,177.145062 38.1551906,177.678897 C37.9299069,178.484005 37.9299069,179.60543 38.1551906,181.043174 L77.659345,181.043174 C77.8944517,180.995828 78.0481561,180.925753 78.1204582,180.832948 C78.2051095,180.724292 78.2856661,180.574915 78.3252159,180.428491 C78.3794488,180.227705 78.3761275,180.028553 78.3790355,179.911779 C78.3981608,179.143769 78.4573589,178.088301 78.3790355,177.678897 C78.3038242,177.28576 78.030122,176.654774 77.6002276,176.207323 C77.407063,176.00627 77.043805,175.762584 76.5104536,175.476266 C76.2535989,175.363181 76.0437353,175.306735 75.8808626,175.306926 C75.0265899,175.30793 74.2137733,175.450448 73.7432399,175.375429 C73.3801393,175.317538 72.6998757,175.243233 72.2029052,175.101981 C71.9820925,175.039221 71.6397067,174.880469 71.175748,174.625725 C70.4329461,173.912773 69.9118006,173.372154 69.6123115,173.003868 C69.3128223,172.635582 68.9430411,172.080614 68.5029678,171.338966 C68.0463806,170.315838 67.7114246,169.43245 67.4980997,168.688801 C67.4498253,168.520517 67.3983123,168.315879 67.2437605,167.893812 C67.1313593,167.458507 67.0331,167.064201 66.9508303,166.717532 C66.8698678,166.376372 66.7939644,165.848672 66.7231199,165.134434 L66.7231199,51.1975939 C66.7368394,50.8764038 66.7489056,50.6604967 66.7593185,50.5498725 C66.7835736,50.292191 66.8208619,50.1576067 66.8256637,50.1196815 C66.8388015,50.0173408 66.9913741,49.4637367 67.2074695,49.2364415 C67.3290176,49.1085938 67.5077403,48.9242231 67.7676931,48.7699414 C67.9698997,48.649932 68.2280269,48.5566431 68.5029678,48.4674245 C68.7003494,48.403374 69.1427059,48.3497969 69.8300373,48.3066931 L114.922969,48.3066931 C116.843994,48.3263147 118.087469,49.1083841 118.653393,50.6529015 C118.957862,51.4838544 119.054046,52.2660776 119.21514,53.4060376 C119.307364,54.0586499 119.307364,55.160882 119.21514,56.712734 L101.000953,221.455259 C100.918973,232.788593 103.918973,238.455259 110.000953,238.455259 C119.000953,238.455259 136.000953,223.455259 136.000953,210.455259 C136.000953,208.627077 133.951595,208.809228 132.000953,210.455259 C126.482707,215.111781 116.478616,228.84357 115.000953,221.455259 C114.167403,217.287505 115.572131,204.609904 119.21514,183.422456 L135.422781,47.5301469 C135.456527,47.3365323 135.48205,47.2004318 135.499349,47.1218455 C135.516648,47.0432592 135.532474,46.9760956 135.546828,46.9203548 C135.586204,46.7984842 135.623549,46.7074428 135.658864,46.6472305 C135.694179,46.5870182 135.762372,46.5032626 135.863442,46.3959637 C135.946871,46.3265272 136.024889,46.2768566 136.097497,46.2469519 C136.170104,46.2170472 136.298908,46.1839297 136.483908,46.1475992 C136.653938,46.1246855 136.813838,46.1132287 136.963608,46.1132287 C137.113379,46.1132287 137.498342,46.1246855 138.118498,46.1475992 L148.477629,46.7428987 C149.454839,46.6608258 150.203298,46.0993341 150.723009,45.0584237 C151.502574,43.497058 151.864548,41.7609924 151.864548,40.9032171 C151.864548,40.0454418 151.881866,39.4239249 151.392573,37.7045107 C151.066378,36.5582346 150.559838,35.8084841 149.872952,35.4552592 Z" 
+                id="Path" 
+                stroke="#FFFFFF" 
+                stroke-width="0.5">
+            </path>
+            <polygon 
+                id="Path-3" 
+                points="126.499867 1.77635684e-15 123.523873 4.96630575 120.528585 9.96480958 123.331169 15.1470329 126.499867 21.0062319 129.667118 15.1621108 132.483822 9.96480958 129.475752 4.95560728">
+            </polygon>
+        </g>
+    </g>
+</svg>`;
+
+// Function to create a texture from SVG
+function createSVGTexture(svgString, callback) {
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = () => {
+        const texture = new THREE.Texture(img);
+        texture.needsUpdate = true;
+        callback(texture);
+        URL.revokeObjectURL(url); // Clean up
+    };
+    img.onerror = (e) => {
+        console.error('Error loading SVG as texture', e);
+    };
+    img.src = url;
+}
+
+// Initialize the scene after the texture is loaded
+createSVGTexture(svg, (texture) => {
+    shaderMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            color: { value: new THREE.Color(PARTICLE_COLOR) }, // Fixed color from CSS
+            pointTexture: { value: texture } // Pass the SVG texture
+        },
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        transparent: true
+    });
+
+    init();
+    animate();
+});
+
+function init() {
+    const container = document.getElementById('threeJsContainer');
+    if (!container) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+  
+    camera = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 1, 10000);
+    camera.position.z = 1000;
+    scene = new THREE.Scene();
+
+    //
+
+    const numParticles = AMOUNTX * AMOUNTY;
+
+    const positions = new Float32Array(numParticles * 3);
+    const scales = new Float32Array(numParticles);
+
+    let i = 0, j = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        positions[i] = ix * SEPARATION_X - ((AMOUNTX * SEPARATION_X) / 2);
+        positions[i + 1] = 0;
+        positions[i + 2] = iy * SEPARATION_Y - ((AMOUNTY * SEPARATION_Y) / 2);
+        scales[j] = 1;
+        i += 3;
+        j++;
+      }
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
+  
+    particles = new THREE.Points(geometry, shaderMaterial);
+    scene.add(particles);
+  
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(containerWidth, containerHeight);
+    container.appendChild(renderer.domElement);
+  
+    container.addEventListener('mousemove', onDocumentMouseMove, { passive: true });
+    container.addEventListener('touchstart', onDocumentTouchStart, { passive: true });
+    container.addEventListener('touchmove', onDocumentTouchMove, { passive: true });
+
+    //
+
+    window.addEventListener('resize', onWindowResize, { passive: false });
+}
+
+function onWindowResize() {
+    const container = document.getElementById('threeJsContainer');
+    if (!container) return;
+      windowHalfX = window.innerWidth / 2;
+    const containerRect = container.getBoundingClientRect();
+      windowHalfY = window.innerHeight / 2;
+    const containerWidth = containerRect.width;
+    const containerHeight = containerRect.height;
+      camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = containerWidth / containerHeight;
+      camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(containerWidth, containerHeight);
+
+}
+
+//
+
+function onDocumentMouseMove(event) {
+    const container = document.getElementById('threeJsContainer');
+    if (!container) return;
+  
+    const containerRect = container.getBoundingClientRect();
+    mouseX = event.clientX - containerRect.left - containerRect.width / 2;
+  }
+  
+  function onDocumentTouchStart(event) {
+    if (event.touches.length === 1) {
+      const container = document.getElementById('threeJsContainer');
+      if (!container) return;
+      
+      const containerRect = container.getBoundingClientRect();
+      mouseX = event.touches[0].pageX - containerRect.left - containerRect.width / 2;
+      console.log('Container Touch Start');
+    }
+  }
+  
+  function onDocumentTouchMove(event) {
+    if (event.touches.length === 1) {
+      const container = document.getElementById('threeJsContainer');
+      if (!container) return;
+  
+      const containerRect = container.getBoundingClientRect();
+      mouseX = event.touches[0].pageX - containerRect.left - containerRect.width / 2;
+      console.log('Container Touch Move');
+    }
+  }
+//
+
+function getCurrentColor() {
+
+    return new THREE.Color(PARTICLE_COLOR);
+}
+
+function animate() {
+        render();
+        requestAnimationFrame(animate);
+
+
+}
+
+function render() {
+    if (shaderMaterial && shaderMaterial.uniforms.color) {
+      shaderMaterial.uniforms.color.value.copy(getCurrentColor());
+    }
+  
+    camera.position.x += (mouseX - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+  
+    const positions = particles.geometry.attributes.position.array;
+    const scales = particles.geometry.attributes.scale.array;
+  
+    let i = 0, j = 0;
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        positions[i + 1] = (Math.sin((ix + count) * 0.3) * (SEPARATION_Y / 2)) +
+          (Math.sin((iy + count) * 0.5) * (SEPARATION_Y / 2));
+        scales[j] = PARTICLE_SIZE * ((Math.sin((ix + count) * 0.3) + 1) * 8 +
+          (Math.sin((iy + count) * 0.5) + 1) * 8);
+        i += 3;
+        j++;
+      }
+    }
+  
+    particles.geometry.attributes.position.needsUpdate = true;
+    particles.geometry.attributes.scale.needsUpdate = true;
+  
+    renderer.render(scene, camera);
+    count += SPEED;
+  }
+
+
+
+================================================================================
+FILE: scroll-indicator.js
+PATH: pi_website_take5\assets\js\scroll-indicator.js
+================================================================================
+
+/**
+ * Scroll Indicator Handler
+ * Shows only the scroll indicator for the currently visible section
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all scroll indicators
+    const scrollIndicators = document.querySelectorAll('.scroll-indicator');
+    
+    // Function to determine which section is currently most visible
+    function getCurrentSection() {
+        const sections = document.querySelectorAll('.full-page-section, .hero');
+        let maxVisibleSection = null;
+        let maxVisibleAmount = 0;
+        const viewportHeight = window.innerHeight;
+        const scrollPosition = window.scrollY;
+        
+        sections.forEach(section => {
+            if (!section.id) return; // Skip sections without IDs
+            
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + scrollPosition;
+            const sectionHeight = rect.height;
+            
+            // Calculate visibility percentage
+            const visibleTop = Math.max(scrollPosition, sectionTop);
+            const visibleBottom = Math.min(scrollPosition + viewportHeight, sectionTop + sectionHeight);
+            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+            const visibilityPercentage = visibleHeight / viewportHeight;
+            
+            // If this section has more visible area than previously found max
+            if (visibilityPercentage > maxVisibleAmount) {
+                maxVisibleAmount = visibilityPercentage;
+                maxVisibleSection = section.id;
+            }
+        });
+        
+        return maxVisibleSection;
+    }
+    
+    // Function to update scroll indicator visibility
+    function updateScrollIndicators() {
+        const currentSection = getCurrentSection();
+        
+        // Hide all scroll indicators first
+        scrollIndicators.forEach(indicator => {
+            indicator.classList.remove('is-visible');
+            indicator.style.opacity = '0';
+            indicator.style.pointerEvents = 'none';
+            
+            // If we're on contact-us, completely hide all indicators
+            if (currentSection === 'contact-us') {
+                indicator.style.display = 'none';
+            } else {
+                indicator.style.display = 'block';
+            }
+        });
+        
+        // Show indicator only if current section is not contact-us and is valid
+        if (currentSection && currentSection !== 'contact-us') {
+            // Find the indicator for the current section
+            let currentIndicator = document.querySelector(`.scroll-indicator[data-parent-section="${currentSection}"]`);
+            
+            // If no exact match, check if it's a segment section
+            if (!currentIndicator && currentSection.startsWith('segment-')) {
+                // Try to find a generic segment indicator
+                currentIndicator = document.querySelector(`.scroll-indicator[data-parent-section="${currentSection}"]`);
+            }
+            
+            if (currentIndicator) {
+                currentIndicator.classList.add('is-visible');
+                currentIndicator.style.opacity = '1';
+                currentIndicator.style.pointerEvents = 'auto';
+            }
+        }
+    }
+    
+    // Add click event listeners to all scroll indicators
+    scrollIndicators.forEach(indicator => {
+        const link = indicator.querySelector('a.scroll-down');
+        if (link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Smooth scroll to the target
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                    
+                    // Update indicators after scrolling
+                    setTimeout(updateScrollIndicators, 1000);
+                }
+            });
+        }
+    });
+    
+    // Throttle function to limit how often a function runs
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+    
+    // Initial hide for all indicators, then show as needed
+    scrollIndicators.forEach(indicator => {
+        indicator.style.opacity = '0';
+    });
+    
+    // Update on scroll with throttling
+    window.addEventListener('scroll', throttle(updateScrollIndicators, 100));
+    
+    // Also update on window resize
+    window.addEventListener('resize', throttle(updateScrollIndicators, 100));
+    
+    // Make sure we run this after the page is fully loaded
+    window.addEventListener('load', function() {
+        setTimeout(updateScrollIndicators, 100);
+    });
+    
+    // Update when clicking on any link
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function() {
+            // Short delay to let the page scroll
+            setTimeout(updateScrollIndicators, 500);
+        });
+    });
+}); 
+
+
+================================================================================
+FILE: shaders.js
+PATH: pi_website_take5\assets\js\shaders.js
+================================================================================
+
+/**
+ * WebGL shaders for the particle wave effect
+ * Used by pi_bg_wave.js
+ */
+
+// Vertex Shader
+export const vertexShader = `
+    precision mediump float;
+
+    attribute float scale;
+
+    void main() {
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = scale * (450.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+    }
+`;
+
+// Fragment Shader
+export const fragmentShader = `
+    precision mediump float;
+
+    uniform sampler2D pointTexture;
+    uniform vec3 color;
+
+    varying float vDigitIndex;
+
+    void main() {
+        vec4 texColor = texture2D(pointTexture, vec2(gl_PointCoord.x,1.0-gl_PointCoord.y));
+        if (texColor.a < 0.1) discard; // Discard transparent pixels
+        gl_FragColor = vec4(color, 1.0) * texColor;
+    }
+`; 
+

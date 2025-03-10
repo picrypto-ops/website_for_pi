@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Home - Segment</title>
+    <title>Home - Product</title>
     <meta name="description" content="Financial Management Professionals">
-    <link rel="canonical" href="https://www.pigroup.com/en/segment">
-    <meta property="og:title" content="Home - Segment">
+    <link rel="canonical" href="https://www.pigroup.com/en/product">
+    <meta property="og:title" content="Home - Product">
     <meta property="og:description" content="Financial Management Professionals">
-    <meta property="og:url" content="https://www.pigroup.com/en/segment">
+    <meta property="og:url" content="https://www.pigroup.com/en/product">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
@@ -16,7 +16,7 @@
     <script src="assets/js/menu.js" defer></script>
     <script src="assets/js/language-switcher.js" defer></script>
     </head>
-<body class="segment-page">
+<body class="product-page">
     <header id="site-header" class="">
         <div class="container">
             <div class="header-content">
@@ -49,12 +49,12 @@
                                 Home                            </a>
                         </li>
                                                 <li class="">
-                            <a href="?page=segment&id=investment_banking&lang=en">
-                                Investment Banking                            </a>
-                        </li>
-                                                <li class="">
                             <a href="?page=segment&id=asset_management&lang=en">
                                 Asset Management                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=segment&id=investment_banking&lang=en">
+                                Investment Banking                            </a>
                         </li>
                                                 <li class="">
                             <a href="?page=our-team&lang=en">
@@ -72,46 +72,29 @@
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?page=segment&id=investment_banking&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=segment&id=investment_banking&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?page=product&id=pi_emf&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=product&id=pi_emf&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
         </div>
     </header>
     <main id="main-content">
 
 
-<section class="segment">
+<section class="product">
     <div class="container">
-        <h1>Investment Banking</h1>
-        <div class="segment-description">
-            Our investment banking services are tailored to advise and support exceptional financial innovators and dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth. In the past, we have invested alongside our partners in every deal we have structured.        </div>
+        <div class="product-header">
+                            <div class="product-logo">
+                    <img src="assets/images/asset_management/pi_emf_retired/logo_large.svg" alt="PI EMF (retired)">
+                </div>
+                        <div class="product-title">
+                <h1>PI EMF (retired)</h1>
+                                    <p class="product-slogan">Mastering Market Discrepancies</p>
+                            </div>
+        </div>
+        
+        <div class="product-description">
+            The Pi EMF fund was an absolute return macro volatility fund that capitalized on pricing discrepancies in currencies, interest rates, stocks, and other asset classes around the globe. The fund employed sophisticated derivative strategies to exploit market inefficiencies and generate consistent returns for its investors. Throughout its 18-year operational history, Pi EMF never experienced a losing year.        </div>
 
-        <h3>Our Products</h3>
-        <div class="product-grid">
-                                                <a href="?page=product&id=pi_pituach&lang=en" class="product-card">
-                        <div class="product-content">
-                            <div class="product-icon">
-                                                                    <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
-                                                            </div>
-                            <div class="product-text">
-                                <h3>PI Pituach</h3>
-                            </div>
-                        </div>
-                        <p class="slogan">
-                            Innovate Today, Secure Tomorrow                        </p>
-                    </a>
-                                    <a href="?page=product&id=pi_select&lang=en" class="product-card">
-                        <div class="product-content">
-                            <div class="product-icon">
-                                                                    <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
-                                                            </div>
-                            <div class="product-text">
-                                <h3>PI Select</h3>
-                            </div>
-                        </div>
-                        <p class="slogan">
-                            Invest With Confidence                        </p>
-                    </a>
-                                    </div>
-    </div>
+        
+            </div>
 </section>
 
 </main>

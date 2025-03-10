@@ -156,6 +156,9 @@ header {
   z-index: 1000;
   transition: transform 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
   /* Hide the mobile menu toggle button by default (for desktop) */
 }
 header.initially-hidden {
@@ -580,6 +583,45 @@ body:not(.home-page) {
   }
   header .header-content .main-nav ul li.active a {
     background-color: rgba(255, 255, 255, 0.15);
+  }
+}
+/* Special fix for the exact width mentioned by user */
+@media (min-width: 420px) and (max-width: 767px) {
+  header .mobile-menu-toggle {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+  }
+  header .mobile-menu-toggle:before {
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+  html[dir=ltr] header .mobile-menu-toggle {
+    left: 5px;
+  }
+  html[dir=rtl] header .mobile-menu-toggle {
+    right: 5px;
+  }
+  header.home-header.initially-hidden {
+    overflow: visible;
+  }
+  header.home-header.initially-hidden .mobile-menu-toggle {
+    position: fixed;
+    top: 15px;
+    z-index: 2500;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background-color: rgba(114, 151, 197, 0.9);
+    border-radius: 4px;
+  }
+  html[dir=ltr] header.home-header.initially-hidden .mobile-menu-toggle {
+    left: 15px;
+  }
+  html[dir=rtl] header.home-header.initially-hidden .mobile-menu-toggle {
+    right: 15px;
   }
 }
 footer {

@@ -12,6 +12,9 @@ header {
   z-index: 1000;
   transition: variables.$header-transition;
   box-shadow: variables.$header-shadow;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
 
   &.initially-hidden {
     transform: translateY(-100%);
@@ -542,6 +545,59 @@ body:not(.home-page) {
             }
           }
         }
+      }
+    }
+  }
+}
+
+// Create special styles for home page with menu open
+
+
+/* Special fix for the exact width mentioned by user */
+@media (min-width: 420px) and (max-width: 767px) {
+  header {
+    
+    .mobile-menu-toggle {
+      width: 36px; // Reduce even further for this specific range
+      height: 36px;
+      padding: 6px;
+      
+      &:before {
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+      }
+    }
+    
+    html[dir="ltr"] & .mobile-menu-toggle {
+      left: 5px;
+    }
+    
+    html[dir="rtl"] & .mobile-menu-toggle {
+      right: 5px;
+    }
+    
+    &.home-header.initially-hidden {
+      overflow: visible;
+      
+      .mobile-menu-toggle {
+        position: fixed;
+        top: 15px;
+        z-index: 2500;
+        width: 40px; // Slightly larger for better visibility
+        height: 40px;
+        padding: 8px;
+        background-color: rgba(114, 151, 197, 0.9); // Match header background with some transparency
+        border-radius: 4px;
+      }
+      
+      html[dir="ltr"] & .mobile-menu-toggle {
+        left: 15px;
+      }
+      
+      html[dir="rtl"] & .mobile-menu-toggle {
+        right: 15px;
       }
     }
   }

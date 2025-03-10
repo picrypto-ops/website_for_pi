@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" style="overflow-x: hidden; max-width: 100vw;">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -18,10 +18,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script type="module" src="assets/js/pi_bg_wave.js"></script>
     </head>
-<body class="home-page" style="overflow-x: hidden; max-width: 100vw;">
-    <header id="site-header" class="home-header initially-hidden no-overflow" style="overflow-x: hidden; max-width: 100vw; width: 100%;">
-        <div class="container" style="overflow-x: hidden; max-width: 100%;">
-            <div class="header-content" style="overflow-x: hidden; max-width: 100%;">
+<body class="home-page">
+    <header id="site-header" class="home-header initially-hidden">
+        <div class="container">
+            <div class="header-content">
                 <!-- Mobile menu toggle button for screens < 768px -->
                 <button class="mobile-menu-toggle" 
                     aria-label="Toggle navigation menu" 
@@ -34,11 +34,11 @@
                 </button>
                 
                 <!-- Section 1: Logo & Group name -->
-                <div class="logo-section" style="overflow-x: hidden; max-width: 100%;">
+                <div class="logo-section">
                     <a href="?page=home&lang=en" class="logo-link">
-                        <div class="logo-container" style="overflow-x: hidden; max-width: 100%;">
-                            <img src="assets/images/logo_small.svg" alt="PI Group Logo" style="max-width: 30px;">
-                            <span class="group-name" style="white-space: normal; overflow-wrap: break-word; max-width: calc(100vw - 100px);">PI Group</span>
+                        <div class="logo-container">
+                            <img src="assets/images/logo_small.svg" alt="PI Group Logo">
+                            <span class="group-name">PI Group</span>
                         </div>
                     </a>
                 </div>
@@ -51,12 +51,12 @@
                                 Home                            </a>
                         </li>
                                                 <li class="">
-                            <a href="?page=segment&id=investment_banking&lang=en">
-                                Investment Banking                            </a>
-                        </li>
-                                                <li class="">
                             <a href="?page=segment&id=asset_management&lang=en">
                                 Asset Management                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=segment&id=investment_banking&lang=en">
+                                Investment Banking                            </a>
                         </li>
                                                 <li class="">
                             <a href="?page=our-team&lang=en">
@@ -74,10 +74,10 @@
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=home&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
         </div>
     </header>
-    <main id="main-content" style="overflow-x: hidden; max-width: 100vw;">
+    <main id="main-content">
 
 
 <div class="home-page">
@@ -90,7 +90,7 @@
         
         <!-- Language Switcher positioned at top left/right depending on language -->
         <div class="hero-language-switcher left-aligned">
-            <a href="?page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=home&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
+            <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
         
         <!-- Clean, minimal hero menu -->
         <div class="hero-menu right-aligned">
@@ -104,12 +104,12 @@
                             Home                        </a>
                     </li>
                                         <li>
-                        <a href="?page=segment&id=investment_banking&lang=en">
-                            Investment Banking                        </a>
-                    </li>
-                                        <li>
                         <a href="?page=segment&id=asset_management&lang=en">
                             Asset Management                        </a>
+                    </li>
+                                        <li>
+                        <a href="?page=segment&id=investment_banking&lang=en">
+                            Investment Banking                        </a>
                     </li>
                                         <li>
                         <a href="?page=our-team&lang=en">
@@ -131,7 +131,7 @@
             <h1>Unwavering Professionalism <br>Exceptional Results</h1>
             <p class="slogan"></p>
             <p class="wide-description content-with-html">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
-                        <a href="#segment-investment_banking" class="cta-button">
+                        <a href="#segment-asset_management" class="cta-button">
                 Learn More            </a>
         </div>
 
@@ -140,7 +140,7 @@
         
         <!-- Render scroll indicator with function -->
             <div class="scroll-indicator" data-parent-section="hero">
-        <a href="#segment-investment_banking" class="scroll-down" data-target="segment-investment_banking">
+        <a href="#segment-asset_management" class="scroll-down" data-target="segment-asset_management">
             <span class="sr-only"></span>
             <i class="arrow-down"></i>
         </a>
@@ -148,54 +148,6 @@
         </section>
 
     <!-- Render all page sections using functions -->
-        
-    <section id="segment-investment_banking" class="segment full-page-section">
-        <div class="container">
-            <h2>Investment Banking</h2>
-            <div class="segment-section-description">
-                Our investment banking services are tailored to advise and support exceptional financial innovators and dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth. In the past, we have invested alongside our partners in every deal we have structured.            </div>
-
-            <h3>Our Products</h3>
-            <div class="product-grid">
-                                                            <a href="?page=product&id=pi_pituach&lang=en" class="product-card">
-                            <div class="product-content">
-                                <div class="product-icon">
-                                                                            <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
-                                                                    </div>
-                                <div class="product-text">
-                                    <h3>PI Pituach</h3>
-                                </div>
-                            </div>
-                            <p class="slogan">
-                                Innovate Today, Secure Tomorrow                            </p>
-                        </a>
-                                            <a href="?page=product&id=pi_select&lang=en" class="product-card">
-                            <div class="product-content">
-                                <div class="product-icon">
-                                                                            <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
-                                                                    </div>
-                                <div class="product-text">
-                                    <h3>PI Select</h3>
-                                </div>
-                            </div>
-                            <p class="slogan">
-                                Invest With Confidence                            </p>
-                        </a>
-                                                </div>
-            
-            <div class="back-to-segments">
-                <a href="#hero" class="back-link">
-                    Back to Home                </a>
-            </div>
-        </div>
-        
-            <div class="scroll-indicator" data-parent-section="segment-investment_banking">
-        <a href="#segment-asset_management" class="scroll-down" data-target="segment-asset_management">
-            <span class="sr-only"></span>
-            <i class="arrow-down"></i>
-        </a>
-    </div>
-        </section>
         
     <section id="segment-asset_management" class="segment full-page-section">
         <div class="container">
@@ -250,6 +202,54 @@
         </div>
         
             <div class="scroll-indicator" data-parent-section="segment-asset_management">
+        <a href="#segment-investment_banking" class="scroll-down" data-target="segment-investment_banking">
+            <span class="sr-only"></span>
+            <i class="arrow-down"></i>
+        </a>
+    </div>
+        </section>
+        
+    <section id="segment-investment_banking" class="segment full-page-section">
+        <div class="container">
+            <h2>Investment Banking</h2>
+            <div class="segment-section-description">
+                Our investment banking services are tailored to advise and support exceptional financial innovators and dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth. In the past, we have invested alongside our partners in every deal we have structured.            </div>
+
+            <h3>Our Products</h3>
+            <div class="product-grid">
+                                                            <a href="?page=product&id=pi_pituach&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                            <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI Pituach">
+                                                                    </div>
+                                <div class="product-text">
+                                    <h3>PI Pituach</h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                Innovate Today, Secure Tomorrow                            </p>
+                        </a>
+                                            <a href="?page=product&id=pi_select&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                            <img src="assets/images/investment_banking/pi_select/logo_large.svg" alt="PI Select">
+                                                                    </div>
+                                <div class="product-text">
+                                    <h3>PI Select</h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                Invest With Confidence                            </p>
+                        </a>
+                                                </div>
+            
+            <div class="back-to-segments">
+                <a href="#hero" class="back-link">
+                    Back to Home                </a>
+            </div>
+        </div>
+        
+            <div class="scroll-indicator" data-parent-section="segment-investment_banking">
         <a href="#team" class="scroll-down" data-target="team">
             <span class="sr-only"></span>
             <i class="arrow-down"></i>
@@ -692,7 +692,7 @@
     <nav class="breadcrumb-navigation">
         <ul>
             <li><a href="#hero">Home</a></li>
-            <li><a href="#segment-investment_banking">Segments</a></li>
+            <li><a href="#segment-asset_management">Segments</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="#about-us">About</a></li>
             <li><a href="#contact-us">Contact</a></li>

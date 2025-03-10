@@ -14,42 +14,6 @@
             "items": []
         },
         {
-            "main_page_slug": "investment_banking",
-            "url": "/investment-banking",
-            "language_slug": {
-                "en": {
-                    "label": "Investment Banking"
-                },
-                "he": {
-                    "label": "בנקאות השקעות"
-                }
-            },
-            "items": [
-                {
-                    "url": "/investment-banking/pi-pituach",
-                    "language_slug": {
-                        "en": {
-                            "label": "PI Pituach"
-                        },
-                        "he": {
-                            "label": "פאי פיתוח"
-                        }
-                    }
-                },
-                {
-                    "url": "/investment-banking/pi-select",
-                    "language_slug": {
-                        "en": {
-                            "label": "PI Select"
-                        },
-                        "he": {
-                            "label": "פאי סלקט"
-                        }
-                    }
-                }
-            ]
-        },
-        {
             "main_page_slug": "asset_management",
             "url": "/asset-management",
             "language_slug": {
@@ -96,6 +60,42 @@
                 }
             ]
         },
+        {
+            "main_page_slug": "investment_banking",
+            "url": "/investment-banking",
+            "language_slug": {
+                "en": {
+                    "label": "Investment Banking"
+                },
+                "he": {
+                    "label": "בנקאות השקעות"
+                }
+            },
+            "items": [
+                {
+                    "url": "/investment-banking/pi-pituach",
+                    "language_slug": {
+                        "en": {
+                            "label": "PI Pituach"
+                        },
+                        "he": {
+                            "label": "פאי פיתוח"
+                        }
+                    }
+                },
+                {
+                    "url": "/investment-banking/pi-select",
+                    "language_slug": {
+                        "en": {
+                            "label": "PI Select"
+                        },
+                        "he": {
+                            "label": "פאי סלקט"
+                        }
+                    }
+                }
+            ]
+        },        
         {
             "main_page_slug": "team",
             "url": "/team",
