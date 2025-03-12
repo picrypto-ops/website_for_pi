@@ -2782,6 +2782,18 @@ html[dir=rtl] .segment .product-card .slogan:hover .arrow {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
+  /* Placeholder for maintaining layout when a button is missing */
+}
+.member-navigation .navigation-placeholder {
+  width: 46px;
+  height: 46px;
+  pointer-events: none;
+}
+@media (max-width: 767px) {
+  .member-navigation .navigation-placeholder {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 .navigation-button {

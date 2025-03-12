@@ -180,12 +180,14 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                 </div>
             </div>
             
-            <div class="member-navigation">
+            <div class="member-navigation<?php echo $isFirst ? ' first-member' : ''; ?><?php echo $isLast ? ' last-member' : ''; ?>">
                 <?php if (!$isFirst) { ?>
                 <a href="?page=team-member&id=<?php echo $prevMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button prev-button" data-tooltip="<?php echo TranslatableFactory::general()->getContent($lang, 'previous', 'Previous'); ?>">
                     <span class="nav-icon">←</span>
                     <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'previous', 'Previous'); ?></span>
                 </a>
+                <?php } else { ?>
+                <div class="navigation-placeholder"></div>
                 <?php } ?>
                 
                 <?php if (!$isLast) { ?>
@@ -193,6 +195,8 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                     <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'next', 'Next'); ?></span>
                     <span class="nav-icon">→</span>
                 </a>
+                <?php } else { ?>
+                <div class="navigation-placeholder"></div>
                 <?php } ?>
             </div>
         </div>
