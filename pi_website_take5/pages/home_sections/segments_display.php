@@ -68,14 +68,13 @@ function renderSegmentDisplay($lang, $segment_slug, $nextSectionId = null) {
                         // Create a proper translatable for this product
                         $productTranslatable = TranslatableFactory::product($productSlug);
                     ?>
-                        <a href="?page=product&id=<?php echo $productSlug; ?>&lang=<?php echo $lang; ?>" class="product-card">
+                        <a href="?page=product&id=<?php echo $productSlug; ?>&segment=<?php echo $segment_slug; ?>&lang=<?php echo $lang; ?>" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
-                                    <?php if (isset($product['logo']) && !empty($product['logo'])): ?>
-                                        <img src="<?php echo $product['logo']; ?>" alt="<?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Product'; ?>">
-                                    <?php else: ?>
-                                        <img src="assets/images/products/pi-logo-icon.svg" alt="PI Logo">
-                                    <?php endif; ?>
+                                    <?php 
+                                        $productLogoPath = getProductLogoPath($product);
+                                    ?>
+                                    <img src="<?php echo $productLogoPath; ?>" alt="<?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Product'; ?>">
                                 </div>
                                 <div class="product-text">
                                     <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>

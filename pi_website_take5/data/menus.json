@@ -76,7 +76,7 @@
                     "url": "/investment-banking/pi-pituach",
                     "language_slug": {
                         "en": {
-                            "label": "PI Pituach"
+                            "label": "PI PItuach"
                         },
                         "he": {
                             "label": "פאי פיתוח"
@@ -97,8 +97,8 @@
             ]
         },        
         {
-            "main_page_slug": "team",
-            "url": "/team",
+            "main_page_slug": "our-team",
+            "url": "/our-team",
             "language_slug": {
                 "en": {
                     "label": "Our Team"

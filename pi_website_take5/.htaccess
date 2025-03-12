@@ -1,19 +1,97 @@
-# Enable gzip compression
+# Enable gzip compression with enhanced file types
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+    # Add svg, font types, and more mime types
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml application/rss+xml application/atom+xml
+    AddOutputFilterByType DEFLATE image/svg+xml application/font-woff application/font-woff2
+    AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype application/vnd.ms-fontobject
 </IfModule>
 
-# Set cache headers
+# Set cache headers with expanded filetypes and improved configuration
 <IfModule mod_expires.c>
     ExpiresActive On
+    
+    # Images - 1 year
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType text/html "access plus 1 day"
-    ExpiresByType text/xml "access plus 1 day"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Video/Audio - 1 year
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType audio/mp3 "access plus 1 year"
+    ExpiresByType audio/ogg "access plus 1 year"
+    ExpiresByType video/webm "access plus 1 year"
+    
+    # CSS, JavaScript - extended to 6 months
+    ExpiresByType text/css "access plus 6 months"
+    ExpiresByType application/javascript "access plus 6 months"
+    ExpiresByType text/javascript "access plus 6 months"
+    
+    # Fonts - 1 year
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/otf "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    
+    # Data formats - increased to 1 week
+    ExpiresByType text/html "access plus 1 week"
+    ExpiresByType text/xml "access plus 1 week"
+    ExpiresByType application/xml "access plus 1 week"
+    ExpiresByType application/json "access plus 1 week"
+    
+    # Default: everything else
+    ExpiresDefault "access plus 1 week"
+</IfModule>
+
+# Additional caching controls
+<IfModule mod_headers.c>
+    # Cache immutable resources for 1 year
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|svg|js|css|swf|webp|avif|woff|woff2|ttf|otf)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    
+    # Cache HTML and XML files for 1 day, must revalidate
+    <FilesMatch "\.(html|htm|xml|txt|xsl)$">
+        Header set Cache-Control "public, max-age=86400, must-revalidate"
+    </FilesMatch>
+    
+    # Set ETag for better caching
+    FileETag MTime Size
+    
+    # Add Vary header for correct caching with compression
+    Header append Vary Accept-Encoding
+    Header append Vary Accept
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    # Protect against XSS attacks
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Prevent MIME-type sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy - customize as needed for your site
+    # Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self';"
+    
+    # HSTS (uncomment if you have SSL properly configured)
+    # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Prevent this site from being framed
+    Header set X-Frame-Options "SAMEORIGIN"
 </IfModule>
 
 # Rewrite rules for clean URLs
@@ -24,25 +102,78 @@
     # Redirect to HTTPS
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
+    
+    # Force www (uncomment if needed)
+    # RewriteCond %{HTTP_HOST} !^www\. [NC]
+    # RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Remove trailing slash
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+    
+    # Block access to sensitive files
+    RewriteRule ^(?:\.git|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|config\.php)$ - [F,L]
+    
     # Rewrite URLs to index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 
-# Serve WebP images if supported
+# Serve modern image formats if supported
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+    # WebP Support
     RewriteCond %{HTTP_ACCEPT} image/webp
     RewriteCond %{REQUEST_FILENAME} (.*)\.(jpe?g|png)$
     RewriteCond %{REQUEST_FILENAME}\.webp -f
     RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1]
+    
+    # AVIF Support (even better compression than WebP)
+    RewriteCond %{HTTP_ACCEPT} image/avif
+    RewriteCond %{REQUEST_FILENAME} (.*)\.(jpe?g|png|webp)$
+    RewriteCond %{REQUEST_FILENAME}\.avif -f
+    RewriteRule (.+)\.(jpe?g|png|webp)$ $1.avif [T=image/avif,E=accept:1]
 </IfModule>
 
 <IfModule mod_headers.c>
     Header append Vary Accept env=REDIRECT_accept
 </IfModule>
 
+# Define MIME types
 AddType image/webp .webp
+AddType image/avif .avif
+AddType image/svg+xml .svg
+AddType application/font-woff .woff
+AddType application/font-woff2 .woff2
+
+# PHP Settings
+<IfModule mod_php.c>
+    # Maximum execution time
+    php_value max_execution_time 120
+    
+    # Maximum file upload size
+    php_value upload_max_filesize 12M
+    php_value post_max_size 16M
+    
+    # Memory limit
+    php_value memory_limit 256M
+    
+    # Error handling (set to Off in production)
+    php_flag display_errors Off
+    php_flag log_errors On
+    
+    # Session security
+    php_flag session.cookie_httponly On
+    php_flag session.use_only_cookies On
+    php_flag session.cookie_secure On
+</IfModule>
+
+# Custom error pages
+ErrorDocument 404 /index.php?url=error/404
+ErrorDocument 500 /index.php?url=error/500
+ErrorDocument 403 /index.php?url=error/403
+
+# Disable directory browsing
+Options -Indexes
 

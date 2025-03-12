@@ -29,6 +29,7 @@ require_once 'includes/classes/translation/TranslatableFactory.php';
 
 // Enable direct browser output for TranslatableFactory
 TranslatableFactory::$debug = true;
+TranslatableFactory::$debugToScreen = true;
 
 echo "<h1>TranslatableFactory Debug Tool</h1>";
 echo "<p>This page tests the TranslatableFactory and displays detailed debug information.</p>";
@@ -430,4 +431,69 @@ function debugBukyKatzman() {
 debugBukyKatzman();
 
 echo "<p>Error log path: " . ini_get('error_log') . "</p>";
-echo "<p>This is where detailed debug logs from TranslatableFactory are being written.</p>"; 
+echo "<p>This is where detailed debug logs from TranslatableFactory are being written.</p>";
+
+/**
+ * Demonstrates the new about page structure with multiple content sections
+ * and image slider insertion
+ */
+function debugAboutPageSections() {
+    // Initialize the factory
+    TranslatableFactory::initialize();
+    
+    echo "<h1>About Page Section Structure Documentation</h1>";
+    
+    echo "<h2>How to Use Multiple Content Sections with Image Slider</h2>";
+    
+    echo "<p>The about page now supports multiple content sections with a configurable image slider position.</p>";
+    
+    echo "<h3>Data Structure:</h3>";
+    echo "<pre>
+{
+  \"about\": {
+    \"en\": {
+      \"title\": \"About Our Company\",
+      \"slogan\": \"Building Trust & Excellence Since 1995\",
+      
+      // This controls where the image slider appears (0-based index)
+      \"image_slider_insertion_index\": 2,
+      
+      // Array of content sections (paragraphs)
+      \"short_description\": [
+        \"First paragraph content...\",
+        \"Second paragraph content...\",
+        \"Third paragraph content...\",
+        \"Fourth paragraph content...\"
+      ],
+      
+      // Other content follows...
+    }
+  }
+}
+</pre>";
+    
+    echo "<h3>Example Rendering:</h3>";
+    echo "<p>With <code>image_slider_insertion_index: 2</code>, the content will display as:</p>";
+    echo "<ul>
+        <li>First paragraph</li>
+        <li>Second paragraph</li>
+        <li><strong>Image Slider appears here</strong></li>
+        <li>Third paragraph</li>
+        <li>Fourth paragraph</li>
+    </ul>";
+    
+    echo "<h3>Backward Compatibility:</h3>";
+    echo "<p>The system maintains backward compatibility for existing data. If <code>short_description</code> is a single string instead of an array, it will be converted to a single-element array.</p>";
+    
+    echo "<h3>Default Behavior:</h3>";
+    echo "<p>If <code>image_slider_insertion_index</code> is not defined, the slider will appear after the first section (index 1).</p>";
+    
+    echo "<h3>Image Configuration:</h3>";
+    echo "<p>Images for the slider should be placed in <code>assets/images/about_us/</code> directory. The slider will automatically load all supported image formats (jpg, jpeg, png, webp, gif).</p>";
+}
+
+// Add a menu entry for the new function
+$functionMenu[] = [
+    'name' => 'debugAboutPageSections',
+    'label' => 'About Page Sections with Image Slider'
+]; 

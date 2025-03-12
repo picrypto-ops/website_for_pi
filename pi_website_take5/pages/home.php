@@ -135,8 +135,6 @@ $menuData = TranslatableFactory::getData('menus') ?: [];
     </nav>
 </div>
 
-<!-- JavaScript for functionality -->
-<script src="assets/js/home.js"></script>
-<script src="assets/js/scroll-indicator.js"></script>
-<script src="assets/js/hero-menu.js"></script>
+<!-- ThreeJS Container for Background Wave -->
+<div id="threeJsContainer"></div>
 

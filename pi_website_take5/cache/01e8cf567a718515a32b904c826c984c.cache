@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Home - Product</title>
+    <title>Home - Team-member</title>
     <meta name="description" content="Financial Management Professionals">
-    <link rel="canonical" href="https://www.pigroup.com/en/product">
-    <meta property="og:title" content="Home - Product">
+    <link rel="canonical" href="https://www.pigroup.com/en/team-member">
+    <meta property="og:title" content="Home - Team-member">
     <meta property="og:description" content="Financial Management Professionals">
-    <meta property="og:url" content="https://www.pigroup.com/en/product">
+    <meta property="og:url" content="https://www.pigroup.com/en/team-member">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Load the new modular JavaScript main file -->
     <script type="module" src="assets/js/main.js"></script>
-    <script src="assets/js/menu.js" defer></script>
-    <script src="assets/js/language-switcher.js" defer></script>
     </head>
-<body class="product-page">
+<body class="team-member-page">
     <header id="site-header" class="">
         <div class="container">
             <div class="header-content">
@@ -72,29 +71,51 @@
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?page=product&id=pi_emf&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=product&id=pi_emf&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?page=team-member&id=moriel-cohen&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=team-member&id=moriel-cohen&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
         </div>
     </header>
     <main id="main-content">
 
 
-<section class="product">
+<section class="team-member-page">
     <div class="container">
-        <div class="product-header">
-                            <div class="product-logo">
-                    <img src="assets/images/asset_management/pi_emf_retired/logo_large.svg" alt="PI EMF (retired)">
-                </div>
-                        <div class="product-title">
-                <h1>PI EMF (retired)</h1>
-                                    <p class="product-slogan">Mastering Market Discrepancies</p>
-                            </div>
+        <div class="navigation-breadcrumb">
+            <a href="?page=our-team&lang=en" class="back-link">
+                <span class="back-arrow">←</span> 
+                Back to Team            </a>
         </div>
         
-        <div class="product-description">
-            The Pi EMF fund was an absolute return macro volatility fund that capitalized on pricing discrepancies in currencies, interest rates, stocks, and other asset classes around the globe. The fund employed sophisticated derivative strategies to exploit market inefficiencies and generate consistent returns for its investors. Throughout its 18-year operational history, Pi EMF never experienced a losing year.        </div>
-
-        
+        <div class="member-container">
+            <div class="member-profile-card">
+                <div class="member-header">
+                    <div class="member-title-section">
+                        <h1 class="member-name">Moriel Cohen</h1>
+                        
+                        <p class="primary-role">Investor Relations</p>                    </div>
+                </div>
+                
+                <div class="member-content">
+                    <div class="member-bio">
+                        Moriel....                    </div>
+                    
+                                        
+                                        
+                                    </div>
             </div>
+            
+            <div class="member-navigation">
+                                <a href="?page=team-member&id=hagit-borohovitz&lang=en" class="navigation-button prev-button" data-tooltip="Previous">
+                    <span class="nav-icon">←</span>
+                    <span class="nav-text">Previous</span>
+                </a>
+                                
+                                <a href="?page=team-member&id=marina-kazar&lang=en" class="navigation-button next-button" data-tooltip="Next">
+                    <span class="nav-text">Next</span>
+                    <span class="nav-icon">→</span>
+                </a>
+                            </div>
+        </div>
+    </div>
 </section>
 
 </main>
@@ -116,6 +137,19 @@
             </div>
         </div>
     </footer>
-</body>
+
+    
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="container">
+        <div class="cookie-consent-banner__content">
+            <h3>Cookie Consent</h3>
+            <p>This website uses cookies to improve your experience. By continuing to use this site, you agree to our use of cookies.</p>
+        </div>
+        <div class="cookie-consent-banner__actions">
+            <button id="cookie-accept-btn" class="accept">Accept</button>
+            <button id="cookie-decline-btn" class="decline">Decline</button>
+        </div>
+    </div>
+</div> </body>
 </html>
 

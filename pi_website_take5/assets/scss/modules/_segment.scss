@@ -129,6 +129,7 @@
         font-weight: 500;
         line-height: 1.2;
         text-align: right;
+        white-space: nowrap; /* Prevent text wrapping */
       }
     }
 

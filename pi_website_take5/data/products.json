@@ -1,104 +1,147 @@
 {
-    "investment_banking": {
-      "pi_pituach": {
-        "product_slug": "pi_pituach",
-        "logo": "assets/images/investment_banking/pi_pituach/logo_large.svg",
-        "language_slug": {
-          "en": {
-            "name": "PI Pituach",
-            "slogan": "Innovate Today, Secure Tomorrow",
-            "title": "Innovative Financial Products",
-            "description": "Pi Pituach specializes in creating, structuring, and distributing innovative financial products for a wide variety of financial institutions in Israel.<br><br>Established in 2023 by Itai Ruschkewitz , Dan Rosenberg, and Pi, Pi Pituach is at the forefront of financial engineering in the Israeli capital markets.  The partners of Pi Pituach have over 50 years of combined experience in complex financial engineering, deal making, and regulatory knowhow.<br><br>The company operates through several subsidiaries, including Pi Deposits and Pi Plus, both of which are publicly traded entities on the Tel Aviv Stock Exchange. In the past year, Pi Deposits successfully issued three series of bonds backed by deposits totaling 7.5 billion NIS."
-          },
-          "he": {
-            "name": "פאי פיתוח",
-            "slogan": "חדשנות היום, ביטחון למחר",
-            "title": "מוצרים פיננסיים חדשניים",
-            "description": "פאי פיתוח מתמחה ביצירת מוצרים פיננסיים חדשניים לניהול והעברת סיכונים, המיועדים למוסדות פיננסיים ובנקים. החברה גם מעצבת מוצרי השקעה מותאמים אישית, מפתחת פתרונות מימון מותאמים ללקוחות מוסדיים ולשוק ההון הישראלי. החברה פועלת באמצעות מספר חברות בנות, כולל פאי פיקדונות ופאי פלוס, שתיהן חברות ציבוריות הנסחרות בבורסה בתל אביב. בשנה האחרונה, פאי פיקדונות הנפיקה בהצלחה שלוש סדרות של אגרות חוב מגובות פיקדונות בסך כולל של 7.5 מיליארד ש\"ח."
-          }
+  "investment_banking": {
+    "pi_pituach": {
+      "product_slug": "pi_pituach",
+      "asset_category": "investment_banking",
+      "language_slug": {
+        "en": {
+          "name": "PI PItuach",
+          "slogan": "Innovate Today, Secure Tomorrow",
+          "title": "Innovative Financial Products",
+          "image_insertion_index": 1,
+          "description": [
+            "PI PItuach specializes in creating, structuring, and distributing innovative financial products for a wide variety of financial institutions in Israel.",
+            "Established in 2023 by Itai Ruschkewitz , Dan Rosenberg, and PI, PI PItuach is at the forefront of financial engineering in the Israeli capital markets.",
+            "The partners of PI PItuach have over 50 years of combined experience in complex financial engineering, deal-making, and regulatory know-how.",
+            "The company operates through several subsidiaries, including PI Deposits and PI Plus, both of which are publicly traded entities on the Tel Aviv Stock Exchange.",
+            "In the past year, PI Deposits successfully issued three series of bonds backed by deposits totalling 7.5 billion NIS."
+          ]
         },
-        "is_featured": true
+        "he": {
+          "name": "פאי פיתוח",
+          "slogan": "חדשנות היום, ביטחון למחר",
+          "title": "מוצרים פיננסיים חדשניים",
+          "description": "פאי פיתוח מתמחה ביצירת מוצרים פיננסיים חדשניים לניהול והעברת סיכונים, המיועדים למוסדות פיננסיים ובנקים. החברה גם מעצבת מוצרי השקעה מותאמים אישית, מפתחת פתרונות מימון מותאמים ללקוחות מוסדיים ולשוק ההון הישראלי. החברה פועלת באמצעות מספר חברות בנות, כולל פאי פיקדונות ופאי פלוס, שתיהן חברות ציבוריות הנסחרות בבורסה בתל אביב. בשנה האחרונה, פאי פיקדונות הנפיקה בהצלחה שלוש סדרות של אגרות חוב מגובות פיקדונות בסך כולל של 7.5 מיליארד ש\"ח."
+        }
       },
-      "pi_select": {
-        "product_slug": "pi_select",
-        "logo": "assets/images/investment_banking/pi_select/logo_large.svg",
-        "language_slug": {
-          "en": {
-            "name": "PI Select",
-            "slogan": "Invest With Confidence",
-            "title": "Exclusive Investment Opportunities",
-            "description": "For over three decades, Pi has been fortunate to participate in some of Israel's most promising investment opportunities — spanning private and public companies, managed funds, and real estate.<br><br> In partnership with our longtime friend and esteemed commercial lawyer, Buky Katzman, we have launched Pi Select — a boutique platform designed to offer select foreign investors the opportunity to co-invest alongside us in high-potential Israeli ventures."
-          },
-          "he": {
-            "name": "פאי סלקט",
-            "slogan": "השקעה בביטחון",
-            "title": "הזדמנויות השקעה בלעדיות",
-            "description": "במשך למעלה משלושה עשורים, פאי זכתה להשתתף ברבות מהזדמנויות ההשקעה המבטיחות ביותר בישראל - בחברות פרטיות וציבוריות, קרנות מנוהלות ונדל\"ן. בשיתוף פעולה עם ידידנו הוותיק ועורך הדין המסחרי המוערך, בוקי כצמן, השקנו את פאי סלקט - פלטפורמה בוטיק המיועדת להציע למשקיעים זרים נבחרים את ההזדמנות להשקיע לצדנו במיזמים ישראליים בעלי פוטנציאל גבוה. אנו נרגשים לחלוק את התובנות, הניסיון והרשת שלנו עם משקיעים בעלי חשיבה דומה הרואים את ההזדמנויות הייחודיות שישראל מציעה."
-          }
-        },
-        "is_featured": true
-      }
+      "is_featured": true
     },
-    "asset_management": {
-      "pi_emf": {
-        "product_slug": "pi_emf",
-        "logo": "assets/images/asset_management/pi_emf_retired/logo_large.svg",
-        "language_slug": {
-          "en": {
-            "name": "PI EMF (retired)",
-            "slogan": "Mastering Market Discrepancies",
-            "title": "Absolute Return Macro Volatility Fund",
-            "description": "The Pi EMF fund was an absolute return macro volatility fund that capitalized on pricing discrepancies in currencies, interest rates, stocks, and other asset classes around the globe. The fund employed sophisticated derivative strategies to exploit market inefficiencies and generate consistent returns for its investors. Throughout its 18-year operational history, Pi EMF never experienced a losing year."
-          },
-          "he": {
-            "name": "פאי EMF (בדימוס)",
-            "slogan": "שליטה בפערי שוק",
-            "title": "קרן תנודתיות מאקרו לתשואה מוחלטת",
-            "description": "קרן פאי EMF הייתה קרן תנודתיות מאקרו לתשואה מוחלטת שניצלה פערי מחירים במטבעות, שיעורי ריבית, מניות ונכסים אחרים ברחבי העולם. הקרן השתמשה באסטרטגיות נגזרות מתוחכמות כדי לנצל חוסר יעילות בשוק ולייצר תשואות עקביות למשקיעיה. לאורך 18 שנות פעילותה, פאי EMF מעולם לא חוותה שנה מפסידה."
-          }
+    "pi_select": {
+      "product_slug": "pi_select",
+      "asset_category": "investment_banking",
+      "language_slug": {
+        "en": {
+          "name": "PI Select",
+          "slogan": "Invest with Confidence",
+          "title": "Exclusive Investment Opportunities",
+          "image_insertion_index": 1,
+          "description": [
+            "For almost three decades, PI has been fortunate to participate in some of Israel's most promising investment opportunities — spanning private and public companies, managed funds, and real estate.",
+            "In partnership with our longtime friend and esteemed commercial lawyer, Buky Katzman, we have launched PI Select — a boutique platform designed to offer select foreign investors the opportunity to co-invest alongside us in high-potential Israeli ventures."
+          ]
         },
-        "team_group_slug": null,
-        "is_featured": false
+        "he": {
+          "name": "פאי סלקט",
+          "slogan": "השקעה בביטחון",
+          "title": "הזדמנויות השקעה בלעדיות",
+          "description": "במשך למעלה משלושה עשורים, פאי זכתה להשתתף ברבות מהזדמנויות ההשקעה המבטיחות ביותר בישראל - בחברות פרטיות וציבוריות, קרנות מנוהלות ונדל\"ן. בשיתוף פעולה עם ידידנו הוותיק ועורך הדין המסחרי המוערך, בוקי כצמן, השקנו את פאי סלקט - פלטפורמה בוטיק המיועדת להציע למשקיעים זרים נבחרים את ההזדמנות להשקיע לצדנו במיזמים ישראליים בעלי פוטנציאל גבוה. אנו נרגשים לחלוק את התובנות, הניסיון והרשת שלנו עם משקיעים בעלי חשיבה דומה הרואים את ההזדמנויות הייחודיות שישראל מציעה."
+        }
       },
-      "pi_global": {
-        "product_slug": "pi_global",
-        "logo": "assets/images/asset_management/pi_global/logo_large.svg",
-        "language_slug": {
-          "en": {
-            "name": "PI Global",
-            "slogan": "Macro & Derivatives Excellence",
-            "title": "Global Macro and Derivatives Fund",
-            "description": "The Pi Global fund seeks to identify economic trends and market anomalies in order to generate exceptional risk adjusted returns. The fund has a broad underlying mandate and executes trades in FX, Rates, Equities, Digital Currencies, Commodities & their dedicated derivative markets."
-          },
-          "he": {
-            "name": "פאי גלובל",
-            "slogan": "מצוינות במאקרו ונגזרים",
-            "title": "קרן מאקרו ונגזרים גלובלית",
-            "description": "קרן פאי גלובל שואפת לזהות מגמות כלכליות ואנומליות שוק כדי לייצר תשואות מותאמות סיכון יוצאות דופן. לקרן יש מנדט רחב והיא מבצעת עסקאות במט\"ח, ריביות, מניות, מטבעות דיגיטליים, סחורות ושווקי הנגזרים הייעודיים שלהם."
-          }
+      "is_featured": true
+    },
+    "pi_crypto": {
+      "product_slug": "pi_crypto",
+      "asset_category": "investment_banking",
+      "language_slug": {
+        "en": {
+          "name": "PI Crypto",
+          "slogan": "Unlocking Blockchain Potential Together",
+          "title": "Innovative Financial Products",
+          "image_insertion_index": 1,
+          "description": [
+            "In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with PI to create PI Crypto, a boutique investment house specializing in the Crypto and Blockchain space"
+          ]
         },
-        "is_featured": true
-      },
-      "pi_equity": {
-        "product_slug": "pi_equity",
-        "logo": "assets/images/asset_management/pi_equity/logo_large.svg",
-        "language_slug": {
-          "en": {
-            "name": "PI Equity",
-            "slogan": "Cultivating Israeli Business Gems",
-            "title": "Israeli Equity Hedge Fund",
-            "description": "Pi Equity seeks to find, understand, and manage a small number of exceptional medium term investments in publicly listed companies primarily in the Israeli capital market. Our aim is to generate attractive equity like returns for our investors in the coming decades."
-          },
-          "he": {
-            "name": "פאי אקוויטי",
-            "slogan": "טיפוח יהלומי עסקים ישראליים",
-            "title": "קרן גידור מניות ישראלית",
-            "description": "קרן הגידור פאי אקוויטי מוצאת בשקדנות, מבינה לעומק, מנטרת בקפידה ומשקיעה בזהירות במספר קטן של עסקים ציבוריים יוצאי דופן, בעיקר בשווקי ההון הישראליים."
-          }
-        },
-        "is_featured": true
+        "he": {
+          "name": "פאי קריפטו",
+          "slogan": "חדשנות היום, ביטחון למחר",
+          "title": "מוצרים פיננסיים חדשניים",
+          "description": "פאי פיתוח מתמחה ביצירת מוצרים פיננסיים חדשניים לניהול והעברת סיכונים, המיועדים למוסדות פיננסיים ובנקים."
+        }
       }
     }
+  },
+  "asset_management": {
+    "pi_emf": {
+      "product_slug": "pi_emf",
+      "asset_category": "asset_management",
+      "language_slug": {
+        "en": {
+          "name": "PI EMF (Legacy)",
+          "slogan": "Mastering Market Discrepancies",
+          "title": "Absolute Return Macro Volatility Fund",
+          "image_insertion_index": 1,
+          "description": [
+            "The PI EMF fund was an absolute return macro volatility fund that capitalized on pricing discrepancies in currencies, interest rates, stocks, and other asset classes worldwide.",
+            "The fund employed sophisticated derivative strategies to exploit market inefficiencies and generate consistent returns for its investors.",
+            "<b>Throughout its 18-year operational history, PI EMF never experienced a losing year.</b>"
+          ]
+        },
+        "he": {
+          "name": "פאי EMF (בדימוס)",
+          "slogan": "שליטה בפערי שוק",
+          "title": "קרן תנודתיות מאקרו לתשואה מוחלטת",
+          "description": "קרן פאי EMF הייתה קרן תנודתיות מאקרו לתשואה מוחלטת שניצלה פערי מחירים במטבעות, שיעורי ריבית, מניות ונכסים אחרים ברחבי העולם. הקרן השתמשה באסטרטגיות נגזרות מתוחכמות כדי לנצל חוסר יעילות בשוק ולייצר תשואות עקביות למשקיעיה. לאורך 18 שנות פעילותה, פאי EMF מעולם לא חוותה שנה מפסידה."
+        }
+      },
+      "team_group_slug": null,
+      "is_featured": false
+    },
+    "pi_global": {
+      "product_slug": "pi_global",
+      "asset_category": "asset_management",
+      "language_slug": {
+        "en": {
+          "name": "PI Global",
+          "slogan": "Macro & Derivatives Excellence",
+          "title": "Global Macro and Derivatives Fund",
+          "image_insertion_index": 1,
+          "description": [
+            "The PI Global fund seeks to identify economic trends and market anomalies in order to generate exceptional risk adjusted returns.",
+            "The fund has a broad underlying mandate and executes trades in FX, Rates, Equities, Digital Currencies, Commodities and their dedicated derivative markets."
+          ]
+        },
+        "he": {
+          "name": "פאי גלובל",
+          "slogan": "מצוינות במאקרו ונגזרים",
+          "title": "קרן מאקרו ונגזרים גלובלית",
+          "description": "קרן פאי גלובל שואפת לזהות מגמות כלכליות ואנומליות שוק כדי לייצר תשואות מותאמות סיכון יוצאות דופן. לקרן יש מנדט רחב והיא מבצעת עסקאות במט\"ח, ריביות, מניות, מטבעות דיגיטליים, סחורות ושווקי הנגזרים הייעודיים שלהם."
+        }
+      },
+      "is_featured": true
+    },
+    "pi_equity": {
+      "product_slug": "pi_equity",
+      "asset_category": "asset_management",
+      "language_slug": {
+        "en": {
+          "name": "PI Equity",
+          "slogan": "Cultivating Israeli Business Gems",
+          "title": "Israeli Equity Hedge Fund",
+          "image_insertion_index": 1,
+          "description": [
+            "PI Equity seeks to find, understand, and manage a small number of exceptional medium term investments in publicly listed companies primarily in the Israeli capital market.",
+            "Our aim is to generate attractive, equity-like returns for our investors in the coming decades."
+          ]
+        },
+        "he": {
+          "name": "פאי אקוויטי",
+          "slogan": "טיפוח יהלומי עסקים ישראליים",
+          "title": "קרן גידור מניות ישראלית",
+          "description": "קרן הגידור פאי אקוויטי מוצאת בשקדנות, מבינה לעומק, מנטרת בקפידה ומשקיעה בזהירות במספר קטן של עסקים ציבוריים יוצאי דופן, בעיקר בשווקי ההון הישראליים."
+        }
+      },
+      "is_featured": true
+    }
   }
-  
-  
+}

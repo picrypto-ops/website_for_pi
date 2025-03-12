@@ -72,6 +72,12 @@ $nav-gap: 2rem;
 $nav-font-weight: normal;
 $nav-transition: color 0.3s ease;
 $header-font-size: 18px;
+$nav-hover-animation-duration: 0.3s;
+$nav-active-highlight-color: rgba(255, 255, 255, 0.2);
+$nav-hover-underline-color: rgba(255, 255, 255, 0.8);
+$nav-active-pulse-duration: 2s;
+$nav-active-indicator-color: #ffffff;
+$nav-active-bg-opacity: 0.15;
 
 // Language Switcher
 $lang-switcher-gap: 0.5rem;

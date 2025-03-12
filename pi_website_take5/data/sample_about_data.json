@@ -1,0 +1,74 @@
+{
+  "about": {
+    "en": {
+      "title": "About Our Company",
+      "slogan": "Building Trust & Excellence Since 1995",
+      "image_slider_insertion_index": 2,
+      "short_description": [
+        "Welcome to our company. We are a leading provider of financial services with over 25 years of experience in the industry. Our approach combines traditional wisdom with innovative solutions to deliver exceptional results for our clients.",
+        
+        "Our team consists of industry experts with diverse backgrounds, bringing a wealth of knowledge and perspectives to every project. We believe in collaboration and partnership with our clients to understand their unique needs and goals.",
+        
+        "With offices across the globe, we serve clients from various industries and of different sizes. We are proud of our international reach while maintaining localized expertise and personalized attention to detail.",
+        
+        "Innovation drives our business forward. We continuously invest in cutting-edge technologies and methodologies to enhance our service offerings and operational efficiency. This commitment to innovation allows us to stay ahead of market trends and deliver forward-thinking solutions."
+      ],
+      "company_history_heading": "Our Journey Through Time",
+      "company_history": [
+        {
+          "year": "1995",
+          "title": "Foundation",
+          "description": "Our company was founded with a vision to transform the financial services landscape."
+        },
+        {
+          "year": "2001",
+          "title": "International Expansion",
+          "description": "Opened our first international office in London, beginning our global journey."
+        },
+        {
+          "year": "2008",
+          "title": "Digital Transformation",
+          "description": "Launched our digital platform, bringing our services to clients online."
+        },
+        {
+          "year": "2015",
+          "title": "Sustainability Initiative",
+          "description": "Introduced our sustainability framework, aligning our operations with environmental goals."
+        },
+        {
+          "year": "2020",
+          "title": "Innovation Hub",
+          "description": "Established a dedicated innovation hub to foster creative solutions and technological advancement."
+        }
+      ],
+      "our_values_heading": "The Principles That Guide Us",
+      "our_values": [
+        {
+          "title": "Integrity",
+          "description": "We conduct our business with the highest ethical standards, ensuring transparency and honesty in all interactions."
+        },
+        {
+          "title": "Excellence",
+          "description": "We strive for excellence in everything we do, continuously raising the bar for quality and performance."
+        },
+        {
+          "title": "Innovation",
+          "description": "We embrace innovation as a core principle, constantly seeking new ways to improve and evolve."
+        },
+        {
+          "title": "Collaboration",
+          "description": "We believe in the power of teamwork and partnership, both within our organization and with our clients."
+        }
+      ],
+      "our_mission_heading": "Our Mission & Vision",
+      "our_mission": [
+        {
+          "mission": "To empower our clients with financial solutions that enable growth, security, and success in an ever-changing global landscape."
+        },
+        {
+          "mission": "To be the most trusted partner in financial services, recognized for our integrity, expertise, and client-centered approach."
+        }
+      ]
+    }
+  }
+} 

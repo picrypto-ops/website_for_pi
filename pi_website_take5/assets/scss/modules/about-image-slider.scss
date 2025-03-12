@@ -1,0 +1,104 @@
+.about-image-slider {
+    position: relative;
+    width: 50%;
+    max-width: 800px;
+    overflow: hidden;
+    margin: 2rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 1; // Default visible state
+    transition: opacity 0.3s ease-in-out; // Add transition for opacity
+
+    // Set a standard photo aspect ratio container (4:3)
+    &::before {
+        content: '';
+        display: block;
+        padding-top: 75%; // 4:3 aspect ratio (3/4 = 0.75 = 75%)
+    }
+
+    // For mobile devices, use a wider width
+    @media (max-width: 768px) {
+        width: 75%;
+        &::before {
+            padding-top: 75%; // Maintain 4:3 ratio
+        }
+    }
+
+    // For very small screens
+    @media (max-width: 480px) {
+        width: 90%;
+    }
+
+    &__container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        will-change: transform; // Optimize for animations
+    }
+
+    &__slide {
+        min-width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        flex-shrink: 0; // Prevent slides from shrinking
+    }
+
+    &__controls {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    &__dots {
+        display: flex;
+        gap: 8px;
+        margin: 0 15px;
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &.active {
+                background-color: #fff;
+                transform: scale(1.2); // Slightly enlarge active dot
+            }
+        }
+    }
+
+    &__button {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+} 

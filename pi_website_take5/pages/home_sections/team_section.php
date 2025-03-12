@@ -15,8 +15,14 @@ function renderTeamSection($lang, $nextSectionId = 'about-us') {
     ?>
     <section id="team" class="our-team-preview full-page-section">
         <div class="container">
-            <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'our_team', 'Our Team'); ?></h2>
+            <h2><?php echo TranslatableFactory::general()->getContent($lang, 'our_team', 'Our Team'); ?></h2>
             <p class="section-description"><?php echo TranslatableFactory::general()->getContent($lang, 'team_description', 'Meet our dedicated professionals who provide exceptional service.'); ?></p>
+
+            <div class="view-all-link">
+                <a href="?page=our-team&lang=<?php echo $lang; ?>" class="button-link">
+                    <?php echo TranslatableFactory::general()->getContent($lang, 'view_all_team', 'View All Team Members'); ?>
+                </a>
+            </div>
 
             <div class="team-navigation">
                 <ul class="team-nav">

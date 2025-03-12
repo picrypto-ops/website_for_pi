@@ -1,0 +1,47 @@
+// RTL Styles for the product page
+// These styles will be applied when the page direction is RTL (Hebrew)
+
+[dir="rtl"] {
+  // Product header RTL adjustments
+  .product-header {
+    .product-logo {
+      margin-right: 0;
+      margin-left: 30px;
+      
+      @media (max-width: 768px) {
+        margin-left: 0;
+      }
+    }
+  }
+  
+  // Product content RTL adjustments
+  .product-content {
+    .product-description-paragraph {
+      text-align: right;
+    }
+  }
+  
+  // Product image caption RTL adjustments
+  .product-image-caption {
+    left: auto;
+    right: 25px;
+    text-align: right;
+  }
+  
+  // Section title RTL adjustments
+  .section-title {
+    &::after {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
+  
+  // Team section RTL adjustments
+  .team-grid {
+    .team-card {
+      .team-info {
+        text-align: right;
+      }
+    }
+  }
+} 

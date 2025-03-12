@@ -17,4 +17,60 @@
   60% {
     transform: translateY(-5px);
   }
+}
+
+// Add new animation for menu hover effect
+@keyframes navItemHover {
+  from {
+    width: 0;
+    left: 50%;
+  }
+  to {
+    width: 100%;
+    left: 0;
+  }
+}
+
+// Add animation for active menu pulse
+@keyframes activePulse {
+  0% {
+    opacity: 0.6;
+    transform: scaleX(0.92);
+    background-color: #ffffff;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+    background-color: #ffffff;
+  }
+  100% {
+    opacity: 0.6;
+    transform: scaleX(0.92);
+    background-color: #ffffff;
+  }
+}
+
+// Add animation for active menu indicator slide-in
+@keyframes activeSlideIn {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+// Add a new glow animation for active menu items
+@keyframes activeGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
 } 

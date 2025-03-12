@@ -182,14 +182,14 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
             
             <div class="member-navigation">
                 <?php if (!$isFirst) { ?>
-                <a href="?page=team-member&id=<?php echo $prevMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button prev-button">
+                <a href="?page=team-member&id=<?php echo $prevMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button prev-button" data-tooltip="<?php echo TranslatableFactory::general()->getContent($lang, 'previous', 'Previous'); ?>">
                     <span class="nav-icon">←</span>
                     <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'previous', 'Previous'); ?></span>
                 </a>
                 <?php } ?>
                 
                 <?php if (!$isLast) { ?>
-                <a href="?page=team-member&id=<?php echo $nextMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button next-button">
+                <a href="?page=team-member&id=<?php echo $nextMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button next-button" data-tooltip="<?php echo TranslatableFactory::general()->getContent($lang, 'next', 'Next'); ?>">
                     <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'next', 'Next'); ?></span>
                     <span class="nav-icon">→</span>
                 </a>

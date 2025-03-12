@@ -14,15 +14,22 @@
       }
     }
   },
-  
   "about": {
     "page_slug": "about",
     "language_slug": {
       "en": {
         "title": "About Us",
+        "image_slider_insertion_index": 2,
         "slogan": "",
-        "home_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.<br><br>Pi's journey began when Aron and Jonny recognized significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.<br><br>While proprietary trading and investing have always been at Pi's core, PI gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first ETF, the Hadas, raising over 2 billion  ILS. Two years later, in 2005, PI launched the Shacharit, Israel's first listed structured product.  In total, during the following couple of years Pi issued over 3 billion ILS worth of products.<br><br>Pi also played a pioneering role in Israel's hedge fund industry. In 2004, PI established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.<br><br>In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with Pi to create Pi Crypto, a boutique investment house specializing in the Crypto and blockchain space.<br><br>More recently, in 2023, Pi co-founded Pi Pituach, a firm specializing in financial product structuring and securitization capitalizing.  In 2024, Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations issued over 7.5 billion ILS in bonds primarily bought by Israeli money market funds.",
-        "short_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the Pi Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.<br><br>Pi's journey began when Aron and Jonny recognized significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, Pi had grown into one of the country's largest proprietary derivative trading firms.<br><br>While proprietary trading and investing have always been at Pi's core, PI gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, Pi issued Israel's first ETF, the Hadas, raising over 2 billion  ILS. Two years later, in 2005, PI launched the Shacharit, Israel's first listed structured product.  In total, during the following couple of years Pi issued over 3 billion ILS worth of products.<br><br>Pi also played a pioneering role in Israel's hedge fund industry. In 2004, PI established Arbitrade, the country's first hedge fund, followed by Pi EMF, a global macro derivatives fund, in 2005. Pi EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.<br><br>In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with Pi to create Pi Crypto, a boutique investment house specializing in the Crypto and blockchain space.<br><br>More recently, in 2023, Pi co-founded Pi Pituach, a firm specializing in financial product structuring and securitization capitalizing.  In 2024, Pi Pituach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations issued over 7.5 billion ILS in bonds primarily bought by Israeli money market funds.",
+        "home_description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the PI Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.<br><br>PI's journey began when Aron and Jonny recognized significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, PI had grown into one of the country's largest proprietary derivative trading firms.<br><br>While proprietary trading and investing have always been at PI's core, PI gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, PI issued Israel's first ETF, the Hadas, raising over 2 billion  ILS. Two years later, in 2005, PI launched the Shacharit, Israel's first listed structured product.  In total, during the following couple of years PI issued over 3 billion ILS worth of products.<br><br>PI also played a pioneering role in Israel's hedge fund industry. In 2004, PI established Arbitrade, the country's first hedge fund, followed by PI EMF, a global macro derivatives fund, in 2005. PI EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.<br><br>In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with PI to create PI Crypto, a boutique investment house specializing in the Crypto and blockchain space.<br><br>More recently, in 2023, PI co-founded PI PItuach, a firm specializing in financial product structuring and securitization capitalizing.  In 2024, PI PItuach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations issued over 7.5 billion ILS in bonds primarily bought by Israeli money market funds.",
+        "short_description": [
+          "Founded in 1999 by Aron Cohen and Jonny Kaye, the PI Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally.<br><br>",
+          "PI's journey began when Aron and Jonny recognized significant pricing inefficiencies in Israel's early listed derivatives market. By 2001, PI had grown into one of the country's largest proprietary derivative trading firms.<br><br>",
+          "While proprietary trading and investing have always been at PI's core, PI gradually expanded into other areas of the Israeli financial market. In 2003, working closely with the Israeli SEC, PI issued Israel's first ETF, the Hadas, raising over 2 billion  ILS. Two years later, in 2005, PI launched the Shacharit, Israel's first listed structured product.  In total, during the following couple of years PI issued over 3 billion ILS worth of products.<br><br>",
+          "PI also played a pioneering role in Israel's hedge fund industry. In 2004, PI established Arbitrade, the country's first hedge fund, followed by PI EMF, a global macro derivatives fund, in 2005. PI EMF maintained a flawless track record, generating positive returns every year throughout its 16-year lifespan.<br><br>",
+          "In 2021, Kesem, the mutual fund arm of the Phoenix Investment house, invested and partnered with PI to create PI Crypto, a boutique investment house specializing in the Crypto and blockchain space.<br><br>",
+          "More recently, in 2023, PI co-founded PI PItuach, a firm specializing in financial product structuring and securitization capitalizing.  In 2024, PI PItuach, capitalizing on both the growing demand for short-term fixed-income investments and inefficiencies in local market regulations issued over 7.5 billion ILS in bonds primarily bought by Israeli money market funds."
+        ],
         "company_history_heading": "Our History",
         "our_values_heading": "Our Values",
         "our_mission_heading": "Our Mission"
@@ -134,6 +141,25 @@
           "lat": 32.109608,
           "lng": 34.837384
         }
+      }
+    }
+  },
+  "cookie_consent": {
+    "page_slug": "cookie_consent",
+    "language_slug": {
+      "en": {
+        "title": "Cookie Consent",
+        "cookie_title": "Cookie Consent",
+        "cookie_text": "This website uses cookies to improve your experience. By continuing to use this site, you agree to our use of cookies.",
+        "cookie_accept": "Accept",
+        "cookie_decline": "Decline"
+      },
+      "he": {
+        "title": "הסכמה לשימוש בעוגיות",
+        "cookie_title": "הסכמה לשימוש בעוגיות",
+        "cookie_text": "אתר זה משתמש בעוגיות כדי לשפר את חוויית המשתמש שלך. על ידי המשך הגלישה באתר זה, אתה מסכים לשימוש שלנו בעוגיות.",
+        "cookie_accept": "מסכים",
+        "cookie_decline": "לא מסכים"
       }
     }
   }

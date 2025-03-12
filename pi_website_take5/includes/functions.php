@@ -53,7 +53,30 @@ function sanitizeInput($input) {
  * @return string 'active' if current page matches menu item, empty string otherwise
  */
 function isActiveMenu($currentPage, $menuItem) {
-    return $currentPage === $menuItem ? 'active' : '';
+    // Get current page id parameter if it exists
+    $currentId = isset($_GET['id']) ? $_GET['id'] : '';
+    
+    // Check for direct match
+    if ($currentPage === $menuItem) {
+        return 'active';
+    }
+    
+    // Special case for team page
+    if ($currentPage === 'our-team' && $menuItem === 'team') {
+        return 'active';
+    }
+    
+    // Check if this is a segment page (like investment_banking)
+    if ($currentPage === 'segment' && $currentId === $menuItem) {
+        return 'active';
+    }
+    
+    // Check if this is a product page under a segment
+    if ($currentPage === 'product' && isset($_GET['segment']) && $_GET['segment'] === $menuItem) {
+        return 'active';
+    }
+    
+    return '';
 }
 
 /**
@@ -225,6 +248,27 @@ function formatHtmlContent($content, $convertNewlines = true) {
     }
     
     return $formatted;
+}
+
+/**
+ * Generate the product logo path based on asset category and product slug
+ * 
+ * @param array $product The product data array containing 'asset_category' and 'product_slug'
+ * @return string Path to the product logo
+ */
+function getProductLogoPath($product) {
+    if (!isset($product['asset_category']) || !isset($product['product_slug'])) {
+        return 'assets/images/products/pi-logo-icon.svg'; // Default fallback
+    }
+    
+    $path = "assets/images/{$product['asset_category']}/{$product['product_slug']}/logo_large.svg";
+    
+    // Check if the file exists and return fallback if it doesn't
+    if (!file_exists($path)) {
+        return 'assets/images/products/pi-logo-icon.svg';
+    }
+    
+    return $path;
 }
 
 // todo: remove all the notused functions & why getTranslatedContent is used

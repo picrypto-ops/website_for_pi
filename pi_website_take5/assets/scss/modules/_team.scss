@@ -51,6 +51,30 @@
     }
 }
 
+// View All Team link styling
+.view-all-link {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 30px;
+    
+    .button-link {
+        display: inline-block;
+        background-color: #0056b3;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background-color: #004494;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
 // Product roles styling
 .product-roles {
     margin: 14px 0;

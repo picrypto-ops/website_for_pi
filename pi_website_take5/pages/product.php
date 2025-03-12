@@ -109,11 +109,41 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
 ?>
 
 <section class="product">
+    <?php
+            // Determine the path to the product image
+            $productSlug = isset($product['product_slug']) ? $product['product_slug'] : '';
+            $productCategory = isset($product['asset_category']) ? $product['asset_category'] : '';
+            $productLogoPath = getProductLogoPath($product);
+            
+            // Special case for pi_emf which has an image in pi_emf_retired directory
+            $productImagePath = "assets/images/{$productCategory}/{$productSlug}/product_image.webp";
+            // Check if product image exists
+            $productImageExists = file_exists($productImagePath);
+            
+            // Get product description - this could be a string or an array
+            $description = $productTranslatable->getContent($lang, 'description', 'Product description not available.');
+            
+            // If description is a string, convert it to an array for consistent processing
+            if (!is_array($description)) {
+                $description = [$description];
+            }
+            
+            // Get the image insertion index (default to after the first paragraph if not specified)
+            $imageInsertionIndex = $productTranslatable->getContent($lang, 'image_insertion_index', 1);
+            $imageInsertionIndex = intval($imageInsertionIndex);
+            
+            // Make sure the index is valid
+            if ($imageInsertionIndex < 0) {
+                $imageInsertionIndex = 0;
+            } elseif ($imageInsertionIndex > count($description)) {
+                $imageInsertionIndex = count($description);
+            }
+    ?>
     <div class="container">
         <div class="product-header">
-            <?php if (isset($product['logo']) && !empty($product['logo'])): ?>
+            <?php if (file_exists($productLogoPath)): ?>
                 <div class="product-logo">
-                    <img src="<?php echo $product['logo']; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', $product['product_slug']); ?>">
+                    <img src="<?php echo $productLogoPath; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', $product['product_slug']); ?>">
                 </div>
             <?php endif; ?>
             <div class="product-title">
@@ -124,8 +154,32 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
             </div>
         </div>
         
-        <div class="product-description">
-            <?php echo $productTranslatable->getContent($lang, 'description', 'Product description not available.'); ?>
+        <div class="product-content">
+            <?php 
+            // Display paragraphs before the image
+            for ($i = 0; $i < $imageInsertionIndex; $i++) {
+                if (isset($description[$i])) {
+                    echo '<p class="product-description-paragraph">' . $description[$i] . '</p>';
+                }
+            }
+            
+            // Display the product image if it exists
+            if ($productImageExists): 
+            ?>
+                <div class="product-image">
+                    <img src="<?php echo $productImagePath; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', $productSlug); ?> team">
+                    <div class="product-image-caption">
+                        <?php echo TranslatableFactory::general()->getContent($lang, 'product_image_caption', 'Our dedicated team'); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            
+            <?php 
+            // Display paragraphs after the image
+            for ($i = $imageInsertionIndex; $i < count($description); $i++) {
+                echo '<p class="product-description-paragraph">' . $description[$i] . '</p>';
+            }
+            ?>
         </div>
 
         <?php if (!empty($founderTeam)): ?>
@@ -183,11 +237,11 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
             </div>
         <?php endif; ?>
 
-        <?php if (!empty($productTeam)) { ?>
+        <?php if (!empty($productTeam)): ?>
             <div class="team-section">
                 <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'product_team', 'Product Team'); ?></h2>
                 <div class="team-grid">
-                    <?php foreach ($productTeam as $memberKey => $member) { ?>
+                    <?php foreach ($productTeam as $memberKey => $member): ?>
                         <?php $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']); ?>
                         <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
                             <div class="team-card">
@@ -228,16 +282,29 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
                                     }
                                     ?>
                                     
-                                    <?php if ($memberTranslatable->hasContent($lang, 'short_bio')) { ?>
+                                    <?php if ($memberTranslatable->hasContent($lang, 'short_bio')): ?>
                                         <p class="short-bio"><?php echo $memberTranslatable->getContent($lang, 'short_bio', ''); ?></p>
-                                    <?php } ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </a>
-                    <?php } ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
-        <?php } ?>
+        <?php endif; ?>
+        
+        <?php
+        // Add a back to segment link if we have a segment parameter
+        $segmentId = isset($_GET['segment']) ? $_GET['segment'] : $productCategory;
+        if ($segmentId): 
+        ?>
+        <div class="back-to-segment">
+            <a href="?page=segment&id=<?php echo $segmentId; ?>&lang=<?php echo $lang; ?>" class="back-link">
+                <span class="back-arrow">←</span> 
+                <?php echo TranslatableFactory::general()->getContent($lang, 'back_to_segment', 'Back to Segment'); ?>
+            </a>
+        </div>
+        <?php endif; ?>
     </div>
 </section>
 

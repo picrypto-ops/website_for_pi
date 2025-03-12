@@ -38,6 +38,8 @@
             </div>
         </div>
     </footer>
+
+    <?php include 'components/cookie-consent.php'; ?>
 </body>
 </html>
 

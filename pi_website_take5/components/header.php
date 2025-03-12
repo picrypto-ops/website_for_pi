@@ -22,12 +22,10 @@ $defaultDescription = 'Financial Management Professionals';
     <meta property="og:type" content="website">
     <meta property="og:image" content="<?php echo defined('BASE_URL') ? BASE_URL : ''; ?>/assets/images/og-image.jpg">
     <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Load the new modular JavaScript main file -->
     <script type="module" src="assets/js/main.js"></script>
-    <script src="assets/js/menu.js" defer></script>
-    <script src="assets/js/language-switcher.js" defer></script>
     <?php if ($page === 'home'): ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script type="module" src="assets/js/pi_bg_wave.js"></script>
     <?php endif; ?>
 </head>
 <body class="<?php echo $page; ?>-page">
@@ -65,7 +63,7 @@ $defaultDescription = 'Financial Management Professionals';
                                 $isSegment = in_array($item['main_page_slug'], ['investment_banking', 'asset_management']);
                                 
                                 // Check if this is the team page
-                                $isTeam = $item['main_page_slug'] === 'team';
+                                $isTeam = $item['main_page_slug'] === 'our-team';
                                 
                                 // Check if this is the home page
                                 $isHome = $item['main_page_slug'] === 'home';

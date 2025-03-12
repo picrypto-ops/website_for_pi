@@ -32,8 +32,8 @@
             }
         }
     },
-    "team": {
-        "term_slug": "team",
+    "our-team": {
+        "term_slug": "our-team",
         "language_slug": {
             "en": {
                 "label": "Our Team"
@@ -50,7 +50,7 @@
                 "label": "About Us"
             },
             "he": {
-                "label": "אודותינו"
+                "label": "אודות"
             }
         }
     },
@@ -124,7 +124,7 @@
         "term_slug": "team_group_pi_pituach",
         "language_slug": {
             "en": {
-                "label": "PI Pituach"
+                "label": "PI PItuach"
             },
             "he": {
                 "label": "פאי פיתוח"
@@ -183,17 +183,6 @@
             },
             "he": {
                 "label": ""
-            }
-        }
-    },
-    "our_team": {
-        "term_slug": "our_team",
-        "language_slug": {
-            "en": {
-                "label": "Our Team"
-            },
-            "he": {
-                "label": "הצוות שלנו"
             }
         }
     },
@@ -415,6 +404,17 @@
             },
             "he": {
                 "label": "חזרה לצוות"
+            }
+        }
+    },
+    "product_image_caption": {
+        "term_slug": "product_image_caption",
+        "language_slug": {
+            "en": {
+                "label": ""
+            },
+            "he": {
+                "label": ""
             }
         }
     }

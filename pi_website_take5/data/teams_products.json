@@ -29,6 +29,19 @@
         {
             "segment_slug": "asset_management",
             "product_slug": "pi_equity",
+            "name_slug": "eli-afek",
+            "language_slug": {
+                "en": {
+                    "title": "Trader"
+                },
+                "he": {
+                    "title": "סוחר"
+                }
+            }
+        },
+        {
+            "segment_slug": "asset_management",
+            "product_slug": "pi_equity",
             "name_slug": "jonny-kaye",
             "language_slug": {
                 "en": {
@@ -71,7 +84,7 @@
             "name_slug": "buky-katzman",
             "language_slug": {
                 "en": {
-                    "title": "co-founder"
+                    "title": "Co-Founder"
                 },
                 "he": {
                     "title": "מייסד משותף"
