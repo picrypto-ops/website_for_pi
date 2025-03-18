@@ -1,0 +1,79 @@
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+
+// Display
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-grid { display: grid !important; }
+
+// Flex utilities
+.flex-row { flex-direction: row !important; }
+.flex-column { flex-direction: column !important; }
+.justify-content-start { justify-content: flex-start !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-end { justify-content: flex-end !important; }
+.align-items-start { align-items: flex-start !important; }
+.align-items-center { align-items: center !important; }
+.align-items-end { align-items: flex-end !important; }
+
+// Spacing
+@each $size, $value in (
+  'xs': vars.$spacing-xs,
+  'sm': vars.$spacing-sm,
+  'md': vars.$spacing-md,
+  'lg': vars.$spacing-lg,
+  'xl': vars.$spacing-xl
+) {
+  .m-#{$size} { margin: $value !important; }
+  .mt-#{$size} { margin-top: $value !important; }
+  .mb-#{$size} { margin-bottom: $value !important; }
+  .ml-#{$size} { margin-left: $value !important; }
+  .mr-#{$size} { margin-right: $value !important; }
+  
+  .p-#{$size} { padding: $value !important; }
+  .pt-#{$size} { padding-top: $value !important; }
+  .pb-#{$size} { padding-bottom: $value !important; }
+  .pl-#{$size} { padding-left: $value !important; }
+  .pr-#{$size} { padding-right: $value !important; }
+}
+
+// Text alignment
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+
+// Text colors
+.text-primary { color: vars.$color-primary !important; }
+.text-secondary { color: vars.$color-secondary !important; }
+.text-success { color: vars.$color-success !important; }
+.text-danger { color: vars.$color-danger !important; }
+.text-warning { color: vars.$color-warning !important; }
+.text-info { color: vars.$color-info !important; }
+
+// Background colors
+.bg-primary { background-color: vars.$color-primary !important; }
+.bg-secondary { background-color: vars.$color-secondary !important; }
+.bg-success { background-color: vars.$color-success !important; }
+.bg-danger { background-color: vars.$color-danger !important; }
+.bg-warning { background-color: vars.$color-warning !important; }
+.bg-info { background-color: vars.$color-info !important; }
+
+// Visibility
+.visible { visibility: visible !important; }
+.invisible { visibility: hidden !important; }
+
+// Position
+.position-relative { position: relative !important; }
+.position-absolute { position: absolute !important; }
+.position-fixed { position: fixed !important; }
+
+// RTL Support
+@include mix.rtl {
+  .ml-#{$size} { margin-right: $value !important; margin-left: 0 !important; }
+  .mr-#{$size} { margin-left: $value !important; margin-right: 0 !important; }
+  .pl-#{$size} { padding-right: $value !important; padding-left: 0 !important; }
+  .pr-#{$size} { padding-left: $value !important; padding-right: 0 !important; }
+  .text-left { text-align: right !important; }
+  .text-right { text-align: left !important; }
+} 

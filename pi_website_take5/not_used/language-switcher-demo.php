@@ -7,9 +7,9 @@
  */
 
 // Include required files
-require_once dirname(__DIR__) . '/config.php';
-require_once dirname(__DIR__) . '/includes/functions.php';
-require_once dirname(__DIR__) . '/includes/language.php';
+require_once dirname(__DIR__) . '/src/config/config.php';
+require_once dirname(__DIR__) . '/src/utility/functions.php';
+require_once dirname(__DIR__) . '/src/utility/language.php';
 
 // Get language from query parameter, default to English
 $lang = isset($_GET['lang']) && in_array($_GET['lang'], ['en', 'he']) ? $_GET['lang'] : 'en';

@@ -1,0 +1,282 @@
+@use 'sass:color';
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+
+.home {
+  &__hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: vars.$spacing-xl vars.$spacing-lg;
+    background: linear-gradient(90deg, vars.$color-primary, vars.$color-primary-light);
+    color: vars.$color-light;
+
+    > * {
+      flex: 0 0 auto;
+    }
+
+    &__top-logo {
+      position: absolute;
+      top: vars.$spacing-lg;
+      z-index: 10;
+
+      &.right-aligned {
+        right: vars.$spacing-lg;
+      }
+
+      &.left-aligned {
+        left: vars.$spacing-lg;
+      }
+
+      img {
+        height: 40px;
+        width: auto;
+      }
+    }
+
+    &__language-switcher {
+      position: absolute;
+      top: vars.$spacing-lg;
+      z-index: 10;
+
+      &.right-aligned {
+        right: vars.$spacing-lg;
+      }
+
+      &.left-aligned {
+        left: vars.$spacing-lg;
+      }
+
+      a {
+        @include mix.font-size(1rem);
+        color: vars.$color-dark;
+        text-decoration: none;
+        margin: 0 vars.$spacing-xs;
+
+        &:hover {
+          color: vars.$color-primary;
+        }
+
+        &.active {
+          color: vars.$color-primary;
+          font-weight: bold;
+        }
+      }
+
+      .separator {
+        color: vars.$color-secondary;
+        margin: 0 vars.$spacing-xs;
+      }
+    }
+
+    &__content {
+      @include mix.container;
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      padding-top: 20vh;
+
+      h1 {
+        @include mix.font-size(3.5rem, 1.2);
+        margin-bottom: vars.$spacing-md;
+        color: vars.$color-dark;
+      }
+
+      .slogan {
+        @include mix.font-size(1.5rem);
+        color: vars.$color-primary;
+        margin-bottom: vars.$spacing-lg;
+      }
+
+      .wide-description {
+        @include mix.font-size(1.25rem);
+        color: vars.$color-secondary;
+        max-width: 800px;
+        margin: 0 auto vars.$spacing-xl;
+      }
+
+      .cta-button {
+        @include mix.button;
+        @include mix.font-size(1.1rem);
+        padding: vars.$spacing-md vars.$spacing-xl;
+      }
+    }
+
+    &__threejs-container {
+      position: absolute;
+      bottom: 30%;
+      left: 0;
+      width: 100%;
+      height: 40vh;
+      z-index: 1;
+    }
+  }
+
+  // Full Page Sections
+  .full-page-section {
+    @include mix.full-page;
+    
+    & {
+      padding: vars.$spacing-xl 0;
+    }
+
+    &__container {
+      @include mix.container;
+    }
+
+    &__header {
+      text-align: center;
+      margin-bottom: vars.$spacing-xl;
+
+      h2 {
+        @include mix.font-size(2.5rem, 1.2);
+        margin-bottom: vars.$spacing-md;
+        color: vars.$color-dark;
+      }
+
+      .section-description {
+        @include mix.font-size(1.25rem);
+        color: vars.$color-secondary;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  // Scroll Indicator
+  .scroll-indicator {
+    position: absolute;
+    bottom: vars.$spacing-lg;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    &__scroll-down {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: vars.$color-dark;
+      text-decoration: none;
+      @include mix.transition(color);
+
+      &:hover {
+        color: vars.$color-primary;
+      }
+
+      .arrow-down {
+        @include mix.font-size(2rem);
+        margin-top: vars.$spacing-xs;
+        animation: bounce 2s infinite;
+      }
+    }
+  }
+
+  // Breadcrumb Navigation
+  .breadcrumb-navigation {
+    position: fixed;
+    right: vars.$spacing-lg;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+
+    ul {
+      @include mix.flex(column, flex-start, flex-end);
+      gap: vars.$spacing-sm;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li a {
+      @include mix.font-size(0.9rem);
+      color: vars.$color-secondary;
+      text-decoration: none;
+      @include mix.transition(color);
+
+      &:hover {
+        color: vars.$color-primary;
+      }
+
+      &.active {
+        color: vars.$color-primary;
+        font-weight: bold;
+      }
+    }
+  }
+
+  // RTL Support
+  @include mix.rtl {
+    .hero {
+      &__content {
+        text-align: center;
+      }
+
+      &__wide-description {
+        text-align: center;
+      }
+    }
+
+    .breadcrumb-navigation {
+      right: auto;
+      left: vars.$spacing-lg;
+    }
+  }
+
+  // Responsive Design
+  @include mix.respond-to(md) {
+    .hero {
+      &__content {
+        h1 {
+          @include mix.font-size(3rem);
+        }
+
+        .slogan {
+          @include mix.font-size(1.25rem);
+        }
+
+        .wide-description {
+          @include mix.font-size(1.1rem);
+        }
+      }
+    }
+
+    .breadcrumb-navigation {
+      display: none;
+    }
+  }
+
+  @include mix.respond-to(sm) {
+    .hero {
+      &__content {
+        h1 {
+          @include mix.font-size(2.5rem);
+        }
+
+        .slogan {
+          @include mix.font-size(1.1rem);
+        }
+
+        .wide-description {
+          @include mix.font-size(1rem);
+        }
+      }
+
+      &__top-logo img {
+        height: 30px;
+      }
+    }
+  }
+
+  &__segments {
+    padding: vars.$spacing-xl 0;
+    @include mix.container;
+
+    > * {
+      flex: 0 0 auto;
+    }
+  }
+} 

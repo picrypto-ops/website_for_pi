@@ -5,17 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Home - Home</title>
     <meta name="description" content="">
-    <link rel="canonical" href="https://www.pigroup.com/en/home">
+    <link rel="canonical" href="https://www.pi-hf.com/en/home">
     <meta property="og:title" content="Home - Home">
     <meta property="og:description" content="">
-    <meta property="og:url" content="https://www.pigroup.com/en/home">
+    <meta property="og:url" content="https://www.pi-hf.com/en/home">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.pigroup.com/assets/images/og-image.jpg">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <meta property="og:image" content="https://www.pi-hf.com/assets/images/og-image.jpg">
+        <link rel="stylesheet" href="assets/css/main.css">
+        
+        
     <!-- Load the new modular JavaScript main file -->
     <script type="module" src="assets/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    </head>
+            
+    <script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "WebSite",
+</script>
+<script type="application/ld+json">
+    "name": "PI Group",
+</script>
+<script type="application/ld+json">
+    "url": "https://www.pi-hf.com",
+</script>
+<script type="application/ld+json">
+    "logo": "https://www.pi-hf.com/assets/images/logo.png",
+</script>
+<script type="application/ld+json">
+    "sameAs": [
+</script>
+<script type="application/ld+json">
+        "https://www.facebook.com/PIGroup",
+</script>
+<script type="application/ld+json">
+        "https://www.linkedin.com/company/pigroup",
+</script>
+<script type="application/ld+json">
+        "https://twitter.com/PIGroup"
+</script>
+<script type="application/ld+json">
+    ],
+</script>
+<script type="application/ld+json">
+    "address": {
+</script>
+<script type="application/ld+json">
+        "@type": "PostalAddress",
+</script>
+<script type="application/ld+json">
+        "streetAddress": "123 Financial Street",
+</script>
+<script type="application/ld+json">
+        "addressLocality": "Tel Aviv",
+</script>
+<script type="application/ld+json">
+        "addressRegion": "TA",
+</script>
+<script type="application/ld+json">
+        "postalCode": "12345",
+</script>
+<script type="application/ld+json">
+        "addressCountry": "IL"
+</script>
+<script type="application/ld+json">
+    },
+</script>
+<script type="application/ld+json">
+    "foundingDate": "1999",
+</script>
+<script type="application/ld+json">
+    "founder": {
+</script>
+<script type="application/ld+json">
+        "@type": "Person",
+</script>
+<script type="application/ld+json">
+        "name": "Aron Cohen and Jonny Kaye"
+</script>
+<script type="application/ld+json">
+    },
+</script>
+<script type="application/ld+json">
+    "description": "Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.",
+</script>
+<script type="application/ld+json">
+    "headline": "Unwavering Professionalism, Exceptional Results",
+</script>
+<script type="application/ld+json">
+    "potentialAction": {
+</script>
+<script type="application/ld+json">
+        "@type": "SearchAction",
+</script>
+<script type="application/ld+json">
+        "target": "https://www.pi-hf.com/search?q={search_term_string}",
+</script>
+<script type="application/ld+json">
+        "query-input": "required name=search_term_string"
+</script>
+<script type="application/ld+json">
+    }
+</script>
+<script type="application/ld+json">
+}
+</script>
+<script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "BreadcrumbList",
+</script>
+<script type="application/ld+json">
+    "itemListElement": [
+</script>
+<script type="application/ld+json">
+        {
+</script>
+<script type="application/ld+json">
+            "@type": "ListItem",
+</script>
+<script type="application/ld+json">
+            "position": 1,
+</script>
+<script type="application/ld+json">
+            "name": "PI Group - Home",
+</script>
+<script type="application/ld+json">
+            "item": "https://www.pi-hf.com/?page=home&lang=en"
+</script>
+<script type="application/ld+json">
+        }
+</script>
+<script type="application/ld+json">
+    ]
+</script>
+<script type="application/ld+json">
+}
+</script>
+</head>
 <body class="home-page">
     <header id="site-header" class="home-header initially-hidden">
         <div class="container">
@@ -402,7 +537,7 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Marina Kazar</h3>
-                                                                                            <p class="position">Accountant</p>
+                                                                                            <p class="position">Accounting and Payroll Manager</p>
                                                                                         
 
                                         </div>
@@ -665,8 +800,10 @@
                                     </div>
             </div>
             
-            <a href="?page=contact&lang=en" class="button contact-button">
-                Get In Touch            </a>
+            <div class="text-center">
+                <a href="?page=contact&lang=en" class="button button--outline">
+                    Get In Touch                </a>
+            </div>
         </div>
         
             <div class="scroll-indicator" data-parent-section="contact-us">

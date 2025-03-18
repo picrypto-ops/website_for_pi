@@ -1,0 +1,90 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use "sass:color";
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: $border-radius;
+  margin: $spacing-md 0;
+
+  &-item {
+    &:first-child {
+      .pagination-link {
+        margin-left: 0;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+      }
+    }
+
+    &:last-child {
+      .pagination-link {
+        margin-right: 0;
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+
+    &.active {
+      .pagination-link {
+        z-index: 3;
+        color: $color-light;
+        background-color: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+
+    &.disabled {
+      .pagination-link {
+        color: $color-secondary;
+        pointer-events: none;
+        background-color: $color-light;
+        border-color: rgba($color-dark, 0.125);
+      }
+    }
+  }
+
+  &-link {
+    position: relative;
+    display: block;
+    padding: $spacing-sm $spacing-md;
+    margin-left: -1px;
+    line-height: $line-height-base;
+    color: $color-primary;
+    background-color: $color-light;
+    border: 1px solid rgba($color-dark, 0.125);
+    transition: color $transition-base, background-color $transition-base, border-color $transition-base;
+
+    &:hover {
+      z-index: 2;
+      color: color.adjust($color-primary, $lightness: -10%);
+      text-decoration: none;
+      background-color: color.adjust($color-light, $lightness: -5%);
+      border-color: rgba($color-dark, 0.125);
+    }
+
+    &:focus {
+      z-index: 3;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+    }
+  }
+
+  // Sizes
+  &-sm {
+    .pagination-link {
+      padding: $spacing-xs $spacing-sm;
+      font-size: $font-size-sm;
+      line-height: 1.5;
+    }
+  }
+
+  &-lg {
+    .pagination-link {
+      padding: $spacing-md $spacing-lg;
+      font-size: $font-size-lg;
+      line-height: 1.5;
+    }
+  }
+} 

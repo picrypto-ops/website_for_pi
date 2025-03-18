@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/cache.php';
+require_once 'src/utility/cache.php';
 
 // Clear all cache
 clearCache();

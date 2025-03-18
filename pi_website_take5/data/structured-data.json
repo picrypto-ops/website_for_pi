@@ -1,0 +1,69 @@
+{
+    "organization": {
+        "name": "PI Group",
+        "legalName": "PI Financial Management",
+        "url": "https://www.pi-hf.com",
+        "logo": "/assets/images/logo.png",
+        "socialProfiles": {
+            "facebook": "https://www.facebook.com/PIGroup",
+            "linkedin": "https://www.linkedin.com/company/pigroup",
+            "twitter": "https://twitter.com/PIGroup"
+        },
+        "address": {
+            "streetAddress": "123 Financial Street",
+            "addressLocality": "Tel Aviv",
+            "addressRegion": "TA",
+            "postalCode": "12345",
+            "addressCountry": "IL"
+        },
+        "contactPoint": {
+            "telephone": "+972-123-4567",
+            "email": "contact@pigroup.com",
+            "contactType": "customer service"
+        },
+        "foundingDate": "1999",
+        "founders": "Aron Cohen and Jonny Kaye"
+    },
+    "website": {
+        "name": "PI Group - Financial Management Professionals",
+        "description": "Founded in 1999, PI Group specializes in investment banking and asset management, identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally."
+    },
+    "pages": {
+        "home": {
+            "type": "WebSite",
+            "name": "PI Group - Home",
+            "title": "Unwavering Professionalism, Exceptional Results",
+            "description": "Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments."
+        },
+        "about": {
+            "type": "AboutPage",
+            "name": "About PI Group",
+            "title": "About Us",
+            "description": "Founded in 1999 by Aron Cohen and Jonny Kaye, the PI Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes, both in Israel and globally."
+        },
+        "contact": {
+            "type": "ContactPage",
+            "name": "Contact PI Group",
+            "title": "Contact Us",
+            "description": "Contact PI Group for expert financial services and inquiries."
+        },
+        "our-team": {
+            "type": "ProfilePage",
+            "name": "Our Team",
+            "title": "Our Team",
+            "description": "Meet our team of financial experts and professionals at PI Group."
+        },
+        "investment_banking": {
+            "type": "Service",
+            "name": "Investment Banking",
+            "title": "Innovative Financial Solutions",
+            "description": "Our investment banking services are tailored to advise and support exceptional financial innovators and dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth."
+        },
+        "asset_management": {
+            "type": "Service",
+            "name": "Asset Management",
+            "title": "Expert Portfolio Management",
+            "description": "Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver exceptional risk adjusted returns, and to date, none of our funds have experienced a losing year."
+        }
+    }
+}

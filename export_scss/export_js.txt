@@ -1,0 +1,2445 @@
+
+================================================================================
+FILE: main.js
+PATH: pi_website_take5\assets\js\main.js
+================================================================================
+
+/**
+ * Main JavaScript file
+ * Initializes all components and modules for the website
+ */
+
+// Import core functionality
+import { 
+    validateForm, 
+    initSmoothScrolling 
+} from './modules/core/helpers/index.js';
+
+// Import components
+import { AssetManagementIcons } from './modules/components/asset-management/index.js';
+import { 
+    ScrollIndicator, 
+    LazyLoading, 
+    Cards,
+    ScrollHeader
+} from './modules/components/ui/index.js';
+import {
+    NavigationMenu,
+    HeroMenu
+} from './modules/components/navigation/index.js';
+import { CookieConsent } from './modules/components/cookie/index.js';
+
+// Import graphics
+import { BackgroundWave } from './modules/graphics/index.js';
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Initialize smooth scrolling for anchor links
+    initSmoothScrolling();
+    
+    // Initialize form validation for contact form
+    const contactForm = document.querySelector("#contact-form");
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (validateForm(this)) {
+                // Submit the form
+                this.submit();
+            }
+        });
+    }
+    
+    // Initialize Navigation Menu if elements exist
+    const navigationMenu = new NavigationMenu();
+    navigationMenu.init();
+    
+    // Initialize Hero Menu if elements exist
+    const heroMenu = new HeroMenu();
+    heroMenu.init();
+    
+    // Initialize Cookie Consent
+    const cookieConsent = new CookieConsent();
+    cookieConsent.init();
+    
+    // Initialize scroll header for home page
+    const scrollHeader = new ScrollHeader();
+    scrollHeader.init();
+    
+    // Initialize Asset Management Icons if needed
+    if (document.querySelector('.asset-management-left-hand, .asset-management-right-hand, .asset-management-combined-hands')) {
+        const assetManagementIcons = new AssetManagementIcons();
+        assetManagementIcons.init({
+            // Override default selectors if needed
+            leftHandSelector: '.asset-management-left-hand',
+            rightHandSelector: '.asset-management-right-hand',
+            combinedSelector: '.asset-management-combined-hands'
+        });
+    }
+    
+    // Initialize card components
+    const cards = new Cards();
+    cards.init();
+    
+    // Initialize lazy loading
+    const lazyLoader = new LazyLoading();
+    lazyLoader.init();
+    
+    // Initialize scroll indicator if present
+    if (document.querySelector('.scroll-indicator')) {
+        const scrollIndicator = new ScrollIndicator();
+        scrollIndicator.init();
+    }
+    
+    // Initialize background wave animation if container exists
+    if (document.getElementById('threeJsContainer')) {
+        const backgroundWave = new BackgroundWave();
+        backgroundWave.init();
+    }
+    
+    // Initialize about us image slider if present
+    const aboutSliders = document.querySelectorAll('.about-image-slider');
+    if (aboutSliders.length > 0) {
+        aboutSliders.forEach(slider => {
+            import('./modules/about-image-slider.js').then(module => {
+                new module.default(slider);
+            }).catch(error => {
+                console.error('Error loading about-image-slider module:', error);
+            });
+        });
+    }
+});
+
+
+
+
+================================================================================
+FILE: about-image-slider.js
+PATH: pi_website_take5\assets\js\modules\about-image-slider.js
+================================================================================
+
+/**
+ * About Us image slider functionality
+ * Handles automatic image rotation, navigation, and dot indicators
+ */
+class AboutImageSlider {
+    constructor(element, options = {}) {
+        this.sliderElement = element;
+        this.slides = Array.from(this.sliderElement.querySelectorAll('.about-image-slider__slide'));
+        this.dotsContainer = this.sliderElement.querySelector('.about-image-slider__dots');
+        this.prevButton = this.sliderElement.querySelector('.about-image-slider__button--prev');
+        this.nextButton = this.sliderElement.querySelector('.about-image-slider__button--next');
+        this.container = this.sliderElement.querySelector('.about-image-slider__container');
+        
+        // Configuration with defaults
+        this.options = {
+            autoplay: true,
+            interval: 5000, // 5 seconds
+            ...options
+        };
+        
+        this.currentIndex = 0;
+        this.autoplayInterval = null;
+        this.isAnimating = false; // Flag to prevent multiple transitions
+        this.isInitialized = false; // Flag to track initialization state
+        
+        // Initialize
+        this.init();
+    }
+    
+    init() {
+        // If no slides, exit early
+        if (this.slides.length === 0) return;
+        
+        // Temporarily disable transitions during initialization
+        this.container.style.transition = 'none';
+        
+        // Clone first and last slides for smooth infinite loop
+        if (this.slides.length > 1) {
+            const firstSlideClone = this.slides[0].cloneNode(true);
+            const lastSlideClone = this.slides[this.slides.length - 1].cloneNode(true);
+            
+            this.container.appendChild(firstSlideClone);
+            this.container.insertBefore(lastSlideClone, this.slides[0]);
+            
+            // Update slides array to include clones
+            this.slides = Array.from(this.sliderElement.querySelectorAll('.about-image-slider__slide'));
+            
+            // Set initial position to the first actual slide (after the cloned last slide)
+            this.currentIndex = 1; // Start at index 1 (first actual slide)
+            this.container.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+        }
+        
+        // Create dot indicators
+        this.createDots();
+        
+        // Set initial active state
+        this.updateActiveDot();
+        
+        // Force a reflow to ensure the transformation is applied immediately
+        void this.container.offsetWidth;
+        
+        // Make the slider initially invisible and fade it in after it's ready
+        this.sliderElement.style.opacity = '0';
+        
+        // Wait for all images to load before enabling transitions and starting autoplay
+        this.preloadSlideImages().then(() => {
+            // Re-enable transitions after a small delay
+            setTimeout(() => {
+                this.container.style.transition = 'transform 0.5s ease-in-out';
+                this.sliderElement.style.opacity = '1';
+                this.sliderElement.style.transition = 'opacity 0.3s ease-in-out';
+                this.isInitialized = true;
+                
+                // Add event listeners
+                this.addEventListeners();
+                
+                // Start autoplay if enabled
+                if (this.options.autoplay) {
+                    this.startAutoplay();
+                }
+            }, 50);
+        });
+    }
+    
+    createDots() {
+        // Clear existing dots
+        if (this.dotsContainer) {
+            this.dotsContainer.innerHTML = '';
+        }
+        
+        // Only create dots for the original slides (excluding clones)
+        const originalSlidesCount = this.slides.length - (this.slides.length > 1 ? 2 : 0);
+        
+        for (let i = 0; i < originalSlidesCount; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.dataset.index = i;
+            this.dotsContainer.appendChild(dot);
+        }
+        
+        this.dots = Array.from(this.dotsContainer.querySelectorAll('.dot'));
+    }
+    
+    addEventListeners() {
+        // Navigation buttons
+        if (this.prevButton) {
+            this.prevButton.addEventListener('click', () => this.prevSlide());
+        }
+        
+        if (this.nextButton) {
+            this.nextButton.addEventListener('click', () => this.nextSlide());
+        }
+        
+        // Dot navigation
+        this.dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                // Convert dot index to slide index (accounting for the cloned first slide)
+                const slideIndex = this.slides.length > 1 ? i + 1 : i;
+                this.goToSlide(slideIndex);
+                this.resetAutoplay();
+            });
+        });
+        
+        // Pause autoplay on hover or touch
+        this.sliderElement.addEventListener('mouseenter', () => this.pauseAutoplay());
+        this.sliderElement.addEventListener('touchstart', () => this.pauseAutoplay(), { passive: true });
+        
+        this.sliderElement.addEventListener('mouseleave', () => {
+            if (this.options.autoplay) {
+                this.startAutoplay();
+            }
+        });
+        this.sliderElement.addEventListener('touchend', () => {
+            if (this.options.autoplay) {
+                this.startAutoplay();
+            }
+        }, { passive: true });
+        
+        // Handle transition end
+        this.container.addEventListener('transitionend', () => this.handleTransitionEnd());
+    }
+    
+    handleTransitionEnd() {
+        this.isAnimating = false;
+        
+        // If we've transitioned to a clone, immediately jump to the real slide without animation
+        if (this.slides.length > 1) {
+            // If we're at the last clone (index this.slides.length - 1)
+            if (this.currentIndex === this.slides.length - 1) {
+                this.container.style.transition = 'none';
+                this.currentIndex = 1; // Go to the first real slide
+                this.container.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                
+                // Force a reflow
+                void this.container.offsetWidth;
+                
+                // Re-enable transitions
+                this.container.style.transition = 'transform 0.5s ease-in-out';
+            }
+            // If we're at the first clone (index 0)
+            else if (this.currentIndex === 0) {
+                this.container.style.transition = 'none';
+                this.currentIndex = this.slides.length - 2; // Go to the last real slide
+                this.container.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                
+                // Force a reflow
+                void this.container.offsetWidth;
+                
+                // Re-enable transitions
+                this.container.style.transition = 'transform 0.5s ease-in-out';
+            }
+        }
+    }
+    
+    goToSlide(index) {
+        if (this.isAnimating || !this.isInitialized) return;
+        this.isAnimating = true;
+        
+        this.currentIndex = index;
+        
+        // Update container position with animation
+        this.container.style.transition = 'transform 0.5s ease-in-out';
+        this.container.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+        
+        // Update active dot
+        this.updateActiveDot();
+    }
+    
+    updateActiveDot() {
+        if (!this.dots || this.dots.length === 0) return;
+        
+        // Calculate the corresponding dot index based on the current slide
+        let dotIndex = this.currentIndex;
+        if (this.slides.length > 1) {
+            // Adjust for cloned slides
+            if (this.currentIndex === 0) {
+                dotIndex = this.dots.length - 1; // Last dot for first clone
+            } else if (this.currentIndex === this.slides.length - 1) {
+                dotIndex = 0; // First dot for last clone
+            } else {
+                dotIndex = this.currentIndex - 1; // Normal case (subtract 1 for the cloned first slide)
+            }
+        }
+        
+        this.dots.forEach((dot, i) => {
+            if (i === dotIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    nextSlide() {
+        if (this.isAnimating) return;
+        
+        const newIndex = this.currentIndex + 1;
+        this.goToSlide(newIndex);
+        this.resetAutoplay();
+    }
+    
+    prevSlide() {
+        if (this.isAnimating) return;
+        
+        const newIndex = this.currentIndex - 1;
+        this.goToSlide(newIndex);
+        this.resetAutoplay();
+    }
+    
+    startAutoplay() {
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+        }
+        
+        this.autoplayInterval = setInterval(() => {
+            this.nextSlide();
+        }, this.options.interval);
+    }
+    
+    pauseAutoplay() {
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+            this.autoplayInterval = null;
+        }
+    }
+    
+    resetAutoplay() {
+        if (this.options.autoplay) {
+            this.pauseAutoplay();
+            this.startAutoplay();
+        }
+    }
+    
+    // Helper method to preload all slide images
+    preloadSlideImages() {
+        const imagePromises = this.slides.map(slide => {
+            return new Promise((resolve) => {
+                const bgImage = slide.style.backgroundImage;
+                if (!bgImage || bgImage === 'none') {
+                    // No background image to load
+                    resolve();
+                    return;
+                }
+                
+                // Extract URL from the backgroundImage style
+                const url = bgImage.match(/url\(['"]?(.*?)['"]?\)/)?.[1];
+                if (!url) {
+                    resolve();
+                    return;
+                }
+                
+                const img = new Image();
+                img.onload = () => resolve();
+                img.onerror = () => resolve(); // Resolve even on error to continue
+                img.src = url;
+            });
+        });
+        
+        return Promise.all(imagePromises);
+    }
+}
+
+// Initialize all sliders when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.about-image-slider');
+    
+    sliders.forEach(slider => {
+        new AboutImageSlider(slider);
+    });
+});
+
+export default AboutImageSlider; 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\index.js
+================================================================================
+
+/**
+ * Main Modules Index
+ * Re-exports all modules for easier imports
+ */
+
+export * from './core/index.js';
+export * from './components/index.js';
+export * from './graphics/index.js';
+// These will be uncommented as we implement other modules
+// export * from '../../../src/pages/index.js'; 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\components\index.js
+================================================================================
+
+/**
+ * Components Module Index
+ * Re-exports all component categories for easier imports
+ */
+
+export * from './ui/index.js';
+export * from './asset-management/index.js';
+export * from './navigation/index.js';
+export * from './cookie/index.js';
+// These will be uncommented as we implement other component modules
+// export * from './forms/index.js'; 
+
+
+================================================================================
+FILE: icons.js
+PATH: pi_website_take5\assets\js\modules\components\asset-management\icons.js
+================================================================================
+
+/**
+ * Asset Management Icons Handler
+ * Handles dynamic loading and manipulation of SVG icons for asset management section
+ */
+
+class AssetManagementIcons {
+    constructor() {
+        this.iconBasePath = '/assets/images/asset_management/';
+        this.icons = {
+            handLeft: 'hand_left.svg',
+            handRight: 'hand_right.svg',
+            combined: 'icon.svg'
+        };
+    }
+
+    /**
+     * Load an SVG icon and inject it into the specified element
+     * @param {string} iconName - Name of the icon to load (key from this.icons)
+     * @param {HTMLElement} targetElement - Element to inject the SVG into
+     * @return {Promise} - Promise that resolves when the SVG is loaded
+     */
+    loadIcon(iconName, targetElement) {
+        if (!this.icons[iconName]) {
+            console.error(`Icon ${iconName} not found`);
+            return Promise.reject(new Error(`Icon ${iconName} not found`));
+        }
+
+        const iconPath = this.iconBasePath + this.icons[iconName];
+        
+        return fetch(iconPath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load icon: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(svgContent => {
+                targetElement.innerHTML = svgContent;
+                return targetElement.querySelector('svg');
+            })
+            .catch(error => {
+                console.error('Error loading SVG:', error);
+                throw error;
+            });
+    }
+
+    /**
+     * Initialize icons for asset management section
+     * @param {Object} options - Configuration options
+     * @return {AssetManagementIcons} - The instance for method chaining
+     */
+    init(options = {}) {
+        const defaults = {
+            leftHandSelector: '.left-hand-icon',
+            rightHandSelector: '.right-hand-icon',
+            combinedSelector: '.combined-hands-icon'
+        };
+
+        const config = {...defaults, ...options};
+
+        // Initialize left hand icons
+        document.querySelectorAll(config.leftHandSelector).forEach(element => {
+            this.loadIcon('handLeft', element);
+        });
+
+        // Initialize right hand icons
+        document.querySelectorAll(config.rightHandSelector).forEach(element => {
+            this.loadIcon('handRight', element);
+        });
+
+        // Initialize combined icons
+        document.querySelectorAll(config.combinedSelector).forEach(element => {
+            this.loadIcon('combined', element);
+        });
+        
+        return this;
+    }
+}
+
+// Export the class
+export default AssetManagementIcons; 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\components\asset-management\index.js
+================================================================================
+
+/**
+ * Asset Management Component Index
+ * Re-exports all asset management components for easier imports
+ */
+
+export { default as AssetManagementIcons } from './icons.js'; 
+
+
+================================================================================
+FILE: cookie-consent.js
+PATH: pi_website_take5\assets\js\modules\components\cookie\cookie-consent.js
+================================================================================
+
+/**
+ * Cookie Consent
+ * Handles the cookie consent floating box functionality
+ */
+
+class CookieConsent {
+    constructor() {
+        this.isInitialized = false;
+        this.cookieName = 'pi_cookie_consent';
+        this.expiryDays = 365;
+        this.initDelay = 1000; // Delay in ms before showing banner
+    }
+
+    /**
+     * Set a cookie with the given name, value and expiry days
+     * @private
+     * @param {string} name - Cookie name
+     * @param {string} value - Cookie value
+     * @param {number} days - Expiry in days
+     */
+    _setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+    }
+    
+    /**
+     * Get a cookie value by name
+     * @private
+     * @param {string} name - Cookie name
+     * @returns {string|null} Cookie value or null if not found
+     */
+    _getCookie(name) {
+        const nameEQ = `${name}=`;
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    
+    /**
+     * Check if user has already given consent
+     * @private
+     * @returns {boolean} True if consent has been given
+     */
+    _hasConsent() {
+        return this._getCookie(this.cookieName) === 'accepted';
+    }
+    
+    /**
+     * Show the cookie consent floating box
+     * @private
+     */
+    _showBanner() {
+        const banner = document.getElementById('cookie-consent-banner');
+        if (banner) {
+            banner.classList.add('active');
+        }
+    }
+    
+    /**
+     * Hide the cookie consent floating box
+     * @private
+     */
+    _hideBanner() {
+        const banner = document.getElementById('cookie-consent-banner');
+        if (banner) {
+            banner.classList.remove('active');
+            // Add a smooth fade-out effect
+            banner.style.opacity = '0';
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 500);
+        }
+    }
+    
+    /**
+     * Accept cookies and hide the banner
+     * @private
+     */
+    _acceptCookies = () => {
+        this._setCookie(this.cookieName, 'accepted', this.expiryDays);
+        this._hideBanner();
+    }
+    
+    /**
+     * Decline cookies and hide the banner
+     * @private
+     */
+    _declineCookies = () => {
+        this._setCookie(this.cookieName, 'declined', this.expiryDays);
+        this._hideBanner();
+    }
+    
+    /**
+     * Handle click events for cookie consent buttons
+     * @private
+     * @param {Event} e - Click event
+     */
+    _handleClick = (e) => {
+        if (e.target.closest('#cookie-accept-btn')) {
+            this._acceptCookies();
+        } else if (e.target.closest('#cookie-decline-btn')) {
+            this._declineCookies();
+        }
+    }
+    
+    /**
+     * Initialize the cookie consent module
+     * @param {Object} options - Configuration options
+     * @param {string} options.cookieName - Name of the cookie to store consent
+     * @param {number} options.expiryDays - Number of days until consent expires
+     * @param {number} options.initDelay - Delay in ms before showing the banner
+     * @return {CookieConsent} - The instance for method chaining
+     */
+    init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        // Apply custom options
+        Object.assign(this, {
+            cookieName: options.cookieName || this.cookieName,
+            expiryDays: options.expiryDays || this.expiryDays,
+            initDelay: options.initDelay || this.initDelay
+        });
+        
+        // Bind events
+        document.addEventListener('click', this._handleClick);
+        
+        // Slight delay to ensure smooth animation
+        setTimeout(() => {
+            if (!this._hasConsent()) {
+                this._showBanner();
+            }
+        }, this.initDelay);
+        
+        this.isInitialized = true;
+        return this;
+    }
+    
+    /**
+     * Manually show the cookie consent banner
+     * @return {CookieConsent} - The instance for method chaining
+     */
+    show() {
+        this._showBanner();
+        return this;
+    }
+    
+    /**
+     * Manually hide the cookie consent banner
+     * @return {CookieConsent} - The instance for method chaining
+     */
+    hide() {
+        this._hideBanner();
+        return this;
+    }
+    
+    /**
+     * Check if consent has been given
+     * @return {boolean} - True if consent was given
+     */
+    hasConsent() {
+        return this._hasConsent();
+    }
+    
+    /**
+     * Manually set consent status
+     * @param {boolean} accepted - Whether cookies are accepted
+     * @return {CookieConsent} - The instance for method chaining
+     */
+    setConsent(accepted) {
+        this._setCookie(
+            this.cookieName, 
+            accepted ? 'accepted' : 'declined', 
+            this.expiryDays
+        );
+        return this;
+    }
+    
+    /**
+     * Clean up event listeners
+     */
+    destroy() {
+        if (!this.isInitialized) return;
+        
+        document.removeEventListener('click', this._handleClick);
+        
+        this.isInitialized = false;
+    }
+}
+
+export default CookieConsent; 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\components\cookie\index.js
+================================================================================
+
+/**
+ * Cookie Components Index
+ * Re-exports all cookie-related components for easier imports
+ */
+
+export { default as CookieConsent } from './cookie-consent.js'; 
+
+
+================================================================================
+FILE: hero-menu.js
+PATH: pi_website_take5\assets\js\modules\components\navigation\hero-menu.js
+================================================================================
+
+/**
+ * Hero Menu
+ * Handles the functionality for the minimal hero menu on the hero section
+ */
+
+class HeroMenu {
+    constructor() {
+        this.isInitialized = false;
+        this.heroMenuToggle = null;
+        this.heroNav = null;
+    }
+
+    /**
+     * Toggle hero menu visibility
+     * @private
+     * @param {Event} e - The click event
+     */
+    _toggleHeroMenu = (e) => {
+        if (e) {
+            e.preventDefault();
+        }
+        
+        const isOpen = this.heroNav.classList.contains('visible');
+        
+        // Toggle states
+        this.heroMenuToggle.classList.toggle('active');
+        this.heroNav.classList.toggle('visible');
+        
+        // Update ARIA
+        this.heroMenuToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    }
+
+    /**
+     * Handle clicks outside the menu to close it
+     * @private
+     * @param {Event} event - The click event
+     */
+    _handleOutsideClick = (event) => {
+        const isOpen = this.heroNav.classList.contains('visible');
+        
+        if (isOpen && 
+            !event.target.closest('.hero-menu-toggle') && 
+            !event.target.closest('.hero-nav')) {
+            this._toggleHeroMenu();
+        }
+    }
+
+    /**
+     * Handle ESC key to close the menu
+     * @private
+     * @param {KeyboardEvent} event - The keyboard event
+     */
+    _handleEscKey = (event) => {
+        if (event.key === 'Escape' && 
+            this.heroNav.classList.contains('visible')) {
+            this._toggleHeroMenu();
+        }
+    }
+
+    /**
+     * Add accessibility navigation to menu items
+     * @private
+     */
+    _setupAccessibility() {
+        const menuLinks = this.heroNav.querySelectorAll('a');
+        
+        menuLinks.forEach((link, index) => {
+            // Allow keyboard navigation
+            link.addEventListener('keydown', (e) => {
+                // Handle last item to close menu on tab
+                if (e.key === 'Tab' && index === menuLinks.length - 1 && !e.shiftKey) {
+                    setTimeout(() => {
+                        if (this.heroNav.classList.contains('visible')) {
+                            this._toggleHeroMenu();
+                        }
+                    }, 0);
+                }
+            });
+        });
+    }
+
+    /**
+     * Set up smooth scrolling for navigation links
+     * @private
+     */
+    _setupSmoothScrolling() {
+        const navLinks = this.heroNav.querySelectorAll('a[href^="#"]');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Close menu if it's open
+                if (this.heroNav.classList.contains('visible')) {
+                    this._toggleHeroMenu();
+                }
+            });
+        });
+    }
+
+    /**
+     * Initialize hero menu
+     * @param {Object} options - Configuration options
+     * @param {string} options.menuToggleSelector - Selector for menu toggle button
+     * @param {string} options.navSelector - Selector for hero navigation
+     * @return {HeroMenu} - The instance for method chaining
+     */
+    init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        const config = {
+            menuToggleSelector: '.hero-menu-toggle',
+            navSelector: '.hero-nav',
+            ...options
+        };
+        
+        // Get elements
+        this.heroMenuToggle = document.querySelector(config.menuToggleSelector);
+        this.heroNav = document.querySelector(config.navSelector);
+        
+        // Exit if elements don't exist
+        if (!this.heroMenuToggle || !this.heroNav) {
+            console.warn('Hero menu elements not found. Hero menu not initialized.');
+            return this;
+        }
+        
+        // ARIA setup
+        this.heroMenuToggle.setAttribute('aria-expanded', 'false');
+        this.heroMenuToggle.setAttribute('aria-controls', 'hero-nav-menu');
+        this.heroNav.setAttribute('id', 'hero-nav-menu');
+        
+        // Add click handler to toggle button
+        this.heroMenuToggle.addEventListener('click', this._toggleHeroMenu);
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', this._handleOutsideClick);
+        
+        // Close menu when ESC key is pressed
+        document.addEventListener('keydown', this._handleEscKey);
+        
+        // Setup additional functionality
+        this._setupAccessibility();
+        this._setupSmoothScrolling();
+        
+        this.isInitialized = true;
+        return this;
+    }
+
+    /**
+     * Clean up event listeners
+     */
+    destroy() {
+        if (!this.isInitialized) return;
+        
+        // Remove event listeners
+        this.heroMenuToggle.removeEventListener('click', this._toggleHeroMenu);
+        document.removeEventListener('click', this._handleOutsideClick);
+        document.removeEventListener('keydown', this._handleEscKey);
+        
+        // Remove link event listeners - would need more complex tracking of these
+        
+        this.isInitialized = false;
+    }
+}
+
+export default HeroMenu; 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\components\navigation\index.js
+================================================================================
+
+/**
+ * Navigation Components Index
+ * Re-exports all navigation components for easier imports
+ */
+
+export { default as NavigationMenu } from './menu.js';
+export { default as HeroMenu } from './hero-menu.js'; 
+
+
+================================================================================
+FILE: menu.js
+PATH: pi_website_take5\assets\js\modules\components\navigation\menu.js
+================================================================================
+
+/**
+ * Main Navigation Menu
+ * Handles mobile menu toggle, accessibility features, and responsive behavior
+ */
+
+class NavigationMenu {
+    constructor() {
+        this.isInitialized = false;
+        this.menuToggle = null;
+        this.mainNav = null;
+        this.isMenuToggleInProgress = false;
+        this.previousWindowWidth = window.innerWidth;
+        this.resizeTimer = null;
+    }
+
+    /**
+     * Initialize menu state based on screen size
+     * @private
+     */
+    _initMenuState() {
+        // Don't override menu state if a toggle is in progress
+        if (this.isMenuToggleInProgress) {
+            return;
+        }
+        
+        if (window.innerWidth <= 767) {
+            // Mobile view - hide menu
+            this.mainNav.style.maxHeight = '0px';
+            this.mainNav.style.overflow = 'hidden';
+            this.mainNav.style.opacity = '0';
+            this.mainNav.style.visibility = 'hidden';
+            this.mainNav.classList.remove('open');
+            this.menuToggle.classList.remove('active');
+            this.menuToggle.setAttribute('aria-expanded', 'false');
+        } else {
+            // Desktop view - show menu
+            this.mainNav.style.maxHeight = '';
+            this.mainNav.style.overflow = '';
+            this.mainNav.style.opacity = '';
+            this.mainNav.style.visibility = '';
+            this.mainNav.classList.remove('open'); // Ensure mobile classes are removed
+            document.body.classList.remove('menu-open');
+        }
+    }
+
+    /**
+     * Toggle menu function for mobile devices
+     * @private
+     * @param {Event} e - The click event
+     */
+    _toggleMenu = (e) => {
+        if (e) {
+            e.preventDefault();
+        }
+        
+        // Only handle toggle for mobile devices - adjust breakpoint to match CSS
+        if (window.innerWidth > 767) {
+            return;
+        }
+        
+        // Prevent multiple rapid toggles
+        if (this.isMenuToggleInProgress) {
+            return;
+        }
+        
+        // Set flag to prevent multiple toggles
+        this.isMenuToggleInProgress = true;
+        
+        const isOpen = this.mainNav.classList.contains('open');
+        
+        // Toggle states
+        this.menuToggle.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
+        
+        // Explicitly set position of toggle button in active state
+        if (!isOpen) {
+            // When opening menu, fix the toggle button position based on direction
+            const isRTL = document.documentElement.dir === 'rtl';
+            
+            // Add open class immediately
+            this.mainNav.classList.add('open');
+            
+            // Set fixed position at the top
+            this.menuToggle.style.position = 'fixed';
+            this.menuToggle.style.top = '25px';
+            this.menuToggle.style.zIndex = '10000'; // Higher z-index to ensure button is visible
+            
+            // Set left/right based on direction
+            if (isRTL) {
+                // For RTL (Hebrew) - position on the right
+                this.menuToggle.style.right = '15px';
+                this.menuToggle.style.left = 'auto';
+            } else {
+                // For LTR (English) - position on the left
+                this.menuToggle.style.left = '15px';
+                this.menuToggle.style.right = 'auto';
+            }
+            
+            // Handle height animation for mobile only - show immediately
+            this.mainNav.style.visibility = 'visible';
+            this.mainNav.style.opacity = '1';
+            this.mainNav.style.maxHeight = '100vh';
+            this.mainNav.style.zIndex = '9999'; // Ensure menu is on top when visible
+            
+            // Update ARIA
+            this.menuToggle.setAttribute('aria-expanded', 'true');
+            
+            // Allow new toggles after animation completes
+            setTimeout(() => {
+                this.isMenuToggleInProgress = false;
+            }, 500);
+        } else {
+            // For closing, start animation then remove class at the end
+            
+            // Start closing animation
+            this.mainNav.style.maxHeight = '0px';
+            this.mainNav.style.opacity = '0';
+            
+            // Wait for animation to complete before removing classes and visibility
+            setTimeout(() => {
+                // When closing, reset inline styles
+                this.menuToggle.style.position = '';
+                this.menuToggle.style.top = '';
+                this.menuToggle.style.left = '';
+                this.menuToggle.style.right = '';
+                this.menuToggle.style.zIndex = '';
+                
+                // Remove class after animation completes
+                this.mainNav.classList.remove('open');
+                
+                // Finally hide the menu
+                this.mainNav.style.visibility = 'hidden';
+                this.mainNav.style.zIndex = '-1'; // Move it behind other elements
+                
+                // Update ARIA
+                this.menuToggle.setAttribute('aria-expanded', 'false');
+                
+                // Allow new toggles
+                this.isMenuToggleInProgress = false;
+            }, 400); // Just before the transition completes
+        }
+    }
+
+    /**
+     * Handle clicks outside the menu to close it
+     * @private
+     * @param {Event} event - The click event
+     */
+    _handleOutsideClick = (event) => {
+        if (window.innerWidth <= 767 && 
+            this.mainNav.classList.contains('open') && 
+            !event.target.closest('.mobile-menu-toggle') && 
+            !event.target.closest('.main-nav')) {
+            this._toggleMenu();
+        }
+    }
+
+    /**
+     * Handle ESC key to close the menu
+     * @private
+     * @param {KeyboardEvent} event - The keyboard event
+     */
+    _handleEscKey = (event) => {
+        if (window.innerWidth <= 767 && 
+            event.key === 'Escape' && 
+            this.mainNav.classList.contains('open')) {
+            this._toggleMenu();
+        }
+    }
+
+    /**
+     * Handle window resize and reinitialize menu state when crossing breakpoints
+     * @private
+     */
+    _handleResize = () => {
+        // Clear previous timeout
+        clearTimeout(this.resizeTimer);
+        
+        // Set a new timeout to execute the function after 250ms
+        this.resizeTimer = setTimeout(() => {
+            const currentWindowWidth = window.innerWidth;
+            
+            // Only reset menu if we cross the mobile/desktop threshold (767px)
+            const wasMobile = this.previousWindowWidth <= 767;
+            const isMobile = currentWindowWidth <= 767;
+            
+            // Only reinitialize if we've crossed the threshold
+            if (wasMobile !== isMobile) {
+                this._initMenuState();
+            }
+            
+            // Update previous window width
+            this.previousWindowWidth = currentWindowWidth;
+        }, 250);
+    }
+
+    /**
+     * Initialize the navigation menu
+     * @param {Object} options - Configuration options
+     * @param {string} options.menuToggleSelector - Selector for menu toggle button
+     * @param {string} options.navSelector - Selector for main navigation
+     * @return {NavigationMenu} - The instance for method chaining
+     */
+    init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        const config = {
+            menuToggleSelector: '.mobile-menu-toggle',
+            navSelector: '.main-nav',
+            ...options
+        };
+        
+        // Get elements
+        this.menuToggle = document.querySelector(config.menuToggleSelector);
+        this.mainNav = document.querySelector(config.navSelector);
+        
+        if (!this.menuToggle || !this.mainNav) {
+            console.warn('Menu elements not found. Navigation menu not initialized.');
+            return this;
+        }
+        
+        // Set ARIA attributes
+        this.menuToggle.setAttribute('aria-controls', 'main-nav-menu');
+        this.mainNav.setAttribute('id', 'main-nav-menu');
+        
+        // Initial setup
+        this._initMenuState();
+        
+        // Add click handler to toggle button
+        this.menuToggle.addEventListener('click', this._toggleMenu);
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', this._handleOutsideClick);
+        
+        // Close menu when ESC key is pressed
+        document.addEventListener('keydown', this._handleEscKey);
+        
+        // Handle window resize
+        window.addEventListener('resize', this._handleResize);
+        
+        this.isInitialized = true;
+        return this;
+    }
+
+    /**
+     * Clean up event listeners
+     */
+    destroy() {
+        if (!this.isInitialized) return;
+        
+        // Remove event listeners
+        this.menuToggle.removeEventListener('click', this._toggleMenu);
+        document.removeEventListener('click', this._handleOutsideClick);
+        document.removeEventListener('keydown', this._handleEscKey);
+        window.removeEventListener('resize', this._handleResize);
+        
+        // Clear timeout
+        clearTimeout(this.resizeTimer);
+        
+        this.isInitialized = false;
+    }
+}
+
+export default NavigationMenu; 
+
+
+================================================================================
+FILE: cards.js
+PATH: pi_website_take5\assets\js\modules\components\ui\cards.js
+================================================================================
+
+/**
+ * Cards Component
+ * Makes card elements clickable by triggering their primary link
+ */
+
+class Cards {
+    constructor() {
+        this.isInitialized = false;
+        this.cards = null;
+    }
+
+    /**
+     * Handle click events on a card
+     * @private
+     * @param {Event} event - The click event
+     */
+    _handleCardClick(event) {
+        const card = event.currentTarget;
+        const link = card.querySelector('a');
+        
+        // Only trigger the link if the click wasn't directly on another link
+        if (link && !event.target.closest('a')) {
+            link.click();
+        }
+    }
+
+    /**
+     * Make cards clickable by adding event listeners
+     * @param {string} selector - CSS selector for card elements
+     * @private
+     */
+    _makeCardsClickable(selector) {
+        this.cards = document.querySelectorAll(selector);
+        
+        if (this.cards.length === 0) {
+            console.warn(`No cards found with selector: ${selector}`);
+            return;
+        }
+        
+        this.cards.forEach(card => {
+            // Add pointer cursor to indicate clickability
+            card.style.cursor = 'pointer';
+            
+            // Add click handler
+            card.addEventListener('click', this._handleCardClick);
+            
+            // Prevent double triggering when clicking on links inside cards
+            const links = card.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+        });
+    }
+
+    /**
+     * Initialize cards functionality
+     * @param {Object} options - Configuration options
+     * @param {string} options.selector - CSS selector for card elements
+     * @return {Cards} - The instance for method chaining
+     */
+    init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        const config = {
+            selector: '.product-card, .team-card, .segment-card',
+            ...options
+        };
+        
+        this._makeCardsClickable(config.selector);
+        
+        this.isInitialized = true;
+        return this;
+    }
+
+    /**
+     * Clean up event listeners to prevent memory leaks
+     */
+    destroy() {
+        if (!this.isInitialized || !this.cards) return;
+        
+        this.cards.forEach(card => {
+            card.removeEventListener('click', this._handleCardClick);
+            
+            const links = card.querySelectorAll('a');
+            links.forEach(link => {
+                link.removeEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+        });
+        
+        this.isInitialized = false;
+    }
+}
+
+export default Cards; 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\components\ui\index.js
+================================================================================
+
+/**
+ * UI Components Index
+ * Re-exports all UI components for easier imports
+ */
+
+export { default as ScrollIndicator } from './scroll-indicator.js';
+export { default as LazyLoading } from './lazy-loading.js';
+export { default as Cards } from './cards.js';
+export { default as ScrollHeader } from './scroll-header.js'; 
+
+
+================================================================================
+FILE: lazy-loading.js
+PATH: pi_website_take5\assets\js\modules\components\ui\lazy-loading.js
+================================================================================
+
+/**
+ * Lazy Loading
+ * Handles lazy loading of images for better performance
+ */
+
+class LazyLoading {
+    constructor() {
+        this.isInitialized = false;
+        this.imageObserver = null;
+    }
+
+    /**
+     * Create and configure the IntersectionObserver
+     * @private
+     */
+    _setupObserver() {
+        if ('IntersectionObserver' in window) {
+            this.imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const image = entry.target;
+                        
+                        // Only set src if data-src exists
+                        if (image.dataset.src) {
+                            image.src = image.dataset.src;
+                        }
+                        
+                        // Handle srcset as well if present
+                        if (image.dataset.srcset) {
+                            image.srcset = image.dataset.srcset;
+                        }
+                        
+                        image.classList.remove("lazy");
+                        this.imageObserver.unobserve(image);
+                    }
+                });
+            });
+        }
+    }
+
+    /**
+     * Apply lazy loading to images that match the selector
+     * @param {string} selector - CSS selector for lazy loaded images
+     * @private
+     */
+    _applyLazyLoading(selector) {
+        const lazyImages = document.querySelectorAll(selector);
+        
+        if (lazyImages.length === 0) {
+            console.warn(`No lazy-loaded images found with selector: ${selector}`);
+            return;
+        }
+
+        if (this.imageObserver) {
+            // Modern browsers: use IntersectionObserver
+            lazyImages.forEach(img => {
+                this.imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for browsers that don't support IntersectionObserver
+            lazyImages.forEach(img => {
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
+                if (img.dataset.srcset) {
+                    img.srcset = img.dataset.srcset;
+                }
+                img.classList.remove("lazy");
+            });
+        }
+    }
+
+    /**
+     * Initialize lazy loading for images
+     * @param {Object} options - Configuration options
+     * @param {string} options.selector - CSS selector for lazy-loaded images
+     * @return {LazyLoading} - The instance for method chaining
+     */
+    init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        const config = {
+            selector: 'img.lazy',
+            ...options
+        };
+        
+        this._setupObserver();
+        this._applyLazyLoading(config.selector);
+        
+        this.isInitialized = true;
+        return this;
+    }
+}
+
+export default LazyLoading; 
+
+
+================================================================================
+FILE: scroll-header.js
+PATH: pi_website_take5\assets\js\modules\components\ui\scroll-header.js
+================================================================================
+
+/**
+ * Scroll Header
+ * Manages header visibility when scrolling on the home page
+ */
+
+class ScrollHeader {
+    constructor() {
+        this.isInitialized = false;
+        this.header = null;
+        this.heroSection = null;
+        this.scrollThreshold = 100; // Pixels from hero bottom to trigger header
+    }
+
+    /**
+     * Handle scroll events to show/hide header
+     * @private
+     */
+    _handleScroll = () => {
+        if (!this.header || !this.heroSection) return;
+        
+        // Show header when scrolled past hero section (minus threshold)
+        if (window.scrollY >= this.heroSection.offsetHeight - this.scrollThreshold) {
+            this.header.classList.remove('initially-hidden');
+        } else {
+            this.header.classList.add('initially-hidden');
+        }
+    }
+
+    /**
+     * Initialize the scroll header functionality
+     * @param {Object} options - Configuration options
+     * @param {string} options.headerSelector - Selector for the header element
+     * @param {string} options.heroSelector - Selector for the hero section
+     * @param {number} options.scrollThreshold - Pixels from hero bottom to trigger header
+     * @return {ScrollHeader} - The instance for method chaining
+     */
+    init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        const config = {
+            headerSelector: '#site-header',
+            heroSelector: '.hero.full-page',
+            scrollThreshold: this.scrollThreshold,
+            ...options
+        };
+        
+        // Find elements
+        this.header = document.querySelector(config.headerSelector);
+        this.heroSection = document.querySelector(config.heroSelector);
+        this.scrollThreshold = config.scrollThreshold;
+        
+        // Only initialize if we have both header and hero section
+        if (this.header && this.heroSection) {
+            // Set initial state based on current scroll position
+            this._handleScroll();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', this._handleScroll);
+            
+            this.isInitialized = true;
+        } else {
+            console.warn('ScrollHeader: Could not find header or hero section');
+        }
+        
+        return this;
+    }
+
+    /**
+     * Clean up event listeners
+     */
+    destroy() {
+        if (!this.isInitialized) return;
+        
+        window.removeEventListener('scroll', this._handleScroll);
+        this.isInitialized = false;
+    }
+}
+
+export default ScrollHeader; 
+
+
+================================================================================
+FILE: scroll-indicator.js
+PATH: pi_website_take5\assets\js\modules\components\ui\scroll-indicator.js
+================================================================================
+
+/**
+ * Scroll Indicator Handler
+ * Shows only the scroll indicator for the currently visible section
+ */
+
+class ScrollIndicator {
+    constructor() {
+        this.scrollIndicators = null;
+        this.isInitialized = false;
+    }
+
+    /**
+     * Determine which section is currently most visible in the viewport
+     * @private
+     * @return {string|null} - ID of the most visible section
+     */
+    _getCurrentSection() {
+        const sections = document.querySelectorAll('.full-page-section, .hero');
+        let maxVisibleSection = null;
+        let maxVisibleAmount = 0;
+        const viewportHeight = window.innerHeight;
+        const scrollPosition = window.scrollY;
+        
+        sections.forEach(section => {
+            if (!section.id) return; // Skip sections without IDs
+            
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top + scrollPosition;
+            const sectionHeight = rect.height;
+            
+            // Calculate visibility percentage
+            const visibleTop = Math.max(scrollPosition, sectionTop);
+            const visibleBottom = Math.min(scrollPosition + viewportHeight, sectionTop + sectionHeight);
+            const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+            const visibilityPercentage = visibleHeight / viewportHeight;
+            
+            // If this section has more visible area than previously found max
+            if (visibilityPercentage > maxVisibleAmount) {
+                maxVisibleAmount = visibilityPercentage;
+                maxVisibleSection = section.id;
+            }
+        });
+        
+        return maxVisibleSection;
+    }
+    
+    /**
+     * Update scroll indicator visibility based on current section
+     * @private
+     */
+    _updateScrollIndicators = () => {
+        const currentSection = this._getCurrentSection();
+        
+        // Hide all scroll indicators first
+        this.scrollIndicators.forEach(indicator => {
+            indicator.classList.remove('is-visible');
+            indicator.style.opacity = '0';
+            indicator.style.pointerEvents = 'none';
+            
+            // If we're on contact-us, completely hide all indicators
+            if (currentSection === 'contact-us') {
+                indicator.style.display = 'none';
+            } else {
+                indicator.style.display = 'block';
+            }
+        });
+        
+        // Show indicator only if current section is not contact-us and is valid
+        if (currentSection && currentSection !== 'contact-us') {
+            // Find the indicator for the current section
+            let currentIndicator = document.querySelector(`.scroll-indicator[data-parent-section="${currentSection}"]`);
+            
+            // If no exact match, check if it's a segment section
+            if (!currentIndicator && currentSection.startsWith('segment-')) {
+                // Try to find a generic segment indicator
+                currentIndicator = document.querySelector(`.scroll-indicator[data-parent-section="${currentSection}"]`);
+            }
+            
+            if (currentIndicator) {
+                currentIndicator.classList.add('is-visible');
+                currentIndicator.style.opacity = '1';
+                currentIndicator.style.pointerEvents = 'auto';
+            }
+        }
+    }
+    
+    /**
+     * Throttle function to limit how often a function runs
+     * @private
+     * @param {Function} func - The function to throttle
+     * @param {number} limit - Time limit in milliseconds
+     * @return {Function} - Throttled function
+     */
+    _throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+    
+    /**
+     * Scroll to a target element with additional offset to ensure it's fully visible
+     * @private
+     * @param {HTMLElement} targetElement - The element to scroll to
+     */
+    _scrollToElement(targetElement) {
+        if (!targetElement) return;
+        
+        // Get the element's position relative to the document
+        const targetRect = targetElement.getBoundingClientRect();
+        const targetPosition = window.scrollY + targetRect.top;
+        
+        // Add a small offset to ensure the element is fully visible
+        const offset = 20; // Pixels to offset
+        
+        // Scroll to the target position
+        window.scrollTo({
+            top: targetPosition - offset,
+            behavior: 'smooth'
+        });
+    }
+    
+    /**
+     * Initialize the scroll indicator functionality
+     * @param {Object} options - Configuration options
+     * @return {ScrollIndicator} - The instance for method chaining
+     */
+    init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        // Get all scroll indicators
+        this.scrollIndicators = document.querySelectorAll('.scroll-indicator');
+        
+        if (!this.scrollIndicators || this.scrollIndicators.length === 0) {
+            console.warn('No scroll indicators found on the page');
+            return this;
+        }
+        
+        // Add click event listeners to all scroll indicators
+        this.scrollIndicators.forEach(indicator => {
+            const link = indicator.querySelector('a.scroll-down');
+            if (link) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        // Use improved scroll method instead of scrollIntoView
+                        this._scrollToElement(targetElement);
+                        
+                        // Update indicators after scrolling
+                        setTimeout(this._updateScrollIndicators, 1000);
+                    } else if (targetId === 'page-bottom') {
+                        // Special case: scroll to the bottom of the page
+                        const pageHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
+                        window.scrollTo({
+                            top: pageHeight,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update indicators after scrolling
+                        setTimeout(this._updateScrollIndicators, 1000);
+                    }
+                });
+            }
+        });
+        
+        // Initial hide for all indicators, then show as needed
+        this.scrollIndicators.forEach(indicator => {
+            indicator.style.opacity = '0';
+        });
+        
+        // Create throttled update function
+        const throttledUpdate = this._throttle(this._updateScrollIndicators, 100);
+        
+        // Update on scroll with throttling
+        window.addEventListener('scroll', throttledUpdate);
+        
+        // Also update on window resize
+        window.addEventListener('resize', throttledUpdate);
+        
+        // Make sure we run this after the page is fully loaded
+        window.addEventListener('load', () => {
+            setTimeout(this._updateScrollIndicators, 100);
+        });
+        
+        // Update when clicking on any link
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', () => {
+                // Short delay to let the page scroll
+                setTimeout(this._updateScrollIndicators, 500);
+            });
+        });
+        
+        // Initial update
+        setTimeout(this._updateScrollIndicators, 100);
+        
+        this.isInitialized = true;
+        return this;
+    }
+}
+
+export default ScrollIndicator; 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\core\index.js
+================================================================================
+
+/**
+ * Core Module Index
+ * Re-exports all core modules for easier imports
+ */
+
+export * from './helpers/index.js'; 
+
+
+================================================================================
+FILE: dom.js
+PATH: pi_website_take5\assets\js\modules\core\helpers\dom.js
+================================================================================
+
+/**
+ * DOM Helpers
+ * Contains utility functions for DOM manipulation
+ */
+
+/**
+ * Checks if the current page matches a specific page type
+ * @param {string} pageType - The page type to check for
+ * @param {Function} callback - Function to execute if on matching page
+ */
+export function onCurrentPage(pageType, callback) {
+  const body = document.body;
+  if (body && body.classList.contains(`page-${pageType}`)) {
+    callback();
+  }
+}
+
+/**
+ * Adds smooth scrolling behavior to anchor links
+ * @param {string} selector - Selector for anchor links (default: 'a[href^="#"]')
+ */
+export function initSmoothScrolling(selector = 'a[href^="#"]') {
+  document.querySelectorAll(selector).forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+}
+
+/**
+ * Makes card elements clickable (clicking anywhere on the card activates its main link)
+ * @param {string} cardSelector - Selector for card elements
+ */
+export function makeCardsClickable(cardSelector = '.product-card, .team-card, .segment-card') {
+  const cards = document.querySelectorAll(cardSelector);
+  
+  cards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (event) => {
+      const link = card.querySelector('a');
+      if (link && !event.target.closest('a')) {
+        link.click();
+      }
+    });
+    
+    // Prevent double click on links inside cards
+    const links = card.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    });
+  });
+}
+
+/**
+ * Initializes lazy loading for images
+ * @param {string} selector - Selector for lazy-loaded images
+ */
+export function initLazyLoading(selector = 'img.lazy') {
+  if ("IntersectionObserver" in window) {
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.remove("lazy");
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    document.querySelectorAll(selector).forEach((img) => {
+      imageObserver.observe(img);
+    });
+  } else {
+    // Fallback for browsers that don't support IntersectionObserver
+    document.querySelectorAll(selector).forEach((img) => {
+      img.src = img.dataset.src;
+      img.classList.remove("lazy");
+    });
+  }
+} 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\core\helpers\index.js
+================================================================================
+
+/**
+ * Core Helpers Index
+ * Re-exports all helper modules for easier imports
+ */
+
+export * from './validation.js';
+export * from './dom.js'; 
+
+
+================================================================================
+FILE: validation.js
+PATH: pi_website_take5\assets\js\modules\core\helpers\validation.js
+================================================================================
+
+/**
+ * Validation Helpers
+ * Contains utility functions for form validation
+ */
+
+/**
+ * Validates a form using specified rules
+ * @param {HTMLFormElement} form - The form element to validate
+ * @return {boolean} - True if the form is valid, false otherwise
+ */
+export function validateForm(form) {
+  const nameInput = form.querySelector("#name")
+  const emailInput = form.querySelector("#email")
+  const subjectInput = form.querySelector("#subject")
+  const messageInput = form.querySelector("#message")
+
+  let isValid = true
+
+  if (nameInput && nameInput.value.trim() === "") {
+    showError(nameInput, "Name is required")
+    isValid = false
+  } else if (nameInput) {
+    clearError(nameInput)
+  }
+
+  if (emailInput && emailInput.value.trim() === "") {
+    showError(emailInput, "Email is required")
+    isValid = false
+  } else if (emailInput && !isValidEmail(emailInput.value)) {
+    showError(emailInput, "Please enter a valid email address")
+    isValid = false
+  } else if (emailInput) {
+    clearError(emailInput)
+  }
+
+  if (subjectInput && subjectInput.value.trim() === "") {
+    showError(subjectInput, "Subject is required")
+    isValid = false
+  } else if (subjectInput) {
+    clearError(subjectInput)
+  }
+
+  if (messageInput && messageInput.value.trim() === "") {
+    showError(messageInput, "Message is required")
+    isValid = false
+  } else if (messageInput) {
+    clearError(messageInput)
+  }
+
+  return isValid
+}
+
+/**
+ * Shows an error message for a form field
+ * @param {HTMLElement} input - The input element
+ * @param {string} message - The error message to display
+ */
+export function showError(input, message) {
+  const formGroup = input.closest(".form-group")
+  const error = formGroup.querySelector(".error-message") || document.createElement("div")
+  error.className = "error-message"
+  error.textContent = message
+  if (!formGroup.querySelector(".error-message")) {
+    formGroup.appendChild(error)
+  }
+  input.classList.add("error")
+}
+
+/**
+ * Clears an error message for a form field
+ * @param {HTMLElement} input - The input element
+ */
+export function clearError(input) {
+  const formGroup = input.closest(".form-group")
+  const error = formGroup.querySelector(".error-message")
+  if (error) {
+    formGroup.removeChild(error)
+  }
+  input.classList.remove("error")
+}
+
+/**
+ * Validates an email address
+ * @param {string} email - The email address to validate
+ * @return {boolean} - True if the email is valid, false otherwise
+ */
+export function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return re.test(email)
+} 
+
+
+================================================================================
+FILE: index.js
+PATH: pi_website_take5\assets\js\modules\graphics\index.js
+================================================================================
+
+/**
+ * Graphics Module Index
+ * Re-exports all graphics modules for easier imports
+ */
+
+export { default as BackgroundWave } from './wave.js';
+export * from './shaders.js'; 
+
+
+================================================================================
+FILE: shaders.js
+PATH: pi_website_take5\assets\js\modules\graphics\shaders.js
+================================================================================
+
+/**
+ * WebGL shaders for the particle wave effect
+ * Used by wave.js for the background effect
+ */
+
+// Vertex Shader
+export const vertexShader = `
+    precision mediump float;
+
+    attribute float scale;
+
+    void main() {
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_PointSize = scale * (450.0 / -mvPosition.z);
+        gl_Position = projectionMatrix * mvPosition;
+    }
+`;
+
+// Fragment Shader
+export const fragmentShader = `
+    precision mediump float;
+
+    uniform sampler2D pointTexture;
+    uniform vec3 color;
+
+    varying float vDigitIndex;
+
+    void main() {
+        vec4 texColor = texture2D(pointTexture, vec2(gl_PointCoord.x,1.0-gl_PointCoord.y));
+        if (texColor.a < 0.1) discard; // Discard transparent pixels
+        gl_FragColor = vec4(color, 1.0) * texColor;
+    }
+`; 
+
+
+================================================================================
+FILE: wave.js
+PATH: pi_website_take5\assets\js\modules\graphics\wave.js
+================================================================================
+
+/**
+ * Background Wave Animation
+ * Creates an interactive WebGL particle wave animation using Three.js
+ */
+
+import * as THREE from 'https://cdn.skypack.dev/three@0.132.2';
+import { vertexShader, fragmentShader } from './shaders.js';
+
+class BackgroundWave {
+    constructor() {
+        this.isInitialized = false;
+        this.camera = null;
+        this.scene = null;
+        this.renderer = null;
+        this.shaderMaterial = null;
+        this.particles = null;
+        this.count = 0;
+        this.animationFrameId = null;
+        this.container = null;
+        
+        // Default settings (can be overridden in init)
+        this.settings = {
+            containerId: 'threeJsContainer',
+            svgPath: null, // SVG string or path
+            separationX: 200,
+            separationY: 400,
+            amountX: 40,
+            amountY: 25,
+            speed: 0.04,
+            particleSize: 4,
+            particleColor: '#bacde4'
+        };
+        
+        // Mouse position
+        this.mouseX = 0;
+        this.mouseY = -400;
+        this.windowHalfX = window.innerWidth / 2;
+        this.windowHalfY = window.innerHeight / 2;
+        
+        // SVG Pi logo
+        this.svgLogo = `<?xml version="1.0" encoding="UTF-8"?>
+<svg 
+    width="154px" 
+    height="240px" 
+    viewBox="0 0 154 240" 
+    version="1.1" 
+    xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g 
+        id="Pi-Group" 
+        stroke="none" 
+        stroke-width="1" 
+        fill="none" 
+        fill-rule="evenodd">
+        <g id="Group" 
+            transform="translate(0.999047, 0.544741)" 
+            fill="#FFFFFF">
+            <path 
+                d="M149.872952,35.4552592 L39.8089057,40.9032171 C27.7457427,42.1152525 18.3095751,45.5467114 11.500403,51.1975939 C-0.333020599,61.0180662 0.00191479463,73.2325363 0.00191479463,79.2900801 C0.00191479463,85.0373066 1.62565636,98.8121876 12.9639409,108.276606 C19.6594839,113.865584 26.9175708,116.843383 34.7382016,117.210004 C38.319661,117.34403 41.0407114,117.228881 42.9013531,116.864556 C44.7619947,116.50023 46.671869,115.593643 48.6309759,114.144795 C49.0132543,113.782531 49.2350354,113.521548 49.2963193,113.361848 C49.4468795,112.969501 49.4705079,112.582361 49.4705079,112.340048 C49.4705079,111.949789 49.0930872,111.68414 48.3382459,111.543101 C44.6341197,112.074399 41.0207197,112.340048 37.4980457,112.340048 C35.2932553,112.340048 32.0023684,112.079129 29.4598536,111.543101 C28.4466844,111.329498 26.9588819,110.764882 24.9964461,109.849253 C20.7842307,107.601129 17.6402472,104.707361 15.5644955,101.16795 C13.8796993,98.2951653 13.0592415,96.1545168 12.3475509,93.1688588 C11.1256137,88.0426332 11.1750678,82.2087312 11.500403,79.2900801 C11.9999852,74.8082219 13.1999985,66.3469328 18.8651357,59.2193271 C21.0352215,56.4890284 21.9749324,55.2639557 25.4390057,53.0405303 C25.9184471,52.7327994 29.1626082,50.6307878 33.4020289,49.2364415 C36.9858709,48.0577151 41.5620562,47.5301469 42.9013531,47.5301469 C44.4928995,47.5301469 46.6735095,47.4879311 49.2963193,48.0800656 C49.6890959,48.1687402 50.2650988,48.3438501 51.0243279,48.6053954 C51.5569594,48.7799202 51.9788044,48.9902689 52.289863,49.2364415 C52.524876,49.4224314 52.7764019,49.6153438 53.0584956,50.0593226 C53.1015324,50.1270568 53.1632872,50.2210602 53.2067598,50.3909119 C53.2187578,50.4377893 53.2434685,50.5553276 53.2808919,50.743527 C53.3034119,50.8914553 53.3177904,51.0103846 53.3240272,51.1003147 C53.3302641,51.1902449 53.332631,51.3127687 53.3311279,51.4678863 L53.3311279,165.134434 C53.2832986,165.557637 53.229421,165.849437 53.1694951,166.009833 C52.9756932,166.528556 52.8079842,167.097386 52.6134842,167.550625 C51.6881149,169.70699 50.740822,171.05463 49.9492804,171.912599 C49.3403254,172.572658 48.0913838,173.629738 47.3669124,173.999874 C46.642441,174.370009 46.4378368,174.504877 45.8332829,174.731016 C45.666085,174.793558 45.2938386,174.905672 44.9690012,174.993503 C44.7649675,175.04867 44.4763119,175.080223 44.1030342,175.088161 L41.1173253,175.005568 C40.7112732,175.02393 40.4325343,175.047974 40.2811087,175.077698 C40.1296832,175.107422 39.9722822,175.168991 39.8089057,175.262406 C39.5219149,175.457575 39.3045692,175.645642 39.1568684,175.826606 C38.7208808,176.360783 38.3045672,177.145062 38.1551906,177.678897 C37.9299069,178.484005 37.9299069,179.60543 38.1551906,181.043174 L77.659345,181.043174 C77.8944517,180.995828 78.0481561,180.925753 78.1204582,180.832948 C78.2051095,180.724292 78.2856661,180.574915 78.3252159,180.428491 C78.3794488,180.227705 78.3761275,180.028553 78.3790355,179.911779 C78.3981608,179.143769 78.4573589,178.088301 78.3790355,177.678897 C78.3038242,177.28576 78.030122,176.654774 77.6002276,176.207323 C77.407063,176.00627 77.043805,175.762584 76.5104536,175.476266 C76.2535989,175.363181 76.0437353,175.306735 75.8808626,175.306926 C75.0265899,175.30793 74.2137733,175.450448 73.7432399,175.375429 C73.3801393,175.317538 72.6998757,175.243233 72.2029052,175.101981 C71.9820925,175.039221 71.6397067,174.880469 71.175748,174.625725 C70.4329461,173.912773 69.9118006,173.372154 69.6123115,173.003868 C69.3128223,172.635582 68.9430411,172.080614 68.5029678,171.338966 C68.0463806,170.315838 67.7114246,169.43245 67.4980997,168.688801 C67.4498253,168.520517 67.3983123,168.315879 67.2437605,167.893812 C67.1313593,167.458507 67.0331,167.064201 66.9508303,166.717532 C66.8698678,166.376372 66.7939644,165.848672 66.7231199,165.134434 L66.7231199,51.1975939 C66.7368394,50.8764038 66.7489056,50.6604967 66.7593185,50.5498725 C66.7835736,50.292191 66.8208619,50.1576067 66.8256637,50.1196815 C66.8388015,50.0173408 66.9913741,49.4637367 67.2074695,49.2364415 C67.3290176,49.1085938 67.5077403,48.9242231 67.7676931,48.7699414 C67.9698997,48.649932 68.2280269,48.5566431 68.5029678,48.4674245 C68.7003494,48.403374 69.1427059,48.3497969 69.8300373,48.3066931 L114.922969,48.3066931 C116.843994,48.3263147 118.087469,49.1083841 118.653393,50.6529015 C118.957862,51.4838544 119.054046,52.2660776 119.21514,53.4060376 C119.307364,54.0586499 119.307364,55.160882 119.21514,56.712734 L101.000953,221.455259 C100.918973,232.788593 103.918973,238.455259 110.000953,238.455259 C119.000953,238.455259 136.000953,223.455259 136.000953,210.455259 C136.000953,208.627077 133.951595,208.809228 132.000953,210.455259 C126.482707,215.111781 116.478616,228.84357 115.000953,221.455259 C114.167403,217.287505 115.572131,204.609904 119.21514,183.422456 L135.422781,47.5301469 C135.456527,47.3365323 135.48205,47.2004318 135.499349,47.1218455 C135.516648,47.0432592 135.532474,46.9760956 135.546828,46.9203548 C135.586204,46.7984842 135.623549,46.7074428 135.658864,46.6472305 C135.694179,46.5870182 135.762372,46.5032626 135.863442,46.3959637 C135.946871,46.3265272 136.024889,46.2768566 136.097497,46.2469519 C136.170104,46.2170472 136.298908,46.1839297 136.483908,46.1475992 C136.653938,46.1246855 136.813838,46.1132287 136.963608,46.1132287 C137.113379,46.1132287 137.498342,46.1246855 138.118498,46.1475992 L148.477629,46.7428987 C149.454839,46.6608258 150.203298,46.0993341 150.723009,45.0584237 C151.502574,43.497058 151.864548,41.7609924 151.864548,40.9032171 C151.864548,40.0454418 151.881866,39.4239249 151.392573,37.7045107 C151.066378,36.5582346 150.559838,35.8084841 149.872952,35.4552592 Z" 
+                id="Path" 
+                stroke="#FFFFFF" 
+                stroke-width="0.5">
+            </path>
+            <polygon 
+                id="Path-3" 
+                points="126.499867 1.77635684e-15 123.523873 4.96630575 120.528585 9.96480958 123.331169 15.1470329 126.499867 21.0062319 129.667118 15.1621108 132.483822 9.96480958 129.475752 4.95560728">
+            </polygon>
+        </g>
+    </g>
+</svg>`;
+    }
+
+    /**
+     * Create a texture from SVG string
+     * @private
+     * @param {string} svgString - SVG content as string
+     * @return {Promise} - Promise resolving to the texture
+     */
+    _createSVGTexture(svgString) {
+        return new Promise((resolve, reject) => {
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(svgBlob);
+            const img = new Image();
+            
+            img.onload = () => {
+                const texture = new THREE.Texture(img);
+                texture.needsUpdate = true;
+                resolve(texture);
+                URL.revokeObjectURL(url); // Clean up
+            };
+            
+            img.onerror = (e) => {
+                console.error('Error loading SVG as texture', e);
+                reject(e);
+            };
+            
+            img.src = url;
+        });
+    }
+
+    /**
+     * Load CSS variables for customization
+     * @private
+     */
+    _loadCssVariables() {
+        const rootStyles = getComputedStyle(document.documentElement);
+        
+        this.settings.separationX = parseFloat(rootStyles.getPropertyValue('--separation-x')) || this.settings.separationX;
+        this.settings.separationY = parseFloat(rootStyles.getPropertyValue('--separation-y')) || this.settings.separationY;
+        this.settings.amountX = parseInt(rootStyles.getPropertyValue('--count-row')) || this.settings.amountX;
+        this.settings.amountY = parseInt(rootStyles.getPropertyValue('--count-col')) || this.settings.amountY;
+        this.settings.speed = parseFloat(rootStyles.getPropertyValue('--particle-speed')) || this.settings.speed;
+        this.settings.particleSize = parseFloat(rootStyles.getPropertyValue('--particle-size')) || this.settings.particleSize;
+        
+        const cssColor = rootStyles.getPropertyValue('--particle-color').trim();
+        if (cssColor) {
+            this.settings.particleColor = cssColor;
+        }
+    }
+
+    /**
+     * Initialize the scene
+     * @private
+     */
+    async _initScene() {
+        this.container = document.getElementById(this.settings.containerId);
+        if (!this.container) {
+            console.warn(`Container #${this.settings.containerId} not found. Wave animation not initialized.`);
+            return false;
+        }
+
+        const containerRect = this.container.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+        const containerHeight = containerRect.height;
+        
+        this.camera = new THREE.PerspectiveCamera(50, containerWidth / containerHeight, 1, 10000);
+        this.camera.position.z = 1000;
+        this.scene = new THREE.Scene();
+
+        // Create particles
+        const numParticles = this.settings.amountX * this.settings.amountY;
+        const positions = new Float32Array(numParticles * 3);
+        const scales = new Float32Array(numParticles);
+
+        let i = 0, j = 0;
+        for (let ix = 0; ix < this.settings.amountX; ix++) {
+            for (let iy = 0; iy < this.settings.amountY; iy++) {
+                positions[i] = ix * this.settings.separationX - ((this.settings.amountX * this.settings.separationX) / 2);
+                positions[i + 1] = 0;
+                positions[i + 2] = iy * this.settings.separationY - ((this.settings.amountY * this.settings.separationY) / 2);
+                scales[j] = 1;
+                i += 3;
+                j++;
+            }
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
+        
+        // Load texture and create material
+        try {
+            const svgSource = this.settings.svgPath || this.svgLogo;
+            const texture = await this._createSVGTexture(svgSource);
+            
+            this.shaderMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    color: { value: new THREE.Color(this.settings.particleColor) },
+                    pointTexture: { value: texture }
+                },
+                vertexShader: vertexShader,
+                fragmentShader: fragmentShader,
+                transparent: true
+            });
+            
+            this.particles = new THREE.Points(geometry, this.shaderMaterial);
+            this.scene.add(this.particles);
+            
+            // Set up renderer
+            this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            this.renderer.setPixelRatio(window.devicePixelRatio);
+            this.renderer.setSize(containerWidth, containerHeight);
+            this.container.appendChild(this.renderer.domElement);
+            
+            // Event listeners
+            this._setupEventListeners();
+            
+            return true;
+        } catch (error) {
+            console.error('Failed to initialize wave animation:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Set up event listeners
+     * @private
+     */
+    _setupEventListeners() {
+        this.container.addEventListener('mousemove', this._handleMouseMove, { passive: true });
+        this.container.addEventListener('touchstart', this._handleTouchStart, { passive: true });
+        this.container.addEventListener('touchmove', this._handleTouchMove, { passive: true });
+        window.addEventListener('resize', this._handleResize, { passive: false });
+    }
+
+    /**
+     * Handle mouse movement
+     * @private
+     * @param {MouseEvent} event - Mouse event
+     */
+    _handleMouseMove = (event) => {
+        if (!this.container) return;
+        
+        const containerRect = this.container.getBoundingClientRect();
+        this.mouseX = event.clientX - containerRect.left - containerRect.width / 2;
+    }
+
+    /**
+     * Handle touch start
+     * @private
+     * @param {TouchEvent} event - Touch event
+     */
+    _handleTouchStart = (event) => {
+        if (event.touches.length === 1 && this.container) {
+            const containerRect = this.container.getBoundingClientRect();
+            this.mouseX = event.touches[0].pageX - containerRect.left - containerRect.width / 2;
+        }
+    }
+
+    /**
+     * Handle touch move
+     * @private
+     * @param {TouchEvent} event - Touch event
+     */
+    _handleTouchMove = (event) => {
+        if (event.touches.length === 1 && this.container) {
+            const containerRect = this.container.getBoundingClientRect();
+            this.mouseX = event.touches[0].pageX - containerRect.left - containerRect.width / 2;
+        }
+    }
+
+    /**
+     * Handle window resize
+     * @private
+     */
+    _handleResize = () => {
+        if (!this.container || !this.camera || !this.renderer) return;
+        
+        const containerRect = this.container.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+        const containerHeight = containerRect.height;
+        
+        this.windowHalfX = window.innerWidth / 2;
+        this.windowHalfY = window.innerHeight / 2;
+        
+        this.camera.aspect = containerWidth / containerHeight;
+        this.camera.updateProjectionMatrix();
+        
+        this.renderer.setSize(containerWidth, containerHeight);
+    }
+
+    /**
+     * Get current particle color
+     * @private
+     * @return {THREE.Color} - Current color
+     */
+    _getCurrentColor() {
+        return new THREE.Color(this.settings.particleColor);
+    }
+
+    /**
+     * Animation loop
+     * @private
+     */
+    _animate = () => {
+        this._render();
+        this.animationFrameId = requestAnimationFrame(this._animate);
+    }
+
+    /**
+     * Render the scene
+     * @private
+     */
+    _render = () => {
+        if (!this.particles || !this.camera || !this.scene || !this.renderer) return;
+        
+        if (this.shaderMaterial && this.shaderMaterial.uniforms.color) {
+            this.shaderMaterial.uniforms.color.value.copy(this._getCurrentColor());
+        }
+        
+        this.camera.position.x += (this.mouseX - this.camera.position.x) * 0.05;
+        this.camera.position.y += (-this.mouseY - this.camera.position.y) * 0.05;
+        this.camera.lookAt(this.scene.position);
+        
+        const positions = this.particles.geometry.attributes.position.array;
+        const scales = this.particles.geometry.attributes.scale.array;
+        
+        let i = 0, j = 0;
+        for (let ix = 0; ix < this.settings.amountX; ix++) {
+            for (let iy = 0; iy < this.settings.amountY; iy++) {
+                positions[i + 1] = (Math.sin((ix + this.count) * 0.3) * (this.settings.separationY / 2)) +
+                (Math.sin((iy + this.count) * 0.5) * (this.settings.separationY / 2));
+                
+                scales[j] = this.settings.particleSize * ((Math.sin((ix + this.count) * 0.3) + 1) * 8 +
+                (Math.sin((iy + this.count) * 0.5) + 1) * 8);
+                
+                i += 3;
+                j++;
+            }
+        }
+        
+        this.particles.geometry.attributes.position.needsUpdate = true;
+        this.particles.geometry.attributes.scale.needsUpdate = true;
+        
+        this.renderer.render(this.scene, this.camera);
+        this.count += this.settings.speed;
+    }
+
+    /**
+     * Clean up event listeners and resources
+     * @private
+     */
+    _cleanup() {
+        // Remove event listeners
+        if (this.container) {
+            this.container.removeEventListener('mousemove', this._handleMouseMove);
+            this.container.removeEventListener('touchstart', this._handleTouchStart);
+            this.container.removeEventListener('touchmove', this._handleTouchMove);
+        }
+        
+        window.removeEventListener('resize', this._handleResize);
+        
+        // Cancel animation frame
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
+        
+        // Dispose of Three.js resources
+        if (this.particles) {
+            this.scene.remove(this.particles);
+            this.particles.geometry.dispose();
+            this.shaderMaterial.dispose();
+        }
+        
+        // Remove the canvas
+        if (this.renderer) {
+            this.container.removeChild(this.renderer.domElement);
+            this.renderer.dispose();
+        }
+    }
+
+    /**
+     * Initialize the wave animation
+     * @param {Object} options - Configuration options
+     * @param {string} options.containerId - ID of the container element
+     * @param {string} options.svgPath - Custom SVG string or path
+     * @param {number} options.separationX - Horizontal separation between particles
+     * @param {number} options.separationY - Vertical separation between particles
+     * @param {number} options.amountX - Number of particles horizontally
+     * @param {number} options.amountY - Number of particles vertically
+     * @param {number} options.speed - Animation speed
+     * @param {number} options.particleSize - Size of particles
+     * @param {string} options.particleColor - Color of particles
+     * @return {BackgroundWave} - The instance for method chaining
+     */
+    async init(options = {}) {
+        if (this.isInitialized) return this;
+        
+        // Apply custom options
+        Object.assign(this.settings, options);
+        
+        // Load CSS variables (which can override options)
+        this._loadCssVariables();
+        
+        // Initialize scene
+        const success = await this._initScene();
+        
+        if (success) {
+            // Start animation loop
+            this.count = 0;
+            this._animate();
+            this.isInitialized = true;
+        }
+        
+        return this;
+    }
+
+    /**
+     * Update animation settings
+     * @param {Object} options - New settings to apply
+     * @return {BackgroundWave} - The instance for method chaining
+     */
+    updateSettings(options = {}) {
+        Object.assign(this.settings, options);
+        
+        // Update material color if changed
+        if (options.particleColor && this.shaderMaterial) {
+            this.shaderMaterial.uniforms.color.value = new THREE.Color(options.particleColor);
+        }
+        
+        return this;
+    }
+
+    /**
+     * Stop the animation and clean up resources
+     */
+    destroy() {
+        if (!this.isInitialized) return;
+        
+        this._cleanup();
+        this.isInitialized = false;
+    }
+}
+
+export default BackgroundWave; 
+

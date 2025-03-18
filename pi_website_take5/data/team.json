@@ -96,8 +96,8 @@
                 "en": {
                     "name": "Baruch (Buky) Katzman",
                     "position": "Co-Founder",
-                    "short_bio": "A renowned civil and commercial law expert with over 20 years of experience who transitioned from senior partnership at Herzog, Fox & Neeman to independent business ventures and strategic legal consulting for international companies and executives.",
-                    "bio": "A renowned expert in civil and commercial law with over 20 years of experience representing international and local companies, investment firms, and top executives. After a distinguished career as a senior partner at Herzog, Fox & Neeman, he embarked on an independent path combining business activities with legal consulting. He leverages his extensive network and deep legal-commercial understanding to engage in significant business ventures. He holds important public positions, including directorships in international legal organizations and sports committees. His contributions extend to lecturing at law faculties, providing legal commentary in media, and writing for professional journals."
+                    "short_bio": "A renowned civil and commercial law expert who serves as a Board Member and Head of Legal Regulation at Maccabi World Union. With over 20 years of experience, he transitioned from senior partnership at Herzog, Fox & Neeman to independent business ventures and strategic legal consulting for international companies and executives.",
+                    "bio": "A renowned expert in civil and commercial law who serves as a Board Member and Head of Legal Regulation at Maccabi World Union. With over 20 years of experience representing international and local companies, investment firms, and top executives. After a distinguished career as a senior partner at Herzog, Fox & Neeman, he embarked on an independent path combining business activities with legal consulting. He leverages his extensive network and deep legal-commercial understanding to engage in significant business ventures. He holds important public positions, including directorships in international legal organizations and sports committees. His contributions extend to lecturing at law faculties, providing legal commentary in media, and writing for professional journals."
                 },
                 "he": {
                     "name": "ברוך (בוקי) כצמן",
@@ -202,15 +202,15 @@
             "language_slug": {
                 "en": {
                     "name": "Marina Kazar",
-                    "position": "Accountant",
-                    "short_bio": "Marin .....",
-                    "bio": "Marina...."
+                    "position": "Accounting and Payroll Manager",
+                    "short_bio": "Marina Kazar has over 35 years of experience in accounting and payroll management.",
+                    "bio": "Marina Kazar has over 35 years of experience in accounting and payroll management."
                 },
                 "he": {
                     "name": "מרינה קאזר",
-                    "position": "מנהלת חשבונות",
-                    "short_bio": "מרינה....",
-                    "bio": "מרינה...."
+                    "position": "מנהלת חשבונות וחשבת שכר",
+                    "short_bio": "מרינה קאזר עם ניסיון של למעלה מ 35 שנה בתחום הנהלת חשבונות וחשבות שכר",
+                    "bio": "מרינה קאזר עם ניסיון של למעלה מ 35 שנה בתחום הנהלת חשבונות וחשבות שכר"
                 }
             }
         }        

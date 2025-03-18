@@ -1,0 +1,193 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.our-team {
+  @include container;
+  padding: $spacing-xl 0;
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+
+    .page-title {
+      @include font-size(3rem, 1.2);
+      color: $color-dark;
+      margin-bottom: $spacing-md;
+    }
+
+    .lead {
+      @include font-size(1.5rem);
+      color: $color-secondary;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  }
+
+  &__section {
+    margin-bottom: $spacing-xl;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    @include font-size(2rem, 1.2);
+    color: $color-dark;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-sm;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, $color-primary, $color-primary-light);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: $spacing-lg;
+
+    @include respond-to(md) {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: $spacing-md;
+    }
+
+    @include respond-to(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    background-color: $color-light;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    box-shadow: $shadow-sm;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba($color-primary, 0.1), rgba($color-primary, 0));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: $shadow-md;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__info {
+    h3 {
+      @include font-size(1.5rem, 1.2);
+      color: $color-dark;
+      margin-bottom: $spacing-sm;
+    }
+
+    .position {
+      @include font-size(1.1rem);
+      color: $color-primary;
+      margin-bottom: $spacing-md;
+      font-weight: 500;
+    }
+
+    .short-bio {
+      @include font-size(1rem);
+      color: $color-secondary;
+      line-height: 1.6;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__expertise {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &__expertise-tag {
+    @include font-size(0.9rem);
+    background-color: rgba($color-primary, 0.1);
+    color: $color-primary;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba($color-primary, 0.2);
+    }
+  }
+
+  &__no-data {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $color-secondary;
+    @include font-size(1.1rem);
+  }
+
+  // RTL Support
+  @include rtl {
+    &__section-title::after {
+      left: auto;
+      right: 0;
+    }
+
+    &__info {
+      text-align: right;
+    }
+  }
+
+  // Responsive Design
+  @include respond-to(sm) {
+    &__header {
+      .page-title {
+        @include font-size(2.5rem);
+      }
+
+      .lead {
+        @include font-size(1.25rem);
+      }
+    }
+
+    &__section-title {
+      @include font-size(1.75rem);
+    }
+
+    &__card {
+      padding: $spacing-md;
+    }
+
+    &__info {
+      h3 {
+        @include font-size(1.25rem);
+      }
+
+      .position {
+        @include font-size(1rem);
+      }
+
+      .short-bio {
+        @include font-size(0.9rem);
+      }
+    }
+  }
+} 

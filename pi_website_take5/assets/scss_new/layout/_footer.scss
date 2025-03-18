@@ -1,0 +1,54 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.footer {
+  background-color: $color-dark;
+  color: $color-light;
+  padding: $spacing-xl 0;
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-xl;
+  }
+
+  &__section {
+    h3 {
+      color: $color-light;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: rgba($color-light, 0.8);
+      margin-bottom: $spacing-sm;
+    }
+  }
+
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: $spacing-xs;
+    }
+
+    a {
+      color: rgba($color-light, 0.8);
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $color-light;
+      }
+    }
+  }
+
+  &__bottom {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid rgba($color-light, 0.1);
+    text-align: center;
+    color: rgba($color-light, 0.6);
+  }
+} 

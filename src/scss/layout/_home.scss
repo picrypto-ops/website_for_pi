@@ -1,0 +1,150 @@
+@use '../base/variables' as *;
+
+.home-page {
+    min-height: 100vh;
+    background-color: $primary-blue;
+}
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    padding: $spacing-xl;
+    display: flex;
+    flex-direction: column;
+
+    &.full-page {
+        height: 100vh;
+    }
+
+    .hero-top-logo {
+        position: absolute;
+        top: $spacing-large;
+        z-index: 10;
+        
+        &.right-aligned {
+            right: $spacing-large;
+        }
+        
+        &.left-aligned {
+            left: $spacing-large;
+        }
+        
+        img {
+            height: 60px;
+            width: auto;
+        }
+    }
+
+    .hero-language-switcher {
+        position: absolute;
+        top: $spacing-large;
+        z-index: 10;
+        color: $white;
+        
+        &.right-aligned {
+            right: $spacing-large;
+        }
+        
+        &.left-aligned {
+            left: $spacing-large;
+        }
+        
+        a {
+            color: $white;
+            text-decoration: none;
+            padding: 0 0.5rem;
+            
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .hero-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 800px;
+        color: $white;
+        position: relative;
+        z-index: 1;
+        margin: 0 auto;
+        text-align: center;
+
+        h1 {
+            font-size: $font-size-large;
+            font-weight: bold;
+            margin-bottom: $spacing-base;
+            line-height: 1.2;
+        }
+
+        .slogan {
+            font-size: $font-size-medium * 1.2;
+            margin-bottom: $spacing-large;
+            opacity: 0.9;
+        }
+
+        .wide-description {
+            font-size: $font-size-medium;
+            line-height: 1.6;
+            margin-bottom: $spacing-xl;
+            opacity: 0.85;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: $white;
+            color: $primary-blue;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+#threeJsContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30vh;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+// Responsive adjustments
+@media (max-width: $breakpoint-md) {
+    .hero {
+        padding: $spacing-large;
+
+        .hero-content {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .wide-description {
+                font-size: 1rem;
+            }
+        }
+
+        .hero-top-logo,
+        .hero-language-switcher {
+            &.right-aligned,
+            &.left-aligned {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                margin-bottom: $spacing-base;
+            }
+        }
+    }
+} 

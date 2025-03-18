@@ -1,0 +1,288 @@
+@use 'sass:color';
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+
+.team-member-page {
+  @include mix.container;
+  padding: vars.$spacing-xl 0;
+
+  &__breadcrumb {
+    margin-bottom: vars.$spacing-lg;
+
+    &--rtl {
+      text-align: right;
+    }
+  }
+
+  &__back-link {
+    display: inline-flex;
+    align-items: center;
+    color: vars.$color-primary;
+    text-decoration: none;
+    @include mix.font-size(1.1rem);
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: vars.$color-primary-dark;
+    }
+  }
+
+  &__back-arrow {
+    margin-right: vars.$spacing-sm;
+    @include mix.font-size(1.2rem);
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$spacing-xl;
+
+    &--rtl {
+      direction: rtl;
+    }
+  }
+
+  &__profile-card {
+    background-color: vars.$color-light;
+    border-radius: vars.$border-radius-lg;
+    padding: vars.$spacing-xl;
+    box-shadow: vars.$shadow-sm;
+  }
+
+  &__header {
+    margin-bottom: vars.$spacing-xl;
+  }
+
+  &__title-section {
+    h1 {
+      @include mix.font-size(2.5rem, 1.2);
+      color: vars.$color-dark;
+      margin-bottom: vars.$spacing-sm;
+    }
+
+    .position {
+      @include mix.font-size(1.5rem);
+      color: vars.$color-primary;
+      font-weight: 500;
+    }
+  }
+
+  &__content {
+    .section-subtitle {
+      @include mix.font-size(1.5rem, 1.2);
+      color: vars.$color-dark;
+      margin-bottom: vars.$spacing-md;
+      padding-bottom: vars.$spacing-sm;
+      border-bottom: 2px solid rgba(vars.$color-primary, 0.1);
+    }
+  }
+
+  &__bio {
+    @include mix.font-size(1.1rem);
+    color: vars.$color-secondary;
+    line-height: 1.8;
+    margin-bottom: vars.$spacing-xl;
+  }
+
+  &__roles-section {
+    margin-bottom: vars.$spacing-xl;
+  }
+
+  &__product-roles {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$spacing-sm;
+  }
+
+  &__role {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-sm;
+    padding: vars.$spacing-sm;
+    background-color: rgba(vars.$color-primary, 0.05);
+    border-radius: vars.$border-radius-sm;
+  }
+
+  &__product-name {
+    @include mix.font-size(1.1rem);
+    color: vars.$color-primary;
+    font-weight: 500;
+  }
+
+  &__role-title {
+    @include mix.font-size(1rem);
+    color: vars.$color-secondary;
+  }
+
+  &__expertise-section {
+    margin-bottom: vars.$spacing-xl;
+  }
+
+  &__expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$spacing-sm;
+  }
+
+  &__expertise-tag {
+    @include mix.font-size(0.9rem);
+    background-color: rgba(vars.$color-primary, 0.1);
+    color: vars.$color-primary;
+    padding: vars.$spacing-xs vars.$spacing-sm;
+    border-radius: vars.$border-radius-sm;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(vars.$color-primary, 0.2);
+    }
+  }
+
+  &__credentials-section {
+    margin-bottom: vars.$spacing-xl;
+  }
+
+  &__credentials-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: vars.$spacing-md;
+  }
+
+  &__credential-item {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$spacing-xs;
+  }
+
+  &__credential-label {
+    @include mix.font-size(0.9rem);
+    color: vars.$color-secondary;
+    text-transform: capitalize;
+  }
+
+  &__credential-value {
+    @include mix.font-size(1.1rem);
+    color: vars.$color-dark;
+    font-weight: 500;
+  }
+
+  &__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: vars.$spacing-xl;
+    padding-top: vars.$spacing-lg;
+    border-top: 1px solid rgba(vars.$color-primary, 0.1);
+
+    &--first-member {
+      justify-content: flex-end;
+    }
+
+    &--last-member {
+      justify-content: flex-start;
+    }
+  }
+
+  &__nav-button {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-sm;
+    padding: vars.$spacing-sm vars.$spacing-md;
+    background-color: vars.$color-light;
+    border: 1px solid rgba(vars.$color-primary, 0.2);
+    border-radius: vars.$border-radius-sm;
+    color: vars.$color-primary;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(vars.$color-primary, 0.05);
+      border-color: vars.$color-primary;
+    }
+
+    &--prev {
+      .nav-icon {
+        @include mix.font-size(1.2rem);
+      }
+    }
+
+    &--next {
+      .nav-icon {
+        @include mix.font-size(1.2rem);
+      }
+    }
+  }
+
+  &__nav-text {
+    @include mix.font-size(1rem);
+    font-weight: 500;
+  }
+
+  &__nav-placeholder {
+    width: 120px;
+  }
+
+  // RTL Support
+  @include mix.rtl {
+    &__back-arrow {
+      margin-right: 0;
+      margin-left: vars.$spacing-sm;
+    }
+
+    &__nav-button {
+      &--prev {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  // Responsive Design
+  @include mix.respond-to(md) {
+    &__profile-card {
+      padding: vars.$spacing-lg;
+    }
+
+    &__title-section {
+      h1 {
+        @include mix.font-size(2rem);
+      }
+
+      .position {
+        @include mix.font-size(1.25rem);
+      }
+    }
+
+    &__bio {
+      @include mix.font-size(1rem);
+    }
+  }
+
+  @include mix.respond-to(sm) {
+    &__profile-card {
+      padding: vars.$spacing-md;
+    }
+
+    &__title-section {
+      h1 {
+        @include mix.font-size(1.75rem);
+      }
+
+      .position {
+        @include mix.font-size(1.1rem);
+      }
+    }
+
+    &__section-subtitle {
+      @include mix.font-size(1.25rem);
+    }
+
+    &__navigation {
+      flex-direction: column;
+      gap: vars.$spacing-md;
+    }
+
+    &__nav-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

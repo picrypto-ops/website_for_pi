@@ -1,0 +1,163 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use "sass:color";
+
+.table {
+  width: 100%;
+  margin-bottom: $spacing-md;
+  color: $color-dark;
+  background-color: transparent;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: $spacing-sm;
+    vertical-align: top;
+    border-top: 1px solid rgba($color-dark, 0.125);
+  }
+
+  thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid rgba($color-dark, 0.125);
+    background-color: color.adjust($color-light, $lightness: -2%);
+    font-weight: $font-weight-medium;
+  }
+
+  tbody + tbody {
+    border-top: 2px solid rgba($color-dark, 0.125);
+  }
+
+  &__caption {
+    padding-top: $spacing-sm;
+    padding-bottom: $spacing-sm;
+    color: $color-secondary;
+    text-align: left;
+    caption-side: bottom;
+  }
+
+  // Table variants
+  &--striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: rgba($color-dark, 0.05);
+    }
+  }
+
+  &--hover {
+    tbody tr {
+      transition: background-color $transition-base;
+
+      &:hover {
+        background-color: rgba($color-dark, 0.075);
+      }
+    }
+  }
+
+  &--bordered {
+    border: 1px solid rgba($color-dark, 0.125);
+
+    th,
+    td {
+      border: 1px solid rgba($color-dark, 0.125);
+    }
+
+    thead {
+      th,
+      td {
+        border-bottom-width: 2px;
+      }
+    }
+  }
+
+  &--borderless {
+    th,
+    td,
+    thead th,
+    tbody + tbody {
+      border: 0;
+    }
+  }
+
+  // Responsive tables
+  &--responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  // Table sizes
+  &--sm {
+    th,
+    td {
+      padding: $spacing-xs;
+    }
+  }
+
+  &--lg {
+    th,
+    td {
+      padding: $spacing-md;
+    }
+  }
+
+  // Table colors
+  &-primary {
+    th,
+    td,
+    thead th {
+      background-color: color.adjust($color-primary, $lightness: 45%);
+      border-color: color.adjust($color-primary, $lightness: 40%);
+      color: color.adjust($color-primary, $lightness: -10%);
+    }
+  }
+
+  &-secondary {
+    th,
+    td,
+    thead th {
+      background-color: color.adjust($color-secondary, $lightness: 45%);
+      border-color: color.adjust($color-secondary, $lightness: 40%);
+      color: color.adjust($color-secondary, $lightness: -10%);
+    }
+  }
+
+  &-success {
+    th,
+    td,
+    thead th {
+      background-color: color.adjust($color-success, $lightness: 45%);
+      border-color: color.adjust($color-success, $lightness: 40%);
+      color: color.adjust($color-success, $lightness: -10%);
+    }
+  }
+
+  &-danger {
+    th,
+    td,
+    thead th {
+      background-color: color.adjust($color-danger, $lightness: 45%);
+      border-color: color.adjust($color-danger, $lightness: 40%);
+      color: color.adjust($color-danger, $lightness: -10%);
+    }
+  }
+
+  &-warning {
+    th,
+    td,
+    thead th {
+      background-color: color.adjust($color-warning, $lightness: 45%);
+      border-color: color.adjust($color-warning, $lightness: 40%);
+      color: color.adjust($color-warning, $lightness: -10%);
+    }
+  }
+
+  &-info {
+    th,
+    td,
+    thead th {
+      background-color: color.adjust($color-info, $lightness: 45%);
+      border-color: color.adjust($color-info, $lightness: 40%);
+      color: color.adjust($color-info, $lightness: -10%);
+    }
+  }
+} 

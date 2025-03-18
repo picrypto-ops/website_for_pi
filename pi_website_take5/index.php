@@ -4,10 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once 'config.php';
-require_once 'includes/functions.php';
-require_once 'includes/language.php';
-require_once 'includes/cache.php';
+require_once 'src/config/config.php';
+require_once 'src/utility/functions.php';
+require_once 'src/utility/language.php';
+require_once 'src/utility/cache.php';
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 $lang = isset($_GET['lang']) && in_array($_GET['lang'], ['en', 'he']) ? $_GET['lang'] : 'en';
@@ -26,17 +26,17 @@ if ($cachedContent === false) {
     ob_start();
 
     // Load the header
-    include 'components/header.php';
+    include 'src/components/header.php';
 
     // Load the page content
-    if (file_exists("pages/{$page}.php")) {
-        include "pages/{$page}.php";
+    if (file_exists("src/pages/{$page}.php")) {
+        include "src/pages/{$page}.php";
     } else {
-        include 'pages/404.php';
+        include 'src/pages/404.php';
     }
 
     // Load the footer
-    include 'components/footer.php';
+    include 'src/components/footer.php';
 
     // Get the buffered content
     $content = ob_get_clean();

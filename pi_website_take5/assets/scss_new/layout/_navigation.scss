@@ -1,0 +1,108 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+
+  &__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: $spacing-md;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__link {
+    color: $color-dark;
+    text-decoration: none;
+    padding: $spacing-xs $spacing-sm;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+    &.active {
+      color: $color-primary;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: $color-light;
+    box-shadow: 0 2px 4px rgba($color-dark, 0.1);
+    border-radius: $border-radius;
+    padding: $spacing-sm 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: $transition-base;
+
+    .nav__item:hover & {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &__dropdown-link {
+    display: block;
+    padding: $spacing-xs $spacing-md;
+    color: $color-dark;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba($color-primary, 0.05);
+      color: $color-primary;
+    }
+  }
+
+  // Mobile Navigation
+  &--mobile {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 400px;
+    height: 100vh;
+    background-color: $color-light;
+    box-shadow: -2px 0 4px rgba($color-dark, 0.1);
+    padding: $spacing-xl;
+    transition: right 0.3s ease;
+    z-index: $z-index-modal;
+
+    &.active {
+      right: 0;
+    }
+
+    .nav__list {
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+
+    .nav__dropdown {
+      position: static;
+      box-shadow: none;
+      padding-left: $spacing-md;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+} 

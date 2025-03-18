@@ -67,7 +67,7 @@ foreach ($securityChecks as $header => $enabled) {
 
 // Check for CSRF implementation
 echo "\nChecking CSRF protection...\n";
-if (file_exists('includes/csrf.php')) {
+if (file_exists('src/utility/csrf.php')) {
     echo "✓ CSRF protection file exists\n";
 } else {
     echo "! CSRF protection is missing\n";

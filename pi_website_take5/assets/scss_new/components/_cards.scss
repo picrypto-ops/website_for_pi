@@ -1,0 +1,148 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use "sass:color";
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: $color-light;
+  background-clip: border-box;
+  border: 1px solid rgba($color-dark, 0.125);
+  border-radius: $border-radius;
+  box-shadow: $shadow-sm;
+  transition: $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  &__header {
+    padding: $spacing-md;
+    margin-bottom: 0;
+    background-color: rgba($color-dark, 0.03);
+    border-bottom: 1px solid rgba($color-dark, 0.125);
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    padding: $spacing-md;
+  }
+
+  &__footer {
+    padding: $spacing-md;
+    background-color: rgba($color-dark, 0.03);
+    border-top: 1px solid rgba($color-dark, 0.125);
+    border-radius: 0 0 $border-radius $border-radius;
+  }
+
+  &__title {
+    margin-bottom: $spacing-sm;
+    font-size: 1.25rem;
+    font-weight: $font-weight-bold;
+    color: $color-dark;
+  }
+
+  &__subtitle {
+    margin-top: -$spacing-sm;
+    margin-bottom: $spacing-sm;
+    font-size: 0.875rem;
+    color: $color-secondary;
+  }
+
+  &__text {
+    margin-bottom: $spacing-sm;
+    color: $color-dark;
+  }
+
+  &__link {
+    color: $color-primary;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: color.adjust($color-primary, $lightness: -10%);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: $border-radius $border-radius 0 0;
+  }
+
+  // Card variants
+  &--primary {
+    border-color: $color-primary;
+    .card__header {
+      background-color: rgba($color-primary, 0.1);
+      border-bottom-color: $color-primary;
+    }
+    .card__footer {
+      background-color: rgba($color-primary, 0.1);
+      border-top-color: $color-primary;
+    }
+  }
+
+  &--secondary {
+    border-color: $color-secondary;
+    .card__header {
+      background-color: rgba($color-secondary, 0.1);
+      border-bottom-color: $color-secondary;
+    }
+    .card__footer {
+      background-color: rgba($color-secondary, 0.1);
+      border-top-color: $color-secondary;
+    }
+  }
+
+  &--success {
+    border-color: $color-success;
+    .card__header {
+      background-color: rgba($color-success, 0.1);
+      border-bottom-color: $color-success;
+    }
+    .card__footer {
+      background-color: rgba($color-success, 0.1);
+      border-top-color: $color-success;
+    }
+  }
+
+  &--danger {
+    border-color: $color-danger;
+    .card__header {
+      background-color: rgba($color-danger, 0.1);
+      border-bottom-color: $color-danger;
+    }
+    .card__footer {
+      background-color: rgba($color-danger, 0.1);
+      border-top-color: $color-danger;
+    }
+  }
+
+  &--warning {
+    border-color: $color-warning;
+    .card__header {
+      background-color: rgba($color-warning, 0.1);
+      border-bottom-color: $color-warning;
+    }
+    .card__footer {
+      background-color: rgba($color-warning, 0.1);
+      border-top-color: $color-warning;
+    }
+  }
+
+  &--info {
+    border-color: $color-info;
+    .card__header {
+      background-color: rgba($color-info, 0.1);
+      border-bottom-color: $color-info;
+    }
+    .card__footer {
+      background-color: rgba($color-info, 0.1);
+      border-top-color: $color-info;
+    }
+  }
+} 

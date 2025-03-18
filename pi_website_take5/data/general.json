@@ -417,5 +417,61 @@
                 "label": ""
             }
         }
+    },
+
+    "contact_confirmation_subject": {
+        "term_slug": "contact_confirmation_subject",
+        "language_slug": {
+            "en": {
+                "label": "Thank you for contacting us"
+            },
+            "he": {
+                "label": "תודה שפנית אלינו"
+            }
+        }
+    },
+    "contact_confirmation_greeting": {
+        "term_slug": "contact_confirmation_greeting",
+        "language_slug": {
+            "en": {
+                "label": "Dear"
+            },
+            "he": {
+                "label": "שלום"
+            }
+        }
+    },
+    "contact_confirmation_thank_you": {
+        "term_slug": "contact_confirmation_thank_you",
+        "language_slug": {
+            "en": {
+                "label": "Thank you for contacting PI Group. We have received your message and will respond as soon as possible."
+            },
+            "he": {
+                "label": "תודה שפנית אלינו. קיבלנו את ההודעה שלך ונפנה אליך בהקדם האפשרי."
+            }
+        }
+    },
+    "contact_confirmation_regards": {
+        "term_slug": "contact_confirmation_regards",
+        "language_slug": {
+            "en": {
+                "label": "Best regards"
+            },
+            "he": {
+                "label": "בהצלחה"
+            }
+        }
+    },
+    "contact_confirmation_signature": {
+        "term_slug": "contact_confirmation_signature",
+        "language_slug": {
+            "en": {
+                "label": "PI Group Team"
+            },
+            "he": {
+                "label": "צוות פאי"
+            }
+        }
     }
 }

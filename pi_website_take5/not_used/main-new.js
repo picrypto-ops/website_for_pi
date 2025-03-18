@@ -14,17 +14,17 @@ import {
 } from './modules/core/helpers/index.js';
 
 // Import components
-import { AssetManagementIcons } from './modules/components/asset-management/index.js';
+import { AssetManagementIcons } from './modules/src/components/asset-management/index.js';
 import { 
     ScrollIndicator, 
     LazyLoading, 
     Cards 
-} from './modules/components/ui/index.js';
+} from './modules/src/components/ui/index.js';
 import {
     NavigationMenu,
     HeroMenu
-} from './modules/components/navigation/index.js';
-import { CookieConsent } from './modules/components/cookie/index.js';
+} from './modules/src/components/navigation/index.js';
+import { CookieConsent } from './modules/src/components/cookie/index.js';
 
 // Import graphics
 import { BackgroundWave } from './modules/graphics/index.js';

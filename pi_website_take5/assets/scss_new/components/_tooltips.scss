@@ -1,0 +1,102 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use "sass:color";
+
+.tooltip {
+  position: absolute;
+  z-index: $z-index-tooltip;
+  display: block;
+  margin: 0;
+  font-size: $font-size-sm;
+  opacity: 0;
+  transition: opacity $transition-base;
+
+  &.show {
+    opacity: 1;
+  }
+
+  &-arrow {
+    position: absolute;
+    display: block;
+    width: 0.8rem;
+    height: 0.4rem;
+
+    &::before {
+      position: absolute;
+      content: "";
+      border-color: transparent;
+      border-style: solid;
+    }
+  }
+
+  // Tooltip directions
+  &-top {
+    padding: 0.4rem 0;
+
+    .tooltip-arrow {
+      bottom: 0;
+
+      &::before {
+        top: 0;
+        border-width: 0.4rem 0.4rem 0;
+        border-top-color: $color-dark;
+      }
+    }
+  }
+
+  &-right {
+    padding: 0 0.4rem;
+
+    .tooltip-arrow {
+      left: 0;
+      width: 0.4rem;
+      height: 0.8rem;
+
+      &::before {
+        right: 0;
+        border-width: 0.4rem 0.4rem 0.4rem 0;
+        border-right-color: $color-dark;
+      }
+    }
+  }
+
+  &-bottom {
+    padding: 0.4rem 0;
+
+    .tooltip-arrow {
+      top: 0;
+
+      &::before {
+        bottom: 0;
+        border-width: 0 0.4rem 0.4rem;
+        border-bottom-color: $color-dark;
+      }
+    }
+  }
+
+  &-left {
+    padding: 0 0.4rem;
+
+    .tooltip-arrow {
+      right: 0;
+      width: 0.4rem;
+      height: 0.8rem;
+
+      &::before {
+        left: 0;
+        border-width: 0.4rem 0 0.4rem 0.4rem;
+        border-left-color: $color-dark;
+      }
+    }
+  }
+
+  // Tooltip content
+  &-inner {
+    max-width: 200px;
+    padding: 0.5rem 1rem;
+    color: $color-light;
+    text-align: center;
+    background-color: $color-dark;
+    border-radius: $border-radius;
+  }
+} 

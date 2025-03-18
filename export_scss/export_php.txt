@@ -1,0 +1,3482 @@
+
+================================================================================
+FILE: asset_management_icons.php
+PATH: pi_website_take5\src\components\asset_management_icons.php
+================================================================================
+
+<?php
+/**
+ * Asset Management Icons Component
+ * Displays the hand icons for asset management section
+ * 
+ * @param array $options Optional configuration options
+ */
+
+// Default options
+$defaults = [
+    'container_class' => 'asset-management-icon-container',
+    'show_left_hand' => true,
+    'show_right_hand' => true,
+    'show_combined' => true,
+    'container_id' => null
+];
+
+// Merge with provided options
+$options = isset($options) ? array_merge($defaults, $options) : $defaults;
+$container_id = $options['container_id'] ? 'id="' . $options['container_id'] . '"' : '';
+?>
+
+<div class="<?php echo $options['container_class']; ?>" <?php echo $container_id; ?>>
+    <?php if ($options['show_left_hand']) : ?>
+        <div class="asset-management-left-hand" aria-label="Left hand icon">
+            <!-- SVG will be inserted by JavaScript -->
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($options['show_right_hand']) : ?>
+        <div class="asset-management-right-hand" aria-label="Right hand icon">
+            <!-- SVG will be inserted by JavaScript -->
+        </div>
+    <?php endif; ?>
+    
+    <?php if ($options['show_combined']) : ?>
+        <div class="asset-management-combined-hands" aria-label="Combined hands icon">
+            <!-- SVG will be inserted by JavaScript -->
+        </div>
+    <?php endif; ?>
+</div>
+
+
+
+
+================================================================================
+FILE: cookie-consent.php
+PATH: pi_website_take5\src\components\cookie-consent.php
+================================================================================
+
+<?php
+/**
+ * Cookie Consent Floating Box Component
+ * Displays a cookie consent box on the right side (LTR) or left side (RTL)
+ */
+
+// Use TranslatableFactory to get cookie consent text from pages.json
+$cookieConsent = TranslatableFactory::page('cookie_consent');
+
+// Get translations for the cookie consent
+$cookieTitle = $cookieConsent->getContent(
+    $lang, 
+    'cookie_title', 
+    $lang === 'he' ? 'הסכמה לשימוש בעוגיות' : 'Cookie Consent'
+);
+
+$cookieText = $cookieConsent->getContent(
+    $lang, 
+    'cookie_text', 
+    $lang === 'he' 
+        ? 'אתר זה משתמש בעוגיות כדי לשפר את חוויית המשתמש שלך. על ידי המשך הגלישה באתר זה, אתה מסכים לשימוש שלנו בעוגיות.'
+        : 'This website uses cookies to improve your experience. By continuing to use this site, you agree to our use of cookies.'
+);
+
+$acceptText = $cookieConsent->getContent(
+    $lang, 
+    'cookie_accept', 
+    $lang === 'he' ? 'מסכים' : 'Accept'
+);
+
+$declineText = $cookieConsent->getContent(
+    $lang, 
+    'cookie_decline', 
+    $lang === 'he' ? 'לא מסכים' : 'Decline'
+);
+?>
+
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="container">
+        <div class="cookie-consent-banner__content">
+            <h3><?php echo $cookieTitle; ?></h3>
+            <p><?php echo $cookieText; ?></p>
+        </div>
+        <div class="cookie-consent-banner__actions">
+            <button id="cookie-accept-btn" class="accept"><?php echo $acceptText; ?></button>
+            <button id="cookie-decline-btn" class="decline"><?php echo $declineText; ?></button>
+        </div>
+    </div>
+</div> 
+
+
+================================================================================
+FILE: footer.php
+PATH: pi_website_take5\src\components\footer.php
+================================================================================
+
+</main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <?php 
+                    $footerText = TranslatableFactory::general()->getContent($lang, 'footer_text', 'PI Group Financial Services');
+                    if (!empty($footerText)): 
+                    ?>
+                        <img src="assets/images/logo.svg" alt="PI Group Logo">
+                        <p class="footer-text"><?php echo $footerText; ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <?php
+                        $footerItems = loadJsonData('menu');
+                        if ($footerItems && isset($footerItems['main_menu'])):
+                            foreach ($footerItems['main_menu'] as $item):
+                        ?>
+                        <li>
+                            <a href="<?php echo $item['url']; ?>">
+                                <?php echo t($item['language_slug'][$lang]['label']); ?>
+                            </a>
+                        </li>
+                        <?php 
+                            endforeach;
+                        endif;
+                        ?>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <!-- Add social media links here -->
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <?php echo date('Y'); ?> PI Group. <?php echo TranslatableFactory::general()->getContent($lang, 'all_rights_reserved', 'All rights reserved'); ?>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <?php include __DIR__ . '/cookie-consent.php'; ?>
+</body>
+</html>
+
+
+
+
+================================================================================
+FILE: header.php
+PATH: pi_website_take5\src\components\header.php
+================================================================================
+
+<?php
+// Initialize data with error handling to prevent warnings
+$generalData = TranslatableFactory::getData('general') ?: [];
+$menuData = TranslatableFactory::getData('menus') ?: [];
+$isHomePage = $page === 'home';
+
+// Define a default page title and description in case data is not found
+$defaultTitle = 'PI Group';
+$defaultDescription = 'Financial Management Professionals';
+
+// Set default value for $useNewScss if not defined
+$useNewScss = isset($useNewScss) ? $useNewScss : false;
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $lang; ?>" dir="<?php echo $lang === 'he' ? 'rtl' : 'ltr'; ?>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title><?php echo isset($generalData['home']) ? getTranslatedContent($generalData['home'], $lang, 'label') : $defaultTitle; ?> - <?php echo isset($generalData[$page]) ? getTranslatedContent($generalData[$page], $lang, 'label') : ucfirst($page); ?></title>
+    <meta name="description" content="<?php echo isset($generalData[$page]) ? getTranslatedContent($generalData[$page], $lang, 'description') : $defaultDescription; ?>">
+    <link rel="canonical" href="<?php echo defined('BASE_URL') ? BASE_URL . '/' . $lang . '/' . $page : '/'; ?>">
+    <meta property="og:title" content="<?php echo isset($generalData['home']) ? getTranslatedContent($generalData['home'], $lang, 'label') : $defaultTitle; ?> - <?php echo isset($generalData[$page]) ? getTranslatedContent($generalData[$page], $lang, 'label') : ucfirst($page); ?>">
+    <meta property="og:description" content="<?php echo isset($generalData[$page]) ? getTranslatedContent($generalData[$page], $lang, 'description') : $defaultDescription; ?>">
+    <meta property="og:url" content="<?php echo defined('BASE_URL') ? BASE_URL . '/' . $lang . '/' . $page : '/'; ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="<?php echo defined('BASE_URL') ? BASE_URL : ''; ?>/assets/images/og-image.jpg">
+    <?php if ($useNewScss): ?>
+    <link rel="stylesheet" href="assets/scss_new/main_new.css">
+    <?php else: ?>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <?php endif; ?>
+    <!-- Load the new modular JavaScript main file -->
+    <script type="module" src="assets/js/main.js"></script>
+    <?php if ($page === 'home'): ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <?php endif; ?>
+</head>
+<body class="<?php echo $page; ?>-page">
+    <header id="site-header" class="<?php echo $isHomePage ? 'home-header initially-hidden' : ''; ?>">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile menu toggle button for screens < 768px -->
+                <button class="mobile-menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false">
+                    <span class="menu-icon">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                </button>
+                
+                <!-- Section 1: Logo & Group name -->
+                <div class="logo-section">
+                    <a href="?page=home&lang=<?php echo $lang; ?>" class="logo-link">
+                        <div class="logo-container">
+                            <img src="assets/images/logo_small.svg" alt="PI Group Logo">
+                            <span class="group-name"><?php echo isset($generalData['group_name']) ? getTranslatedContent($generalData['group_name'], $lang, 'label') : 'PI Group'; ?></span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Section 2: Main Navigation Menu -->
+                <nav class="main-nav">
+                    <ul>
+                        <?php
+                        if (isset($menuData['main_menu'])):
+                            foreach ($menuData['main_menu'] as $item):
+                                // Check if this is a segment page (investment_banking or asset_management)
+                                $isSegment = in_array($item['main_page_slug'], ['investment_banking', 'asset_management']);
+                                
+                                // Check if this is the team page
+                                $isTeam = $item['main_page_slug'] === 'our-team';
+                                
+                                // Check if this is the home page
+                                $isHome = $item['main_page_slug'] === 'home';
+                                
+                                // Generate the correct URL
+                                if ($isHome) {
+                                    $url = "?page=home&lang={$lang}";
+                                } elseif ($isSegment) {
+                                    $url = "?page=segment&id={$item['main_page_slug']}&lang={$lang}";
+                                } elseif ($isTeam) {
+                                    $url = "?page=our-team&lang={$lang}";
+                                } else {
+                                    $url = strpos($item['url'], '/') === 0 ? "?page=".ltrim($item['url'], '/')."&lang={$lang}" : $item['url'];
+                                }
+                        ?>
+                        <li class="<?php echo isActiveMenu($page, $item['main_page_slug']); ?>">
+                            <a href="<?php echo $url; ?>">
+                                <?php echo getTranslatedContent($item, $lang, 'label'); ?>
+                            </a>
+                        </li>
+                        <?php 
+                            endforeach;
+                        endif;
+                        ?>
+                    </ul>
+                </nav>
+                
+                <!-- Section 3: Language Switcher -->
+                <?php echo renderLanguageSwitcher($lang); ?>
+            </div>
+        </div>
+    </header>
+    <main id="main-content">
+
+
+
+
+================================================================================
+FILE: config.php
+PATH: pi_website_take5\src\config\config.php
+================================================================================
+
+<?php
+define('BASE_URL', 'https://www.pi-hf.com');
+define('DEFAULT_LANG', 'en');
+define('AVAILABLE_LANGUAGES', ['en', 'he']);
+
+// Database configuration (if needed in the future)
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'pigroup_db');
+define('DB_USER', 'username');
+define('DB_PASS', 'password');
+
+// Email configuration for contact form
+define('SMTP_HOST', 'smtp.example.com');
+define('SMTP_PORT', 587);
+define('SMTP_USER', 'your_email@example.com');
+define('SMTP_PASS', 'your_email_password');
+
+// Other configuration settings
+// We're using OpenStreetMap which doesn't require an API key
+// define('GOOGLE_MAPS_API_KEY', 'your_google_maps_api_key');
+
+
+
+
+================================================================================
+FILE: 404.php
+PATH: pi_website_take5\src\pages\404.php
+================================================================================
+
+<?php
+/**
+ * 404 error page
+ */
+
+// Get translatable for this page
+$pageTranslatable = TranslatableFactory::general();
+?>
+
+<div class="error-page">
+    <div class="container mx-auto py-20 px-6">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold mb-6"><?php echo $pageTranslatable->getContent($lang, 'page_not_found_title', '404 - Page Not Found'); ?></h1>
+            <p class="text-xl mb-8"><?php echo $pageTranslatable->getContent($lang, 'page_not_found_message', 'The page you are looking for does not exist or is no longer available.'); ?></p>
+            <a href="<?php echo buildUrl('home'); ?>" class="inline-block bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-dark transition duration-300">
+                <?php echo $pageTranslatable->getContent($lang, 'back_home', 'Back to Home'); ?>
+            </a>
+        </div>
+    </div>
+</div> 
+
+
+================================================================================
+FILE: about.php
+PATH: pi_website_take5\src\pages\about.php
+================================================================================
+
+<?php
+// Initialize the factory and preload common data files if not already done
+$Pages = TranslatableFactory::getData('pages');
+
+
+$aboutTranslatable = null;
+if (!empty($Pages) && isset($Pages['about'])) {
+    $aboutTranslatable = TranslatableFactory::page('about');
+} else {
+    // No valid segment ID found
+    header("HTTP/1.0 404 Not Found");
+    echo "<h1>404 - Segment Not Found</h1>";
+    echo "<p>The requested segment does not exist.</p>";
+    echo "<p><a href='index.php'>Return to homepage</a></p>";
+    exit;
+}
+
+// Get current language from the global variable
+global $lang;
+
+// Get content sections
+$contentSections = $aboutTranslatable->getAllContent($lang)['short_description'] ?? [];
+
+// If short_description is not an array but a single string, convert it to array for backward compatibility
+if (!is_array($contentSections)) {
+    $contentSections = [$contentSections];
+}
+
+// Get the image slider insertion index (default to after the first section if not specified)
+$imageSliderInsertionIndex = $aboutTranslatable->getContent($lang, 'image_slider_insertion_index', 1);
+$imageSliderInsertionIndex = intval($imageSliderInsertionIndex);
+
+// Make sure the index is valid
+if ($imageSliderInsertionIndex < 0) {
+    $imageSliderInsertionIndex = 0;
+} elseif ($imageSliderInsertionIndex > count($contentSections)) {
+    $imageSliderInsertionIndex = count($contentSections);
+}
+
+// Get image files for the slider
+$aboutUsImagesDir = 'assets/images/about_us/';
+$aboutUsImages = [];
+
+// Check if directory exists
+if (file_exists($aboutUsImagesDir) && is_dir($aboutUsImagesDir)) {
+    // Get all image files from the directory
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+    $dirContents = scandir($aboutUsImagesDir);
+    
+    foreach ($dirContents as $file) {
+        $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if (in_array($extension, $allowedExtensions)) {
+            // Skip hidden files
+            if (substr($file, 0, 1) !== '.') {
+                $aboutUsImages[] = $aboutUsImagesDir . $file;
+            }
+        }
+    }
+    
+    // Sort image files for consistent order
+    sort($aboutUsImages);
+}
+
+// If no images found, provide sample image URLs for demonstration
+if (empty($aboutUsImages)) {
+    $aboutUsImages = [
+        'assets/images/about_us/sample1.jpg',
+        'assets/images/about_us/sample2.jpg',
+        'assets/images/about_us/sample3.jpg'
+    ];
+}
+?>
+
+<section class="about-us">
+    <div class="container">
+        <h1><?php echo $aboutTranslatable->getHtmlContent($lang, 'title'); ?></h1>
+        <p class="slogan"><?php echo $aboutTranslatable->getHtmlContent($lang, 'slogan'); ?></p>
+        
+        <?php 
+        // Display sections before the image slider
+        for ($i = 0; $i < $imageSliderInsertionIndex; $i++) {
+            if (isset($contentSections[$i])) {
+                echo '<p class="lead content-with-html">' . $contentSections[$i] . '</p>';
+            }
+        }
+        ?>
+        
+        <!-- Image Slider -->
+        <div class="about-image-slider">
+            <div class="about-image-slider__container">
+                <?php foreach ($aboutUsImages as $image): ?>
+                <div class="about-image-slider__slide" style="background-image: url('<?php echo $image; ?>'); background-position: center center;"></div>
+                <?php endforeach; ?>
+            </div>
+            <div class="about-image-slider__controls">
+                <button class="about-image-slider__button about-image-slider__button--prev" aria-label="Previous image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="about-image-slider__dots"></div>
+                <button class="about-image-slider__button about-image-slider__button--next" aria-label="Next image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <?php 
+        // Display sections after the image slider
+        for ($i = $imageSliderInsertionIndex; $i < count($contentSections); $i++) {
+            echo '<p class="lead content-with-html">' . $contentSections[$i] . '</p>';
+        }
+        ?>
+        
+        <div class="about-content">
+            <div class="company-history">
+                <?php 
+                $history = $aboutTranslatable->getAllContent($lang)['company_history'] ?? [];
+                if (!empty($history)): 
+                ?>
+                <h2><?php echo $aboutTranslatable->getHtmlContent($lang, 'company_history_heading', 'Our History'); ?></h2>
+                <ul class="timeline">
+                    <?php 
+                    foreach ($history as $item): 
+                    ?>
+                        <li class="timeline-item">
+                            <span class="year"><?php echo $item['year'] ?? ''; ?></span>
+                            <p class="event"><?php echo $item['title'] ?? ''; ?></p>
+                            <p class="event content-with-html"><?php echo formatHtmlContent($item['description'] ?? ''); ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <?php 
+        $values = $aboutTranslatable->getAllContent($lang)['our_values'] ?? [];
+        if (!empty($values)): 
+        ?>
+        <h2><?php echo $aboutTranslatable->getHtmlContent($lang, 'our_values_heading', 'Our Values'); ?></h2>
+        <ul class="values-list">
+            <?php foreach ($values as $value): ?>
+                <li>
+                    <h3><?php echo $value['title'] ?? ''; ?></h3>
+                    <p class="content-with-html"><?php echo formatHtmlContent($value['description'] ?? ''); ?></p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+
+        <?php 
+        $values = $aboutTranslatable->getAllContent($lang)['values'] ?? [];
+        if (!empty($values)): 
+        ?>
+        <ul class="values-list">
+            <?php 
+            foreach ($values as $value): 
+            ?>
+                <li>
+                    <h3><?php echo $value['title'] ?? ''; ?></h3>
+                    <p class="content-with-html"><?php echo formatHtmlContent($value['description'] ?? ''); ?></p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+
+        <?php 
+        $missions = $aboutTranslatable->getAllContent($lang)['our_mission'] ?? [];
+        if (!empty($missions)): 
+        ?>
+        <h2><?php echo $aboutTranslatable->getHtmlContent($lang, 'our_mission_heading', 'Our Mission'); ?></h2>
+        <div class="mission-statement">
+            <?php 
+            foreach ($missions as $mission): 
+            ?>
+                <p class="content-with-html"><?php echo formatHtmlContent($mission['mission'] ?? ''); ?></p>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+
+
+
+================================================================================
+FILE: contact.php
+PATH: pi_website_take5\src\pages\contact.php
+================================================================================
+
+<?php
+// Initialize the factory and preload common data files if not already done
+$Pages = TranslatableFactory::getData('pages');
+
+$contactTranslatable = null;
+if (!empty($Pages) && isset($Pages['contact'])) {
+    // Get contact page translatable
+    $contactTranslatable = TranslatableFactory::page('contact');
+} else {
+    // No valid segment ID found
+    header("HTTP/1.0 404 Not Found");
+    echo "<h1>404 - Page Not Found</h1>";
+    echo "<p>The requested page does not exist.</p>";
+    echo "<p><a href='index.php'>Return to homepage</a></p>";
+    exit;
+}
+
+// Get current language from the global variable
+global $lang;
+
+// Get contact details from the translatable object
+$contactDetails = $contactTranslatable->getContent($lang, 'contact_details', []);
+if (!is_array($contactDetails)) {
+    $contactDetails = json_decode($contactDetails, true);
+}
+?>
+
+<section class="contact-hero">
+    <div class="container">
+        <h1><?php echo $contactTranslatable->getContent($lang, 'title'); ?></h1>
+        <p class="slogan"><?php echo $contactTranslatable->getContent($lang, 'slogan'); ?></p>
+        <p class="lead"><?php echo $contactTranslatable->getContent($lang, 'short_description'); ?></p>
+    </div>
+</section>
+
+<section class="contact-us">
+    <div class="container">
+        <div class="contact-content">
+            <!-- Form on the left for desktop, last for mobile -->
+            <div class="contact-form contact-column">
+                <h2><?php echo $contactTranslatable->getContent($lang, 'form_heading', 'Send Us a Message'); ?></h2>
+                <form id="contact-form" action="process-contact.php" method="POST">
+                    <div class="form-group">
+                        <label for="name"><?php echo $contactTranslatable->getContent($lang, 'name_label', 'Name'); ?></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><?php echo $contactTranslatable->getContent($lang, 'email_label', 'Email'); ?></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject"><?php echo $contactTranslatable->getContent($lang, 'subject_label', 'Subject'); ?></label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message"><?php echo $contactTranslatable->getContent($lang, 'message_label', 'Message'); ?></label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="button"><?php echo $contactTranslatable->getContent($lang, 'submit_button', 'Send Message'); ?></button>
+                </form>
+            </div>
+            
+            <!-- Map and contact info on the right for desktop, first for mobile -->
+            <div class="contact-info-map contact-column">
+                <!-- Map section -->
+                <div class="map-section">
+                    <h2><?php echo $contactTranslatable->getContent($lang, 'our_info_map_label', 'Map'); ?></h2>
+                    <div id="map" class="contact-map"></div>
+                    <p class="map-link">
+                        <a href="<?php echo $contactDetails['map_link'] ?? 'https://www.openstreetmap.org/?mlat=32.109608&mlon=34.837384#map=21/32.109608/34.837384'; ?>" target="_blank">
+                            <?php echo TranslatableFactory::general()->getContent($lang, 'view_larger_map', 'View Larger Map'); ?>
+                        </a>
+                    </p>
+                </div>
+                
+                <!-- Contact information -->
+                <div class="contact-info">
+                    <h2><?php echo $contactTranslatable->getContent($lang, 'our_info_heading', 'Contact Information'); ?></h2>
+                    
+                    <div class="contact-info-grid">
+                        <!-- Address card -->
+                        <div class="contact-card address">
+                            <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+                            <div class="contact-info-content">
+                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_address_label', 'Address'); ?></h3>
+                                <p><?php echo $contactDetails['address'] ?? ''; ?></p>
+                                <?php if (!empty($contactDetails['zipcode'])): ?>
+                                    <p><?php echo $contactTranslatable->getContent($lang, 'our_info_zipcode_label', 'Zipcode'); ?>: <?php echo $contactDetails['zipcode']; ?></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        
+                        <!-- Phone card -->
+                        <div class="contact-card phone">
+                            <div class="icon"><i class="fa fa-phone"></i></div>
+                            <div class="contact-info-content">
+                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_phone_label', 'Phone'); ?></h3>
+                                <p><a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone'] ?? ''); ?>"><?php echo $contactDetails['phone'] ?? ''; ?></a></p>
+                                <?php if (!empty($contactDetails['fax'])): ?>
+                                    <p><?php echo $contactTranslatable->getContent($lang, 'our_info_fax_label', 'Fax'); ?>: <?php echo $contactDetails['fax']; ?></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        
+                        <!-- Email card -->
+                        <div class="contact-card email">
+                            <div class="icon"><i class="fa fa-envelope"></i></div>
+                            <div class="contact-info-content">
+                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_email_label', 'Email'); ?></h3>
+                                <p><a href="mailto:<?php echo $contactDetails['email'] ?? ''; ?>"><?php echo $contactDetails['email'] ?? ''; ?></a></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Website card -->
+                        <?php if (!empty($contactDetails['website_link'])): ?>
+                        <div class="contact-card website">
+                            <div class="icon"><i class="fa fa-globe"></i></div>
+                            <div class="contact-info-content">
+                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_website_label', 'Website'); ?></h3>
+                                <p><a href="<?php echo $contactDetails['website_link']; ?>" target="_blank"><?php echo $contactDetails['website_link']; ?></a></p>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Leaflet CSS and JS for OpenStreetMap -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+      crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+        crossorigin=""></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the map
+    const map = L.map('map').setView([<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>], 17);
+    
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+    }).addTo(map);
+    
+    // Add a marker for the office location
+    const officeLocation = [<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>];
+    const marker = L.marker(officeLocation).addTo(map);
+    
+    // Add a popup with the address
+    marker.bindPopup('<?php echo addslashes($contactDetails['address'] ?? "18, Raoul Wallenberg, Atidim, Tel Aviv, Israel"); ?>').openPopup();
+    
+    // Ensure the map container is visible and redraws properly
+    setTimeout(function() {
+        map.invalidateSize();
+    }, 100);
+});
+</script>
+
+
+
+
+================================================================================
+FILE: home.php
+PATH: pi_website_take5\src\pages\home.php
+================================================================================
+
+<?php
+// Turn on debug output temporarily - remove in production
+TranslatableFactory::$debug = false;
+
+// Initialize the factory and preload common data files
+TranslatableFactory::initialize(['general', 'segments', 'products', 'menus', 'pages', 'team']);
+
+// Include necessary files
+include_once __DIR__ . '/../utility/functions.php';
+include_once __DIR__ . '/home_sections/helpers.php';
+
+// Get home translatable for hero section
+$homeTranslatable = TranslatableFactory::page('home');
+
+// Get menu data
+$menuData = TranslatableFactory::getData('menus') ?: [];
+?>
+
+<div class="home-page">
+    <!-- Hero Section -->
+    <section id="hero" class="hero full-page">
+        <!-- Logo in top right for English -->
+        <div class="hero-top-logo <?php echo $lang === 'he' ? 'left-aligned' : 'right-aligned'; ?>">
+            <img src="assets/images/logo.svg" alt="PI Group Logo">
+        </div>
+        
+        <!-- Language Switcher positioned at top left/right depending on language -->
+        <div class="hero-language-switcher <?php echo $lang === 'he' ? 'right-aligned' : 'left-aligned'; ?>">
+            <?php echo renderLanguageSwitcher($lang, '', false); ?>
+        </div>
+        
+        <!-- Clean, minimal hero menu -->
+        <div class="hero-menu <?php echo $lang === 'he' ? 'left-aligned' : 'right-aligned'; ?>">
+            <button class="hero-menu-toggle" aria-label="<?php echo TranslatableFactory::general()->getHtmlContent($lang, 'menu_toggle', 'Toggle Menu'); ?>">
+                <span></span>
+            </button>
+            <nav class="hero-nav">
+                <ul>
+                    <?php
+                    if (isset($menuData['main_menu'])):
+                        foreach ($menuData['main_menu'] as $item):
+                            // Check if this is a segment page (investment_banking or asset_management)
+                            $isSegment = in_array($item['main_page_slug'], ['investment_banking', 'asset_management']);
+                            
+                            // Check if this is the team page
+                            $isTeam = $item['main_page_slug'] === 'team';
+                            
+                            // Check if this is the home page
+                            $isHome = $item['main_page_slug'] === 'home';
+                            
+                            // Generate the correct URL
+                            if ($isHome) {
+                                $url = "?page=home&lang={$lang}";
+                            } elseif ($isSegment) {
+                                $url = "?page=segment&id={$item['main_page_slug']}&lang={$lang}";
+                            } elseif ($isTeam) {
+                                $url = "?page=our-team&lang={$lang}";
+                            } else {
+                                $url = strpos($item['url'], '/') === 0 ? "?page=".ltrim($item['url'], '/')."&lang={$lang}" : $item['url'];
+                            }
+                    ?>
+                    <li>
+                        <a href="<?php echo $url; ?>">
+                            <?php echo getTranslatedContent($item, $lang, 'label'); ?>
+                        </a>
+                    </li>
+                    <?php 
+                        endforeach;
+                    endif;
+                    ?>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="hero-content">
+            <h1><?php echo $homeTranslatable->getHtmlContent($lang, 'title', 'Welcome to PI Group'); ?></h1>
+            <p class="slogan"><?php echo $homeTranslatable->getHtmlContent($lang, 'slogan', 'Financial Excellence'); ?></p>
+            <p class="wide-description content-with-html"><?php echo $homeTranslatable->getHtmlContent($lang, 'home_description', 'Your trusted partner in financial services.'); ?></p>
+            <?php
+            // Point CTA to the first segment
+            $segments = TranslatableFactory::getData('segments');
+            $firstSegmentId = is_array($segments) && !empty($segments) ? 
+                'segment-' . array_key_first($segments) : 'team';
+            ?>
+            <a href="#<?php echo $firstSegmentId; ?>" class="cta-button">
+                <?php echo TranslatableFactory::general()->getHtmlContent($lang, 'learn_more', 'Learn More'); ?>
+            </a>
+        </div>
+
+        <!-- ThreeJS container positioned at bottom 30% -->
+        <div id="threeJsContainer"></div>
+        
+        <!-- Render scroll indicator with function -->
+        <?php
+        // Point to the first segment directly
+        $segments = TranslatableFactory::getData('segments');
+        $firstSegmentId = is_array($segments) && !empty($segments) ? 
+            'segment-' . array_key_first($segments) : 'team';
+        renderScrollIndicator($firstSegmentId, $lang, 'hero');
+        ?>
+    </section>
+
+    <!-- Render all page sections using functions -->
+    <?php 
+    // Include the segments display file
+    require_once __DIR__ . '/home_sections/segments_display.php';
+    
+    // Get all segments to display them one by one
+    $segments = TranslatableFactory::getData('segments');
+    if (is_array($segments)) {
+        $segmentKeys = array_keys($segments);
+        foreach ($segmentKeys as $index => $segment_slug) {
+            // Determine next section
+            $nextSectionId = null; // This will use the default logic in renderSegmentDisplay
+            
+            // Pass the next section ID to the render function
+            renderSegmentDisplay($lang, $segment_slug, $nextSectionId);
+        }
+    }
+    ?>
+    
+    <?php renderTeamSection($lang, 'about-us'); ?>
+    <?php renderAboutSection($lang, 'contact-us'); ?>
+    <?php renderContactSection($lang, 'hero'); ?>
+    
+    <!-- Breadcrumb navigation for direct section access -->
+    <nav class="breadcrumb-navigation">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#segment-<?php echo array_key_first($segments); ?>">Segments</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#about-us">About</a></li>
+            <li><a href="#contact-us">Contact</a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- ThreeJS Container for Background Wave -->
+<div id="threeJsContainer"></div>
+
+
+
+
+================================================================================
+FILE: our-team.php
+PATH: pi_website_take5\src\pages\our-team.php
+================================================================================
+
+<?php
+$allTeam = TranslatableFactory::getData('team');
+
+// Get all team groups
+$teamGroups = array_keys($allTeam);
+?>
+
+<section class="our-team">
+    <div class="container">
+        <h1 class="page-title"><?php echo TranslatableFactory::general()->getContent($lang, 'our_team_title', 'Our Team'); ?></h1>
+        <p class="lead"><?php echo TranslatableFactory::general()->getContent($lang, 'our_team_description', 'Meet the people who make it all happen.'); ?></p>
+
+        <?php if (empty($teamGroups)): ?>
+            <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_team_members', 'No team members available.'); ?></p>
+        <?php else: ?>
+            <?php foreach ($teamGroups as $groupSlug): ?>
+                <?php 
+                $groupMembers = $allTeam[$groupSlug];
+                if (!is_array($groupMembers) || empty($groupMembers)) continue;
+                
+                // Get group name from first member or use group slug as fallback
+                $groupName = TranslatableFactory::general()->getContent($lang, "team_group_{$groupSlug}", ucfirst(str_replace('_', ' ', $groupSlug)));
+                ?>
+                
+                <div class="team-section">
+                    <h2 class="section-title"><?php echo $groupName; ?></h2>
+                    <div class="team-grid">
+                        <?php foreach ($groupMembers as $index => $member): ?>
+                            <?php if (!is_array($member) || !isset($member['name_slug'])) continue; ?>
+                            <?php $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']); ?>
+                            <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                                <div class="team-card">
+                                    <div class="team-info">
+                                        <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
+                                        
+                                        <?php
+                                        // Check if this member should display product roles
+                                        $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                                        
+                                        if ($displayProductRoles) {
+                                            // Get position which will be an array of roles when display_product_roles is true
+                                            $positions = $memberTranslatable->getContent($lang, 'position', []);
+                                            
+                                            if (is_array($positions) && !empty($positions)) {
+                                                echo '<div class="product-roles">';
+                                                foreach ($positions as $role) {
+                                                    echo '<div class="role">';
+                                                    
+                                                    $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                                    $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                                    
+                                                    if (!empty($productName)) {
+                                                        echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
+                                                    }
+                                                    
+                                                    if (!empty($roleTitle)) {
+                                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                    }
+                                                    
+                                                    echo '</div>';
+                                                }
+                                                echo '</div>';
+                                            } else {
+                                                echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                            }
+                                        } else {
+                                            echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                        }
+                                        ?>
+                                        
+                                        <?php if ($memberTranslatable->hasContent($lang, 'short_bio')): ?>
+                                            <p class="short-bio"><?php echo $memberTranslatable->getContent($lang, 'short_bio', ''); ?></p>
+                                        <?php endif; ?>
+
+                                        <?php 
+                                        // Display credentials or expertise if available
+                                        if ($memberTranslatable->hasContent($lang, 'expertise')): 
+                                            $expertise = $memberTranslatable->getContent($lang, 'expertise', []);
+                                            if (!empty($expertise) && is_array($expertise)):
+                                        ?>
+                                            <div class="expertise-tags">
+                                                <?php foreach ($expertise as $skill): ?>
+                                                    <span class="expertise-tag"><?php echo htmlspecialchars($skill); ?></span>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php 
+                                            endif;
+                                        endif; 
+                                        ?>
+                                    </div>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</section>
+
+
+
+
+================================================================================
+FILE: product.php
+PATH: pi_website_take5\src\pages\product.php
+================================================================================
+
+<?php
+$productId = isset($_GET['id']) ? $_GET['id'] : '';
+$allProducts = TranslatableFactory::getData('products');
+$allTeam = TranslatableFactory::getData('team');
+
+$product = null;
+$productCategory = null;
+
+// Search for the product in the nested structure
+if (!empty($productId) && is_array($allProducts)) {
+    foreach ($allProducts as $categorySlug => $categoryProducts) {
+        if (!is_array($categoryProducts)) continue;
+        
+        if (isset($categoryProducts[$productId])) {
+            $product = $categoryProducts[$productId];
+            $productCategory = $categorySlug;
+            break;
+        }
+    }
+}
+
+// If product not found, display error and exit
+if (!$product) {
+    header("HTTP/1.0 404 Not Found");
+    echo "<h1>404 - Product Not Found</h1>";
+    echo "<p>The requested product does not exist.</p>";
+    echo "<p><a href='index.php'>Return to homepage</a></p>";
+    exit;
+}
+
+// Get translatable for this product
+$productTranslatable = TranslatableFactory::product($productId);
+
+// Find team members associated with this product
+$productTeam = [];
+if (isset($product['team_group']) && is_array($allTeam)) {
+    foreach ($allTeam as $teamGroup => $members) {
+        if (!is_array($members)) continue;
+        
+        foreach ($members as $memberKey => $member) {
+            if (!is_array($member)) continue;
+            
+            // Check if member belongs to the product's team group
+            if (isset($member['groups']) && is_array($member['groups']) && 
+                in_array($product['team_group'], $member['groups'])) {
+                $productTeam[$memberKey] = $member;
+            }
+        }
+    }
+}
+
+// Find founder team members associated with team_group_slug
+$founderTeam = [];
+if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) && is_array($allTeam)) {
+    // Debug output to help troubleshoot
+    if (TranslatableFactory::$debug) {
+        error_log("Looking for team members with team_group_slug: " . $product['team_group_slug']);
+    }
+    
+    foreach ($allTeam as $teamGroup => $members) {
+        if (!is_array($members)) continue;
+        
+        foreach ($members as $memberKey => $member) {
+            if (!is_array($member)) continue;
+            
+            // Check if member is a founder
+            $isFounder = isset($member['is_founder']) && $member['is_founder'] === true;
+            
+            // Check if member belongs to the product's team_group_slug
+            // First check direct match with team_group_slug
+            if ($isFounder && $product['team_group_slug'] === $teamGroup) {
+                $founderTeam[$memberKey] = $member;
+                continue;
+            }
+            
+            // Then check if member has the team_group_slug in their groups array
+            if ($isFounder && isset($member['groups']) && is_array($member['groups']) && 
+                in_array($product['team_group_slug'], $member['groups'])) {
+                $founderTeam[$memberKey] = $member;
+            }
+            
+            // Also check if the member's name_slug matches the team_group_slug
+            // This handles cases where team_group_slug might refer to an individual
+            if ($isFounder && isset($member['name_slug']) && 
+                $member['name_slug'] === $product['team_group_slug']) {
+                $founderTeam[$memberKey] = $member;
+            }
+        }
+    }
+    
+    // If still empty, try a more flexible approach by checking if the team_group_slug
+    // is contained within any member data
+    if (empty($founderTeam)) {
+        foreach ($allTeam as $teamGroup => $members) {
+            if (!is_array($members)) continue;
+            
+            foreach ($members as $memberKey => $member) {
+                if (!is_array($member)) continue;
+                
+                if (isset($member['is_founder']) && $member['is_founder'] === true) {
+                    // Add any founder to the team if we couldn't find specific matches
+                    // This is a fallback to ensure we show something
+                    $founderTeam[$memberKey] = $member;
+                }
+            }
+        }
+    }
+}
+?>
+
+<section class="product">
+    <?php
+            // Determine the path to the product image
+            $productSlug = isset($product['product_slug']) ? $product['product_slug'] : '';
+            $productCategory = isset($product['asset_category']) ? $product['asset_category'] : '';
+            $productLogoPath = getProductLogoPath($product);
+            
+            // Special case for pi_emf which has an image in pi_emf_retired directory
+            $productImagePath = "assets/images/{$productCategory}/{$productSlug}/product_image.webp";
+            // Check if product image exists
+            $productImageExists = file_exists($productImagePath);
+            
+            // Get product description - this could be a string or an array
+            $description = $productTranslatable->getContent($lang, 'description', 'Product description not available.');
+            
+            // If description is a string, convert it to an array for consistent processing
+            if (!is_array($description)) {
+                $description = [$description];
+            }
+            
+            // Get the image insertion index (default to after the first paragraph if not specified)
+            $imageInsertionIndex = $productTranslatable->getContent($lang, 'image_insertion_index', 1);
+            $imageInsertionIndex = intval($imageInsertionIndex);
+            
+            // Make sure the index is valid
+            if ($imageInsertionIndex < 0) {
+                $imageInsertionIndex = 0;
+            } elseif ($imageInsertionIndex > count($description)) {
+                $imageInsertionIndex = count($description);
+            }
+    ?>
+    <div class="container">
+        <div class="product-header">
+            <?php if (file_exists($productLogoPath)): ?>
+                <div class="product-logo">
+                    <img src="<?php echo $productLogoPath; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', $product['product_slug']); ?>">
+                </div>
+            <?php endif; ?>
+            <div class="product-title">
+                <h1><?php echo $productTranslatable->getContent($lang, 'name', $product['product_slug']); ?></h1>
+                <?php if ($productTranslatable->hasContent($lang, 'slogan')): ?>
+                    <p class="product-slogan"><?php echo $productTranslatable->getContent($lang, 'slogan', ''); ?></p>
+                <?php endif; ?>
+            </div>
+        </div>
+        
+        <div class="product-content">
+            <?php 
+            // Display paragraphs before the image
+            for ($i = 0; $i < $imageInsertionIndex; $i++) {
+                if (isset($description[$i])) {
+                    echo '<p class="product-description-paragraph">' . $description[$i] . '</p>';
+                }
+            }
+            
+            // Display the product image if it exists
+            if ($productImageExists): 
+            ?>
+                <div class="product-image">
+                    <img src="<?php echo $productImagePath; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', $productSlug); ?> team">
+                    <div class="product-image-caption">
+                        <?php echo TranslatableFactory::general()->getContent($lang, 'product_image_caption', 'Our dedicated team'); ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            
+            <?php 
+            // Display paragraphs after the image
+            for ($i = $imageInsertionIndex; $i < count($description); $i++) {
+                echo '<p class="product-description-paragraph">' . $description[$i] . '</p>';
+            }
+            ?>
+        </div>
+
+        <?php if (!empty($founderTeam)): ?>
+            <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'product_founders', 'Founders'); ?></h2>
+            <div class="team-grid founders-grid">
+                <?php foreach ($founderTeam as $memberKey => $member): ?>
+                    <?php $memberTranslatable = TranslatableFactory::createFromData($member); ?>
+                    <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                        <div class="team-card founder-card">
+                            <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
+                                <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>">
+                            <?php else: ?>
+                                <div class="photo-placeholder"><i class="fa fa-user-circle"></i></div>
+                            <?php endif; ?>
+                            <div class="team-info">
+                                <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
+                                <?php
+                                // Check if this member should display product roles
+                                $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                                
+                                if ($displayProductRoles) {
+                                    // Get position which will be an array of roles when display_product_roles is true
+                                    $positions = $memberTranslatable->getContent($lang, 'position', []);
+                                    
+                                    if (is_array($positions) && !empty($positions)) {
+                                        echo '<div class="product-roles">';
+                                        foreach ($positions as $role) {
+                                            echo '<p class="role">';
+                                            
+                                            $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                            $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                            // todo: format the output to be more readable
+                                            if (!empty($roleTitle) && !empty($productName)) {
+                                                echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
+                                            } elseif (!empty($roleTitle)) {
+                                                echo htmlspecialchars(ucfirst($roleTitle));
+                                            } elseif (!empty($productName)) {
+                                                echo htmlspecialchars($productName);
+                                            }
+                                            
+                                            echo '</p>';
+                                        }
+                                        echo '</div>';
+                                    } else {
+                                        echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                    }
+                                } else {
+                                    echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($productTeam)): ?>
+            <div class="team-section">
+                <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'product_team', 'Product Team'); ?></h2>
+                <div class="team-grid">
+                    <?php foreach ($productTeam as $memberKey => $member): ?>
+                        <?php $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']); ?>
+                        <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                            <div class="team-card">
+                                <div class="team-info">
+                                    <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
+                                    <?php
+                                    // Check if this member should display product roles
+                                    $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                                    
+                                    if ($displayProductRoles) {
+                                        // Get position which will be an array of roles when display_product_roles is true
+                                        $positions = $memberTranslatable->getContent($lang, 'position', []);
+                                        
+                                        if (is_array($positions) && !empty($positions)) {
+                                            echo '<div class="product-roles">';
+                                            foreach ($positions as $role) {
+                                                echo '<div class="role">';
+                                                
+                                                $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                                $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                                
+                                                if (!empty($productName)) {
+                                                    echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
+                                                }
+                                                
+                                                if (!empty($roleTitle)) {
+                                                    echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                }
+                                                
+                                                echo '</div>';
+                                            }
+                                            echo '</div>';
+                                        } else {
+                                            echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                        }
+                                    } else {
+                                        echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                                    }
+                                    ?>
+                                    
+                                    <?php if ($memberTranslatable->hasContent($lang, 'short_bio')): ?>
+                                        <p class="short-bio"><?php echo $memberTranslatable->getContent($lang, 'short_bio', ''); ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        
+        <?php
+        // Add a back to segment link if we have a segment parameter
+        $segmentId = isset($_GET['segment']) ? $_GET['segment'] : $productCategory;
+        if ($segmentId): 
+        ?>
+        <div class="back-to-segment">
+            <a href="?page=segment&id=<?php echo $segmentId; ?>&lang=<?php echo $lang; ?>" class="back-link">
+                <span class="back-arrow">←</span> 
+                <?php echo TranslatableFactory::general()->getContent($lang, 'back_to_segment', 'Back to Segment'); ?>
+            </a>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+
+
+
+================================================================================
+FILE: segment.php
+PATH: pi_website_take5\src\pages\segment.php
+================================================================================
+
+<?php
+$segmentId = isset($_GET['id']) ? $_GET['id'] : '';
+$segments = TranslatableFactory::getData('segments');
+$products = TranslatableFactory::getData('products');
+$general = TranslatableFactory::getData('general');
+
+$segment = null;
+if (!empty($segmentId) && isset($segments[$segmentId])) {
+    $segment = $segments[$segmentId];
+} else {
+    // No valid segment ID found
+    header("HTTP/1.0 404 Not Found");
+    echo "<h1>404 - Segment Not Found</h1>";
+    echo "<p>The requested segment does not exist.</p>";
+    echo "<p><a href='index.php'>Return to homepage</a></p>";
+    exit;
+}
+
+// Find products that belong to this segment
+$segmentProducts = [];
+if (is_array($products)) {
+    // Check if segment ID matches the product category directly
+    if (isset($products[$segmentId]) && is_array($products[$segmentId])) {
+        $segmentProducts = $products[$segmentId];
+    }
+}
+
+// Create translatable for this segment
+$segmentTranslatable = TranslatableFactory::segment($segmentId);
+?>
+
+<section class="segment">
+    <div class="container">
+        <h1><?php echo $segmentTranslatable->getContent($lang, 'name', $segment['segment_slug']); ?></h1>
+        <div class="segment-description">
+            <?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
+        </div>
+
+        <h3><?php echo TranslatableFactory::general()->getContent($lang, 'our_products', 'Our Products'); ?></h3>
+        <div class="product-grid">
+            <?php if (empty($segmentProducts)): ?>
+                <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_products', 'No products available for this segment.'); ?></p>
+            <?php else: ?>
+                <?php foreach ($segmentProducts as $productSlug => $product): 
+                    // Create a proper translatable for this product
+                    $productTranslatable = TranslatableFactory::product($productSlug);
+                ?>
+                    <a href="?page=product&id=<?php echo $productSlug; ?>&segment=<?php echo $segmentId; ?>&lang=<?php echo $lang; ?>" class="product-card">
+                        <div class="product-content">
+                            <div class="product-icon">
+                                <?php 
+                                    $productLogoPath = getProductLogoPath($product);
+                                ?>
+                                <img src="<?php echo $productLogoPath; ?>" alt="<?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Product'; ?>">
+                            </div>
+                            <div class="product-text">
+                                <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
+                            </div>
+                        </div>
+                        <p class="slogan">
+                            <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                        </p>
+                    </a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+
+
+
+================================================================================
+FILE: team-member.php
+PATH: pi_website_take5\src\pages\team-member.php
+================================================================================
+
+<?php
+$memberId = isset($_GET['id']) ? $_GET['id'] : '';
+$allTeam = TranslatableFactory::getData('team');
+
+$member = null;
+$teamGroup = null;
+
+// Search for the member in the nested team structure
+if (!empty($memberId) && is_array($allTeam)) {
+    foreach ($allTeam as $groupSlug => $groupMembers) {
+        if (!is_array($groupMembers)) continue;
+        
+        foreach ($groupMembers as $index => $potentialMember) {
+            if (is_array($potentialMember) && isset($potentialMember['name_slug']) && $potentialMember['name_slug'] === $memberId) {
+                $member = $potentialMember;
+                $teamGroup = $groupSlug;
+                break 2; // Break from both loops
+            }
+        }
+    }
+}
+
+if (!$member) {
+    include '404.php';
+    exit;
+}
+
+// Get translatable for this team member
+$memberTranslatable = TranslatableFactory::teamMemberEnhanced($memberId);
+
+// Create a flat array of all team members from all groups
+$allMembers = [];
+foreach ($allTeam as $groupMembers) {
+    if (!is_array($groupMembers)) continue;
+    
+    foreach ($groupMembers as $m) {
+        if (is_array($m) && isset($m['name_slug'])) {
+            $allMembers[] = $m;
+        }
+    }
+}
+
+// Find current index in the flat array of all members
+$currentIndex = -1;
+foreach ($allMembers as $index => $teamMember) {
+    if ($teamMember['name_slug'] === $memberId) {
+        $currentIndex = $index;
+        break;
+    }
+}
+
+// Check if current member is first or last
+$isFirst = ($currentIndex === 0);
+$isLast = ($currentIndex === count($allMembers) - 1);
+
+// Get previous and next member IDs only if not first/last
+$prevMember = !$isFirst ? $allMembers[$currentIndex - 1] : null;
+$nextMember = !$isLast ? $allMembers[$currentIndex + 1] : null;
+$prevMemberId = $prevMember ? $prevMember['name_slug'] : '';
+$nextMemberId = $nextMember ? $nextMember['name_slug'] : '';
+
+// Set page data for structured data
+$pageData = $member;
+
+// Check if the language is Hebrew (RTL)
+$isRTL = ($lang === 'he');
+
+// Get arrow from translations
+$arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
+?>
+
+<section class="team-member-page">
+    <div class="container">
+        <div class="navigation-breadcrumb<?php echo $isRTL ? ' rtl' : ''; ?>">
+            <a href="?page=our-team&lang=<?php echo $lang; ?>" class="back-link">
+                <span class="back-arrow">←</span> 
+                <?php echo TranslatableFactory::general()->getContent($lang, 'back_to_team', 'Back to Team'); ?>
+            </a>
+        </div>
+        
+        <div class="member-container<?php echo $isRTL ? ' rtl' : ''; ?>">
+            <div class="member-profile-card">
+                <div class="member-header">
+                    <div class="member-title-section">
+                        <h1 class="member-name"><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h1>
+                        
+                        <?php
+                        // Check if this member should display product roles
+                        $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                        
+                        if ($displayProductRoles) {
+                            // Get position which will be an array of roles when display_product_roles is true
+                            $positions = $memberTranslatable->getContent($lang, 'position', []);
+                            
+                            if (is_array($positions) && !empty($positions)) {
+                                $firstRole = reset($positions);
+                                $primaryRoleTitle = isset($firstRole['title']) ? ucfirst($firstRole['title']) : '';
+                                $primaryProductName = isset($firstRole['product_name']) ? $firstRole['product_name'] : '';
+                                
+                                if (!empty($primaryRoleTitle) && !empty($primaryProductName)) {
+                                    echo '<p class="primary-role">' . htmlspecialchars($primaryRoleTitle) . ' - ' . htmlspecialchars($primaryProductName) . '</p>';
+                                } elseif (!empty($primaryRoleTitle)) {
+                                    echo '<p class="primary-role">' . htmlspecialchars($primaryRoleTitle) . '</p>';
+                                } elseif (!empty($primaryProductName)) {
+                                    echo '<p class="primary-role">' . htmlspecialchars($primaryProductName) . '</p>';
+                                }
+                            } else {
+                                echo '<p class="primary-role">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                            }
+                        } else {
+                            echo '<p class="primary-role">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="member-content">
+                    <div class="member-bio">
+                        <?php echo $memberTranslatable->getContent($lang, 'bio', 'Biography information not available.'); ?>
+                    </div>
+                    
+                    <?php if ($displayProductRoles && is_array($positions) && count($positions) > 1) { ?>
+                    <div class="member-roles-section">
+                        <h3 class="section-subtitle"><?php echo TranslatableFactory::general()->getContent($lang, 'member_roles', 'Roles'); ?></h3>
+                        <div class="product-roles">
+                            <?php foreach ($positions as $index => $role) { 
+                                if ($index === 0) continue; // Skip first role which is already displayed
+                            ?>
+                                <div class="role">
+                                    <?php 
+                                    $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                    $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                    
+                                    if (!empty($productName)) {
+                                        echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
+                                    }
+                                    
+                                    if (!empty($roleTitle)) {
+                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                    }
+                                    ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    
+                    <?php 
+                    // Display expertise/skills if available
+                    if ($memberTranslatable->hasContent($lang, 'expertise')) { 
+                        $expertise = $memberTranslatable->getContent($lang, 'expertise', []);
+                        if (!empty($expertise) && is_array($expertise)) {
+                    ?>
+                    <div class="member-expertise-section">
+                        <h3 class="section-subtitle"><?php echo TranslatableFactory::general()->getContent($lang, 'expertise', 'Areas of Expertise'); ?></h3>
+                        <div class="expertise-tags">
+                            <?php foreach ($expertise as $skill) { ?>
+                                <span class="expertise-tag"><?php echo htmlspecialchars($skill); ?></span>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php 
+                        }
+                    } 
+                    ?>
+                    
+                    <?php if (isset($member['credentials']) && is_array($member['credentials']) && !empty($member['credentials'])) { ?>
+                    <div class="member-credentials-section">
+                        <h3 class="section-subtitle"><?php echo TranslatableFactory::general()->getContent($lang, 'credentials', 'Credentials'); ?></h3>
+                        <div class="credentials-list">
+                            <?php foreach ($member['credentials'] as $credential => $value) { ?>
+                            <div class="credential-item">
+                                <div class="credential-label"><?php echo ucfirst(str_replace('_', ' ', $credential)); ?>:</div>
+                                <div class="credential-value"><?php echo $value; ?></div>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+            
+            <div class="member-navigation<?php echo $isFirst ? ' first-member' : ''; ?><?php echo $isLast ? ' last-member' : ''; ?>">
+                <?php if (!$isFirst) { ?>
+                <a href="?page=team-member&id=<?php echo $prevMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button prev-button" data-tooltip="<?php echo TranslatableFactory::general()->getContent($lang, 'previous', 'Previous'); ?>">
+                    <span class="nav-icon">←</span>
+                    <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'previous', 'Previous'); ?></span>
+                </a>
+                <?php } else { ?>
+                <div class="navigation-placeholder"></div>
+                <?php } ?>
+                
+                <?php if (!$isLast) { ?>
+                <a href="?page=team-member&id=<?php echo $nextMemberId; ?>&lang=<?php echo $lang; ?>" class="navigation-button next-button" data-tooltip="<?php echo TranslatableFactory::general()->getContent($lang, 'next', 'Next'); ?>">
+                    <span class="nav-text"><?php echo TranslatableFactory::general()->getContent($lang, 'next', 'Next'); ?></span>
+                    <span class="nav-icon">→</span>
+                </a>
+                <?php } else { ?>
+                <div class="navigation-placeholder"></div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+================================================================================
+FILE: what-we-do.php
+PATH: pi_website_take5\src\pages\what-we-do.php
+================================================================================
+
+<section class="what-we-do">
+    <div class="container">
+        <h1><?php echo t('what_we_do_title'); ?></h1>
+        <p class="lead"><?php echo t('what_we_do_description'); ?></p>
+
+        <div class="segment-grid" role="list">
+            <?php foreach ($segments as $segment): ?>
+                <div class="segment-card" role="listitem">
+                    <h2><?php echo t($segment['name']); ?></h2>
+                    <p><?php echo t($segment['short_description']); ?></p>
+                    <a href="?page=segment&id=<?php echo $segment['id']; ?>&lang=<?php echo $lang; ?>" class="button" aria-label="<?php echo t('learn_more_about') . ' ' . t($segment['name']); ?>"><?php echo t('learn_more'); ?></a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+
+
+
+================================================================================
+FILE: about_section.php
+PATH: pi_website_take5\src\pages\home_sections\about_section.php
+================================================================================
+
+<?php
+/**
+ * About section rendering for the home page
+ */
+
+/**
+ * Renders the About Us section
+ * 
+ * @param string $lang Current language code
+ * @param string $nextSectionId ID of the next section to scroll to
+ * @return void
+ */
+function renderAboutSection($lang, $nextSectionId = 'contact-us') {
+    $aboutTranslatable = TranslatableFactory::page('about');
+    ?>
+    <section id="about-us" class="about-preview full-page-section">
+        <div class="container">
+            <h2><?php echo $aboutTranslatable->getContent($lang, 'title', 'About Us'); ?></h2>
+            <p><?php echo $aboutTranslatable->getHtmlContent($lang, 'home_description', 'Learn more about our company and our mission.'); ?></p>
+            <a href="?page=about&lang=<?php echo $lang; ?>" class="button">
+                <?php echo TranslatableFactory::general()->getContent($lang, 'read_more', 'Read More...'); ?>
+            </a>
+        </div>
+        
+        <?php renderScrollIndicator($nextSectionId, $lang, 'about-us'); ?>
+    </section>
+    <?php
+} 
+
+
+================================================================================
+FILE: contact_section.php
+PATH: pi_website_take5\src\pages\home_sections\contact_section.php
+================================================================================
+
+<?php
+/**
+ * Contact section rendering for the home page
+ */
+
+/**
+ * Renders the Contact section
+ * 
+ * @param string $lang Current language code
+ * @param string $nextSectionId ID of the next section to scroll to
+ * @return void
+ */
+function renderContactSection($lang, $nextSectionId = 'hero') {
+    $contactPage = TranslatableFactory::page('contact');
+    $contactDetails = $contactPage->getContent($lang, 'contact_details', []);
+    if (!is_array($contactDetails)) {
+        $contactDetails = json_decode($contactDetails, true);
+    }
+    ?>
+    <section id="contact-us" class="contact-preview full-page-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><?php echo $contactPage->getContent($lang, 'title', 'Contact Us'); ?></h2>
+                <p class="section-description"><?php echo $contactPage->getContent($lang, 'home_description', 'Get in touch with our team.'); ?></p>
+            </div>
+            
+            <div class="home-contact-content">
+                <!-- Map preview - visible first on mobile -->
+                <div class="home-map-preview">
+                    <div id="home-map" class="home-contact-map"></div>
+                </div>
+                
+                <!-- Contact info cards - visible after map on mobile -->
+                <div class="contact-info-grid">
+                    <!-- Address card -->
+                    <?php if (!empty($contactDetails['address'])): ?>
+                    <div class="contact-card address">
+                        <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+                        <div class="contact-info">
+                            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'address', 'Address'); ?></h3>
+                            <p><?php echo $contactDetails['address']; ?></p>
+                            <?php if (!empty($contactDetails['zipcode'])): ?>
+                                <p><?php echo $contactPage->getContent($lang, 'our_info_zipcode_label', 'Zipcode'); ?>: <?php echo $contactDetails['zipcode']; ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <!-- Phone card -->
+                    <?php if (!empty($contactDetails['phone'])): ?>
+                    <div class="contact-card phone">
+                        <div class="icon"><i class="fa fa-phone"></i></div>
+                        <div class="contact-info">
+                            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'phone', 'Phone'); ?></h3>
+                            <p><a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone']); ?>"><?php echo $contactDetails['phone']; ?></a></p>
+                            <?php if (!empty($contactDetails['fax'])): ?>
+                                <p><?php echo $contactPage->getContent($lang, 'our_info_fax_label', 'Fax'); ?>: <?php echo $contactDetails['fax']; ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <!-- Email card -->
+                    <?php if (!empty($contactDetails['email'])): ?>
+                    <div class="contact-card email">
+                        <div class="icon"><i class="fa fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'email', 'Email'); ?></h3>
+                            <p><a href="mailto:<?php echo $contactDetails['email']; ?>"><?php echo $contactDetails['email']; ?></a></p>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <!-- Website card -->
+                    <?php if (!empty($contactDetails['website_link'])): ?>
+                    <div class="contact-card website">
+                        <div class="icon"><i class="fa fa-globe"></i></div>
+                        <div class="contact-info">
+                            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'website', 'Website'); ?></h3>
+                            <p><a href="<?php echo $contactDetails['website_link']; ?>" target="_blank"><?php echo $contactDetails['website_link']; ?></a></p>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            
+            <a href="?page=contact&lang=<?php echo $lang; ?>" class="button contact-button">
+                <?php echo TranslatableFactory::general()->getContent($lang, 'get_in_touch', 'Get In Touch'); ?>
+            </a>
+        </div>
+        
+        <?php renderScrollIndicator($nextSectionId, $lang, 'contact-us'); ?>
+    </section>
+    
+    <!-- Add Leaflet for home page map preview -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('home-map')) {
+            // Initialize the map
+            const homeMap = L.map('home-map', {
+                dragging: false,
+                scrollWheelZoom: false,
+                zoomControl: false
+            }).setView([<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>], 16);
+            
+            // Add OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(homeMap);
+            
+            // Add a marker for the office location
+            const officeLocation = [<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>];
+            const marker = L.marker(officeLocation).addTo(homeMap);
+            
+            // Ensure the map container is visible and redraws properly
+            setTimeout(function() {
+                homeMap.invalidateSize();
+            }, 100);
+        }
+    });
+    </script>
+    <?php
+} 
+
+
+================================================================================
+FILE: helpers.php
+PATH: pi_website_take5\src\pages\home_sections\helpers.php
+================================================================================
+
+<?php
+/**
+ * Home page helper functions - main file
+ * 
+ * This file includes all individual section files and exports the render functions
+ */
+
+// Include section files
+require_once __DIR__ . '/scroll_indicator.php';
+require_once __DIR__ . '/about_section.php';
+require_once __DIR__ . '/what_we_do_section.php';
+require_once __DIR__ . '/products_section.php';
+require_once __DIR__ . '/team_section.php';
+require_once __DIR__ . '/contact_section.php';
+
+// Any additional helper functions for the home page can be added here 
+
+
+================================================================================
+FILE: products_section.php
+PATH: pi_website_take5\src\pages\home_sections\products_section.php
+================================================================================
+
+<?php
+/**
+ * Products section rendering for the home page
+ */
+
+/**
+ * Renders the Featured Products section
+ * 
+ * @param string $lang Current language code
+ * @return void
+ */
+function renderProductsSection($lang) {
+    $productData = TranslatableFactory::getData('products');
+    ?>
+    <section id="products" class="featured-products full-page-section">
+        <div class="container">
+            <h2><?php echo TranslatableFactory::general()->getContent($lang, 'featured_products', 'Featured Products'); ?></h2>
+            <p class="section-description"><?php echo TranslatableFactory::general()->getContent($lang, 'featured_products_description', 'Discover our premium financial products designed to meet your needs.'); ?></p>
+            
+            <!-- Featured Products Grid -->
+            <div class="product-grid">
+                <?php 
+                    // Extract featured products from the nested structure
+                    $featuredProducts = [];
+                    $counter = 0;
+                    
+                    if (is_array($productData)) {
+                        foreach ($productData as $categorySlug => $categoryProducts) {
+                            if (!is_array($categoryProducts)) continue;
+                            
+                            foreach ($categoryProducts as $productSlug => $product) {
+                                if (!is_array($product)) continue;
+                                
+                                if (isset($product['is_featured']) && $product['is_featured'] === true) {
+                                    // Store both the product and its slug
+                                    $featuredProducts[] = [
+                                        'slug' => $productSlug,
+                                        'data' => $product,
+                                        'category' => $categorySlug
+                                    ];
+                                    $counter++;
+                                    
+                                    // Limit to 3 featured products
+                                    if ($counter >= 3) break;
+                                }
+                            }
+                            if ($counter >= 3) break;
+                        }
+                    }
+
+                    // If no featured products found, show example placeholders
+                    if (empty($featuredProducts)) {
+                        // Display placeholders if no products are found
+                            // No valid segment ID found
+                            header("HTTP/1.0 404 Not Found");
+                            echo "<h1>404 - Segment Not Found</h1>";
+                            echo "<p>The requested segment does not exist.</p>";
+                            echo "<p><a href='index.php'>Return to homepage</a></p>";
+                            exit;
+                    } else {
+                        // Display actual featured products
+                        foreach ($featuredProducts as $productInfo): 
+                            $productSlug = $productInfo['slug'];
+                            $product = $productInfo['data'];
+                            $segmentId = $productInfo['category'] ?? '';
+                            
+                            // Create a proper translatable for this product
+                            $productTranslatable = TranslatableFactory::product($productSlug);
+                ?>
+                        <a href="?page=product&id=<?php echo $productSlug; ?>&segment=<?php echo $segmentId; ?>&lang=<?php echo $lang; ?>" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                    <?php 
+                                        $productLogoPath = getProductLogoPath($product);
+                                    ?>
+                                    <img src="<?php echo $productLogoPath; ?>" alt="<?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Product'; ?>">
+                                </div>
+                                <div class="product-text">
+                                    <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                            </p>
+                        </a>
+                <?php 
+                        endforeach; 
+                    }
+                ?>
+            </div>
+            
+            <!-- Removed "View All Products" button as requested -->
+        </div>
+        
+        <?php renderScrollIndicator('team', $lang); ?>
+    </section>
+    <?php
+} 
+
+
+================================================================================
+FILE: scroll_indicator.php
+PATH: pi_website_take5\src\pages\home_sections\scroll_indicator.php
+================================================================================
+
+<?php
+/**
+ * Scroll indicator component for the home page
+ */
+
+/**
+ * Renders a scroll indicator pointing to the next section
+ * 
+ * @param string $targetSectionId ID of the section to scroll to
+ * @param string $lang Current language code
+ * @param string $currentSectionId ID of the current section (optional)
+ * @return void
+ */
+function renderScrollIndicator($targetSectionId, $lang, $currentSectionId = null) {
+    $generalTranslatable = TranslatableFactory::general();
+    
+    // Use provided current section ID if available
+    if ($currentSectionId === null) {
+        // If not provided, use backtrace to determine current section (for backward compatibility)
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+        
+        if (isset($backtrace[1]['function'])) {
+            switch ($backtrace[1]['function']) {
+                case 'renderAboutSection':
+                    $currentSectionId = 'about-us';
+                    break;
+                case 'renderWhatWeDoSection':
+                    $currentSectionId = 'what-we-do';
+                    break;
+                case 'renderProductsSection':
+                    $currentSectionId = 'products';
+                    break;
+                case 'renderTeamSection':
+                    $currentSectionId = 'team';
+                    break;
+                case 'renderContactSection':
+                    $currentSectionId = 'contact-us';
+                    break;
+                case 'renderSegmentDisplay':
+                    // For segment display, get the segment slug from the arguments
+                    if (isset($backtrace[1]['args'][1])) {
+                        $currentSectionId = 'segment-' . $backtrace[1]['args'][1];
+                    } else {
+                        $currentSectionId = 'segment';
+                    }
+                    break;
+                default:
+                    // For the hero section
+                    $currentSectionId = 'hero';
+            }
+        } else {
+            // Default to hero if function name can't be determined
+            $currentSectionId = 'hero';
+        }
+    }
+    ?>
+    <div class="scroll-indicator" data-parent-section="<?php echo $currentSectionId; ?>">
+        <a href="#<?php echo $targetSectionId; ?>" class="scroll-down" data-target="<?php echo $targetSectionId; ?>">
+            <span class="sr-only"><?php echo $generalTranslatable->getContent($lang, 'scroll_down', 'Scroll Down'); ?></span>
+            <i class="arrow-down"></i>
+        </a>
+    </div>
+    <?php
+} 
+
+
+================================================================================
+FILE: segments_display.php
+PATH: pi_website_take5\src\pages\home_sections\segments_display.php
+================================================================================
+
+<?php
+/**
+ * Segment display rendering for the home page
+ */
+
+/**
+ * Renders a specific segment with its products
+ * 
+ * @param string $lang Current language code
+ * @param string $segment_slug The slug of the segment to display
+ * @param string $nextSectionId ID of the next section to scroll to (optional)
+ * @return void
+ */
+function renderSegmentDisplay($lang, $segment_slug, $nextSectionId = null) {
+    $segments = TranslatableFactory::getData('segments');
+    $products = TranslatableFactory::getData('products');
+    
+    // Validate segment exists
+    if (!isset($segments[$segment_slug]) || !is_array($segments[$segment_slug])) {
+        echo "<div class='error-message'>Segment not found</div>";
+        return;
+    }
+    
+    $segment = $segments[$segment_slug];
+    
+    // Find products that belong to this segment
+    $segmentProducts = [];
+    if (is_array($products)) {
+        // Check if segment ID matches the product category directly
+        if (isset($products[$segment_slug]) && is_array($products[$segment_slug])) {
+            $segmentProducts = $products[$segment_slug];
+        }
+    }
+    
+    // If nextSectionId is not provided, calculate it
+    if ($nextSectionId === null) {
+        // Find the next segment or point to team section if this is the last segment
+        $segmentKeys = array_keys($segments);
+        $currentIndex = array_search($segment_slug, $segmentKeys);
+        
+        if ($currentIndex !== false && $currentIndex < count($segmentKeys) - 1) {
+            // There is a next segment
+            $nextSegment = $segmentKeys[$currentIndex + 1];
+            $nextSectionId = 'segment-' . $nextSegment;
+        } else {
+            // This is the last segment, point to team section
+            $nextSectionId = 'team';
+        }
+    }
+    
+    // Create translatable for this segment
+    $segmentTranslatable = TranslatableFactory::segment($segment_slug);
+    ?>
+    
+    <section id="segment-<?php echo $segment_slug; ?>" class="segment full-page-section">
+        <div class="container">
+            <h2><?php echo $segmentTranslatable->getContent($lang, 'name', $segment['segment_slug']); ?></h2>
+            <div class="segment-section-description">
+                <?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
+            </div>
+
+            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'our_products', 'Our Products'); ?></h3>
+            <div class="product-grid">
+                <?php if (empty($segmentProducts)): ?>
+                    <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_products', 'No products available for this segment.'); ?></p>
+                <?php else: ?>
+                    <?php foreach ($segmentProducts as $productSlug => $product): 
+                        // Create a proper translatable for this product
+                        $productTranslatable = TranslatableFactory::product($productSlug);
+                    ?>
+                        <a href="?page=product&id=<?php echo $productSlug; ?>&segment=<?php echo $segment_slug; ?>&lang=<?php echo $lang; ?>" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                    <?php 
+                                        $productLogoPath = getProductLogoPath($product);
+                                    ?>
+                                    <img src="<?php echo $productLogoPath; ?>" alt="<?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Product'; ?>">
+                                </div>
+                                <div class="product-text">
+                                    <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                            </p>
+                        </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+            
+            <div class="back-to-segments">
+                <a href="#hero" class="back-link">
+                    <?php echo TranslatableFactory::general()->getContent($lang, 'back_to_home', 'Back to Home'); ?>
+                </a>
+            </div>
+        </div>
+        
+        <?php renderScrollIndicator($nextSectionId, $lang, 'segment-' . $segment_slug); ?>
+    </section>
+    <?php
+} 
+
+
+================================================================================
+FILE: team_section.php
+PATH: pi_website_take5\src\pages\home_sections\team_section.php
+================================================================================
+
+<?php
+/**
+ * Team section rendering for the home page
+ */
+
+/**
+ * Renders the Team section
+ * 
+ * @param string $lang Current language code
+ * @param string $nextSectionId ID of the next section to scroll to
+ * @return void
+ */
+function renderTeamSection($lang, $nextSectionId = 'about-us') {
+    $teamData = TranslatableFactory::getData('team');
+    ?>
+    <section id="team" class="our-team-preview full-page-section">
+        <div class="container">
+            <h2><?php echo TranslatableFactory::general()->getContent($lang, 'our_team', 'Our Team'); ?></h2>
+            <p class="section-description"><?php echo TranslatableFactory::general()->getContent($lang, 'team_description', 'Meet our dedicated professionals who provide exceptional service.'); ?></p>
+
+            <div class="view-all-link">
+                <a href="?page=our-team&lang=<?php echo $lang; ?>" class="button-link">
+                    <?php echo TranslatableFactory::general()->getContent($lang, 'view_all_team', 'View All Team Members'); ?>
+                </a>
+            </div>
+
+            <div class="team-navigation">
+                <ul class="team-nav">
+                    <?php
+                    // Find all team groups for the navigation
+                    $teamGroups = array_keys($teamData);
+                    
+                    // Display team group links
+                    foreach ($teamGroups as $groupKey) {
+                        if (!is_array($teamData[$groupKey])) continue;
+                        
+                        $groupLabel = TranslatableFactory::general()->getContent($lang, 'team_group_' . $groupKey, ucfirst(str_replace('_', ' ', $groupKey)));
+                    ?>
+                        <li><a href="#team-group-<?php echo $groupKey; ?>" class="team-group-link"><?php echo $groupLabel; ?></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+            
+            <?php
+            // Display team members by group without limiting to 4
+            foreach ($teamData as $groupKey => $members) {
+                if (!is_array($members)) continue;
+                
+                // Get translatable for group label
+                $groupLabel = TranslatableFactory::general()->getContent($lang, 'team_group_' . $groupKey, ucfirst(str_replace('_', ' ', $groupKey)));
+            ?>
+                <div id="team-group-<?php echo $groupKey; ?>" class="team-section">
+                    <h3 class="section-title"><?php echo $groupLabel; ?></h3>
+                    <div class="team-grid">
+                        <?php if (empty($members)) { ?>
+                            <div class="no-data-message">No team members found for this group.</div>
+                        <?php } else { ?>
+                            <?php 
+                            foreach ($members as $index => $member) { 
+                                if (!is_array($member)) continue;
+                                
+                                // Skip if no name_slug
+                                if (!isset($member['name_slug'])) continue;
+                                
+                                // Get the correct translatable for a team member
+                                $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']);
+                            ?>
+                                <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
+                                            <h3><?php echo $memberTranslatable->getContent($lang, 'name', 'Team Member'); ?></h3>
+                                            <?php
+                                            // Check if this member should display product roles
+                                            $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
+                                            
+                                            if ($displayProductRoles) {
+                                                // Get position which will be an array of roles when display_product_roles is true
+                                                $positions = $memberTranslatable->getContent($lang, 'position', []);
+                                                
+                                                if (is_array($positions) && !empty($positions)) {
+                                            ?>
+                                                <div class="product-roles">
+                                                    <?php foreach ($positions as $role) { ?>
+                                                        <div class="role">
+                                                            <?php 
+                                                            $roleTitle = isset($role['title']) ? $role['title'] : '';
+                                                            $productName = isset($role['product_name']) ? $role['product_name'] : '';
+                                                            
+                                                            if (!empty($productName)) {
+                                                                echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
+                                                            }
+                                                            
+                                                            if (!empty($roleTitle)) {
+                                                                echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+                                            <?php } else { ?>
+                                                <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Financial Professional'); ?></p>
+                                            <?php } ?>
+                                            <?php } else { ?>
+                                                <p class="position"><?php echo $memberTranslatable->getContent($lang, 'position', 'Financial Professional'); ?></p>
+                                            <?php } ?>
+                                            
+
+                                        </div>
+                                    </div>
+                                </a>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+            
+            <div class="view-all-container">
+                <a href="?page=our-team&lang=<?php echo $lang; ?>" class="view-all-button">
+                    <?php echo TranslatableFactory::general()->getContent($lang, 'meet_our_team', 'Meet Our Team'); ?>
+                </a>
+            </div>
+        </div>
+        
+        <?php renderScrollIndicator($nextSectionId, $lang, 'team'); ?>
+    </section>
+    
+    <!-- Add additional CSS for the team grid to the page -->
+    <style>
+        .our-team-preview .section-title {
+            position: relative;
+            font-size: 1.8rem;
+            color: #1a3a5f;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .our-team-preview .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 60px;
+            background: linear-gradient(90deg, #0056b3, #007bff);
+        }
+        
+        .our-team-preview .section-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        
+        .team-navigation {
+            margin-bottom: 2rem;
+        }
+        
+        .team-nav {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .team-nav li a {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #f8fafc;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #1a3a5f;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .team-nav li a:hover, 
+        .team-nav li a.active {
+            background-color: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+        
+        .view-all-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .view-all-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .view-all-button:hover {
+            background-color: #003d80;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+    <?php
+} 
+
+
+================================================================================
+FILE: what_we_do_section.php
+PATH: pi_website_take5\src\pages\home_sections\what_we_do_section.php
+================================================================================
+
+<?php
+/**
+ * What We Do section rendering for the home page
+ */
+
+/**
+ * Renders the What We Do section with segment cards
+ * 
+ * @param string $lang Current language code
+ * @param string $nextSectionId ID of the next section to scroll to
+ * @return void
+ */
+function renderWhatWeDoSection($lang, $nextSectionId = null) {
+    $whatWeDoTranslatable = TranslatableFactory::page('what_we_do');
+    $segmentData = TranslatableFactory::getData('segments');
+    
+    // If nextSectionId is not provided, default to the first segment or team section
+    if ($nextSectionId === null) {
+        $nextSectionId = is_array($segmentData) && !empty($segmentData) ? 
+            'segment-' . array_key_first($segmentData) : 'team';
+    }
+    ?>
+    <section id="what-we-do" class="featured-segments full-page-section">
+        <div class="container">
+            <h2><?php echo $whatWeDoTranslatable->getContent($lang, 'title'); ?></h2>
+            <p class="section-description"><?php echo $whatWeDoTranslatable->getContent($lang, 'home_description'); ?></p>
+            
+            <div class="segment-grid">
+                <?php 
+                // Extract segments with better error handling
+                if (is_array($segmentData)) {
+                    foreach ($segmentData as $segmentSlug => $segment): 
+                        if (!is_array($segment)) continue;
+                        
+                        // Create translatable for this segment
+                        $segmentTranslatable = TranslatableFactory::segment($segmentSlug);
+                ?>
+                    <div class="segment-card">
+                        <div class="segment-icon">
+                            <?php if (isset($segment['icon']) && !empty($segment['icon'])): ?>
+                                <img src="<?php echo $segment['icon']; ?>" alt="<?php echo $segmentTranslatable->getContent($lang, 'name'); ?>">
+                            <?php else: ?>
+                                <div class="icon-placeholder"><i class="fa fa-chart-line"></i></div>
+                            <?php endif; ?>
+                        </div>
+                        <h3><?php echo $segmentTranslatable->getContent($lang, 'name'); ?></h3>
+                        <p><?php echo $segmentTranslatable->getContent($lang, 'home_description'); ?></p>
+                        <a href="?page=segment&id=<?php echo $segmentSlug; ?>&lang=<?php echo $lang; ?>" class="segment-link">
+                            <p class="slogan">
+                                <?php echo TranslatableFactory::general()->getContent($lang, 'view_details', 'View Details'); ?>
+                                <!-- <span class="arrow"><?php echo TranslatableFactory::general()->getContent($lang, 'arrow', '»'); ?></span>                                 -->
+                            </p>
+                        </a>
+                    </div>
+                <?php 
+                    endforeach;
+                } else {
+                    echo "<div class='no-data-message'>No segment data available</div>";
+                }
+                ?>
+            </div>
+            
+            <!-- Removed "View All Services" button as requested -->
+        </div>
+        
+        <?php renderScrollIndicator($nextSectionId, $lang, 'what-we-do'); ?>
+    </section>
+    <?php
+} 
+
+
+================================================================================
+FILE: AbstractTranslatable.php
+PATH: pi_website_take5\src\translation\AbstractTranslatable.php
+================================================================================
+
+<?php
+/**
+ * Abstract base class for translatable content
+ */
+abstract class AbstractTranslatable implements TranslatableInterface {
+    /**
+     * Data array containing translatable content
+     * @var array
+     */
+    protected $data;
+    
+    /**
+     * Constructor
+     * 
+     * @param array $data Data containing translatable content
+     */
+    public function __construct($data) {
+        $this->data = $data;
+    }
+    
+    /**
+     * Get specific translated content
+     * 
+     * @param string $lang Language code
+     * @param string $key Content key
+     * @param string $default Default value if content not found
+     * @return string Translated content
+     */
+    public function getContent($lang, $key, $default = '') {
+        if ($this->key_exists($lang, $key)) {
+            return $this->get_key($lang, $key);
+        }
+        return $default;
+    }
+    
+    /**
+     * Check if specific translated content exists
+     * 
+     * @param string $lang Language code
+     * @param string $key Content key
+     * @return bool True if content exists, false otherwise
+     */
+    public function hasContent($lang, $key) {
+        return $this->key_exists($lang, $key);
+    }
+    
+    /**
+     * Check if a key exists for a specific language
+     * 
+     * @param string $lang Language code
+     * @param string $key Content key
+     * @return bool True if key exists, false otherwise
+     */
+    protected abstract function key_exists($lang, $key);
+    
+    /**
+     * Get the value for a specific key and language
+     * 
+     * @param string $lang Language code
+     * @param string $key Content key
+     * @return string Value for the key
+     * @throws Exception If the key does not exist
+     */
+    protected abstract function get_key($lang, $key);
+    
+    /**
+     * Get translated content with HTML formatting preserved
+     * 
+     * This method ensures HTML tags like <br> are properly rendered and 
+     * preserves line breaks in the content.
+     * 
+     * @param string $lang Language code
+     * @param string $key Content key
+     * @param string $default Default value if content not found
+     * @param bool $convertNewlines Whether to convert newlines to <br> tags
+     * @return string HTML-formatted content
+     */
+    public function getHtmlContent($lang, $key, $default = '', $convertNewlines = true) {
+        $content = $this->getContent($lang, $key, $default);
+        
+        // Use the formatHtmlContent function to preserve HTML formatting
+        return formatHtmlContent($content, $convertNewlines);
+    }
+    
+    /**
+     * Default implementation returning empty string when content not found
+     * 
+     * @return string Empty string
+     */
+    protected function getDefaultContent() {
+        return '';
+    }
+} 
+
+
+================================================================================
+FILE: GeneralTranslatable.php
+PATH: pi_website_take5\src\translation\GeneralTranslatable.php
+================================================================================
+
+<?php
+/**
+ * Translatable for general.json data format
+ */
+class GeneralTranslatable extends AbstractTranslatable {
+    /**
+     * {@inheritdoc}
+     */
+    protected function key_exists($lang, $key) {
+        // Structure: { "term_slug": "X", "language_slug": { "en": { "label": "..." } } }
+        
+        // Check if we're trying to access a top-level key from the general data
+        if (isset($this->data[$key]) && 
+            isset($this->data[$key]['language_slug']) && 
+            isset($this->data[$key]['language_slug'][$lang]) && 
+            isset($this->data[$key]['language_slug'][$lang]['label'])) {
+            return true;
+        }
+        
+        // Fallback to original implementation for compatibility
+        if (isset($this->data['language_slug']) && 
+            isset($this->data['language_slug'][$lang]) && 
+            isset($this->data['language_slug'][$lang][$key])) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function get_key($lang, $key) {
+        // Structure: { "term_slug": "X", "language_slug": { "en": { "label": "..." } } }
+        
+        // Check if we're trying to access a top-level key from the general data
+        if (isset($this->data[$key]) && 
+            isset($this->data[$key]['language_slug']) && 
+            isset($this->data[$key]['language_slug'][$lang]) && 
+            isset($this->data[$key]['language_slug'][$lang]['label'])) {
+            
+            // Successfully found the translation
+            return $this->data[$key]['language_slug'][$lang]['label'];
+        }
+        
+        // Fallback to original implementation for compatibility
+        if (isset($this->data['language_slug']) && 
+            isset($this->data['language_slug'][$lang]) && 
+            isset($this->data['language_slug'][$lang][$key])) {
+            
+            // Found translation in the original structure
+            return $this->data['language_slug'][$lang][$key];
+        }
+        
+        // Translation not found - log for debugging if debug is enabled
+        if (TranslatableFactory::$debug) {
+            $backtraceInfo = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
+            $caller = isset($backtraceInfo[1]) ? $backtraceInfo[1] : $backtraceInfo[0];
+            $file = isset($caller['file']) ? basename($caller['file']) : 'unknown';
+            $line = isset($caller['line']) ? $caller['line'] : 'unknown';
+            
+            error_log("Translation missing: Key '{$key}' not found for language '{$lang}' in {$file}:{$line}");
+        }
+        
+        // This shouldn't normally happen since key_exists should be called first
+        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllContent($lang) {
+        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
+            return $this->data['language_slug'][$lang];
+        }
+        
+        return [];
+    }
+} 
+
+
+================================================================================
+FILE: PageTranslatable.php
+PATH: pi_website_take5\src\translation\PageTranslatable.php
+================================================================================
+
+<?php
+/**
+ * Translatable for pages.json data format
+ */
+class PageTranslatable extends AbstractTranslatable {
+    /**
+     * {@inheritdoc}
+     */
+    protected function key_exists($lang, $key) {
+        // Structure: { "language_slug": { "en": { "key": "..." } } }
+        return isset($this->data['language_slug']) && 
+               isset($this->data['language_slug'][$lang]) && 
+               isset($this->data['language_slug'][$lang][$key]);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function get_key($lang, $key) {
+        // Structure: { "language_slug": { "en": { "key": "..." } } }
+        if ($this->key_exists($lang, $key)) {
+            return $this->data['language_slug'][$lang][$key];
+        }
+        
+        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllContent($lang) {
+        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
+            return $this->data['language_slug'][$lang];
+        }
+        
+        return [];
+    }
+} 
+
+
+================================================================================
+FILE: ProductTranslatable.php
+PATH: pi_website_take5\src\translation\ProductTranslatable.php
+================================================================================
+
+<?php
+/**
+ * Translatable for products.json data format
+ */
+class ProductTranslatable extends AbstractTranslatable {
+    /**
+     * {@inheritdoc}
+     */
+    protected function key_exists($lang, $key) {
+        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
+        return isset($this->data['language_slug']) && 
+               isset($this->data['language_slug'][$lang]) && 
+               isset($this->data['language_slug'][$lang][$key]);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function get_key($lang, $key) {
+        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
+        if ($this->key_exists($lang, $key)) {
+            return $this->data['language_slug'][$lang][$key];
+        }
+        
+        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllContent($lang) {
+        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
+            return $this->data['language_slug'][$lang];
+        }
+        
+        return [];
+    }
+} 
+
+
+================================================================================
+FILE: SegmentTranslatable.php
+PATH: pi_website_take5\src\translation\SegmentTranslatable.php
+================================================================================
+
+<?php
+/**
+ * Translatable for segments.json data format
+ */
+class SegmentTranslatable extends AbstractTranslatable {
+    /**
+     * {@inheritdoc}
+     */
+    protected function key_exists($lang, $key) {
+        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
+        return isset($this->data['language_slug']) && 
+               isset($this->data['language_slug'][$lang]) && 
+               isset($this->data['language_slug'][$lang][$key]);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function get_key($lang, $key) {
+        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
+        if ($this->key_exists($lang, $key)) {
+            return $this->data['language_slug'][$lang][$key];
+        }
+        
+        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllContent($lang) {
+        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
+            return $this->data['language_slug'][$lang];
+        }
+        
+        return [];
+    }
+} 
+
+
+================================================================================
+FILE: TeamMemberEnhanced.php
+PATH: pi_website_take5\src\translation\TeamMemberEnhanced.php
+================================================================================
+
+<?php
+/**
+ * Enhanced Translatable for team members with product roles
+ */
+class TeamMemberEnhanced extends AbstractTranslatable {
+    /**
+     * Team member data
+     * @var array
+     */
+    protected $memberData;
+    
+    /**
+     * Product roles data for the team member
+     * @var array
+     */
+    protected $productRoles = [];
+    
+    /**
+     * Constructor
+     * 
+     * @param array $memberData Team member data
+     * @param array $productRoles Product roles for the team member
+     */
+    public function __construct($memberData, $productRoles = []) {
+        parent::__construct($memberData);
+        $this->memberData = $memberData;
+        $this->productRoles = $productRoles;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function key_exists($lang, $key) {
+        // Check if the key is 'product_roles'
+        if ($key === 'product_roles') {
+            return true;
+        }
+        
+        // First check in main member data
+        if (isset($this->memberData[$key])) {
+            // Direct key for non-translatable content
+            return true;
+        } else if (isset($this->memberData['language_slug']) && 
+            isset($this->memberData['language_slug'][$lang]) && 
+            isset($this->memberData['language_slug'][$lang][$key])) {
+            // Translated key
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function get_key($lang, $key) {
+        // Special handling for product_roles
+        if ($key === 'product_roles') {
+            return $this->productRoles;
+        }
+        
+        // Special handling for position when display_product_roles is true
+        if ($key === 'position' && isset($this->memberData['display_product_roles']) && $this->memberData['display_product_roles'] === true) {
+            $positionRoles = [];
+            
+            // Process each product role
+            foreach ($this->productRoles as $role) {
+                if (isset($role['language_slug'][$lang]['title'])) {
+                    $roleData = [
+                        'segment_slug' => $role['segment_slug'] ?? null,
+                        'product_slug' => $role['product_slug'] ?? null,
+                        'title' => $role['language_slug'][$lang]['title']
+                    ];
+                    
+                    // Try to get product name from product_data (first approach)
+                    $productName = null;
+                    if (isset($role['product_data']) && 
+                        isset($role['product_data']['language_slug']) && 
+                        isset($role['product_data']['language_slug'][$lang]) && 
+                        isset($role['product_data']['language_slug'][$lang]['name'])) {
+                        $productName = $role['product_data']['language_slug'][$lang]['name'];
+                    } 
+                    // If first approach fails, try to find it through the productRoles array
+                    else {
+                        // Look through all product roles to find products with matching product_slug
+                        foreach ($this->productRoles as $searchRole) {
+                            if (isset($searchRole['product_data']) && 
+                                isset($searchRole['product_slug']) && 
+                                $searchRole['product_slug'] === $role['product_slug']) {
+                                if (isset($searchRole['product_data']['language_slug'][$lang]['name'])) {
+                                    $productName = $searchRole['product_data']['language_slug'][$lang]['name'];
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Manually fetch product from TranslatableFactory if still not found
+                    if ($productName === null && isset($role['product_slug']) && $role['product_slug'] !== null) {
+                        try {
+                            $productTranslatable = TranslatableFactory::product($role['product_slug']);
+                            if ($productTranslatable !== null) {
+                                $productName = $productTranslatable->getContent($lang, 'name', null);
+                            }
+                        } catch (Exception $e) {
+                            // Silently fail and continue
+                        }
+                    }
+                    
+                    if ($productName !== null) {
+                        $roleData['product_name'] = $productName;
+                    }
+                    
+                    $positionRoles[] = $roleData;
+                }
+            }
+            
+            // Return the array of roles if not empty, otherwise fall back to regular position
+            if (!empty($positionRoles)) {
+                return $positionRoles;
+            }
+        }
+        
+        // Main data handling
+        if (isset($this->memberData[$key])) {
+            // Direct key for non-translatable content
+            return $this->memberData[$key];
+        } else if (isset($this->memberData['language_slug']) && 
+            isset($this->memberData['language_slug'][$lang]) && 
+            isset($this->memberData['language_slug'][$lang][$key])) {
+            // Translated key
+            return $this->memberData['language_slug'][$lang][$key];
+        }
+        
+        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllContent($lang) {
+        $result = [];
+        
+        // Include all direct properties
+        foreach ($this->memberData as $key => $value) {
+            if ($key !== 'language_slug') {
+                $result[$key] = $value;
+            }
+        }
+        
+        // Include all language-specific properties
+        if (isset($this->memberData['language_slug']) && isset($this->memberData['language_slug'][$lang])) {
+            foreach ($this->memberData['language_slug'][$lang] as $key => $value) {
+                // Special handling for 'position' when display_product_roles is true
+                if ($key === 'position' && isset($this->memberData['display_product_roles']) && 
+                    $this->memberData['display_product_roles'] === true) {
+                    // Use get_key to handle the position transformation
+                    $result[$key] = $this->get_key($lang, 'position');
+                } else {
+                    $result[$key] = $value;
+                }
+            }
+        }
+        
+        // Add product roles
+        $result['product_roles'] = $this->productRoles;
+        
+        return $result;
+    }
+    
+    /**
+     * Get all product roles for the team member
+     * 
+     * @param string $lang Language code
+     * @return array Array of product roles with segment, product, and title information
+     */
+    public function getProductRoles($lang) {
+        return $this->productRoles;
+    }
+} 
+
+
+================================================================================
+FILE: TeamTranslatable.php
+PATH: pi_website_take5\src\translation\TeamTranslatable.php
+================================================================================
+
+<?php
+/**
+ * Translatable for team.json data format
+ */
+class TeamTranslatable extends AbstractTranslatable {
+    /**
+     * {@inheritdoc}
+     */
+    protected function key_exists($lang, $key) {
+        // Structure: { "name": "X", "position": "Y", ... }
+        if (isset($this->data[$key])) {
+            // Direct key for non-translatable content
+            return true;
+        } else if (isset($this->data['language_slug']) && 
+            isset($this->data['language_slug'][$lang]) && 
+            isset($this->data['language_slug'][$lang][$key])) {
+            // Translated key
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    protected function get_key($lang, $key) {
+        // Structure: { "name": "X", "position": "Y", ... }
+        if (isset($this->data[$key])) {
+            // Direct key for non-translatable content
+            return $this->data[$key];
+        } else if (isset($this->data['language_slug']) && 
+            isset($this->data['language_slug'][$lang]) && 
+            isset($this->data['language_slug'][$lang][$key])) {
+            // Translated key
+            return $this->data['language_slug'][$lang][$key];
+        }
+        
+        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getAllContent($lang) {
+        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
+            $result = $this->data['language_slug'][$lang];
+            
+            // Merge direct properties (not language dependent)
+            foreach ($this->data as $key => $value) {
+                if ($key !== 'language_slug') {
+                    $result[$key] = $value;
+                }
+            }
+            
+            return $result;
+        }
+        
+        // Return just the direct properties if no language data
+        $result = [];
+        foreach ($this->data as $key => $value) {
+            if ($key !== 'language_slug') {
+                $result[$key] = $value;
+            }
+        }
+        
+        return $result;
+    }
+} 
+
+
+================================================================================
+FILE: TranslatableFactory.php
+PATH: pi_website_take5\src\translation\TranslatableFactory.php
+================================================================================
+
+<?php
+/**
+ * Factory for creating translatable objects with automatic data loading
+ */
+class TranslatableFactory {
+    /**
+     * Debug flag - set to true to enable debug output
+     */
+    public static $debug = false;
+    
+    /**
+     * Loaded data cache
+     */
+    private static $dataCache = [];
+    
+    /**
+     * Flag to force data refresh on next access
+     */
+    private static $refreshDataFlag = false;
+    
+    /**
+     * Initialize the factory and preload commonly used data
+     * 
+     * @param array $preloadFiles Array of file names to preload
+     */
+    public static function initialize($preloadFiles = ['general', 'pages']) {
+        foreach ($preloadFiles as $file) {
+            self::loadDataInternal($file);
+        }
+        if (self::$debug) error_log("TranslatableFactory: Initialized with preloaded files: " . implode(', ', $preloadFiles));
+    }
+    
+    /**
+     * Flag all data to be refreshed on next access
+     */
+    public static function refreshData() {
+        self::$dataCache = [];
+        self::$refreshDataFlag = true;
+        if (self::$debug) error_log("TranslatableFactory: Data refresh requested");
+    }
+    
+    /**
+     * Internal method to load JSON data from file with improved error handling
+     * 
+     * @param string $file The name of the JSON file without extension
+     * @param bool $forceRefresh Force refresh from file even if cached
+     * @return array The decoded JSON data or empty array on error
+     */
+    private static function loadDataInternal($file, $forceRefresh = false) {
+        // Check if data is already cached in memory and refresh not forced
+        if (!$forceRefresh && !self::$refreshDataFlag && isset(self::$dataCache[$file])) {
+            if (self::$debug) error_log("TranslatableFactory: Using cached data for $file");
+            return self::$dataCache[$file];
+        }
+        
+        $jsonFile = "data/{$file}.json";
+        
+        // Check if file exists
+        if (!file_exists($jsonFile)) {
+            if (self::$debug) error_log("TranslatableFactory: JSON file not found: {$jsonFile}");
+            self::$dataCache[$file] = [];
+            return [];
+        }
+        
+        // Get file contents
+        $jsonContent = file_get_contents($jsonFile);
+        if ($jsonContent === false) {
+            if (self::$debug) error_log("TranslatableFactory: Could not read JSON file: {$jsonFile}");
+            self::$dataCache[$file] = [];
+            return [];
+        }
+        
+        // Decode JSON
+        $data = json_decode($jsonContent, true);
+        
+        // Check for JSON decode errors
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            if (self::$debug) error_log("TranslatableFactory: JSON decode error for file {$jsonFile}: " . json_last_error_msg());
+            self::$dataCache[$file] = [];
+            return [];
+        }
+        
+        // Cache the data
+        self::$dataCache[$file] = $data;
+        
+        if (self::$debug) error_log("TranslatableFactory: Successfully loaded data from {$jsonFile}");
+        
+        // Reset refresh flag after successful load
+        self::$refreshDataFlag = false;
+        
+        // Return data
+        return $data;
+    }
+    
+    /**
+     * Public method to get data - for backwards compatibility
+     * 
+     * @param string $file The name of the JSON file without extension
+     * @param bool $forceRefresh Force refresh from file
+     * @return array The decoded JSON data
+     * @deprecated Use createFromFile instead for translations
+     */
+    public static function loadData($file, $forceRefresh = false) {
+        return self::loadDataInternal($file, $forceRefresh);
+    }
+    
+    /**
+     * Get specific data item by key
+     * 
+     * @param string $file The name of the JSON file without extension
+     * @param string $key The key to retrieve
+     * @return array The data or empty array if not found
+     */
+    public static function getData($file, $key = null) {
+        $data = self::loadDataInternal($file);
+        
+        if ($key !== null) {
+            return isset($data[$key]) ? $data[$key] : [];
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * Create a translatable object for the given type and data
+     * 
+     * @param string $type The type of data ('general', 'page', 'product', 'segment', 'team')
+     * @param mixed $data The data containing translatable content or data key if string
+     * @param string|null $file Optional JSON file to load data from if $data is a string key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function create($type, $data = null, $file = null) {
+        // Handle array input for data when it should be a string key
+        if (is_array($data) && $file !== null) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for data parameter when file is specified");
+            // This means we already have the data, so we don't need to load it from a file
+            $file = null;
+        }
+        
+        // Auto-load data if needed
+        if ($data === null && $file !== null) {
+            // Load the entire file
+            $data = self::loadDataInternal($file);
+            if (self::$debug) error_log("TranslatableFactory: Auto-loaded entire file '$file'");
+        } else if (is_string($data) && $file !== null) {
+            // Load specific key from file
+            $allData = self::loadDataInternal($file);
+            $dataKey = $data; // Store the key name
+            if (isset($allData[$dataKey])) {
+                $data = $allData[$dataKey];
+                if (self::$debug) error_log("TranslatableFactory: Auto-loaded data for key '$dataKey' from file '$file'");
+            } else {
+                if (self::$debug) error_log("TranslatableFactory: Warning - Key '$dataKey' not found in file '$file'");
+                $data = [];
+            }
+        }
+        
+        if ($data === null || !is_array($data)) {
+            if (self::$debug) error_log("TranslatableFactory: Data is null or not an array, using empty array");
+            $data = [];
+        }
+        
+        $result = null;
+        
+        switch ($type) {
+            case 'general':
+                $result = new GeneralTranslatable($data);
+                if (self::$debug) error_log("TranslatableFactory: Created GeneralTranslatable for type: $type");
+                break;
+            case 'page':
+                $result = new PageTranslatable($data);
+                if (self::$debug) error_log("TranslatableFactory: Created PageTranslatable for type: $type");
+                break;
+            case 'product':
+                $result = new ProductTranslatable($data);
+                if (self::$debug) error_log("TranslatableFactory: Created ProductTranslatable for type: $type");
+                break;
+            case 'segment':
+                $result = new SegmentTranslatable($data);
+                if (self::$debug) error_log("TranslatableFactory: Created SegmentTranslatable for type: $type");
+                break;
+            case 'team':
+                $result = new TeamTranslatable($data);
+                if (self::$debug) error_log("TranslatableFactory: Created TeamTranslatable for type: $type");
+                break;
+            default:
+                // Default to general translatable for unknown types
+                $result = new GeneralTranslatable($data);
+                if (self::$debug) error_log("TranslatableFactory: Created default GeneralTranslatable for unknown type: $type");
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * Create a translatable directly from a data file and key
+     * 
+     * @param string $type The type of translatable
+     * @param string $file The data file name without extension
+     * @param string|null $key Optional key to access within the data file
+     * @return TranslatableInterface A translatable object
+     */
+    public static function createFromFile($type, $file, $key = null) {
+        if ($key !== null) {
+            if (self::$debug) error_log("TranslatableFactory: Creating $type from file $file with key $key");
+            return self::create($type, $key, $file);
+        } else {
+            if (self::$debug) error_log("TranslatableFactory: Creating $type from full file $file");
+            return self::create($type, null, $file);
+        }
+    }
+    
+    /**
+     * Get translatable for general content with automatic data loading
+     * 
+     * @param string $key Optional specific general content key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function general($key = null) {
+        if (is_array($key)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for key parameter, using first array key");
+            $key = array_key_first($key);
+        }
+        
+        return self::createFromFile('general', 'general', $key);
+    }
+    
+    /**
+     * Get translatable for page content with automatic data loading
+     * 
+     * @param string $pageKey The page key (home, about, etc.)
+     * @return TranslatableInterface A translatable object
+     */
+    public static function page($pageKey) {
+        if (is_array($pageKey)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for pageKey parameter, using first array key");
+            $pageKey = array_key_first($pageKey);
+        }
+        
+        return self::createFromFile('page', 'pages', $pageKey);
+    }
+    
+    /**
+     * Get translatable for product content with automatic data loading
+     * 
+     * @param string $productKey The product key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function product($productKey) {
+        if (is_array($productKey)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for productKey parameter, using first array key");
+            $productKey = array_key_first($productKey);
+        }
+        
+        // Load all products data
+        $allProducts = self::loadDataInternal('products');
+        $productData = null;
+        
+        // Search for the product in the nested structure
+        if (!empty($productKey) && is_array($allProducts)) {
+            foreach ($allProducts as $categorySlug => $categoryProducts) {
+                if (!is_array($categoryProducts)) continue;
+                
+                if (isset($categoryProducts[$productKey])) {
+                    $productData = $categoryProducts[$productKey];
+                    break;
+                }
+            }
+        }
+        
+        // If product was found, create a translatable from the data
+        if ($productData) {
+            return new ProductTranslatable($productData);
+        }
+        
+        // Fallback to old method (might not work due to nesting)
+        return self::createFromFile('product', 'products', $productKey);
+    }
+    
+    /**
+     * Get translatable for segment content with automatic data loading
+     * 
+     * @param string $segmentKey The segment key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function segment($segmentKey) {
+        if (is_array($segmentKey)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for segmentKey parameter, using first array key");
+            $segmentKey = array_key_first($segmentKey);
+        }
+        
+        return self::createFromFile('segment', 'segments', $segmentKey);
+    }
+    
+    /**
+     * Get translatable for team member content with automatic data loading
+     * 
+     * @param string $memberKey The team member key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function teamMember($memberKey) {
+        if (is_array($memberKey)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for memberKey parameter, using first array key");
+            $memberKey = array_key_first($memberKey);
+        }
+        
+        // Load all team data
+        $allTeam = self::loadDataInternal('team');
+        $memberData = null;
+        
+        // Search for the member in the nested team structure
+        if (!empty($memberKey) && is_array($allTeam)) {
+            foreach ($allTeam as $groupSlug => $groupMembers) {
+                if (!is_array($groupMembers)) continue;
+                
+                if (isset($groupMembers[$memberKey])) {
+                    $memberData = $groupMembers[$memberKey];
+                    break;
+                }
+            }
+        }
+        
+        // If member was found, create a translatable from the data
+        if ($memberData) {
+            return new TeamTranslatable($memberData);
+        }
+        
+        // Fallback to old method
+        return self::createFromFile('team', 'team', $memberKey);
+    }
+    
+    /**
+     * Get translatable for enhanced team member content with product roles
+     * 
+     * @param string $memberKey The team member key
+     * @return TranslatableInterface A translatable object
+     */
+    public static function teamMemberEnhanced($memberKey) {
+        if (is_array($memberKey)) {
+            if (self::$debug) error_log("TranslatableFactory: Received array for memberKey parameter, using first array key");
+            $memberKey = array_key_first($memberKey);
+        }
+        
+        // Load all team data
+        $allTeam = self::loadDataInternal('team');
+        $memberData = null;
+        
+        // Search for the member in the nested team structure
+        if (!empty($memberKey) && is_array($allTeam)) {
+            foreach ($allTeam as $groupSlug => $groupMembers) {
+                if (!is_array($groupMembers)) continue;
+                
+                foreach ($groupMembers as $member) {
+                    if (isset($member['name_slug']) && $member['name_slug'] === $memberKey) {
+                        $memberData = $member;
+                        break 2;
+                    }
+                }
+            }
+        }
+        
+        if ($memberData === null) {
+            if (self::$debug) error_log("TranslatableFactory: Team member with key '$memberKey' not found");
+            return new TeamMemberEnhanced([], []);
+        }
+        
+        // Load team_products data to get roles
+        $teamProducts = self::loadDataInternal('teams_products');
+        $productRoles = [];
+        
+        if (isset($teamProducts['team_products']) && is_array($teamProducts['team_products'])) {
+            foreach ($teamProducts['team_products'] as $role) {
+                if (isset($role['name_slug']) && $role['name_slug'] === $memberKey) {
+                    $productRoles[] = $role;
+                }
+            }
+        }
+        
+        // Get all product and segment data for reference
+        $products = self::loadDataInternal('products');
+        $segments = self::loadDataInternal('segments');
+        
+        // Enhance product roles with product and segment data
+        $enhancedRoles = [];
+        foreach ($productRoles as $role) {
+            $enhancedRole = $role;
+            
+            // Add product data if available
+            if (isset($role['product_slug']) && $role['product_slug'] !== null) {
+                $productFound = false;
+                
+                // Products are nested by segment, so we need to search differently
+                foreach ($products as $segmentSlug => $segmentProducts) {
+                    if (!is_array($segmentProducts)) continue;
+                    
+                    foreach ($segmentProducts as $productSlug => $product) {
+                        if ($productSlug === $role['product_slug']) {
+                            $enhancedRole['product_data'] = $product;
+                            $productFound = true;
+                            break 2;
+                        }
+                    }
+                }
+                
+                // If not found in nested structure, try flat search
+                if (!$productFound) {
+                    foreach ($products as $productKey => $product) {
+                        if (is_array($product) && isset($product['product_slug']) && $product['product_slug'] === $role['product_slug']) {
+                            $enhancedRole['product_data'] = $product;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // Add segment data if available
+            if (isset($role['segment_slug']) && $role['segment_slug'] !== null) {
+                foreach ($segments as $segment) {
+                    if (isset($segment['segment_slug']) && $segment['segment_slug'] === $role['segment_slug']) {
+                        $enhancedRole['segment_data'] = $segment;
+                        break;
+                    }
+                }
+            }
+            
+            $enhancedRoles[] = $enhancedRole;
+        }
+        
+        // Check if the member has display_product_roles flag
+        $displayProductRoles = isset($memberData['display_product_roles']) ? $memberData['display_product_roles'] : false;
+        
+        // If display_product_roles is false, we will still return the roles but they won't be displayed
+        $memberData['display_product_roles'] = $displayProductRoles;
+        
+        return new TeamMemberEnhanced($memberData, $enhancedRoles);
+    }
+    
+    /**
+     * Detect the type of data and create appropriate translatable
+     * 
+     * @param array $data The data to analyze
+     * @return TranslatableInterface A translatable object
+     */
+    public static function createFromData($data) {
+        if ($data === null || !is_array($data)) {
+            if (self::$debug) error_log("TranslatableFactory: Data is null or not an array, returning default GeneralTranslatable");
+            return new GeneralTranslatable([]);
+        }
+        
+        if (isset($data['page_slug'])) {
+            if (self::$debug) error_log("TranslatableFactory: Detected page_slug, creating PageTranslatable");
+            return new PageTranslatable($data);
+        } elseif (isset($data['product_slug'])) {
+            if (self::$debug) error_log("TranslatableFactory: Detected product_slug, creating ProductTranslatable");
+            return new ProductTranslatable($data);
+        } elseif (isset($data['segment_slug'])) {
+            if (self::$debug) error_log("TranslatableFactory: Detected segment_slug, creating SegmentTranslatable");
+            return new SegmentTranslatable($data);
+        } elseif (isset($data['term_slug'])) {
+            if (self::$debug) error_log("TranslatableFactory: Detected term_slug, creating GeneralTranslatable");
+            return new GeneralTranslatable($data);
+        } elseif (isset($data['name_slug'])) {
+            if (self::$debug) error_log("TranslatableFactory: Detected name_slug, creating TeamTranslatable");
+            return new TeamTranslatable($data);
+        }
+        
+        // Default fallback
+        if (self::$debug) error_log("TranslatableFactory: No identifiable slug found, returning default GeneralTranslatable");
+        return new GeneralTranslatable($data);
+    }
+    
+    /**
+     * Print debug message to browser
+     * 
+     * @param string $message The debug message
+     */
+    public static function debugToScreen($message) {
+        if (self::$debug) {
+            echo "<div style='background: #eee; padding: 5px; margin: 5px; border: 1px solid #ccc;'>";
+            echo "<strong>TranslatableFactory Debug:</strong> " . htmlspecialchars($message);
+            echo "</div>";
+        }
+    }
+    
+    /**
+     * Debug method to check if a key exists in general.json
+     * 
+     * @param string $key The key to check
+     * @return bool True if the key exists, false otherwise
+     */
+    public static function KeyExists($file, $key) {
+        $data = self::loadDataInternal($file);
+        return isset($data[$key]);
+    }
+} 
+
+
+================================================================================
+FILE: TranslatableInterface.php
+PATH: pi_website_take5\src\translation\TranslatableInterface.php
+================================================================================
+
+<?php
+/**
+ * Interface for translatable content from JSON data
+ */
+interface TranslatableInterface {
+    /**
+     * Get specific translated content
+     * 
+     * @param string $lang Language code
+     * @param string $key Content key
+     * @param string $default Default value if content not found
+     * @return string Translated content
+     */
+    public function getContent($lang, $key, $default = '');
+    
+    /**
+     * Check if specific translated content exists
+     * 
+     * @param string $lang Language code
+     * @param string $key Content key
+     * @return bool True if content exists, false otherwise
+     */
+    public function hasContent($lang, $key);
+    
+    /**
+     * Get all translated content for a language
+     * 
+     * @param string $lang Language code
+     * @return array All translated content
+     */
+    public function getAllContent($lang);
+} 
+

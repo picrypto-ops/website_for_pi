@@ -22,6 +22,7 @@ import {
     HeroMenu
 } from './modules/components/navigation/index.js';
 import { CookieConsent } from './modules/components/cookie/index.js';
+import { ContactMap } from './modules/components/map/index.js';
 
 // Import graphics
 import { BackgroundWave } from './modules/graphics/index.js';
@@ -99,6 +100,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error('Error loading about-image-slider module:', error);
             });
         });
+    }
+    
+    // Initialize contact map if present
+    const mapContainer = document.getElementById('map');
+    if (mapContainer) {
+        const contactMap = new ContactMap(mapContainer, {
+            lat: parseFloat(mapContainer.dataset.lat) || undefined,
+            lng: parseFloat(mapContainer.dataset.lng) || undefined,
+            address: mapContainer.dataset.address || undefined
+        });
+        contactMap.init();
     }
 });
 

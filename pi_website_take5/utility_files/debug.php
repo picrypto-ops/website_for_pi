@@ -17,15 +17,15 @@ function exception_error_handler($severity, $message, $file, $line) {
 set_error_handler("exception_error_handler");
 
 // Include required files
-require_once 'includes/classes/translation/TranslatableInterface.php';
-require_once 'includes/classes/translation/AbstractTranslatable.php';
-require_once 'includes/classes/translation/GeneralTranslatable.php';
-require_once 'includes/classes/translation/PageTranslatable.php';
-require_once 'includes/classes/translation/ProductTranslatable.php';
-require_once 'includes/classes/translation/SegmentTranslatable.php';
-require_once 'includes/classes/translation/TeamTranslatable.php';
-require_once 'includes/classes/translation/TeamMemberEnhanced.php';
-require_once 'includes/classes/translation/TranslatableFactory.php';
+require_once 'src/utility/classes/translation/TranslatableInterface.php';
+require_once 'src/utility/classes/translation/AbstractTranslatable.php';
+require_once 'src/utility/classes/translation/GeneralTranslatable.php';
+require_once 'src/utility/classes/translation/PageTranslatable.php';
+require_once 'src/utility/classes/translation/ProductTranslatable.php';
+require_once 'src/utility/classes/translation/SegmentTranslatable.php';
+require_once 'src/utility/classes/translation/TeamTranslatable.php';
+require_once 'src/utility/classes/translation/TeamMemberEnhanced.php';
+require_once 'src/utility/classes/translation/TranslatableFactory.php';
 
 // Enable direct browser output for TranslatableFactory
 TranslatableFactory::$debug = true;

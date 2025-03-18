@@ -1,0 +1,22 @@
+@use 'sass:color';
+@use '../abstracts/variables' as vars;
+
+// Light Theme (default)
+$theme-light: (
+  'background': vars.$color-light,
+  'text': vars.$color-dark,
+  'primary': vars.$color-primary,
+  'secondary': vars.$color-secondary,
+  'border': rgba(vars.$color-dark, 0.1),
+  'shadow': rgba(vars.$color-dark, 0.1)
+);
+
+// Dark Theme
+$theme-dark: (
+  'background': vars.$color-dark,
+  'text': vars.$color-light,
+  'primary': color.adjust(vars.$color-primary, $lightness: 10%),
+  'secondary': color.adjust(vars.$color-secondary, $lightness: 10%),
+  'border': rgba(vars.$color-light, 0.1),
+  'shadow': rgba(vars.$color-light, 0.2)
+); 

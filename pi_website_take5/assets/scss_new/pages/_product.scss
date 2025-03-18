@@ -1,0 +1,292 @@
+@use 'sass:color';
+@use '../abstracts/variables' as vars;
+@use '../abstracts/mixins' as mix;
+
+// Main Product Page
+.product-page {
+  padding: vars.$spacing-xl 0;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-lg;
+    margin-bottom: vars.$spacing-xl;
+
+    @include mix.respond-to(md) {
+      flex-direction: column;
+      text-align: center;
+      gap: vars.$spacing-md;
+    }
+  }
+
+  &__logo {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: vars.$border-radius-lg;
+    overflow: hidden;
+    box-shadow: vars.$shadow-sm;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @include mix.respond-to(md) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &__title {
+    flex: 1;
+
+    h1 {
+      @include mix.font-size(2.5rem, 1.2);
+      color: vars.$color-dark;
+      margin-bottom: vars.$spacing-sm;
+    }
+  }
+
+  &__slogan {
+    @include mix.font-size(1.25rem);
+    color: vars.$color-primary;
+  }
+
+  &__content {
+    margin-bottom: vars.$spacing-xl;
+  }
+
+  &__description {
+    @include mix.font-size(1.1rem);
+    color: vars.$color-secondary;
+    line-height: 1.8;
+    margin-bottom: vars.$spacing-lg;
+
+    &-paragraph {
+      margin-bottom: vars.$spacing-md;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__image {
+    margin: vars.$spacing-xl 0;
+    text-align: center;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: vars.$border-radius-lg;
+      box-shadow: vars.$shadow-md;
+    }
+  }
+
+  &__image-caption {
+    @include mix.font-size(0.9rem);
+    color: vars.$color-secondary;
+    margin-top: vars.$spacing-sm;
+    font-style: italic;
+  }
+
+  &__team {
+    margin-top: vars.$spacing-xl;
+    padding-top: vars.$spacing-xl;
+    border-top: 1px solid rgba(vars.$color-primary, 0.1);
+
+    h2 {
+      @include mix.font-size(2rem, 1.2);
+      color: vars.$color-dark;
+      margin-bottom: vars.$spacing-lg;
+      text-align: center;
+    }
+  }
+
+  &__team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: vars.$spacing-lg;
+  }
+
+  &__team-card {
+    display: flex;
+    flex-direction: column;
+    background-color: vars.$color-light;
+    border-radius: vars.$border-radius-lg;
+    overflow: hidden;
+    box-shadow: vars.$shadow-sm;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: vars.$shadow-md;
+    }
+  }
+
+  &__team-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  &__team-info {
+    padding: vars.$spacing-md;
+  }
+
+  &__team-name {
+    @include mix.font-size(1.25rem);
+    color: vars.$color-dark;
+    margin-bottom: vars.$spacing-xs;
+  }
+
+  &__team-position {
+    @include mix.font-size(1rem);
+    color: vars.$color-primary;
+    margin-bottom: vars.$spacing-xs;
+  }
+
+  &__team-bio {
+    @include mix.font-size(0.9rem);
+    color: vars.$color-secondary;
+    line-height: 1.6;
+  }
+
+  &__back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: vars.$spacing-sm;
+    color: vars.$color-primary;
+    text-decoration: none;
+    @include mix.font-size(1.1rem);
+    margin-top: vars.$spacing-xl;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: vars.$color-primary-dark;
+    }
+  }
+
+  &__back-arrow {
+    @include mix.font-size(1.2rem);
+  }
+
+  // RTL Support
+  @include mix.rtl {
+    &__back-arrow {
+      transform: scaleX(-1);
+    }
+  }
+
+  // Responsive Design
+  @include mix.respond-to(md) {
+    &__header {
+      h1 {
+        @include mix.font-size(2rem);
+      }
+
+      .slogan {
+        @include mix.font-size(1.1rem);
+      }
+    }
+
+    &__description {
+      @include mix.font-size(1rem);
+    }
+
+    &__team {
+      h2 {
+        @include mix.font-size(1.75rem);
+      }
+    }
+  }
+
+  @include mix.respond-to(sm) {
+    &__header {
+      h1 {
+        @include mix.font-size(1.75rem);
+      }
+    }
+
+    &__team-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Product Preview Components
+.product-card {
+  background-color: vars.$color-light;
+  border-radius: vars.$border-radius;
+  overflow: hidden;
+  @include mix.box-shadow;
+  @include mix.transition(transform);
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  &__content {
+    padding: vars.$spacing-lg;
+    @include mix.flex(row, flex-start, center);
+    gap: vars.$spacing-md;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: vars.$border-radius;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__title {
+    @include mix.font-size(1.25rem);
+    color: vars.$color-dark;
+    margin-bottom: vars.$spacing-xs;
+  }
+
+  &__description {
+    @include mix.font-size(0.9rem);
+    color: vars.$color-secondary;
+    line-height: 1.6;
+  }
+}
+
+// Product Grid
+.product-grid {
+  @include mix.grid(1, vars.$spacing-lg);
+
+  @include mix.respond-to(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: vars.$breakpoint-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+} 

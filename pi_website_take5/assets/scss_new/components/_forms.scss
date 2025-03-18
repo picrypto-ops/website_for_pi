@@ -1,0 +1,222 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use "sass:math";
+
+.form {
+  &__group {
+    margin-bottom: $spacing-md;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: $font-weight-medium;
+    color: $color-dark;
+  }
+
+  &__control {
+    display: block;
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $color-dark;
+    background-color: $color-light;
+    background-clip: padding-box;
+    border: 1px solid rgba($color-dark, 0.125);
+    border-radius: $border-radius;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:focus {
+      color: $color-dark;
+      background-color: $color-light;
+      border-color: $color-primary;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+    }
+
+    &::placeholder {
+      color: $color-secondary;
+      opacity: 0.65;
+    }
+
+    &:disabled,
+    &[readonly] {
+      background-color: rgba($color-dark, 0.05);
+      opacity: 0.65;
+    }
+  }
+
+  &__textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  &__select {
+    padding-right: $spacing-xl;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right $spacing-sm center;
+    background-size: 16px 12px;
+    appearance: none;
+
+    &:focus {
+      border-color: $color-primary;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+    }
+
+    &[multiple],
+    &[size]:not([size="1"]) {
+      height: auto;
+      padding-right: $spacing-sm;
+      background-image: none;
+    }
+  }
+
+  &__checkbox,
+  &__radio {
+    position: relative;
+    display: block;
+    min-height: $font-size-base * $line-height-base;
+    padding-left: $spacing-xl;
+    margin-bottom: $spacing-sm;
+
+    &-label {
+      position: relative;
+      margin-bottom: 0;
+      vertical-align: top;
+    }
+
+    &-input {
+      position: absolute;
+      margin-top: calc(($font-size-base * $line-height-base - $font-size-base) / 2);
+      margin-left: -$spacing-xl;
+      opacity: 0;
+      z-index: 3;
+
+      &:checked ~ .form__check-label {
+        color: $color-primary;
+      }
+
+      &:focus ~ .form__check-label {
+        color: $color-primary;
+      }
+
+      &:disabled ~ .form__check-label {
+        color: $color-secondary;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__check {
+    &-label {
+      position: relative;
+      display: block;
+      min-height: $font-size-base * $line-height-base;
+      padding-left: $spacing-sm;
+      margin-bottom: 0;
+      color: $color-dark;
+      cursor: pointer;
+      user-select: none;
+
+      &::before {
+        position: absolute;
+        top: calc(($font-size-base * $line-height-base - 1rem) / 2);
+        left: 0;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        pointer-events: none;
+        content: "";
+        background-color: $color-light;
+        border: 1px solid rgba($color-dark, 0.25);
+        border-radius: $border-radius-sm;
+      }
+
+      &::after {
+        position: absolute;
+        top: calc(($font-size-base * $line-height-base - 1rem) / 2);
+        left: 0;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        content: "";
+        background: no-repeat 50% / 50% 50%;
+      }
+    }
+  }
+
+  &__checkbox {
+    .form__check-label::after {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+      background-size: 10px 10px;
+      opacity: 0;
+      transition: opacity 0.15s ease-in-out;
+    }
+
+    .form__checkbox-input:checked ~ .form__check-label::after {
+      opacity: 1;
+    }
+  }
+
+  &__radio {
+    .form__check-label::before {
+      border-radius: 50%;
+    }
+
+    .form__check-label::after {
+      position: absolute;
+      top: calc(($font-size-base * $line-height-base - 0.5rem) / 2);
+      left: 0.25rem;
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: $color-primary;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.15s ease-in-out;
+    }
+
+    .form__radio-input:checked ~ .form__check-label::after {
+      opacity: 1;
+    }
+  }
+
+  &__help {
+    display: block;
+    margin-top: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $color-secondary;
+  }
+
+  &__invalid {
+    .form__control {
+      border-color: $color-danger;
+      padding-right: calc(1.5em + 0.75rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linecap='round' d='M6 3.75v2.5'/%3e%3ccircle cx='6' cy='8.25' r='.75'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .form__help {
+      color: $color-danger;
+    }
+  }
+
+  &__valid {
+    .form__control {
+      border-color: $color-success;
+      padding-right: calc(1.5em + 0.75rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .form__help {
+      color: $color-success;
+    }
+  }
+} 

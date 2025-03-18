@@ -1,6 +1,6 @@
 <?php
-require_once 'config.php';
-require_once 'includes/functions.php';
+require_once 'src/config/config.php';
+require_once 'src/utility/functions.php';
 
 header("Content-Type: application/xml; charset=utf-8");
 

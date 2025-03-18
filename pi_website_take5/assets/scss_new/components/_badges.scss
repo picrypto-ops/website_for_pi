@@ -1,0 +1,75 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 75%;
+  font-weight: $font-weight-bold;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: $border-radius;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:empty {
+    display: none;
+  }
+
+  // Badge variants
+  &--primary {
+    color: $color-light;
+    background-color: $color-primary;
+  }
+
+  &--secondary {
+    color: $color-light;
+    background-color: $color-secondary;
+  }
+
+  &--success {
+    color: $color-light;
+    background-color: $color-success;
+  }
+
+  &--danger {
+    color: $color-light;
+    background-color: $color-danger;
+  }
+
+  &--warning {
+    color: $color-dark;
+    background-color: $color-warning;
+  }
+
+  &--info {
+    color: $color-light;
+    background-color: $color-info;
+  }
+
+  &--light {
+    color: $color-dark;
+    background-color: $color-light;
+  }
+
+  &--dark {
+    color: $color-light;
+    background-color: $color-dark;
+  }
+
+  // Pill badges
+  &--pill {
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+  }
+
+  // Badge links
+  &[href] {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+} 

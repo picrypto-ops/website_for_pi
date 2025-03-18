@@ -1,0 +1,87 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use "sass:color";
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-lg;
+  font-size: 1rem;
+  font-weight: $font-weight-bold;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  transition: $transition-base;
+  background-color: $color-primary;
+  color: $color-light;
+
+  &:hover {
+    background-color: color.adjust($color-primary, $lightness: -10%);
+    color: $color-light;
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  // Button variants
+  &--secondary {
+    background-color: $color-secondary;
+    color: $color-light;
+
+    &:hover {
+      background-color: color.adjust($color-secondary, $lightness: -10%);
+      color: $color-light;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border-color: $color-primary;
+    color: $color-primary;
+
+    &:hover {
+      background-color: $color-primary;
+      color: $color-light;
+    }
+  }
+
+  &--outline-secondary {
+    background-color: transparent;
+    border-color: $color-secondary;
+    color: $color-secondary;
+
+    &:hover {
+      background-color: $color-secondary;
+      color: $color-light;
+    }
+  }
+
+  &--lg {
+    padding: $spacing-md $spacing-xl;
+    font-size: 1.25rem;
+  }
+
+  &--sm {
+    padding: $spacing-xs $spacing-md;
+    font-size: 0.875rem;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+} 

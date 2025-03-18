@@ -1,0 +1,144 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: $z-index-modal;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+
+  &-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color-dark, 0.5);
+    z-index: $z-index-modal-backdrop;
+  }
+
+  &-dialog {
+    position: relative;
+    width: 100%;
+    margin: $spacing-md;
+    pointer-events: none;
+
+    @include media-breakpoint-up(sm) {
+      max-width: 500px;
+      margin: $spacing-xl auto;
+    }
+
+    @include media-breakpoint-up(md) {
+      max-width: 700px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-width: 900px;
+    }
+  }
+
+  &-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: $color-light;
+    background-clip: padding-box;
+    border: 1px solid rgba($color-dark, 0.2);
+    border-radius: $border-radius-lg;
+    outline: 0;
+    @include box-shadow($shadow-lg);
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md;
+    border-bottom: 1px solid rgba($color-dark, 0.125);
+  }
+
+  &-title {
+    margin: 0;
+    line-height: 1.5;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+  }
+
+  &-close {
+    padding: $spacing-md;
+    margin: (-$spacing-md) (-$spacing-md) (-$spacing-md) auto;
+    background-color: transparent;
+    border: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    color: $color-secondary;
+    text-shadow: 0 1px 0 $color-light;
+    opacity: 0.5;
+    transition: opacity 0.15s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-dark;
+      text-decoration: none;
+      opacity: 0.75;
+    }
+
+    &:focus {
+      outline: 0;
+      opacity: 0.75;
+    }
+  }
+
+  &-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: $spacing-md;
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: $spacing-md;
+    border-top: 1px solid rgba($color-dark, 0.125);
+  }
+
+  &-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll;
+  }
+
+  &.show {
+    display: block;
+  }
+
+  // Modal sizes
+  &--sm .modal__dialog {
+    @include media-breakpoint-up(sm) {
+      max-width: 300px;
+    }
+  }
+
+  &--lg .modal__dialog {
+    @include media-breakpoint-up(lg) {
+      max-width: 800px;
+    }
+  }
+
+  &--xl .modal__dialog {
+    @include media-breakpoint-up(xl) {
+      max-width: 1140px;
+    }
+  }
+} 

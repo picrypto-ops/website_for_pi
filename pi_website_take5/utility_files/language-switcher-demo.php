@@ -7,9 +7,9 @@
  */
 
 // Include required files
-require_once 'config.php';
-require_once 'includes/functions.php';
-require_once 'includes/language.php';
+require_once 'src/config/config.php';
+require_once 'src/utility/functions.php';
+require_once 'src/utility/language.php';
 
 // Get language from query parameter, default to English
 $lang = isset($_GET['lang']) && in_array($_GET['lang'], ['en', 'he']) ? $_GET['lang'] : 'en';
