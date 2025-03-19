@@ -173,23 +173,23 @@
             }
         },
         {
-            "name_slug":"moriel-cohen",
-            "photo": "assets/images/team/moriel_cohen.png",
+            "name_slug":"muriel-cohen",
+            "photo": "assets/images/team/muriel_cohen.png",
             "is_founder": false,
             "display_in_home_page": true,
             "display_product_roles": false,
             "language_slug": {
                 "en": {
-                    "name": "Moriel Cohen",
+                    "name": "Muriel Cohen",
                     "position": "Investor Relations",
-                    "short_bio": "Moriel .....",
-                    "bio": "Moriel...."
+                    "short_bio": "Muriel Cohen manages Investor Relations at PI Group, overseeing client onboarding and providing support to enhance investor satisfaction.",
+                    "bio": "Muriel Cohen, Investor Relations at PI Group. Responsible for client, onboarding, and relationship management, ensuring seamless investor integration and providing ongoing support to enhance client engagement and satisfaction."
                 },
                 "he": {
                     "name": "מוריאל כהן",
                     "position": "מנהלת קשרי לקוחות",
-                    "short_bio": "מוריאל....",
-                    "bio": "מוריאל...."
+                    "short_bio": "מוריאל כהן, מנהלת קשרי לקוחות בקבוצת PI, אחראית על ניהול קשרים עם לקוחות ושיפור תהליכי קשרים בין הלקוחות לבין הקבוצה.",
+                    "bio": "מוריאל כהן, מנהלת קשרי לקוחות בקבוצת PI, אחראית על ניהול קשרים עם לקוחות ושיפור תהליכי קשרים בין הלקוחות לבין הקבוצה."
                 }
             }
         },
@@ -331,8 +331,8 @@
                 "en": {
                     "name": "Eli Afek",
                     "position": "Trader",
-                    "short_bio": "Eli Afek is a Trader at PI Equity.",
-                    "bio": "Eli Afek is an Investment Analyst at PI Group."
+                    "short_bio": "Eli Afek is a senior trader at PI Equity with an established reputation in the Israeli equity market, where he leverages his extensive experience to navigate the unique characteristics of Israel's resilient economy.",
+                    "bio": "Eli Afek is a senior trader at PI Equity with years of experience in the Israeli market. He navigates Israel's unique economic landscape, characterized by strong fundamentals and resilience during market fluctuations. His approach leverages his deep market knowledge and strategic analysis of Israel's economic trends, which has contributed to his success in the field."
                 },
                 "he": {
                     "name": "אלי אפק",
@@ -352,14 +352,14 @@
                 "en": {
                     "name": "Daniel Cohen",
                     "position": "Trader",
-                    "short_bio": "Daniel Cohen, Trader at PI Group. Extensive experience in trading and investment analysis.",
-                    "bio": "Daniel Cohen, Trader at PI Group. Extensive experience in trading and investment analysis."
+                    "short_bio": "Daniel Cohen, A junior analyst at PI Group. specializing in cryptocurrency and blockchain technology analysis.",
+                    "bio": "Daniel Cohen is a junior crypto analyst, enthusiastic about exploring the evolving world of cryptocurrency and blockchain technology, developing skills in analyzing market trends and understanding the fundamentals of digital assets."
                 },
                 "he": {
                     "name": "דניאל כהן",
                     "position": " מסחר",
-                    "short_bio": "דניאל כהן,  מסחר בפאי גופר",
-                    "bio": "דניאל כהן,  מסחר בפאי גופר"
+                    "short_bio": "דניאל כהן, אנליסט זוטר בקבוצת PI, מתמקד בניתוח מטבעות קריפטוגרפיים וטכנולוגיית בלוקצ'יין.",
+                    "bio": "דניאל כהן הוא אנליסט קריפטו מתחיל, נלהב לחקור את העולם המתפתח של מטבעות קריפטוגרפיים וטכנולוגיית בלוקצ'יין, מפתח מיומנויות בניתוח מגמות שוק והבנת היסודות של נכסים דיגיטליים."
                 }
             }
         }

@@ -142,6 +142,34 @@
         }
       },
       "is_featured": true
+    },
+    "ayalon_pi_30_70_fund": {
+      "product_slug": "ayalon_pi_30_70_fund",
+      "asset_category": "asset_management",
+      "language_slug": {
+        "en": {
+          "name": "Ayalon-PI 30/70 Fund",
+          "slogan": "Balanced Growth with Stability",
+          "title": "Israeli Equity Fund",
+          "image_insertion_index": 1,
+          "description": [
+            "PI Group provides expert consulting services to the Ayalon PI 30/70 Portfolio Fund, combining 70% fixed income with 30% equity exposure to deliver balanced returns with reduced volatility.",
+            "Our consulting implements a disciplined approach focused on capital preservation while strategically capturing growth opportunities.",
+            "We aim to help the fund generate stable, consistent returns for investors seeking moderate risk in today's dynamic markets."
+          ]
+        },
+        "he": {
+          "name": "קרן אילון פאי 30/70",
+          "slogan": "תשואה מבוססת ביטחון",
+          "title": "קרן גידור מניות ישראלית",
+          "description": [
+            "קבוצת PI מספקת שירותי קווינג מומחים לקרן אילון פאי 30/70, שמשקיעה ב-70% נכסים קבועים וב-30% מניות, כדי לייצר תשואות מבוססות ביטחון בעלות מתחרטות ומטפלות בסיכונים.",
+            "השירות מבוסס על גישה מסוכנת ומתחרטת שמטפלת בסיכונים, בעוד שהוא מטפל בסיכונים ומטפל בסיכונים.",
+            "אנו רוצים לעזור לקרן לייצר תשואות עקביות ומבוססות ביטחון למשקיעים שחיפשים תשואה מושקעת בסיכונים בשוקים דינמיים שלעתים קרובות."
+          ]
+        }
+      },
+      "is_featured": true
     }
   }
 }

@@ -3753,7 +3753,8 @@ html[dir=rtl] .cookie-consent-banner__actions {
 }
 
 .product-description-paragraph {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
   line-height: 1.8;
   color: #444;
   margin-bottom: 1.5rem;

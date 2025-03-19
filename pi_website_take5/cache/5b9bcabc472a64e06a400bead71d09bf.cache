@@ -207,7 +207,7 @@
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?url=process-contact.php&page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=process-contact.php&page=home&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
         </div>
     </header>
     <main id="main-content">
@@ -223,7 +223,7 @@
         
         <!-- Language Switcher positioned at top left/right depending on language -->
         <div class="hero-language-switcher left-aligned">
-            <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
+            <a href="?url=process-contact.php&page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=process-contact.php&page=home&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
         
         <!-- Clean, minimal hero menu -->
         <div class="hero-menu right-aligned">
@@ -261,7 +261,7 @@
         </div>
         
         <div class="hero-content">
-            <h1>Unwavering Professionalism <br>Exceptional Results</h1>
+            <h1>Resolute Professionalism<br>Exceptional Results</h1>
             <p class="slogan"></p>
             <p class="wide-description content-with-html">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
                         <a href="#segment-asset_management" class="cta-button">
@@ -286,7 +286,7 @@
         <div class="container">
             <h2>Asset Management</h2>
             <div class="segment-section-description">
-                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver exceptional risk adjusted returns, and to date, none of our funds have experienced a losing year. PI has always invested significantly in the funds we manage for our partners.            </div>
+                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver exceptional risk adjusted returns, and to date, none of our funds have experienced a losing year.<br><br>PI has always invested significantly in the funds we manage for our partners.            </div>
 
             <h3>Our Products</h3>
             <div class="product-grid">
@@ -325,6 +325,18 @@
                             </div>
                             <p class="slogan">
                                 Cultivating Israeli Business Gems                            </p>
+                        </a>
+                                            <a href="?page=product&id=ayalon_pi_30_70_fund&segment=asset_management&lang=en" class="product-card">
+                            <div class="product-content">
+                                <div class="product-icon">
+                                                                        <img src="assets/images/asset_management/ayalon_pi_30_70_fund/logo_large.svg" alt="Ayalon-PI 30/70 Fund">
+                                </div>
+                                <div class="product-text">
+                                    <h3>Ayalon-PI 30/70 Fund</h3>
+                                </div>
+                            </div>
+                            <p class="slogan">
+                                Balanced Growth with Stability                            </p>
                         </a>
                                                 </div>
             
@@ -523,10 +535,10 @@
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=moriel-cohen&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=muriel-cohen&lang=en" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Moriel Cohen</h3>
+                                            <h3>Muriel Cohen</h3>
                                                                                             <p class="position">Investor Relations</p>
                                                                                         
 
