@@ -45,27 +45,6 @@
     ],
     "management": [
         {
-            "name_slug": "dan-rosenberg",
-            "photo": "assets/images/team/dan_rosenberg.png",
-            "is_founder": true,
-            "display_in_home_page": true,
-            "display_product_roles": true,
-            "language_slug": {
-                "en": {
-                    "name": "Dan Rosenberg",
-                    "position": "Founder",
-                    "short_bio": "Co-Founder and Director at PI PItuach Group, with over 20 years of experience in derivative trading and risk management in banks and investment firms.",
-                    "bio": "Co-Founder and Director at PI PItuach Group, which issues deposit-backed bonds on the Tel Aviv Stock Exchange.<br><br> Dan has over 20 years of experience in trading derivative instruments of FX and interest rates.<br>He has served as a senior trader at the PI SPC hedge fund since 2010 and previously held the position of senior interest rate trader at Bank Hapoalim."
-                },
-                "he": {
-                    "name": "דן רוזנברג",
-                    "position": "מייסד",
-                    "short_bio": "מייסד משותף ודירקטור בקבוצת פאי פיתוח מכשירים פיננסים בע\"מ.",
-                    "bio": "מייסד משותף ודירקטור בקבוצת פאי פיתוח מכשירים פיננסים בע\"מ, הכוללת את החברות פאי פיקדונות ומוצרים מובנים בע\"מ ופאי פלוס פיקדונות בע\"מ, חברות מדווחות המנפיקות איגוחי פיקדונות בבורסה בתל אביב. שימש כסוחר בכיר בקרן הגידור פאי SPC משנת 2010. מעל 20 שנות ניסיון במסחר במכשירים נגזרים ובעסקאות ריבית מורכבות, ובעל מומחיות ייחודית בתמחור מכשירים מורכבים ובניהול סיכונים במסגרתם. שימש כסוחר ריביות בכיר בחדר עסקאות בבנק הפועלים."
-                }
-            }
-        },
-        {
             "name_slug": "itai-ruschkewitz",
             "photo": "assets/images/team/itai_ruschkewitz.png",
             "is_founder": true,
@@ -76,7 +55,7 @@
                     "name": "Itay Ruschkewitz",
                     "position": "CEO and Co-Founder",
                     "short_bio": "CEO and Co-Founder of PI PItuach Group, a former partner at PwC Israel who brings his expertise as a Certified Public Accountant (CPA) to lead strategic financial initiatives.",
-                    "bio": "CEO and Co-Founder of PI PItuach Group, which issues deposit-backed bonds on the Tel Aviv Stock Exchange.<br><br> Owner and CEO of Complex, a financial consulting firm providing advisory services to a wide range of leading entities in the Israeli economy, including banks, insurance companies, and financial institutions. Represents Allianz Global Investors, the investment arm of Allianz, in the Israeli market. Previously served as a partner at PwC Israel.<br><br> Itai is a Certified Public Accountant (CPA) and licensed attorney, holding a master’s degree in financial mathematics."
+                    "bio": "<p>Itay Ruschkewitz co-founded and serves as CEO of PI PItuach Group. With over 20 years of experience in legal & accounting, he has established himself as a respected industry professional.</p> <p>He is the Owner and CEO of Complex, a financial consulting firm serving leading Israeli financial institutions, and represents Allianz Global Investors locally. Previously, Itay served as a partner at PwC Israel.</p> <p>Itay is a Certified Public Accountant (CPA) and licensed attorney, holding a master's degree in financial mathematics.</p>"
                 },
                 "he": {
                     "name": "איתי רושקביץ",
@@ -87,6 +66,27 @@
             }
         },        
         {
+            "name_slug": "dan-rosenberg",
+            "photo": "assets/images/team/dan_rosenberg.png",
+            "is_founder": true,
+            "display_in_home_page": true,
+            "display_product_roles": true,
+            "language_slug": {
+                "en": {
+                    "name": "Dan Rosenberg",
+                    "position": "Founder",
+                    "short_bio": "Dan Rosenberg co-founded PI PItuach Group in 2023, leveraging his extensive 20+ year career in foreign exchange (FX) and rates derivatives trading. His background includes significant expertise in trading and risk management across both banking institutions and investment firms.",
+                    "bio": "<p>Dan Rosenberg co-founded and serves as a Director at PI PItuach Group. With over 20 years of experience in trading derivative instruments specializing in foreign exchange and interest rates, he has established himself as an industry veteran.</p><p>Since 2010, Dan has worked as a senior trader at the PI SPC hedge fund. Prior to this role, he held the position of senior interest rate trader at Bank Hapoalim, further demonstrating his extensive background in financial markets and trading expertise.</P>"
+                },
+                "he": {
+                    "name": "דן רוזנברג",
+                    "position": "מייסד",
+                    "short_bio": "מייסד משותף ודירקטור בקבוצת פאי פיתוח מכשירים פיננסים בע\"מ.",
+                    "bio": "מייסד משותף ודירקטור בקבוצת פאי פיתוח מכשירים פיננסים בע\"מ, הכוללת את החברות פאי פיקדונות ומוצרים מובנים בע\"מ ופאי פלוס פיקדונות בע\"מ, חברות מדווחות המנפיקות איגוחי פיקדונות בבורסה בתל אביב. שימש כסוחר בכיר בקרן הגידור פאי SPC משנת 2010. מעל 20 שנות ניסיון במסחר במכשירים נגזרים ובעסקאות ריבית מורכבות, ובעל מומחיות ייחודית בתמחור מכשירים מורכבים ובניהול סיכונים במסגרתם. שימש כסוחר ריביות בכיר בחדר עסקאות בבנק הפועלים."
+                }
+            }
+        },
+        {
             "name_slug": "buky-katzman",
             "photo": "assets/images/team/buky_katzman.png",
             "is_founder": true,
@@ -96,8 +96,8 @@
                 "en": {
                     "name": "Baruch (Buky) Katzman",
                     "position": "Co-Founder",
-                    "short_bio": "A renowned civil and commercial law expert who serves as a Board Member and Head of Legal Regulation at Maccabi World Union. With over 20 years of experience, he transitioned from senior partnership at Herzog, Fox & Neeman to independent business ventures and strategic legal consulting for international companies and executives.",
-                    "bio": "A renowned expert in civil and commercial law who serves as a Board Member and Head of Legal Regulation at Maccabi World Union. With over 20 years of experience representing international and local companies, investment firms, and top executives. After a distinguished career as a senior partner at Herzog, Fox & Neeman, he embarked on an independent path combining business activities with legal consulting. He leverages his extensive network and deep legal-commercial understanding to engage in significant business ventures. He holds important public positions, including directorships in international legal organizations and sports committees. His contributions extend to lecturing at law faculties, providing legal commentary in media, and writing for professional journals."
+                    "short_bio": "A Co-Founder of Pi Select, with over 20 years of experience in civil and commercial law. He serves as a Board Member and Head of Legal Regulation at Maccabi World Union and was a senior partner at Herzog, Fox & Neeman.",
+                    "bio": "<p>Buky Katzman co-founded and serves as a Director at PI Select. With over 20 years of experience in civil and commercial law, he has established himself as a renowned legal expert.</p> <p>He serves as a Board Member and Head of Legal Regulation at Maccabi World Union and previously held the position of senior partner at Herzog, Fox & Neeman. Currently, he combines business activities with legal consulting for international and local companies, investment firms, and top executives.</p>p>Buky holds directorships in international legal organizations and sports committees, and is a frequent lecturer at law faculties.</p>"
                 },
                 "he": {
                     "name": "ברוך (בוקי) כצמן",
@@ -120,7 +120,7 @@
                     "name": "Shlomi Cohen",
                     "position": "Chief Financial Officer",
                     "short_bio": "Shlomi Cohen has 25 years of financial expertise, specializing in corporate finance and risk management.",
-                    "bio": "Shlomi Cohen has 25 years of experience in finance and accounting. He began his career in the mid-90s at PwC and has been with the PI Group since inception its in 1999. Currently, Shlomi serves as the CFO of all companies under the PI Group, where he is responsible for managing their financial operations and daily activities.<br> With his extensive experience and deep understanding of finance, Shlomi continues to lead the group towards growth and financial success."
+                    "bio": "<p>Shlomi Cohen has 25 years of experience in finance and accounting. He began his career in the mid-90s at PwC and has been with the PI Group since inception its in 1999. Currently, Shlomi serves as the CFO of all companies under the PI Group, where he is responsible for managing their financial operations and daily activities.</p><p>With his extensive experience and deep understanding of finance, Shlomi continues to lead the group towards growth and financial success.</p>"
                 },
                 "he": {
                     "name": "שלומי כהן",
@@ -141,7 +141,7 @@
                     "name": "Ronen Bitman",
                     "position": "Chief Technology Officer",
                     "short_bio": "Ronen Bitman brings 25 years of fintech and technology experience, specializing in developing advanced risk management systems.",
-                    "bio": "Ronen Bitman has 25 years of experience in software management and development in the fintech field. Ronen has been with PI Group since 2001. Currently, Ronen serves as the CTO of all companies under the PI Group, where he is responsible for the group's technological systems, architecture and developments. With his extensive experience and deep understanding of technology, Ronen continues to lead the group towards efficiency and innovation."
+                    "bio": "<p>Ronen Bitman has 25 years of experience in software management and development in the fintech field. Ronen has been with PI Group since 2001. Currently, Ronen serves as the CTO of all companies under the PI Group, where he is responsible for the group's technological systems, architecture and developments.</p><p>With his extensive experience and deep understanding of technology, Ronen continues to lead the group towards efficiency and innovation.</p>"
                 },
                 "he": {
                     "name": "רונן ביטמן",
@@ -162,7 +162,7 @@
                     "name": "Hagit Borohovitz",
                     "position": "Chief Legal Officer",
                     "short_bio": "Hagit Borohovitz brings over 10 years of legal expertise, specializing in investment fund operations and compliance management.",
-                    "bio": "Hagit Borohovitz has over 10 years of experience in law, specializing in the establishment and operation of investment funds. She has been with the PI Group since 2018, serving as a legal advisor and operations manager. Currently, she serves as the COO of PI PItuach Group, where she is responsible for overseeing operational processes, managing financial procedures, and ensuring regulatory compliance. With her extensive experience and deep understanding of legal and operational matters, she continues to lead the group towards operational efficiency and success."
+                    "bio": "<p>Hagit Borohovitz has over 10 years of experience in law, specializing in the establishment and operation of investment funds. She has been with the PI Group since 2018, serving as a legal advisor and operations manager. Currently, she serves as the COO of PI PItuach Group, where she is responsible for overseeing operational processes, managing financial procedures, and ensuring regulatory compliance.</p><p>With her extensive experience and deep understanding of legal and operational matters, she continues to lead the group towards operational efficiency and success.</p>"
                 },
                 "he": {
                     "name": "חגית בורוכוביץ",
@@ -203,8 +203,8 @@
                 "en": {
                     "name": "Marina Kazar",
                     "position": "Accounting and Payroll Manager",
-                    "short_bio": "Marina Kazar has over 35 years of experience in accounting and payroll management.",
-                    "bio": "Marina Kazar has over 35 years of experience in accounting and payroll management."
+                    "short_bio": "Marina Kazar has over 35 years of experience in accounting and payroll management. She manages the accounting and payroll operations for the group.",
+                    "bio": "Marina Kazar has over 35 years of experience in accounting and payroll management. She manages the accounting and payroll operations for the group."
                 },
                 "he": {
                     "name": "מרינה קאזר",
@@ -226,8 +226,8 @@
                 "en": {
                     "name": "Ronen Elgali",
                     "position": "Cheif Investment Analyst",
-                    "short_bio": "A seasoned financial expert with extensive experience in hedge fund management and equity research, Ronen serves as Chief Analyst Officer at PI Group after building successful research departments and managing funds at Sphera, Alpha, and Mor investment firms.",
-                    "bio": "Throughout his career, Ronen has gained significant expertise in hedge fund management, company analysis, and valuations, while holding senior positions in leading investment firms. His skills include in-depth analysis of financial reports, building financial models, and analyzing market trends for informed investment decisions. Ronen joined Sphera in its early days and worked there for 10 years, where he established and managed the research department, developed unique research approaches, and managed the small-cap equity fund. Later, At Alpha and Mor, he was involved in restructuring efforts that led to significant growth in assets under management.<br><br>Currently, at the PI Group, Ronen serves as the Chief Analyst Officer, where he analyzes and builds financial models for companies and provides professional investment advice."
+                    "short_bio": "A seasoned financial expert with extensive experience in hedge fund management and equity research, Ronen serves as Chief Investment Analyst Officer at PI Group after building successful research departments and managing funds at Sphera, Alpha, and Mor investment firms.",
+                    "bio": "<p>Ronen Elgali co-founded and serves as Chief Investment Analyst at PI Group. With over 20 years of experience in hedge fund management and company analysis, he has established himself as a respected investment professional.</p> <p>He previously worked at Sphera for 10 years where he established and managed the research department, and later at Alpha and Mor where he was involved in restructuring efforts that led to significant growth in assets under management.</p> <p>Ronen specializes in in-depth analysis of financial reports, building financial models, and analyzing market trends for informed investment decisions.</p>"
                 },
                 "he": {
                     "name": "רונן אלגלי",
@@ -248,7 +248,7 @@
                     "name": "Asaf Shaul",
                     "position": "Investment Analyst",
                     "short_bio": "An accomplished investment analyst and former Deputy CEO of Investments, Asaf brings his economics background and portfolio management expertise to deliver strategic financial analysis and investment guidance for companies at various growth stages.",
-                    "bio" : "Asaf is an experienced investment analyst with a bachelor's degree in economics and business administration as well as a portfolio management license. Throughout his career, he has held key positions in leading investment companies, including roles as Deputy CEO of Investments and Chief Investment Officer, gaining expertise in managing assets of significant scale. Currently, Asaf focuses on financial and strategic analysis of companies at various stages, conducts in-depth market research, and assesses growth potential. He guides investors in decision-making, prepares comprehensive reports with financial insights, and assists in developing investment strategies. His extensive experience and professional knowledge enable him to provide significant value in the field of investments and financial analysis."
+                    "bio" : "<p>Asaf Shaul serves as Investment Analyst at PI Group. With over 20 years of experience in investment management, he has established himself as a respected industry professional.</p> <p>He previously held key positions in leading investment companies, including roles as Deputy CEO of Investments and Chief Investment Officer, managing assets of significant scale. Currently, he focuses on financial and strategic analysis of companies at various stages.</p> <p>Asaf holds a bachelor's degree in economics and business administration as well as a portfolio management license.</p>"
                 },
                 "he": {
                     "name": "אסף שאול",
@@ -268,7 +268,7 @@
                 "en": {
                     "name": "Mor Katz Avrahami",
                     "position": "Analyst",
-                    "short_bio": "Mor Katz Avrahami is an analyst at PI PItuach group and a consultant at Complex, a financial consulting firm.",
+                    "short_bio": "Mor Katz Avrahami is an analyst at PI PItuach group.",
                     "bio": "Mor Katz Avrahami brings extensive expertise in financial consulting, specializing in regulatory compliance and complex financial process management. Mor has a deep understanding of payment systems, banking regulations, and international trade compliance, having advised numerous leading Israeli entities. With a strong background in finance and law, she continues to drive strategic financial planning and regulatory adherence in her role."
                 },
                 "he": {
@@ -289,7 +289,7 @@
                 "en": {
                     "name": "Darina Reznikov",
                     "position": "Director",
-                    "short_bio": "Darina Reznikov is a director at PI PItuach group and a manager at Complex, a financial consulting firm.",
+                    "short_bio": "Darina Reznikov is a director at PI PItuach group.",
                     "bio": "Darina Reznikov brings extensive expertise in financial consulting, specializing in strategic financial planning and complex transaction management. With a strong background in economic analysis and financial modeling, she advises leading Israeli entities on innovative financing solutions and regulatory compliance. Her experience spans roles at PwC and the Bank of Israel, and she continues to drive financial innovation and strategic growth in her current roles."
                 },
                 "he": {

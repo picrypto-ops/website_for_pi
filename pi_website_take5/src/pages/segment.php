@@ -55,11 +55,11 @@ $segmentTranslatable = TranslatableFactory::segment($segmentId);
                             </div>
                             <div class="product-text">
                                 <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
+                                <p class="slogan">
+                                    <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                                </p>
                             </div>
                         </div>
-                        <p class="slogan">
-                            <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
-                        </p>
                     </a>
                 <?php endforeach; ?>
             <?php endif; ?>

@@ -107,8 +107,8 @@ if (isset($_SESSION['contact_form_response'])) {
                         <!-- Address card -->
                         <div class="contact-card address">
                             <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_address_label', 'Address'); ?></h3>
+                            <div class="contact-info">
+                                <h3><?php echo TranslatableFactory::general()->getContent($lang, 'address', 'Address'); ?></h3>
                                 <p><?php echo $contactDetails['address'] ?? ''; ?></p>
                                 <?php if (!empty($contactDetails['zipcode'])): ?>
                                     <p><?php echo $contactTranslatable->getContent($lang, 'our_info_zipcode_label', 'Zipcode'); ?>: <?php echo $contactDetails['zipcode']; ?></p>
@@ -119,9 +119,12 @@ if (isset($_SESSION['contact_form_response'])) {
                         <!-- Phone card -->
                         <div class="contact-card phone">
                             <div class="icon"><i class="fa fa-phone"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_phone_label', 'Phone'); ?></h3>
-                                <p><a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone'] ?? ''); ?>"><?php echo $contactDetails['phone'] ?? ''; ?></a></p>
+                            <div class="contact-info">
+                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_phone_section_label', 'Phone'); ?></h3>
+                                <p>
+                                    <?php echo $contactTranslatable->getContent($lang, 'our_info_phone_label', 'Tel'); ?>:
+                                    <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone'] ?? ''); ?>"><?php echo $contactDetails['phone'] ?? ''; ?></a>
+                                </p>
                                 <?php if (!empty($contactDetails['fax'])): ?>
                                     <p><?php echo $contactTranslatable->getContent($lang, 'our_info_fax_label', 'Fax'); ?>: <?php echo $contactDetails['fax']; ?></p>
                                 <?php endif; ?>
@@ -131,8 +134,8 @@ if (isset($_SESSION['contact_form_response'])) {
                         <!-- Email card -->
                         <div class="contact-card email">
                             <div class="icon"><i class="fa fa-envelope"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_email_label', 'Email'); ?></h3>
+                            <div class="contact-info">
+                                <h3><?php echo TranslatableFactory::general()->getContent($lang, 'email', 'Email'); ?></h3>
                                 <p><a href="mailto:<?php echo $contactDetails['email'] ?? ''; ?>"><?php echo $contactDetails['email'] ?? ''; ?></a></p>
                             </div>
                         </div>
@@ -141,8 +144,8 @@ if (isset($_SESSION['contact_form_response'])) {
                         <?php if (!empty($contactDetails['website_link'])): ?>
                         <div class="contact-card website">
                             <div class="icon"><i class="fa fa-globe"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_website_label', 'Website'); ?></h3>
+                            <div class="contact-info">
+                                <h3><?php echo TranslatableFactory::general()->getContent($lang, 'website', 'Website'); ?></h3>
                                 <p><a href="<?php echo $contactDetails['website_link']; ?>" target="_blank"><?php echo $contactDetails['website_link']; ?></a></p>
                             </div>
                         </div>

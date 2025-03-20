@@ -11,7 +11,7 @@
           "image_insertion_index": 1,
           "description": [
             "PI PItuach specializes in creating, structuring, and distributing innovative financial products for a wide variety of financial institutions in Israel.",
-            "Established in 2023 by Itai Ruschkewitz , Dan Rosenberg, and PI, PI PItuach is at the forefront of financial engineering in the Israeli capital markets.",
+            "Established in 2023 by Itai Ruschkewitz, Dan Rosenberg, and PI. PI PItuach is at the forefront of financial engineering in the Israeli capital markets.",
             "The partners of PI PItuach have over 50 years of combined experience in complex financial engineering, deal-making, and regulatory know-how.",
             "The company operates through several subsidiaries, including PI Deposits and PI Plus, both of which are publicly traded entities on the Tel Aviv Stock Exchange.",
             "In the past year, PI Deposits successfully issued three series of bonds backed by deposits totalling 7.5 billion NIS."
@@ -37,7 +37,7 @@
           "image_insertion_index": 1,
           "description": [
             "For almost three decades, PI has been fortunate to participate in some of Israel's most promising investment opportunities — spanning private and public companies, managed funds, and real estate.",
-            "In partnership with our longtime friend and esteemed commercial lawyer, Buky Katzman, we have launched PI Select — a boutique platform designed to offer select foreign investors the opportunity to co-invest alongside us in high-potential Israeli ventures."
+            "In partnership with our longtime friend and esteemed commercial lawyer, Buky Katzman, we have launched PI Select — a boutique platform designed to offer selected foreign investors the opportunity to co-invest alongside us in high-potential Israeli ventures."
           ]
         },
         "he": {
@@ -72,31 +72,6 @@
     }
   },
   "asset_management": {
-    "pi_emf": {
-      "product_slug": "pi_emf",
-      "asset_category": "asset_management",
-      "language_slug": {
-        "en": {
-          "name": "PI EMF (Legacy)",
-          "slogan": "Mastering Market Discrepancies",
-          "title": "Absolute Return Macro Volatility Fund",
-          "image_insertion_index": 1,
-          "description": [
-            "The PI EMF fund was an absolute return macro volatility fund that capitalized on pricing discrepancies in currencies, interest rates, stocks, and other asset classes worldwide.",
-            "The fund employed sophisticated derivative strategies to exploit market inefficiencies and generate consistent returns for its investors.",
-            "<b>Throughout its 18-year operational history, PI EMF never experienced a losing year.</b>"
-          ]
-        },
-        "he": {
-          "name": "פאי EMF (בדימוס)",
-          "slogan": "שליטה בפערי שוק",
-          "title": "קרן תנודתיות מאקרו לתשואה מוחלטת",
-          "description": "קרן פאי EMF הייתה קרן תנודתיות מאקרו לתשואה מוחלטת שניצלה פערי מחירים במטבעות, שיעורי ריבית, מניות ונכסים אחרים ברחבי העולם. הקרן השתמשה באסטרטגיות נגזרות מתוחכמות כדי לנצל חוסר יעילות בשוק ולייצר תשואות עקביות למשקיעיה. לאורך 18 שנות פעילותה, פאי EMF מעולם לא חוותה שנה מפסידה."
-        }
-      },
-      "team_group_slug": null,
-      "is_featured": false
-    },
     "pi_global": {
       "product_slug": "pi_global",
       "asset_category": "asset_management",
@@ -170,6 +145,31 @@
         }
       },
       "is_featured": true
+    },
+    "pi_emf": {
+      "product_slug": "pi_emf",
+      "asset_category": "asset_management",
+      "language_slug": {
+        "en": {
+          "name": "PI EMF (Legacy)",
+          "slogan": "Mastering Market Discrepancies",
+          "title": "Absolute Return Macro Volatility Fund",
+          "image_insertion_index": 1,
+          "description": [
+            "The PI EMF fund was an absolute return macro volatility fund that capitalized on pricing discrepancies in currencies, interest rates, stocks, and other asset classes worldwide.",
+            "The fund employed sophisticated derivative strategies to exploit market inefficiencies and generate consistent returns for its investors.",
+            "<b>Throughout its 18-year operational history, PI EMF never experienced a losing year.</b>"
+          ]
+        },
+        "he": {
+          "name": "פאי EMF (בדימוס)",
+          "slogan": "שליטה בפערי שוק",
+          "title": "קרן תנודתיות מאקרו לתשואה מוחלטת",
+          "description": "קרן פאי EMF הייתה קרן תנודתיות מאקרו לתשואה מוחלטת שניצלה פערי מחירים במטבעות, שיעורי ריבית, מניות ונכסים אחרים ברחבי העולם. הקרן השתמשה באסטרטגיות נגזרות מתוחכמות כדי לנצל חוסר יעילות בשוק ולייצר תשואות עקביות למשקיעיה. לאורך 18 שנות פעילותה, פאי EMF מעולם לא חוותה שנה מפסידה."
+        }
+      },
+      "team_group_slug": null,
+      "is_featured": false
     }
   }
 }

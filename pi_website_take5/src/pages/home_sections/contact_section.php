@@ -51,8 +51,11 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
                     <div class="contact-card phone">
                         <div class="icon"><i class="fa fa-phone"></i></div>
                         <div class="contact-info">
-                            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'phone', 'Phone'); ?></h3>
-                            <p><a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone']); ?>"><?php echo $contactDetails['phone']; ?></a></p>
+                            <h3><?php echo $contactPage->getContent($lang, 'our_info_phone_section_label', 'Phone'); ?></h3>
+                            <p>
+                                <?php echo $contactPage->getContent($lang, 'our_info_phone_label', 'Tel'); ?>:
+                                <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone']); ?>"><?php echo $contactDetails['phone']; ?></a>
+                            </p>
                             <?php if (!empty($contactDetails['fax'])): ?>
                                 <p><?php echo $contactPage->getContent($lang, 'our_info_fax_label', 'Fax'); ?>: <?php echo $contactDetails['fax']; ?></p>
                             <?php endif; ?>

@@ -15,6 +15,7 @@ header {
   max-width: 100%;
   box-sizing: border-box;
   padding: 0 15px;
+  min-height: variables.$header-min-height;
 
   &.initially-hidden {
     transform: translateY(-100%);
@@ -91,6 +92,7 @@ header {
     display: flex;
     align-items: center;
     margin-right: 2rem; // Add more spacing in LTR mode
+    margin-top: 4px;
     
     .logo-link {
       text-decoration: none;
@@ -405,7 +407,7 @@ body:not(.home-page) {
   
   header {
     padding: 10px 0;
-    
+    min-height: variables.$header-min-height;
     .container {
       padding: 0 15px;
       position: relative;

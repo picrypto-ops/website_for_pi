@@ -34,6 +34,7 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 /* Fix for iOS Safari bouncing effect */
@@ -207,6 +208,7 @@ header {
   max-width: 100%;
   box-sizing: border-box;
   padding: 0 15px;
+  min-height: 60px;
   /* Hide the mobile menu toggle button by default (for desktop) */
 }
 header.initially-hidden {
@@ -272,6 +274,7 @@ header .logo-section {
   display: flex;
   align-items: center;
   margin-right: 2rem;
+  margin-top: 4px;
 }
 header .logo-section .logo-link {
   text-decoration: none;
@@ -282,7 +285,7 @@ header .logo-section .logo-container {
   position: relative;
 }
 header .logo-section .logo-container img {
-  max-width: 40px;
+  max-width: 30px;
   margin-right: 1.5rem;
 }
 header .logo-section .logo-container .group-name {
@@ -463,7 +466,7 @@ body:not(.home-page) {
     margin-right: 0.75rem;
   }
   header .header-content .logo-section .logo-container img {
-    max-width: 35px;
+    max-width: 25px;
     margin-right: 1rem;
   }
   header .header-content .logo-section .logo-container .group-name {
@@ -514,6 +517,7 @@ body:not(.home-page) {
   }
   header {
     padding: 10px 0;
+    min-height: 60px;
     /* Show the mobile menu toggle on mobile screens */
     /* LTR positioning - toggle button on left */
     /* RTL positioning - toggle button on right */
@@ -956,7 +960,7 @@ footer .footer-bottom {
   padding: 2rem;
 }
 .home-page .hero .hero-content h1 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   margin-bottom: 1.5rem;
   animation: fadeInUp 1s ease-out;
   line-height: 1.2;
@@ -1035,7 +1039,7 @@ footer .footer-bottom {
   border: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  min-height: 150px;
+  height: 170px;
   position: relative;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -1071,20 +1075,16 @@ footer .footer-bottom {
 }
 .home-page .product-card .product-content {
   display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  padding: 1rem 1rem;
+  padding: 1rem;
   flex: 1;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  height: 100%;
 }
 .home-page .product-card .product-icon {
   flex: 0 0 100px;
-  height: 150px;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: left;
-  margin-top: -1.5rem;
-  margin-bottom: -0.5rem;
+  justify-content: center;
 }
 .home-page .product-card .product-icon img {
   max-width: 100%;
@@ -1096,8 +1096,8 @@ footer .footer-bottom {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding-right: 0.5rem;
+  justify-content: center;
+  padding-left: 0.5rem;
 }
 .home-page .product-card .product-text h3 {
   margin: 0;
@@ -1105,18 +1105,30 @@ footer .footer-bottom {
   color: #1a1a1a;
   font-weight: 500;
   line-height: 1.2;
-  text-align: right;
-  white-space: nowrap;
-}
-.home-page .product-card .slogan {
-  width: 100%;
   text-align: center;
-  padding: 0.5rem 0.5rem;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+.home-page .product-card .product-text .slogan {
+  text-align: center;
+  padding: 0.5rem 0;
   margin: 0;
   font-size: 1.2rem;
   color: #666;
   line-height: 1.4;
-  position: relative;
+}
+html[dir=rtl] .home-page .product-card .product-content {
+  flex-direction: row-reverse;
+}
+html[dir=rtl] .home-page .product-card .product-text {
+  align-items: flex-start;
+  padding-left: 0;
+  padding-right: 0.5rem;
+}
+html[dir=rtl] .home-page .product-card .product-text h3 {
+  text-align: center;
+}
+html[dir=rtl] .home-page .product-card .product-text .slogan {
+  text-align: center;
 }
 .home-page .team-preview-grid {
   display: grid;
@@ -1855,6 +1867,17 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
   }
 }
 
+@media (min-width: 1200px) {
+  .home-page .hero .hero-content h1 {
+    max-width: 800px;
+    font-size: 3rem;
+    /* Ensure title doesn't wrap to a third line but shows completely */
+    line-height: 1.1;
+    white-space: normal;
+    display: block;
+    overflow: visible;
+  }
+}
 .main-nav ul {
   list-style-type: none;
   padding: 0;
@@ -2235,7 +2258,6 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
   justify-content: space-between;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #eee;
 }
 .member-navigation a {
   text-decoration: none;
@@ -2413,7 +2435,7 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
 .segment .product-card {
   width: 300px; /* Fixed width */
   max-width: 300px;
-  min-height: 200px; /* Ensure minimum height */
+  height: 170px; /* Fixed height instead of min-height */
   flex: 0 0 auto; /* Don't allow flexbox to resize the cards */
   margin: 0.5rem; /* Add a bit of margin between cards */
   background: #fff;
@@ -2456,20 +2478,16 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
 }
 .segment .product-card .product-content {
   display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  padding: 1rem 1rem;
+  padding: 1rem;
   flex: 1;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  height: 100%;
 }
 .segment .product-card .product-icon {
   flex: 0 0 100px;
-  height: 150px;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: left;
-  margin-top: -1.5rem;
-  margin-bottom: -0.5rem;
+  justify-content: center;
 }
 .segment .product-card .product-icon img {
   max-width: 100%;
@@ -2481,8 +2499,8 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding-right: 0.5rem;
+  justify-content: center;
+  padding-left: 0.5rem;
 }
 .segment .product-card .product-text h3 {
   margin: 0;
@@ -2490,18 +2508,18 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
   color: #1a1a1a;
   font-weight: 500;
   line-height: 1.2;
-  text-align: right;
+  text-align: center;
   white-space: nowrap; /* Prevent text wrapping */
 }
 .segment .product-card .slogan {
-  width: 100%;
-  text-align: center;
-  padding: 0.5rem 0.5rem;
+  text-align: right;
+  padding: 0.5rem 0;
   margin: 0;
   font-size: 1.2rem;
   color: #666;
   line-height: 1.4;
   position: relative;
+  border-top: none;
 }
 .segment .product-card .slogan .arrow {
   position: absolute;
@@ -2574,10 +2592,9 @@ html[dir=rtl] .segment .product-card .slogan:hover .arrow {
   color: var(--color-text);
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 170px;
   width: 300px;
   max-width: 300px;
-  min-height: 200px;
   margin: 0;
   flex: 0 0 auto;
 }
@@ -2587,33 +2604,55 @@ html[dir=rtl] .segment .product-card .slogan:hover .arrow {
 }
 .segment .product-grid .product-card .product-content {
   display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  flex: 1;
+  height: 100%;
 }
 .segment .product-grid .product-card .product-icon {
-  width: 60px;
-  height: 60px;
-  margin-right: 1rem;
+  flex: 0 0 60px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 1rem;
 }
 .segment .product-grid .product-card .product-icon img {
   max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
+}
+.segment .product-grid .product-card .product-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .segment .product-grid .product-card .product-text h3 {
   font-size: 1.3rem;
   margin: 0;
-  text-align: left;
+  text-align: center;
   color: var(--color-primary);
   white-space: nowrap;
 }
-.segment .product-grid .product-card .slogan {
+.segment .product-grid .product-card .product-text .slogan {
   font-size: 0.9rem;
   color: var(--color-text-light);
-  margin-top: auto;
+  text-align: center;
   font-style: italic;
+  margin-top: 0.5rem;
+}
+html[dir=rtl] .segment .product-grid .product-card .product-content {
+  flex-direction: row-reverse;
+}
+html[dir=rtl] .segment .product-grid .product-card .product-icon {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+html[dir=rtl] .segment .product-grid .product-card .product-text h3 {
+  text-align: center;
+}
+html[dir=rtl] .segment .product-grid .product-card .product-text .slogan {
+  text-align: center;
 }
 .segment .back-to-segments {
   text-align: center;
