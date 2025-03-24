@@ -3739,7 +3739,7 @@ html[dir=rtl] .cookie-consent-banner__actions {
 .product-header {
   display: flex;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 @media (max-width: 768px) {
   .product-header {

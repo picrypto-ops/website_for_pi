@@ -59,7 +59,6 @@ function renderSegmentDisplay($lang, $segment_slug, $nextSectionId = null) {
                 <?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
             </div>
 
-            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'our_products', 'Our Products'); ?></h3>
             <div class="product-grid">
                 <?php if (empty($segmentProducts)): ?>
                     <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_products', 'No products available for this segment.'); ?></p>

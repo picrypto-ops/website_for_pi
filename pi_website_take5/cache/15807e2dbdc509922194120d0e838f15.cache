@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Home - Contact Us</title>
+    <meta name="description" content="">
+    <link rel="canonical" href="https://www.pi-hf.com/en/contact">
+    <meta property="og:title" content="Home - Contact Us">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://www.pi-hf.com/en/contact">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.pi-hf.com/assets/images/og-image.jpg">
+        <link rel="stylesheet" href="assets/css/main.css">
+        
+        <!-- Leaflet CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+        
+    <!-- Load the new modular JavaScript main file -->
+    <script type="module" src="assets/js/main.js"></script>
+            <!-- Leaflet JS for OpenStreetMap -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+        
+    <script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "ContactPage",
+</script>
+<script type="application/ld+json">
+    "name": "PI Group",
+</script>
+<script type="application/ld+json">
+    "url": "https://www.pi-hf.com",
+</script>
+<script type="application/ld+json">
+    "logo": "https://www.pi-hf.com/assets/images/logo.png",
+</script>
+<script type="application/ld+json">
+    "sameAs": [
+</script>
+<script type="application/ld+json">
+        "https://www.facebook.com/PIGroup",
+</script>
+<script type="application/ld+json">
+        "https://www.linkedin.com/company/pigroup",
+</script>
+<script type="application/ld+json">
+        "https://twitter.com/PIGroup"
+</script>
+<script type="application/ld+json">
+    ],
+</script>
+<script type="application/ld+json">
+    "address": {
+</script>
+<script type="application/ld+json">
+        "@type": "PostalAddress",
+</script>
+<script type="application/ld+json">
+        "streetAddress": "123 Financial Street",
+</script>
+<script type="application/ld+json">
+        "addressLocality": "Tel Aviv",
+</script>
+<script type="application/ld+json">
+        "addressRegion": "TA",
+</script>
+<script type="application/ld+json">
+        "postalCode": "12345",
+</script>
+<script type="application/ld+json">
+        "addressCountry": "IL"
+</script>
+<script type="application/ld+json">
+    },
+</script>
+<script type="application/ld+json">
+    "foundingDate": "1999",
+</script>
+<script type="application/ld+json">
+    "founder": {
+</script>
+<script type="application/ld+json">
+        "@type": "Person",
+</script>
+<script type="application/ld+json">
+        "name": "Aron Cohen and Jonny Kaye"
+</script>
+<script type="application/ld+json">
+    },
+</script>
+<script type="application/ld+json">
+    "description": "Contact PI Group for expert financial services and inquiries.",
+</script>
+<script type="application/ld+json">
+    "headline": "Contact Us",
+</script>
+<script type="application/ld+json">
+    "contactPoint": {
+</script>
+<script type="application/ld+json">
+        "@type": "ContactPoint",
+</script>
+<script type="application/ld+json">
+        "telephone": "",
+</script>
+<script type="application/ld+json">
+        "email": "",
+</script>
+<script type="application/ld+json">
+        "contactType": "customer service"
+</script>
+<script type="application/ld+json">
+    }
+</script>
+<script type="application/ld+json">
+}
+</script>
+<script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "BreadcrumbList",
+</script>
+<script type="application/ld+json">
+    "itemListElement": [
+</script>
+<script type="application/ld+json">
+        {
+</script>
+<script type="application/ld+json">
+            "@type": "ListItem",
+</script>
+<script type="application/ld+json">
+            "position": 1,
+</script>
+<script type="application/ld+json">
+            "name": "PI Group - Home",
+</script>
+<script type="application/ld+json">
+            "item": "https://www.pi-hf.com/?page=home&lang=en"
+</script>
+<script type="application/ld+json">
+        },
+</script>
+<script type="application/ld+json">
+        {
+</script>
+<script type="application/ld+json">
+            "@type": "ListItem",
+</script>
+<script type="application/ld+json">
+            "position": 2,
+</script>
+<script type="application/ld+json">
+            "name": "Contact PI Group",
+</script>
+<script type="application/ld+json">
+            "item": "https://www.pi-hf.com/?page=contact&lang=en"
+</script>
+<script type="application/ld+json">
+        }
+</script>
+<script type="application/ld+json">
+    ]
+</script>
+<script type="application/ld+json">
+}
+</script>
+</head>
+<body class="contact-page">
+    <header id="site-header" class="">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile menu toggle button for screens < 768px -->
+                <button class="mobile-menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false">
+                    <span class="menu-icon">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                </button>
+                
+                <!-- Section 1: Logo & Group name -->
+                <div class="logo-section">
+                    <a href="?page=home&lang=en" class="logo-link">
+                        <div class="logo-container">
+                            <img src="assets/images/logo_small.svg" alt="PI Group Logo">
+                            <span class="group-name">PI Group</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Section 2: Main Navigation Menu -->
+                <nav class="main-nav">
+                    <ul>
+                                                <li class="">
+                            <a href="?page=home&lang=en">
+                                Home                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=segment&id=asset_management&lang=en">
+                                Asset Management                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=segment&id=investment_banking&lang=en">
+                                Investment Banking                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=our-team&lang=en">
+                                Our Team                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=about&lang=en">
+                                About Us                            </a>
+                        </li>
+                                                <li class="active">
+                            <a href="?page=contact&lang=en">
+                                Contact Us                            </a>
+                        </li>
+                                            </ul>
+                </nav>
+                
+                <!-- Section 3: Language Switcher -->
+                <div class="language-switcher"><a href="?page=contact&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=contact&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+        </div>
+    </header>
+    <main id="main-content">
+
+
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact PI Group</h1>
+        <p class="slogan">Get in Touch</p>
+        <p class="lead">Reach out to us for any inquiries or to learn more about our services.</p>
+    </div>
+</section>
+
+<section class="contact-us">
+    <div class="container">
+                
+        <div class="contact-content">
+            <!-- Form on the left for desktop, last for mobile -->
+            <div class="contact-form contact-column">
+                <h2>Send Us a Message</h2>
+                <form id="contact-form" action="../utility/process-contact.php" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="button button--outline">Send</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Map and contact info on the right for desktop, first for mobile -->
+            <div class="contact-info-map contact-column">
+                <!-- Map section -->
+                <div class="map-section">
+                    <h2>Map</h2>
+                    <div id="map" 
+                         class="contact-map"
+                         data-lat="32.109608"
+                         data-lng="34.837384"
+                         data-address="18, Raoul Wallenberg, Tel Aviv, Israel">
+                    </div>
+                    <p class="map-link">
+                        <a href="https://www.openstreetmap.org/?mlat=32.109608&mlon=34.837384#map=21/32.109608/34.837384" target="_blank">
+                            View Larger Map                        </a>
+                    </p>
+                </div>
+                
+                <!-- Contact information -->
+                <div class="contact-info">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="contact-info-grid">
+                        <!-- Address card -->
+                        <div class="contact-card address">
+                            <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
+                            <div class="contact-info">
+                                <h3>Address</h3>
+                                <p>18, Raoul Wallenberg, Tel Aviv, Israel</p>
+                                                                    <p>Zipcode: 6971001</p>
+                                                            </div>
+                        </div>
+                        
+                        <!-- Phone card -->
+                        <div class="contact-card phone">
+                            <div class="icon"><i class="fa fa-phone"></i></div>
+                            <div class="contact-info">
+                                <h3>Phone</h3>
+                                <p>
+                                    Tel:
+                                    <a href="tel:+97233732090">+972-3-3732090</a>
+                                </p>
+                                                                    <p>Fax: +972-3-3732102</p>
+                                                            </div>
+                        </div>
+                        
+                        <!-- Email card -->
+                        <div class="contact-card email">
+                            <div class="icon"><i class="fa fa-envelope"></i></div>
+                            <div class="contact-info">
+                                <h3>Email</h3>
+                                <p><a href="mailto:info@pi-hf.com">info@pi-hf.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Website card -->
+                                                <div class="contact-card website">
+                            <div class="icon"><i class="fa fa-globe"></i></div>
+                            <div class="contact-info">
+                                <h3>Website</h3>
+                                <p><a href="https://www.pi-hf.com" target="_blank">https://www.pi-hf.com</a></p>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                                    </div>
+                <div class="footer-links">
+                    <ul>
+                                            </ul>
+                </div>
+                <div class="footer-social">
+                    <!-- Add social media links here -->
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PI Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="container">
+        <div class="cookie-consent-banner__content">
+            <h3>Cookie Consent</h3>
+            <p>This website uses cookies to improve your experience. By continuing to use this site, you agree to our use of cookies.</p>
+        </div>
+        <div class="cookie-consent-banner__actions">
+            <button id="cookie-accept-btn" class="accept">Accept</button>
+            <button id="cookie-decline-btn" class="decline">Decline</button>
+        </div>
+    </div>
+</div> </body>
+</html>
+

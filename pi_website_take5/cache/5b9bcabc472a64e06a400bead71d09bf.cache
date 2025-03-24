@@ -207,7 +207,7 @@
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?url=process-contact.php&page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=process-contact.php&page=home&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
         </div>
     </header>
     <main id="main-content">
@@ -223,7 +223,7 @@
         
         <!-- Language Switcher positioned at top left/right depending on language -->
         <div class="hero-language-switcher left-aligned">
-            <a href="?url=process-contact.php&page=home&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=process-contact.php&page=home&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
+            <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
         
         <!-- Clean, minimal hero menu -->
         <div class="hero-menu right-aligned">
@@ -263,7 +263,7 @@
         <div class="hero-content">
             <h1>Resolute Professionalism<br>Exceptional Results</h1>
             <p class="slogan"></p>
-            <p class="wide-description content-with-html">Every day, our savvy investment analysis team explore and manage a wide variety of investments. Our focus is to diligently find, thoroughly understand, and meticulously monitor a small number of exceptional investments.</p>
+            <p class="wide-description content-with-html">every day our savvy invetment analysis and asset management teams explore a wide variety of potential investments. Our focus is to diligently find, thoroughly understand, and astutely create exceptional value for our partners.</p>
                         <a href="#segment-asset_management" class="cta-button">
                 Learn More            </a>
         </div>
@@ -286,9 +286,8 @@
         <div class="container">
             <h2>Asset Management</h2>
             <div class="segment-section-description">
-                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver exceptional risk adjusted returns, and to date, none of our funds have experienced a losing year.<br><br>PI has always invested significantly in the funds we manage for our partners.            </div>
+                Our asset management services have been built on a foundation of excellence since 2004, with a diverse range of hedge funds under our management. We strive to deliver exceptional risk adjusted returns, and to date, none of our funds have experienced a losing year.            </div>
 
-            <h3>Our Products</h3>
             <div class="product-grid">
                                                             <a href="?page=product&id=pi_global&segment=asset_management&lang=en" class="product-card">
                             <div class="product-content">
@@ -358,9 +357,8 @@
         <div class="container">
             <h2>Investment Banking</h2>
             <div class="segment-section-description">
-                Our investment banking services are tailored to advise and support exceptional financial innovators and dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth.<br><br>To date, we have invested alongside our partners in every deal we have structured.            </div>
+                Our investment banking services are tailored to advise and support exceptional financial innovators as well as dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth.            </div>
 
-            <h3>Our Products</h3>
             <div class="product-grid">
                                                             <a href="?page=product&id=pi_pituach&segment=investment_banking&lang=en" class="product-card">
                             <div class="product-content">
