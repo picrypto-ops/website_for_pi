@@ -5,7 +5,7 @@
       "en": {
         "title": "Resolute Professionalism<br>Exceptional Results",
         "slogan": "",
-        "home_description": "every day our savvy invetment analysis and asset management teams explore a wide variety of potential investments. Our focus is to diligently find, thoroughly understand, and astutely create exceptional value for our partners."
+        "home_description": "Every day our savvy investment analysis and asset management teams explore a wide variety of potential investments. Our focus is to diligently find, thoroughly understand, and astutely create exceptional value for our partners."
       },
       "he": {
         "title": "ברוכים הבאים לקבוצת PI",
@@ -101,6 +101,7 @@
         "our_info_map_label": "Map",
         "our_info_website_label": "Website",
         "our_info_zipcode_label": "Zipcode",
+        "show_map": false,
         "contact_details": {
           "address": "18, Raoul Wallenberg, Tel Aviv, Israel",
           "zipcode": "6971001",
@@ -136,6 +137,7 @@
         "our_info_map_label": "מפה",
         "our_info_website_label": "אתר",
         "our_info_zipcode_label": "מיקוד",
+        "show_map": true,
         "contact_details": {
           "address": "ראול ולנברג 18, עתידים, תל אביב, ישראל",
           "zipcode": "6971001",

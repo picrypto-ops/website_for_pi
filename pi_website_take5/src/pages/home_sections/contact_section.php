@@ -26,9 +26,11 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
             
             <div class="home-contact-content">
                 <!-- Map preview - visible first on mobile -->
+                <?php if ($contactPage->getContent($lang, 'show_map', true)): ?>
                 <div class="home-map-preview">
                     <div id="home-map" class="home-contact-map"></div>
                 </div>
+                <?php endif; ?>
                 
                 <!-- Contact info cards - visible after map on mobile -->
                 <div class="contact-info-grid">
@@ -98,6 +100,7 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
     </section>
     
     <!-- Add Leaflet for home page map preview -->
+    <?php if ($contactPage->getContent($lang, 'show_map', true)): ?>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin=""/>
@@ -132,5 +135,6 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
         }
     });
     </script>
+    <?php endif; ?>
     <?php
 } 

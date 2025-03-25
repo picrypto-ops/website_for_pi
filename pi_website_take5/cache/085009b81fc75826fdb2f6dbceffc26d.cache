@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Home - Product</title>
+    <meta name="description" content="Financial Management Professionals">
+    <link rel="canonical" href="https://www.pi-hf.com/en/product">
+    <meta property="og:title" content="Home - Product">
+    <meta property="og:description" content="Financial Management Professionals">
+    <meta property="og:url" content="https://www.pi-hf.com/en/product">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.pi-hf.com/assets/images/og-image.jpg">
+        <link rel="stylesheet" href="assets/css/main.css">
+        
+        
+    <!-- Load the new modular JavaScript main file -->
+    <script type="module" src="assets/js/main.js"></script>
+            
+    <script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "Organization",
+</script>
+<script type="application/ld+json">
+    "name": "PI Group",
+</script>
+<script type="application/ld+json">
+    "url": "https://www.pi-hf.com",
+</script>
+<script type="application/ld+json">
+    "logo": "https://www.pi-hf.com/assets/images/logo.png",
+</script>
+<script type="application/ld+json">
+    "sameAs": [
+</script>
+<script type="application/ld+json">
+        "https://www.facebook.com/PIGroup",
+</script>
+<script type="application/ld+json">
+        "https://www.linkedin.com/company/pigroup",
+</script>
+<script type="application/ld+json">
+        "https://twitter.com/PIGroup"
+</script>
+<script type="application/ld+json">
+    ],
+</script>
+<script type="application/ld+json">
+    "address": {
+</script>
+<script type="application/ld+json">
+        "@type": "PostalAddress",
+</script>
+<script type="application/ld+json">
+        "streetAddress": "123 Financial Street",
+</script>
+<script type="application/ld+json">
+        "addressLocality": "Tel Aviv",
+</script>
+<script type="application/ld+json">
+        "addressRegion": "TA",
+</script>
+<script type="application/ld+json">
+        "postalCode": "12345",
+</script>
+<script type="application/ld+json">
+        "addressCountry": "IL"
+</script>
+<script type="application/ld+json">
+    },
+</script>
+<script type="application/ld+json">
+    "foundingDate": "1999",
+</script>
+<script type="application/ld+json">
+    "founder": {
+</script>
+<script type="application/ld+json">
+        "@type": "Person",
+</script>
+<script type="application/ld+json">
+        "name": "Aron Cohen and Jonny Kaye"
+</script>
+<script type="application/ld+json">
+    }
+</script>
+<script type="application/ld+json">
+}
+</script>
+<script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "BreadcrumbList",
+</script>
+<script type="application/ld+json">
+    "itemListElement": [
+</script>
+<script type="application/ld+json">
+        {
+</script>
+<script type="application/ld+json">
+            "@type": "ListItem",
+</script>
+<script type="application/ld+json">
+            "position": 1,
+</script>
+<script type="application/ld+json">
+            "name": "PI Group - Home",
+</script>
+<script type="application/ld+json">
+            "item": "https://www.pi-hf.com/?page=home&lang=en"
+</script>
+<script type="application/ld+json">
+        }
+</script>
+<script type="application/ld+json">
+    ]
+</script>
+<script type="application/ld+json">
+}
+</script>
+</head>
+<body class="product-page">
+    <header id="site-header" class="">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile menu toggle button for screens < 768px -->
+                <button class="mobile-menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false">
+                    <span class="menu-icon">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                </button>
+                
+                <!-- Section 1: Logo & Group name -->
+                <div class="logo-section">
+                    <a href="?page=home&lang=en" class="logo-link">
+                        <div class="logo-container">
+                            <img src="assets/images/logo_small.svg" alt="PI Group Logo">
+                            <span class="group-name">PI Group</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Section 2: Main Navigation Menu -->
+                <nav class="main-nav">
+                    <ul>
+                                                <li class="">
+                            <a href="?page=home&lang=en">
+                                Home                            </a>
+                        </li>
+                                                <li class="active">
+                            <a href="?page=segment&id=asset_management&lang=en">
+                                Asset Management                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=segment&id=investment_banking&lang=en">
+                                Investment Banking                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=our-team&lang=en">
+                                Our Team                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=about&lang=en">
+                                About Us                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=contact&lang=en">
+                                Contact Us                            </a>
+                        </li>
+                                            </ul>
+                </nav>
+                
+                <!-- Section 3: Language Switcher -->
+                <div class="language-switcher"><a href="?page=product&id=ayalon_pi_30_70_fund&segment=asset_management&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?page=product&id=ayalon_pi_30_70_fund&segment=asset_management&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+        </div>
+    </header>
+    <main id="main-content">
+
+
+<section class="product">
+        <div class="container">
+        <div class="product-header">
+                            <div class="product-logo">
+                    <img src="assets/images/asset_management/ayalon_pi_30_70_fund/logo_large.svg" alt="Ayalon-PI 30/70 Fund">
+                </div>
+                        <div class="product-title">
+                <h1>Ayalon-PI 30/70 Fund</h1>
+                                    <p class="product-slogan">Balanced Growth with Stability</p>
+                            </div>
+        </div>
+        
+        <div class="product-content">
+            <p class="product-description-paragraph">PI Financial Ltd., a company under PI Group, provides investment advisory services to Ayalon Investment House, Who is one of the largest investment houses in Israel, managing approximately 235 mutual funds with a total value of about 34.8* billion NIS, on the "Ayalon PI 30/70" Mutual fund.</p>            
+            <p class="product-description-paragraph">* <small><small>as of December 2024</small></small></p><p class="product-description-paragraph"><small><small><p><b>Ayalon PI 30/70 (id: 5102157)</b><br>Exposure Profile: 2B</br>Stocks: 2 - up to 30% of the fund's net asset value</br>Foreign Currency: B - up to 30% of the fund's net asset value</p></small></small></p><p class="product-description-paragraph"><small><small><p><b>Disclaimer</b><br><small>B2 - up to 30% exposure to stocks and foreign currency in absolute value.<br>Investment advisor of the fund: Pi Financials Ltd.<br>Fund manager: Ayalon Mutual Funds Ltd.</p><p>This does not constitute a substitute for investment advice by a licensed investment advisor according to law, who takes into account the specific data and special needs of each person. Nothing stated above constitutes an offer to purchase fund units. The purchase of units in the fund is only based on the fund's prospectuses in effect at the time of purchase and immediate reports. Past performance of the fund does not guarantee similar returns in the future.</small></small></p></small></p>        </div>
+
+        
+                
+                <div class="back-to-segment">
+            <a href="?page=segment&id=asset_management&lang=en" class="back-link">
+                <span class="back-arrow">←</span> 
+                Back to Segment            </a>
+        </div>
+            </div>
+</section>
+
+</main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                                    </div>
+                <div class="footer-links">
+                    <ul>
+                                            </ul>
+                </div>
+                <div class="footer-social">
+                    <!-- Add social media links here -->
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PI Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="container">
+        <div class="cookie-consent-banner__content">
+            <h3>Cookie Consent</h3>
+            <p>This website uses cookies to improve your experience. By continuing to use this site, you agree to our use of cookies.</p>
+        </div>
+        <div class="cookie-consent-banner__actions">
+            <button id="cookie-accept-btn" class="accept">Accept</button>
+            <button id="cookie-decline-btn" class="decline">Decline</button>
+        </div>
+    </div>
+</div> </body>
+</html>
+

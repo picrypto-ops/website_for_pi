@@ -263,7 +263,7 @@
         <div class="hero-content">
             <h1>Resolute Professionalism<br>Exceptional Results</h1>
             <p class="slogan"></p>
-            <p class="wide-description content-with-html">every day our savvy invetment analysis and asset management teams explore a wide variety of potential investments. Our focus is to diligently find, thoroughly understand, and astutely create exceptional value for our partners.</p>
+            <p class="wide-description content-with-html">Every day our savvy investment analysis and asset management teams explore a wide variety of potential investments. Our focus is to diligently find, thoroughly understand, and astutely create exceptional value for our partners.</p>
                         <a href="#segment-asset_management" class="cta-button">
                 Learn More            </a>
         </div>
@@ -465,7 +465,7 @@
                                             <h3>Itay Ruschkewitz</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI PItuach</span><span class="role-title">Chief Executive Officer</span>                                                        </div>
+                                                            <span class="product-name">PI PItuach</span><span class="role-title">Co-Founder and Chief Executive Officer</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
@@ -491,7 +491,7 @@
                                             <h3>Baruch (Buky) Katzman</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI Select</span><span class="role-title">Co-Founder</span>                                                        </div>
+                                                            <span class="product-name">PI Select</span><span class="role-title">Co-Founder and Chief Executive Officer</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
@@ -507,7 +507,7 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Shlomi Cohen</h3>
-                                                                                            <p class="position">Chief Financial Officer</p>
+                                                                                            <p class="position">Chief Financial Officer and Director</p>
                                                                                         
 
                                         </div>
@@ -517,7 +517,7 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Ronen Bitman</h3>
-                                                                                            <p class="position">Chief Technology Officer</p>
+                                                                                            <p class="position">Chief Technology Officer and Director</p>
                                                                                         
 
                                         </div>
@@ -527,7 +527,7 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Hagit Borohovitz</h3>
-                                                                                            <p class="position">Chief Legal Officer</p>
+                                                                                            <p class="position">Chief Legal Officer and Director</p>
                                                                                         
 
                                         </div>
@@ -558,11 +558,21 @@
                             <div id="team-group-investments" class="team-section">
                     <h3 class="section-title">Investments</h3>
                     <div class="team-grid">
-                                                                                    <a href="?page=team-member&id=ronen-elgali&lang=en" class="card-link">
+                                                                                    <a href="?page=team-member&id=dolev-trogman&lang=en" class="card-link">
+                                    <div class="team-card">
+                                        <div class="team-info">
+                                            <h3>Dolev Trogman</h3>
+                                                                                            <p class="position">Portfolio Manager</p>
+                                                                                                                                    
+
+                                        </div>
+                                    </div>
+                                </a>
+                                                            <a href="?page=team-member&id=ronen-elgali&lang=en" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Ronen Elgali</h3>
-                                                                                            <p class="position">Cheif Investment Analyst</p>
+                                                                                            <p class="position">Senior Investment Analyst</p>
                                                                                         
 
                                         </div>
@@ -572,21 +582,8 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Asaf Shaul</h3>
-                                                                                            <p class="position">Investment Analyst</p>
+                                                                                            <p class="position">Senior Investment Analyst</p>
                                                                                         
-
-                                        </div>
-                                    </div>
-                                </a>
-                                                            <a href="?page=team-member&id=mor-katz-avrahami&lang=en" class="card-link">
-                                    <div class="team-card">
-                                        <div class="team-info">
-                                            <h3>Mor Katz Avrahami</h3>
-                                                                                            <div class="product-roles">
-                                                                                                            <div class="role">
-                                                            <span class="product-name">PI PItuach</span><span class="role-title">Analyst</span>                                                        </div>
-                                                                                                    </div>
-                                                                                                                                    
 
                                         </div>
                                     </div>
@@ -595,34 +592,18 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Darina Reznikov</h3>
-                                                                                            <div class="product-roles">
-                                                                                                            <div class="role">
-                                                            <span class="product-name">PI PItuach</span><span class="role-title">Director</span>                                                        </div>
-                                                                                                    </div>
+                                                                                            <p class="position">Director and Analyst</p>
                                                                                                                                     
 
                                         </div>
                                     </div>
                                 </a>
-                                                            <a href="?page=team-member&id=dolev-trogman&lang=en" class="card-link">
+                                                            <a href="?page=team-member&id=mor-katz-avrahami&lang=en" class="card-link">
                                     <div class="team-card">
                                         <div class="team-info">
-                                            <h3>Dolev Trogman</h3>
-                                                                                            <div class="product-roles">
-                                                                                                            <div class="role">
-                                                            <span class="product-name">PI Global</span><span class="role-title">Fund Manager</span>                                                        </div>
-                                                                                                    </div>
+                                            <h3>Mor Katz Avrahami</h3>
+                                                                                            <p class="position">Analyst</p>
                                                                                                                                     
-
-                                        </div>
-                                    </div>
-                                </a>
-                                                            <a href="?page=team-member&id=eli-afek&lang=en" class="card-link">
-                                    <div class="team-card">
-                                        <div class="team-info">
-                                            <h3>Eli Afek</h3>
-                                                                                            <p class="position">Trader</p>
-                                                                                        
 
                                         </div>
                                     </div>
@@ -631,10 +612,7 @@
                                     <div class="team-card">
                                         <div class="team-info">
                                             <h3>Daniel Cohen</h3>
-                                                                                            <div class="product-roles">
-                                                                                                            <div class="role">
-                                                            <span class="product-name">PI Global</span><span class="role-title">Trader</span>                                                        </div>
-                                                                                                    </div>
+                                                                                            <p class="position">Junior Analyst</p>
                                                                                                                                     
 
                                         </div>
@@ -764,10 +742,7 @@
             
             <div class="home-contact-content">
                 <!-- Map preview - visible first on mobile -->
-                <div class="home-map-preview">
-                    <div id="home-map" class="home-contact-map"></div>
-                </div>
-                
+                                
                 <!-- Contact info cards - visible after map on mobile -->
                 <div class="contact-info-grid">
                     <!-- Address card -->
@@ -828,41 +803,7 @@
         </section>
     
     <!-- Add Leaflet for home page map preview -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
-          crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
-            crossorigin=""></script>
-    
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        if (document.getElementById('home-map')) {
-            // Initialize the map
-            const homeMap = L.map('home-map', {
-                dragging: false,
-                scrollWheelZoom: false,
-                zoomControl: false
-            }).setView([32.109608, 34.837384], 16);
             
-            // Add OpenStreetMap tile layer
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                maxZoom: 19
-            }).addTo(homeMap);
-            
-            // Add a marker for the office location
-            const officeLocation = [32.109608, 34.837384];
-            const marker = L.marker(officeLocation).addTo(homeMap);
-            
-            // Ensure the map container is visible and redraws properly
-            setTimeout(function() {
-                homeMap.invalidateSize();
-            }, 100);
-        }
-    });
-    </script>
-        
     <!-- Breadcrumb navigation for direct section access -->
     <nav class="breadcrumb-navigation">
         <ul>
