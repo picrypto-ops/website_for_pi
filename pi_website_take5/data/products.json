@@ -1,16 +1,16 @@
 {
   "investment_banking": {
-    "pi_pituach": {
-      "product_slug": "pi_pituach",
+    "pi_development": {
+      "product_slug": "pi_development",
       "asset_category": "investment_banking",
       "language_slug": {
         "en": {
-          "name": "PI PItuach",
+          "name": "PI Development",
           "slogan": "Innovate Today, Secure Tomorrow",
           "title": "Innovative Financial Products",
           "image_insertion_index": 1,
           "description": [
-            "PI PItuach specializes in creating, structuring, and distributing innovative financial products for a wide variety of financial institutions and corporations in Israel.",
+            "PI Development specializes in creating, structuring, and distributing innovative financial products for a wide variety of financial institutions and corporations in Israel.",
             "Established in 2023 by Itai Ruschkewitz, Dan Rosenberg, and PI, Who have over 50 years of combined experience in complex financial engineering, deal-making, and regulatory know-how.",
             "The company operates through several subsidiaries, including PI Deposits and PI Plus, both of which are publicly traded entities on the Tel Aviv Stock Exchange.",
             "Since 2024, PI Deposits successfully issued four series of bonds backed by deposits totalling 9 billion NIS."
@@ -134,13 +134,13 @@
           ]
         },
         "he": {
-          "name": "קרן אילון פאי 30/70",
-          "slogan": "תשואה מבוססת ביטחון",
+          "name": "איילון פאי (2B) 30/70",
+          "slogan": "מספר נייר: 5102157",
           "title": "קרן גידור מניות ישראלית",
           "description": [
-            "פאי פיננסים בע\"מ חברה מקבוצת PI, מספקת שירותי ייעוץ השקעות לבית ההשקעות איילון, שהוא אחד מבתי ההשקעות הגדולים בישראל, ומנהל כ-235 קרנות נאמנות בשווי כולל של כ-34.8* מיליארד ש\"ח, בקרן הנאמנות \"איילון PI 30/70\".",
-            "* <small><small>נכון לדצמבר 2024</small></small>",
-            "<small><small><p><b>איילון פאי 30/70 (מספר נייר: 5102157)</b><br>פרופיל חשיפה: 2B</br>מניות: 2 - עד 30% מהשווי הנקי של נכסי הקרן</br>מט\"ח: B - עד 30% מהשווי הנקי של נכסי הקרן</p></small></small>",
+            "פאי פיננסים בע\"מ חברה מקבוצת PI, מספקת שירותי ייעוץ השקעות לבית ההשקעות איילון, שהוא אחד מבתי ההשקעות הגדולים בישראל, ומנהל כ-234 קרנות נאמנות בשווי כולל של כ-40.13* מיליארד ש\"ח, בקרן הנאמנות \"איילון פאי (2B) 30/70\" (מספר נייר: 5102157).",
+            "* <small><small>נכון לפברואר 2025</small></small>",
+            "<small><small><p>פרופיל חשיפה: 2B</br>מניות: 2 - עד 30% מהשווי הנקי של נכסי הקרן</br>מט\"ח: B - עד 30% מהשווי הנקי של נכסי הקרן</p></small></small>",
             "<small><small><p><b>דסיקליימר :</b><br>B2 - עד 30% חשיפה למניות ולמט\"ח בערך מוחלט .<br>יועץ השקעות של הקרן: פאי פיננסיים בע\"מ<br>מנהל הקרן: איילון קרנות נאמנות בע\"מ</p></small></small>",
             "<small><small><p>אין באמור כדי להוות תחליף לייעוץ השקעות בידי יועץ השקעות בעל רישיון עפ\"י דין, המתחשב בנתונים ובצרכים המיוחדים של כל אדם. אין באמור לעיל כדי להוות הצעה לרכישת יחידות בקרן. רכישת היחידות בקרן היא רק בהסתמך על תשקיפי הקרן שבתוקף במועד הרכישה והדיווחים המיידים. <br><b>אין בתשואת הקרן בעבר כדי להבטיח תשואה דומה בעתיד</b></p></small></small>"
           ]

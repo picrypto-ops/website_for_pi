@@ -32,7 +32,7 @@
     <g id="Upper-Part">
         <use xlink:href="#piPath" clip-path="url(#upperClip)"/>
     <!-- Add the EQUITY text -->
-    <text x="77" y="210" font-family="Arial" font-size="32" fill="#FFFFFF" stroke="#7297C5" stroke-width="1" text-anchor="middle">PRODUCTS</text>        
+    <text x="77" y="210" font-family="Arial" font-size="32" fill="#FFFFFF" stroke="#7297C5" stroke-width="1" text-anchor="middle">DEVELOPMENT</text>        
         <g id="Lower-Part" transform="translate(0, 25)">
         <use xlink:href="#piPath" clip-path="url(#lowerClip)"/>
         </g>

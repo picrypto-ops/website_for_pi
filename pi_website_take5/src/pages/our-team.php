@@ -54,7 +54,7 @@ $teamGroups = array_keys($allTeam);
                                                     }
                                                     
                                                     if (!empty($roleTitle)) {
-                                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                        echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                                     }
                                                     
                                                     echo '</div>';

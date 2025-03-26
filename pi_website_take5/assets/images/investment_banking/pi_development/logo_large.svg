@@ -26,13 +26,13 @@
             <rect x="0" y="0" width="154" height="182"/>
         </clipPath>
         <clipPath id="lowerClip">
-            <rect x="0" y="190" width="154" height="100"/>
+            <rect x="0" y="183" width="154" height="100"/>
         </clipPath>
     </defs>
     <g id="Upper-Part">
         <use xlink:href="#piPath" clip-path="url(#upperClip)"/>
     <!-- Add the EQUITY text -->
-    <text x="77" y="210" font-family="Arial" font-size="28" fill="#000000" stroke="#000000" stroke-width="1" text-anchor="middle">PITUACH</text>        
+        <text x="80" y="202" font-family="Arial" font-size="20" fill="#000000" stroke="#000000" stroke-width="1" text-anchor="middle">DEVELOPMENT</text>        
         <g id="Lower-Part" transform="translate(0, 25)">
         <use xlink:href="#piPath" clip-path="url(#lowerClip)"/>
         </g>

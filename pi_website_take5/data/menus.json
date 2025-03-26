@@ -73,10 +73,10 @@
             },
             "items": [
                 {
-                    "url": "/investment-banking/pi-pituach",
+                    "url": "/investment-banking/pi-development",
                     "language_slug": {
                         "en": {
-                            "label": "PI PItuach"
+                            "label": "PI Development"
                         },
                         "he": {
                             "label": "פאי פיתוח"

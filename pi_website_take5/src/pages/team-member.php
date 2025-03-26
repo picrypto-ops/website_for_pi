@@ -94,7 +94,7 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                             
                             if (is_array($positions) && !empty($positions)) {
                                 $firstRole = reset($positions);
-                                $primaryRoleTitle = isset($firstRole['title']) ? ucfirst($firstRole['title']) : '';
+                                $primaryRoleTitle = isset($firstRole['title']) ? $firstRole['title'] : '';
                                 $primaryProductName = isset($firstRole['product_name']) ? $firstRole['product_name'] : '';
                                 
                                 if (!empty($primaryRoleTitle) && !empty($primaryProductName)) {
@@ -136,7 +136,7 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                                     }
                                     
                                     if (!empty($roleTitle)) {
-                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                        echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                     }
                                     ?>
                                 </div>
@@ -170,7 +170,7 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                         <div class="credentials-list">
                             <?php foreach ($member['credentials'] as $credential => $value) { ?>
                             <div class="credential-item">
-                                <div class="credential-label"><?php echo ucfirst(str_replace('_', ' ', $credential)); ?>:</div>
+                                <div class="credential-label"><?php echo str_replace('_', ' ', $credential); ?>:</div>
                                 <div class="credential-value"><?php echo $value; ?></div>
                             </div>
                             <?php } ?>

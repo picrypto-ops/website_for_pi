@@ -2341,7 +2341,7 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
 .product-logo {
   flex: 0 0 auto;
   margin-right: 30px;
-  width: 150px;
+  width: 175px;
 }
 .product-logo img {
   max-width: 100%;
@@ -3078,7 +3078,6 @@ html[dir=rtl] .segment .product-grid .product-card .product-text .slogan {
 }
 .product-roles .role .role-title {
   color: #4a4a4a;
-  text-transform: capitalize;
 }
 
 .team-grid {
@@ -3751,7 +3750,7 @@ html[dir=rtl] .cookie-consent-banner__actions {
 .product-logo {
   flex: 0 0 auto;
   margin-right: 30px;
-  width: 150px;
+  width: 175px;
 }
 .product-logo img {
   max-width: 100%;

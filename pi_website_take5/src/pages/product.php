@@ -213,9 +213,9 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
                                             $productName = isset($role['product_name']) ? $role['product_name'] : '';
                                             // todo: format the output to be more readable
                                             if (!empty($roleTitle) && !empty($productName)) {
-                                                echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
+                                                echo htmlspecialchars($roleTitle) . ' - ' . htmlspecialchars($productName);
                                             } elseif (!empty($roleTitle)) {
-                                                echo htmlspecialchars(ucfirst($roleTitle));
+                                                echo htmlspecialchars($roleTitle);
                                             } elseif (!empty($productName)) {
                                                 echo htmlspecialchars($productName);
                                             }
@@ -268,7 +268,7 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
                                                 }
                                                 
                                                 if (!empty($roleTitle)) {
-                                                    echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                    echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                                 }
                                                 
                                                 echo '</div>';

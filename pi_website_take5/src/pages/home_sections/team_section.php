@@ -91,7 +91,7 @@ function renderTeamSection($lang, $nextSectionId = 'about-us') {
                                                             }
                                                             
                                                             if (!empty($roleTitle)) {
-                                                                echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                                echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                                             }
                                                             ?>
                                                         </div>

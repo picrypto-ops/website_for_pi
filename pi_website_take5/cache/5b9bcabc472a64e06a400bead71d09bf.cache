@@ -207,7 +207,7 @@
                 </nav>
                 
                 <!-- Section 3: Language Switcher -->
-                <div class="language-switcher"><a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
+                <div class="language-switcher"><a href="?lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?lang=he" class="lang-switch " data-lang="he">עב</a></div>            </div>
         </div>
     </header>
     <main id="main-content">
@@ -223,7 +223,7 @@
         
         <!-- Language Switcher positioned at top left/right depending on language -->
         <div class="hero-language-switcher left-aligned">
-            <a href="?url=favicon.ico&lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?url=favicon.ico&lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
+            <a href="?lang=en" class="lang-switch active" data-lang="en">EN</a><span class="separator">|</span><a href="?lang=he" class="lang-switch " data-lang="he">עב</a>        </div>
         
         <!-- Clean, minimal hero menu -->
         <div class="hero-menu right-aligned">
@@ -360,13 +360,13 @@
                 Our investment banking services are tailored to advise and support exceptional financial innovators as well as dynamic growing firms. We help visionaries turn their ideas into reality while strategically assisting established companies in raising capital, executing mergers, and acquiring businesses to fuel their growth.            </div>
 
             <div class="product-grid">
-                                                            <a href="?page=product&id=pi_pituach&segment=investment_banking&lang=en" class="product-card">
+                                                            <a href="?page=product&id=pi_development&segment=investment_banking&lang=en" class="product-card">
                             <div class="product-content">
                                 <div class="product-icon">
-                                                                        <img src="assets/images/investment_banking/pi_pituach/logo_large.svg" alt="PI PItuach">
+                                                                        <img src="assets/images/investment_banking/pi_development/logo_large.svg" alt="PI Development">
                                 </div>
                                 <div class="product-text">
-                                    <h3>PI PItuach</h3>
+                                    <h3>PI Development</h3>
                                     <p class="slogan">
                                         Innovate Today, Secure Tomorrow                                    </p>
                                 </div>
@@ -465,7 +465,7 @@
                                             <h3>Itay Ruschkewitz</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI PItuach</span><span class="role-title">Co-Founder and Chief Executive Officer</span>                                                        </div>
+                                                            <span class="product-name">PI Development</span><span class="role-title">Co-Founder and Chief Executive Officer</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
@@ -478,7 +478,7 @@
                                             <h3>Dan Rosenberg</h3>
                                                                                             <div class="product-roles">
                                                                                                             <div class="role">
-                                                            <span class="product-name">PI PItuach</span><span class="role-title">Co-Founder and Director</span>                                                        </div>
+                                                            <span class="product-name">PI Development</span><span class="role-title">Co-Founder and Director</span>                                                        </div>
                                                                                                     </div>
                                                                                                                                     
 
@@ -721,7 +721,7 @@
             <section id="about-us" class="about-preview full-page-section">
         <div class="container">
             <h2>About Us</h2>
-            <p><p>Founded in 1999 by Aron Cohen and Jonny Kaye, the PI Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes in Israel and globally.</p> <p>Starting with proprietary derivative trading, where PI quickly became one of Israel's largest firms, we pioneered several financial innovations in the Israeli market. These include issuing Israel's first ETF (the Hadas) in 2003, launching the country's first listed structured product (the Shacharit) in 2005, and establishing Israel's first hedge fund (Arbitrade) in 2004.</p> <p>Our growth continued with the creation of PI EMF, a global macro derivatives fund with 16 years of consistent positive returns, and more recently with strategic partnerships like PI Crypto (2021) and PI PItuach (2023), which has already issued over 7.5 billion ILS in bonds.</p><br><p>As we continue to evolve, PI Group remains committed to identifying market inefficiencies and creating innovative financial solutions. Our experienced team and proven track record position us uniquely in the financial landscape.</p></p>
+            <p><p>Founded in 1999 by Aron Cohen and Jonny Kaye, the PI Group has spent over two decades identifying and capitalizing on high-value opportunities across various sectors and asset classes in Israel and globally.</p> <p>Starting with proprietary derivative trading, where PI quickly became one of Israel's largest firms, we pioneered several financial innovations in the Israeli market. These include issuing Israel's first ETF (the Hadas) in 2003, launching the country's first listed structured product (the Shacharit) in 2005, and establishing Israel's first hedge fund (Arbitrade) in 2004.</p> <p>Our growth continued with the creation of PI EMF, a global macro derivatives fund with 16 years of consistent positive returns, and more recently with strategic partnerships like PI Crypto (2021) and PI Development (2023), which has already issued over 7.5 billion ILS in bonds.</p><br><p>As we continue to evolve, PI Group remains committed to identifying market inefficiencies and creating innovative financial solutions. Our experienced team and proven track record position us uniquely in the financial landscape.</p></p>
             <a href="?page=about&lang=en" class="button">
                 Read More            </a>
         </div>

@@ -120,11 +120,11 @@
             }
         }
     },
-    "team_group_pi_pituach": {
-        "term_slug": "team_group_pi_pituach",
+    "team_group_pi_development": {
+        "term_slug": "team_group_pi_development",
         "language_slug": {
             "en": {
-                "label": "PI PItuach"
+                "label": "PI Development"
             },
             "he": {
                 "label": "פאי פיתוח"
