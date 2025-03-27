@@ -85,7 +85,36 @@
     Header set Referrer-Policy "strict-origin-when-cross-origin"
     
     # Content Security Policy - customize as needed for your site
-    # Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self';"
+    Header set Content-Security-Policy "\
+        default-src 'self'; \
+        script-src \
+            'self' \
+            'unsafe-inline' \
+            'unsafe-eval' \
+            https://www.google-analytics.com \
+            https://cdnjs.cloudflare.com \
+            https://www.google.com \
+            https://cdn.skypack.dev \
+            https://cdn.jsdelivr.net; \
+        img-src \
+            'self' \
+            data: \
+            blob: \
+            https://www.google-analytics.com; \
+        style-src \
+            'self' \
+            'unsafe-inline' \
+            'unsafe-eval'; \
+        font-src 'self'; \
+        connect-src \
+            'self' \
+            https://jsonplaceholder.typicode.com \
+            https://www.google-analytics.com \
+            https://pihf-com0e.mail.protection.outlook.com; \
+        frame-ancestors 'self'; \
+        worker-src 'self' blob:; \
+        base-uri 'self'; \
+        form-action 'self';"
     
     # HSTS (uncomment if you have SSL properly configured)
     # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"

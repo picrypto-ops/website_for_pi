@@ -3,6 +3,9 @@
     "pi_development": {
       "product_slug": "pi_development",
       "asset_category": "investment_banking",
+      "bond_count_en": "seven",
+      "bond_count_he": "שבע",
+      "bond_total_billion_value": "9",
       "language_slug": {
         "en": {
           "name": "PI Development",
@@ -12,15 +15,21 @@
           "description": [
             "PI Development specializes in creating, structuring, and distributing innovative financial products for a wide variety of financial institutions and corporations in Israel.",
             "Established in 2023 by Itai Ruschkewitz, Dan Rosenberg, and PI, Who have over 50 years of combined experience in complex financial engineering, deal-making, and regulatory know-how.",
-            "The company operates through several subsidiaries, including PI Deposits and PI Plus, both of which are publicly traded entities on the Tel Aviv Stock Exchange.",
-            "Since 2024, PI Deposits successfully issued four series of bonds backed by deposits totalling 9 billion NIS."
+            "The company operates through several subsidiaries, including PI Deposits and PI Plus, both of which are listed on the Tel Aviv Stock Exchange.",
+            "Since 2024, PI Development successfully issued {{bond_count_en}} series of bonds backed by deposits totalling {{bond_total_billion_value}} billion NIS."
           ]
         },
         "he": {
           "name": "פאי פיתוח",
           "slogan": "חדשנות היום, ביטחון למחר",
           "title": "מוצרים פיננסיים חדשניים",
-          "description": "פאי פיתוח מתמחה ביצירת מוצרים פיננסיים חדשניים לניהול והעברת סיכונים, המיועדים למוסדות פיננסיים ובנקים. החברה גם מעצבת מוצרי השקעה מותאמים אישית, מפתחת פתרונות מימון מותאמים ללקוחות מוסדיים ולשוק ההון הישראלי. החברה פועלת באמצעות מספר חברות בנות, כולל פאי פיקדונות ופאי פלוס, שתיהן חברות ציבוריות הנסחרות בבורסה בתל אביב. בשנה האחרונה, פאי פיקדונות הנפיקה בהצלחה שלוש סדרות של אגרות חוב מגובות פיקדונות בסך כולל של 7.5 מיליארד ש\"ח."
+          "description": [
+            "פאי פיתוח מתמחה ביצירה, מבנה והפצה של מוצרים פיננסיים חדשניים עבור מגוון רחב של מוסדות פיננסיים וחברות בישראל.",
+            "החברה הוקמה בשנת 2023 על ידי איתי רושקביץ, דן רוזנברג ופאי, בעלי ניסיון מצטבר של למעלה מ-50 שנה בהנדסה פיננסית מורכבת, עסקאות וידע רגולטורי.",
+            "החברה פועלת באמצעות מספר חברות בנות, כולל פאי פיקדונות ופאי פלוס, שתיהן רשומות בבורסה לניירות ערך בתל אביב.",
+            "מאז 2024, פאי פיתוח הנפיקה בהצלחה {{bond_count_he}} סדרות של אגרות חוב המגובות בפיקדונות בהיקף כולל של {{bond_total_billion_value}} מיליארד ש\"ח."
+          ]
+
         }
       },
       "is_featured": true
@@ -120,28 +129,31 @@
     "ayalon_pi_30_70_fund": {
       "product_slug": "ayalon_pi_30_70_fund",
       "asset_category": "asset_management",
+      "fund_count": "234",
+      "fund_value": "40.13",
+      "fund_value_date_en": "February 28, 2025",
+      "fund_value_date_he": "28 לפברואר 2025",
       "language_slug": {
         "en": {
-          "name": "Ayalon-PI 30/70 Fund",
-          "slogan": "Balanced Growth with Stability",
+          "name": "Ayalon PI (2B) 70/30 IL",
+          "slogan": "paper number: 5102157",
           "title": "Israeli Equity Fund",
           "image_insertion_index": 1,
           "description": [
-            "PI Financial Ltd., a company under PI Group, provides investment advisory services to Ayalon Investment House, Who is one of the largest investment houses in Israel, managing approximately 235 mutual funds with a total value of about 34.8* billion NIS, on the \"Ayalon PI 30/70\" Mutual fund.",
-            "* <small><small>as of December 2024</small></small>",
-            "<small><small><p><b>Ayalon PI 30/70 (id: 5102157)</b><br>Exposure Profile: 2B</br>Stocks: 2 - up to 30% of the fund's net asset value</br>Foreign Currency: B - up to 30% of the fund's net asset value</p></small></small>",
-            "<small><small><p><b>Disclaimer</b><br><small>B2 - up to 30% exposure to stocks and foreign currency in absolute value.<br>Investment advisor of the fund: Pi Financials Ltd.<br>Fund manager: Ayalon Mutual Funds Ltd.</p><p>This does not constitute a substitute for investment advice by a licensed investment advisor according to law, who takes into account the specific data and special needs of each person. Nothing stated above constitutes an offer to purchase fund units. The purchase of units in the fund is only based on the fund's prospectuses in effect at the time of purchase and immediate reports. Past performance of the fund does not guarantee similar returns in the future.</small></small></p></small>"
-          ]
+            "Pi Finance Ltd., a company under the PI Group, provides investment advisory services for the mutual fund \"Ayalon PI (2B) 70/30 IL\" (paper number: 5102157) for Ayalon Investment House, who is one of the largest investment houses in Israel managing {{fund_count}} mutual funds with a total value of about {{fund_value}}* billion NIS.",
+            "* <small><small>As of {{fund_value_date_en}}</small></small>",
+            "<small><small><p>2B - Up to 30% exposure to stocks and foreign currency in absolute terms.<br>Investment advisor for the fund: Pi Finance Ltd.<br>Fund manager: Ayalon Mutual Funds Ltd.</p></small></small>",
+            "<small><small><p>The above does not constitute a substitute for investment advice by a licensed investment advisor who considers the unique data and needs of each individual. The above does not constitute an offer to purchase units in the fund. Purchasing units in the fund is only based on the fund's prospectus valid at the time of purchase and immediate reports.<b><br>Past performance of the fund does not guarantee similar future returns</b></p></small></small>"
+            ]
         },
         "he": {
           "name": "איילון פאי (2B) 30/70",
           "slogan": "מספר נייר: 5102157",
           "title": "קרן גידור מניות ישראלית",
           "description": [
-            "פאי פיננסים בע\"מ חברה מקבוצת PI, מספקת שירותי ייעוץ השקעות לבית ההשקעות איילון, שהוא אחד מבתי ההשקעות הגדולים בישראל, ומנהל כ-234 קרנות נאמנות בשווי כולל של כ-40.13* מיליארד ש\"ח, בקרן הנאמנות \"איילון פאי (2B) 30/70\" (מספר נייר: 5102157).",
-            "* <small><small>נכון לפברואר 2025</small></small>",
-            "<small><small><p>פרופיל חשיפה: 2B</br>מניות: 2 - עד 30% מהשווי הנקי של נכסי הקרן</br>מט\"ח: B - עד 30% מהשווי הנקי של נכסי הקרן</p></small></small>",
-            "<small><small><p><b>דסיקליימר :</b><br>B2 - עד 30% חשיפה למניות ולמט\"ח בערך מוחלט .<br>יועץ השקעות של הקרן: פאי פיננסיים בע\"מ<br>מנהל הקרן: איילון קרנות נאמנות בע\"מ</p></small></small>",
+            "פאי פיננסים בע\"מ חברה מקבוצת PI, מספקת שירותי ייעוץ השקעות בקרן הנאמנות \"איילון פאי (2B) 30/70\" (מספר נייר: 5102157) לבית ההשקעות איילון, שהוא אחד מבתי ההשקעות הגדולים בישראל, ומנהל {{fund_count}} קרנות נאמנות בשווי כולל של כ-{{fund_value}}* מיליארד ש\"ח.",
+            "* <small><small>נכון ל {{fund_value_date_he}}</small></small>",            
+            "<small><small><p><br>2B - עד 30% חשיפה למניות ולמט\"ח בערך מוחלט .<br>יועץ השקעות של הקרן: פאי פיננסיים בע\"מ<br>מנהל הקרן: איילון קרנות נאמנות בע\"מ</p></small></small>",
             "<small><small><p>אין באמור כדי להוות תחליף לייעוץ השקעות בידי יועץ השקעות בעל רישיון עפ\"י דין, המתחשב בנתונים ובצרכים המיוחדים של כל אדם. אין באמור לעיל כדי להוות הצעה לרכישת יחידות בקרן. רכישת היחידות בקרן היא רק בהסתמך על תשקיפי הקרן שבתוקף במועד הרכישה והדיווחים המיידים. <br><b>אין בתשואת הקרן בעבר כדי להבטיח תשואה דומה בעתיד</b></p></small></small>"
           ]
         }

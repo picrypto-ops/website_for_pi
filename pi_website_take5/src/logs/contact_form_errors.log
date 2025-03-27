@@ -1,0 +1,116 @@
+[27-Mar-2025 16:28:49 Europe/Berlin] Contact form processing started
+[27-Mar-2025 16:28:49 Europe/Berlin] Config loaded
+[27-Mar-2025 16:28:49 Europe/Berlin] Utility functions loaded
+[27-Mar-2025 16:28:49 Europe/Berlin] Loading autoload.php
+[27-Mar-2025 16:28:49 Europe/Berlin] PHPMailer loaded successfully
+[27-Mar-2025 16:28:49 Europe/Berlin] Processing POST request
+[27-Mar-2025 16:28:49 Europe/Berlin] POST data: Array
+(
+    [csrf_token] => 2fb5ae737f86172c5d2c89d7c5101156ae9dc4f46d40d2a3b9b8690b66fa16a5
+    [name] => test name
+    [email] => ronenbitman@gmail.com
+    [subject] => test subject
+    [message] => test message
+)
+
+[27-Mar-2025 16:28:49 Europe/Berlin] CSRF token validation passed
+[27-Mar-2025 16:28:49 Europe/Berlin] Form validation passed
+[27-Mar-2025 16:28:49 Europe/Berlin] Email configuration: Array
+(
+    [smtp_host] => pihf-com0e.mail.protection.outlook.com
+    [smtp_port] => 25
+    [smtp_auth] => 
+    [from_email] => website_contact_us@pi-hf.com
+    [to_email] => ronen@pi-hf.com
+    [reply_to] => ronenbitman@gmail.com
+    [phpmailer_available] => 1
+)
+
+[27-Mar-2025 16:28:52 Europe/Berlin] Sending JSON response: {"success":true,"message":"Thank you for your message. We will contact you shortly.","errors":[],"debug":{"smtp_host":"pihf-com0e.mail.protection.outlook.com","smtp_port":25,"smtp_auth":false,"from_email":"website_contact_us@pi-hf.com","to_email":"ronen@pi-hf.com","reply_to":"ronenbitman@gmail.com","phpmailer_available":true}}
+[27-Mar-2025 16:29:36 Europe/Berlin] Contact form processing started
+[27-Mar-2025 16:29:36 Europe/Berlin] Config loaded
+[27-Mar-2025 16:29:36 Europe/Berlin] Utility functions loaded
+[27-Mar-2025 16:29:36 Europe/Berlin] Loading autoload.php
+[27-Mar-2025 16:29:36 Europe/Berlin] PHPMailer loaded successfully
+[27-Mar-2025 16:29:36 Europe/Berlin] Processing POST request
+[27-Mar-2025 16:29:36 Europe/Berlin] POST data: Array
+(
+    [csrf_token] => 05a790ac94623d9217753c402338a2f076064aa8bec2b865c0ba6c4a4f1ff4ff
+    [name] => test name
+    [email] => ronenbitman@gmail.com
+    [subject] => test subject
+    [message] => test message
+)
+
+[27-Mar-2025 16:29:36 Europe/Berlin] CSRF token validation passed
+[27-Mar-2025 16:29:36 Europe/Berlin] Form validation passed
+[27-Mar-2025 16:29:36 Europe/Berlin] Email configuration: Array
+(
+    [smtp_host] => pihf-com0e.mail.protection.outlook.com
+    [smtp_port] => 25
+    [smtp_auth] => 
+    [from_email] => website_contact_us@pi-hf.com
+    [to_email] => ronen@pi-hf.com
+    [reply_to] => ronenbitman@gmail.com
+    [phpmailer_available] => 1
+)
+
+[27-Mar-2025 16:29:38 Europe/Berlin] Sending JSON response: {"success":true,"message":"Thank you for your message. We will contact you shortly.","errors":[],"debug":{"smtp_host":"pihf-com0e.mail.protection.outlook.com","smtp_port":25,"smtp_auth":false,"from_email":"website_contact_us@pi-hf.com","to_email":"ronen@pi-hf.com","reply_to":"ronenbitman@gmail.com","phpmailer_available":true}}
+[27-Mar-2025 16:30:45 Europe/Berlin] Contact form processing started
+[27-Mar-2025 16:30:45 Europe/Berlin] Config loaded
+[27-Mar-2025 16:30:45 Europe/Berlin] Utility functions loaded
+[27-Mar-2025 16:30:45 Europe/Berlin] Loading autoload.php
+[27-Mar-2025 16:30:45 Europe/Berlin] PHPMailer loaded successfully
+[27-Mar-2025 16:30:45 Europe/Berlin] Processing POST request
+[27-Mar-2025 16:30:45 Europe/Berlin] POST data: Array
+(
+    [csrf_token] => 347bcbe91d0ad834c8456fe73b909ac97dcd225281f4cbc5ecc39bb5fee8916a
+    [name] => test name
+    [email] => ronenbitman@gmail.com
+    [subject] => test subject
+    [message] => test message
+)
+
+[27-Mar-2025 16:30:45 Europe/Berlin] CSRF token validation passed
+[27-Mar-2025 16:30:45 Europe/Berlin] Form validation passed
+[27-Mar-2025 16:30:45 Europe/Berlin] Email configuration: Array
+(
+    [smtp_host] => pihf-com0e.mail.protection.outlook.com
+    [smtp_port] => 25
+    [smtp_auth] => 
+    [from_email] => website_contact_us@pi-hf.com
+    [to_email] => ronen@pi-hf.com
+    [reply_to] => ronenbitman@gmail.com
+    [phpmailer_available] => 1
+)
+
+[27-Mar-2025 16:30:49 Europe/Berlin] Sending JSON response: {"success":true,"message":"Thank you for your message. We will contact you shortly.","errors":[],"debug":{"smtp_host":"pihf-com0e.mail.protection.outlook.com","smtp_port":25,"smtp_auth":false,"from_email":"website_contact_us@pi-hf.com","to_email":"ronen@pi-hf.com","reply_to":"ronenbitman@gmail.com","phpmailer_available":true}}
+[27-Mar-2025 16:33:07 Europe/Berlin] Contact form processing started
+[27-Mar-2025 16:33:07 Europe/Berlin] Config loaded
+[27-Mar-2025 16:33:07 Europe/Berlin] Utility functions loaded
+[27-Mar-2025 16:33:07 Europe/Berlin] Loading autoload.php
+[27-Mar-2025 16:33:07 Europe/Berlin] PHPMailer loaded successfully
+[27-Mar-2025 16:33:07 Europe/Berlin] Processing POST request
+[27-Mar-2025 16:33:07 Europe/Berlin] POST data: Array
+(
+    [csrf_token] => 5441b6c1b24da997b4211f4e4c14a75648b5f29d061334d953402dc06b909ec3
+    [name] => test name
+    [email] => ronenbitman@gmail.com
+    [subject] => test subject
+    [message] => test message
+)
+
+[27-Mar-2025 16:33:07 Europe/Berlin] CSRF token validation passed
+[27-Mar-2025 16:33:07 Europe/Berlin] Form validation passed
+[27-Mar-2025 16:33:07 Europe/Berlin] Email configuration: Array
+(
+    [smtp_host] => pihf-com0e.mail.protection.outlook.com
+    [smtp_port] => 25
+    [smtp_auth] => 
+    [from_email] => website_contact_us@pi-hf.com
+    [to_email] => ronen@pi-hf.com
+    [reply_to] => ronenbitman@gmail.com
+    [phpmailer_available] => 1
+)
+
+[27-Mar-2025 16:33:09 Europe/Berlin] Sending JSON response: {"success":true,"message":"Thank you for your message. We will contact you shortly.","errors":[],"debug":{"smtp_host":"pihf-com0e.mail.protection.outlook.com","smtp_port":25,"smtp_auth":false,"from_email":"website_contact_us@pi-hf.com","to_email":"ronen@pi-hf.com","reply_to":"ronenbitman@gmail.com","phpmailer_available":true}}

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Home - Contact Us</title>
+    <meta name="description" content="">
+    <link rel="canonical" href="https://www.pi-hf.com/en/contact">
+    <meta property="og:title" content="Home - Contact Us">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="https://www.pi-hf.com/en/contact">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.pi-hf.com/assets/images/og-image.jpg">
+        <link rel="stylesheet" href="assets/css/main.css">
+        
+        <!-- Leaflet CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+        
+    <!-- Load the new modular JavaScript main file -->
+    <script type="module" src="assets/js/main.js"></script>
+            <!-- Leaflet JS for OpenStreetMap -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+        
+    <script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "ContactPage",
+</script>
+<script type="application/ld+json">
+    "name": "PI Group",
+</script>
+<script type="application/ld+json">
+    "url": "https://www.pi-hf.com",
+</script>
+<script type="application/ld+json">
+    "logo": "https://www.pi-hf.com/assets/images/logo.png",
+</script>
+<script type="application/ld+json">
+    "sameAs": [
+</script>
+<script type="application/ld+json">
+        "https://www.facebook.com/PIGroup",
+</script>
+<script type="application/ld+json">
+        "https://www.linkedin.com/company/pigroup",
+</script>
+<script type="application/ld+json">
+        "https://twitter.com/PIGroup"
+</script>
+<script type="application/ld+json">
+    ],
+</script>
+<script type="application/ld+json">
+    "address": {
+</script>
+<script type="application/ld+json">
+        "@type": "PostalAddress",
+</script>
+<script type="application/ld+json">
+        "streetAddress": "123 Financial Street",
+</script>
+<script type="application/ld+json">
+        "addressLocality": "Tel Aviv",
+</script>
+<script type="application/ld+json">
+        "addressRegion": "TA",
+</script>
+<script type="application/ld+json">
+        "postalCode": "12345",
+</script>
+<script type="application/ld+json">
+        "addressCountry": "IL"
+</script>
+<script type="application/ld+json">
+    },
+</script>
+<script type="application/ld+json">
+    "foundingDate": "1999",
+</script>
+<script type="application/ld+json">
+    "founder": {
+</script>
+<script type="application/ld+json">
+        "@type": "Person",
+</script>
+<script type="application/ld+json">
+        "name": "Aron Cohen and Jonny Kaye"
+</script>
+<script type="application/ld+json">
+    },
+</script>
+<script type="application/ld+json">
+    "description": "Contact PI Group for expert financial services and inquiries.",
+</script>
+<script type="application/ld+json">
+    "headline": "Contact Us",
+</script>
+<script type="application/ld+json">
+    "contactPoint": {
+</script>
+<script type="application/ld+json">
+        "@type": "ContactPoint",
+</script>
+<script type="application/ld+json">
+        "telephone": "",
+</script>
+<script type="application/ld+json">
+        "email": "",
+</script>
+<script type="application/ld+json">
+        "contactType": "customer service"
+</script>
+<script type="application/ld+json">
+    }
+</script>
+<script type="application/ld+json">
+}
+</script>
+<script type="application/ld+json">
+{
+</script>
+<script type="application/ld+json">
+    "@context": "https://schema.org",
+</script>
+<script type="application/ld+json">
+    "@type": "BreadcrumbList",
+</script>
+<script type="application/ld+json">
+    "itemListElement": [
+</script>
+<script type="application/ld+json">
+        {
+</script>
+<script type="application/ld+json">
+            "@type": "ListItem",
+</script>
+<script type="application/ld+json">
+            "position": 1,
+</script>
+<script type="application/ld+json">
+            "name": "PI Group - Home",
+</script>
+<script type="application/ld+json">
+            "item": "https://www.pi-hf.com/?page=home&lang=en"
+</script>
+<script type="application/ld+json">
+        },
+</script>
+<script type="application/ld+json">
+        {
+</script>
+<script type="application/ld+json">
+            "@type": "ListItem",
+</script>
+<script type="application/ld+json">
+            "position": 2,
+</script>
+<script type="application/ld+json">
+            "name": "Contact PI Group",
+</script>
+<script type="application/ld+json">
+            "item": "https://www.pi-hf.com/?page=contact&lang=en"
+</script>
+<script type="application/ld+json">
+        }
+</script>
+<script type="application/ld+json">
+    ]
+</script>
+<script type="application/ld+json">
+}
+</script>
+</head>
+<body class="contact-page">
+    <header id="site-header" class="">
+        <div class="container">
+            <div class="header-content">
+                <!-- Mobile menu toggle button for screens < 768px -->
+                <button class="mobile-menu-toggle" 
+                    aria-label="Toggle navigation menu" 
+                    aria-expanded="false">
+                    <span class="menu-icon">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </span>
+                </button>
+                
+                <!-- Section 1: Logo & Group name -->
+                <div class="logo-section">
+                    <a href="?page=home&lang=en" class="logo-link">
+                        <div class="logo-container">
+                            <img src="assets/images/logo_small.svg" alt="PI Group Logo">
+                            <span class="group-name">PI Group</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Section 2: Main Navigation Menu -->
+                <nav class="main-nav">
+                    <ul>
+                                                <li class="">
+                            <a href="?page=home&lang=en">
+                                Home                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=segment&id=asset_management&lang=en">
+                                Asset Management                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=segment&id=investment_banking&lang=en">
+                                Investment Banking                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=our-team&lang=en">
+                                Our Team                            </a>
+                        </li>
+                                                <li class="">
+                            <a href="?page=about&lang=en">
+                                About Us                            </a>
+                        </li>
+                                                <li class="active">
+                            <a href="?page=contact&lang=en">
+                                Contact Us                            </a>
+                        </li>
+                                            </ul>
+                </nav>
+                
+                <!-- Section 3: Language Switcher -->
+                            </div>
+        </div>
+    </header>
+    <main id="main-content">
+
+
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact PI Group</h1>
+        <p class="slogan">Get in Touch</p>
+        <p class="lead">Reach out to us for any inquiries or to learn more about our services.</p>
+    </div>
+</section>
+
+<section class="contact-us">
+    <div class="container">
+                
+        <div class="contact-content">
+            <!-- Contact info and map on the left for desktop, first for mobile -->
+            <div class="contact-info-map contact-column">
+                <!-- Map section -->
+                                
+                <!-- Contact information -->
+                <div class="contact-info">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="contact-info-grid">
+                        <!-- Address card -->
+                        <div class="contact-card address">
+                            <div class="contact-info">
+                                <h3>Address</h3>
+                                <p>18, Raoul Wallenberg, Tel Aviv, Israel</p>
+                                                                    <p>Zipcode: 6971001</p>
+                                                            </div>
+                        </div>
+                        
+                        <!-- Phone card -->
+                        <div class="contact-card phone">
+                            <div class="contact-info">
+                                <h3>Phone</h3>
+                                <p>
+                                    Tel:
+                                    <a href="tel:+97233732090">+972-3-3732090</a>
+                                </p>
+                                                                    <p>Fax: +972-3-3732102</p>
+                                                            </div>
+                        </div>
+                        
+                        <!-- Email card -->
+                        <div class="contact-card email">
+                            <div class="contact-info">
+                                <h3>Email</h3>
+                                <p><a href="mailto:info@pi-hf.com">info@pi-hf.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Website card -->
+                                                <div class="contact-card website">
+                            <div class="contact-info">
+                                <h3>Website</h3>
+                                <p><a href="https://www.pi-hf.com" target="_blank">https://www.pi-hf.com</a></p>
+                            </div>
+                        </div>
+                                            </div>
+
+                    <!-- Social Media Links -->
+                                    </div>
+            </div>
+
+            <!-- Form on the right for desktop, last for mobile -->
+            <div class="contact-form contact-column">
+                <h2>Send Us a Message</h2>
+                <form id="contactForm" class="contact-form" data-action="?page=process-contact" method="post">
+                    <input type="hidden" name="csrf_token" value="aba6084357474b4af219944492a93fc621f332a1a1bef41bfced0dddce3442a6">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <div class="error-message"></div>
+                    </div>
+                                        <button type="submit" class="submit-btn">Send Message</button>
+                                        <button type="button" id="debugSmtpButton" class="debug-btn">Test SMTP Server</button>
+                                    </form>
+            </div>
+        </div>
+        <div id="formMessage" class="form-message"></div>
+    </div>
+</section>
+
+
+<!-- Add custom JavaScript for form validation and submission -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+    
+    // Form validation
+    form.addEventListener('input', function(e) {
+        const field = e.target;
+        const errorDiv = field.nextElementSibling;
+        
+        // Reset error message
+        errorDiv.textContent = '';
+        field.classList.remove('error');
+        
+        // Validate field
+        if (field.validity.valid) {
+            field.classList.add('valid');
+        } else {
+            field.classList.add('error');
+            errorDiv.textContent = field.validationMessage;
+        }
+    });
+    
+    // Debug SMTP button handler
+    const debugButton = document.getElementById('debugSmtpButton');
+    if (debugButton) {
+        debugButton.addEventListener('click', function() {
+            // Fill form with test data
+            form.querySelector('#name').value = 'test name';
+            form.querySelector('#email').value = 'ronenbitman@gmail.com';
+            form.querySelector('#subject').value = 'test subject';
+            form.querySelector('#message').value = 'test message';
+            
+            // Submit the form
+            form.dispatchEvent(new Event('submit'));
+        });
+    }
+    
+    // Form submission
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Reset previous messages
+        formMessage.textContent = '';
+        formMessage.className = 'form-message';
+        
+        // Reset all error messages
+        form.querySelectorAll('.error-message').forEach(div => div.textContent = '');
+        form.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+        
+        // Validate form
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+        
+        // Validate reCAPTCHA if enabled
+                
+        // Get form data
+        const formData = new FormData(form);
+        
+        try {
+            // Log form submission details
+            console.log('Form submission started');
+            console.log('Form action:', form.dataset.action);
+            console.log('Form data:', Object.fromEntries(formData));
+            
+            // Send form data
+            const response = await fetch(form.dataset.action, {
+                method: 'POST',
+                body: formData,
+                credentials: 'include',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            });
+            
+            // Get response text first
+            const responseText = await response.text();
+            console.log('Raw server response:', responseText);
+            
+            // Try to parse as JSON
+            let data;
+            try {
+                data = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', e);
+                throw new Error('Server returned invalid response format');
+            }
+            
+            // Log SMTP configuration if available
+            if (data.debug) {
+                console.log('SMTP Configuration:', data.debug);
+            }
+            
+            if (data.success) {
+                // Show success message
+                formMessage.textContent = data.message;
+                formMessage.className = 'form-message success';
+                
+                // Reset form
+                form.reset();
+                
+                // Reset reCAPTCHA if enabled
+                                
+                // Scroll message into view
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Show error message
+                formMessage.textContent = data.message;
+                formMessage.className = 'form-message error';
+                
+                // Show field-specific errors
+                if (data.errors) {
+                    Object.entries(data.errors).forEach(([field, message]) => {
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            input.classList.add('error');
+                            input.nextElementSibling.textContent = message;
+                        }
+                    });
+                }
+                
+                // If CSRF token error, regenerate token
+                if (data.message.includes('Invalid security token')) {
+                    try {
+                        // Get new CSRF token by making a GET request to the contact page
+                        const tokenResponse = await fetch('?page=contact&lang=en', {
+                            credentials: 'include',
+                            headers: {
+                                'Accept': 'text/html'
+                            }
+                        });
+                        
+                        if (!tokenResponse.ok) {
+                            throw new Error('Failed to get new CSRF token');
+                        }
+                        
+                        const html = await tokenResponse.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newToken = doc.querySelector('input[name="csrf_token"]')?.value;
+                        
+                        if (!newToken) {
+                            throw new Error('Could not find CSRF token in response');
+                        }
+                        
+                        // Update form with new token
+                        const tokenInput = form.querySelector('input[name="csrf_token"]');
+                        if (tokenInput) {
+                            tokenInput.value = newToken;
+                            
+                            // Retry submission if it was the debug button
+                            if (e.target === debugButton) {
+                                console.log('Retrying form submission with new CSRF token');
+                                form.dispatchEvent(new Event('submit'));
+                            }
+                        } else {
+                            throw new Error('Could not find CSRF token input field');
+                        }
+                    } catch (error) {
+                        console.error('Error refreshing CSRF token:', error);
+                        formMessage.textContent = 'Session expired. Please refresh the page and try again.';
+                        formMessage.className = 'form-message error';
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            formMessage.textContent = 'An error occurred while submitting the form. Please try again.';
+            formMessage.className = 'form-message error';
+        }
+    });
+
+    // Initialize the map only if the map container exists
+    const mapContainer = document.getElementById('map');
+    if (mapContainer) {
+        const map = L.map('map', {
+            scrollWheelZoom: false,
+            dragging: true,
+            zoomControl: true
+        }).setView([32.109608, 34.837384], 17);
+        
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+        
+        // Add a marker for the office location
+        const officeLocation = [32.109608, 34.837384];
+        const marker = L.marker(officeLocation).addTo(map);
+        
+        // Add a popup with the address
+        marker.bindPopup('18, Raoul Wallenberg, Tel Aviv, Israel').openPopup();
+        
+        // Ensure the map container is visible and redraws properly
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 100);
+    }
+});
+</script>
+
+</main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                                    </div>
+                <div class="footer-links">
+                    <ul>
+                                            </ul>
+                </div>
+                <div class="footer-social">
+                    <!-- Add social media links here -->
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PI Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    
+<div id="cookie-consent-banner" class="cookie-consent-banner">
+    <div class="container">
+        <div class="cookie-consent-banner__content">
+            <h3>Cookie Consent</h3>
+            <p>This website uses cookies to improve your experience. By continuing to use this site, you agree to our use of cookies.</p>
+        </div>
+        <div class="cookie-consent-banner__actions">
+            <button id="cookie-accept-btn" class="accept">Accept</button>
+            <button id="cookie-decline-btn" class="decline">Decline</button>
+        </div>
+    </div>
+</div> </body>
+</html>
+

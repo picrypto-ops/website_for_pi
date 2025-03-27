@@ -1,0 +1,5 @@
+[27-Mar-2025 16:27:54 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\src\pages/src/config/config.php' (include_path='C:\xampp\php\PEAR') in C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\src\pages\process-contact.php:10
+Stack trace:
+#0 C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\index.php(43): include()
+#1 {main}
+  thrown in C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi\pi_website_take5\src\pages\process-contact.php on line 10

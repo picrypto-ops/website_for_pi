@@ -2341,7 +2341,7 @@ html[dir=rtl] .segment-card .segment-link .slogan .arrow:hover {
 .product-logo {
   flex: 0 0 auto;
   margin-right: 30px;
-  width: 175px;
+  width: 150px;
 }
 .product-logo img {
   max-width: 100%;
@@ -3750,7 +3750,7 @@ html[dir=rtl] .cookie-consent-banner__actions {
 .product-logo {
   flex: 0 0 auto;
   margin-right: 30px;
-  width: 175px;
+  width: 150px;
 }
 .product-logo img {
   max-width: 100%;

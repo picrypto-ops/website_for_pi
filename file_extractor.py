@@ -246,12 +246,12 @@ if __name__ == "__main__":
     # Example usage
     extractor = FileExtractor(
         # extension_list=["php", "js", "scss"],
-        extension_list=["php", "js"],
-        folder_list=["./pi_website_take5/assets/js", "./pi_website_take5/src"],
+        extension_list=["php", "js", "scss", "css", "json"],
+        folder_list=["./pi_website_take5/assets/css", "./pi_website_take5/assets/js", "./pi_website_take5/assets/scss", "./pi_website_take5/src"],
         # folder_list=["./pi_website_take5/assets", './pi_website_take5/components', './pi_website_take5/includes', './pi_website_take5/pages'],
         # exclude_folder_list=["./pi_website_take5/assets/images", "./pi_website_take5/assets/scss-bem"],
-        exclude_folder_list=["./pi_website_take5/src/utility"],
-        saved_export_folder="./export_scss"
-        # include_file_list=["./pi_website_take5/.htaccess", "./pi_website_take5/index.php"]
+        exclude_folder_list=["./pi_website_take5/src/utility", "./pi_website_take5/src/src/scss"],
+        saved_export_folder="./export_scss",
+        include_file_list=["./pi_website_take5/.htaccess", "./pi_website_take5/index.php"]
     )
     extractor.run()

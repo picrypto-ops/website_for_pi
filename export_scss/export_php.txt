@@ -1,5 +1,100 @@
 
 ================================================================================
+FILE: index.php
+PATH: pi_website_take5\index.php
+================================================================================
+
+<?php
+// Configure error reporting based on debug mode
+if (defined('PHP_DEBUG_MODE') && PHP_DEBUG_MODE === true) {
+    // Debug mode: Show all errors
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    // Production mode: Hide errors
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    error_reporting(0);
+    
+    // Log errors instead of displaying them
+    ini_set('log_errors', 1);
+    ini_set('error_log', __DIR__ . '/src/logs/php_errors.log');
+}
+
+require_once 'src/config/config.php';
+require_once 'src/utility/functions.php';
+require_once 'src/utility/language.php';
+require_once 'src/utility/cache.php';
+
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
+// Validate language from URL against available languages, or use default
+$urlLang = isset($_GET['lang']) ? $_GET['lang'] : '';
+$lang = in_array($urlLang, AVAILABLE_LANGUAGES) ? $urlLang : DEFAULT_LANG;
+
+// Validate that default language exists in available languages
+if (!in_array(DEFAULT_LANG, AVAILABLE_LANGUAGES) && count(AVAILABLE_LANGUAGES) > 0) {
+    // If default is not in available languages, use the first available language
+    $lang = AVAILABLE_LANGUAGES[0];
+}
+
+// Handle AJAX requests for process-contact
+if ($page === 'process-contact' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+    // Include the process-contact file directly
+    include 'src/pages/process-contact.php';
+    exit;
+}
+
+// Validate the page against whitelist
+if (!isPageAllowed($page)) {
+    // Redirect to 404 page if not allowed
+    redirectToPage('404', ['original' => $page], $lang);
+}
+
+// Set the language
+setLanguage($lang);
+
+// Generate cache key
+$cacheKey = $lang . '_' . $page . '_' . (isset($_GET['id']) ? $_GET['id'] : '');
+
+// Try to get cached content
+$cachedContent = getCache($cacheKey);
+
+if ($cachedContent === false) {
+    // Start output buffering
+    ob_start();
+
+    // Load the header
+    include 'src/components/header.php';
+
+    // Load the page content
+    if (file_exists("src/pages/{$page}.php")) {
+        include "src/pages/{$page}.php";
+    } else {
+        include 'src/pages/404.php';
+    }
+
+    // Load the footer
+    include 'src/components/footer.php';
+
+    // Get the buffered content
+    $content = ob_get_clean();
+
+    // Cache the content
+    setCache($cacheKey, $content);
+
+    // Output the content
+    echo $content;
+} else {
+    // Output the cached content
+    echo $cachedContent;
+}
+
+
+
+
+================================================================================
 FILE: asset_management_icons.php
 PATH: pi_website_take5\src\components\asset_management_icons.php
 ================================================================================
@@ -194,11 +289,66 @@ $useNewScss = isset($useNewScss) ? $useNewScss : false;
     <?php else: ?>
     <link rel="stylesheet" href="assets/css/main.css">
     <?php endif; ?>
+    
+    <?php if ($page === 'contact'): ?>
+    <!-- Leaflet CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    <?php endif; ?>
+    
     <!-- Load the new modular JavaScript main file -->
     <script type="module" src="assets/js/main.js"></script>
     <?php if ($page === 'home'): ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" 
+            integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" 
+            crossorigin="anonymous">
+        </script>
     <?php endif; ?>
+    <?php if ($page === 'contact'): ?>
+    <!-- Leaflet JS for OpenStreetMap -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    <?php endif; ?>
+    
+    <?php
+    // Add structured data for SEO
+    require_once 'src/utility/structured-data.php';
+    
+    // Prepare data for structured data generation
+    $structuredDataParams = [
+        'lang' => $lang
+    ];
+    
+    // Add page-specific data
+    if ($page === 'contact') {
+        $contactData = TranslatableFactory::getData('contact') ?: [];
+        $structuredDataParams['phone'] = $contactData['phone'] ?? '';
+        $structuredDataParams['email'] = $contactData['email'] ?? '';
+    } 
+    else if ($page === 'team-member' && isset($_GET['id'])) {
+        $teamMembers = TranslatableFactory::getData('team') ?: [];
+        $memberId = $_GET['id'];
+        
+        if (isset($teamMembers[$memberId])) {
+            $member = $teamMembers[$memberId];
+            $structuredDataParams['id'] = $memberId;
+            $structuredDataParams['name'] = $member['name'] ?? '';
+            $structuredDataParams['title'] = $member['title'] ?? '';
+            $structuredDataParams['bio'] = $member['bio'] ?? '';
+            $structuredDataParams['image'] = $member['image'] ?? '';
+            $structuredDataParams['linkedin'] = $member['linkedin'] ?? '';
+        }
+    }
+    else if ($page === 'segment' && isset($_GET['id'])) {
+        $structuredDataParams['segment_id'] = $_GET['id'];
+    }
+    
+    // Output the structured data
+    echo outputStructuredData($page, $structuredDataParams);
+    ?>
 </head>
 <body class="<?php echo $page; ?>-page">
     <header id="site-header" class="<?php echo $isHomePage ? 'home-header initially-hidden' : ''; ?>">
@@ -281,7 +431,9 @@ PATH: pi_website_take5\src\config\config.php
 <?php
 define('BASE_URL', 'https://www.pi-hf.com');
 define('DEFAULT_LANG', 'en');
-define('AVAILABLE_LANGUAGES', ['en', 'he']);
+define('AVAILABLE_LANGUAGES', ['en']);
+// define('AVAILABLE_LANGUAGES', ['en']);
+
 
 // Database configuration (if needed in the future)
 define('DB_HOST', 'localhost');
@@ -290,16 +442,69 @@ define('DB_USER', 'username');
 define('DB_PASS', 'password');
 
 // Email configuration for contact form
-define('SMTP_HOST', 'smtp.example.com');
-define('SMTP_PORT', 587);
-define('SMTP_USER', 'your_email@example.com');
-define('SMTP_PASS', 'your_email_password');
+define('SMTP_HOST', 'pihf-com0e.mail.protection.outlook.com');
+define('SMTP_PORT', 25);
+define('SMTP_FROM', 'website_contact_us@pi-hf.com');
+define('SMTP_TO', 'ronen@pi-hf.com');
+define('SEND_CONFIRMATION_EMAIL', false);
+
+// reCAPTCHA configuration
+define('USE_RECAPTCHA', false);
+define('RECAPTCHA_SITE_KEY', '');
+define('RECAPTCHA_SECRET_KEY', '');
+
+// Debug configuration
+define('SHOW_DEBUG_SMTP_SERVER_BUTTON', true);
+define('PHP_DEBUG_MODE', false);
 
 // Other configuration settings
 // We're using OpenStreetMap which doesn't require an API key
 // define('GOOGLE_MAPS_API_KEY', 'your_google_maps_api_key');
 
 
+
+
+================================================================================
+FILE: whitelist.php
+PATH: pi_website_take5\src\config\whitelist.php
+================================================================================
+
+<?php
+/**
+ * Page Whitelist Configuration
+ * 
+ * This file defines the whitelist of allowed pages that can be loaded by the application.
+ * Pages not in this list will be redirected to the 404 page.
+ */
+
+/**
+ * Array of allowed page names
+ * 
+ * The array keys are the page names as they appear in the URL parameter,
+ * while the values indicate whether the page requires authentication.
+ * 
+ * Value of true means the page requires authentication (if auth system is implemented).
+ * Value of false means the page is publicly accessible.
+ */
+return [
+    // Public pages
+    'home' => false,
+    'about' => false,
+    'what-we-do' => false,
+    'contact' => false,
+    'our-team' => false,
+    'team-member' => false,
+    'segment' => false,
+    'product' => false,
+    '404' => false,
+    'csp-debug' => false,
+    'process-contact' => false,
+    'phpmailer-test' => false,
+    
+    // Auth-protected pages (for future use)
+    // 'admin' => true,
+    // 'dashboard' => true,
+]; 
 
 
 ================================================================================
@@ -314,13 +519,24 @@ PATH: pi_website_take5\src\pages\404.php
 
 // Get translatable for this page
 $pageTranslatable = TranslatableFactory::general();
+
+// Check if the user tried to access a disallowed page
+$originalPage = isset($_GET['original']) ? sanitizeInput($_GET['original']) : '';
+$isRestricted = !empty($originalPage);
 ?>
 
 <div class="error-page">
     <div class="container mx-auto py-20 px-6">
         <div class="text-center">
             <h1 class="text-4xl font-bold mb-6"><?php echo $pageTranslatable->getContent($lang, 'page_not_found_title', '404 - Page Not Found'); ?></h1>
-            <p class="text-xl mb-8"><?php echo $pageTranslatable->getContent($lang, 'page_not_found_message', 'The page you are looking for does not exist or is no longer available.'); ?></p>
+            
+            <?php if ($isRestricted): ?>
+                <p class="text-xl mb-4"><?php echo $pageTranslatable->getContent($lang, 'page_restricted_message', 'Access to the requested page is not allowed.'); ?></p>
+                <p class="mb-8 text-gray-700"><?php echo sprintf($pageTranslatable->getContent($lang, 'page_restricted_detail', 'The page "%s" is either restricted or does not exist.'), htmlspecialchars($originalPage)); ?></p>
+            <?php else: ?>
+                <p class="text-xl mb-8"><?php echo $pageTranslatable->getContent($lang, 'page_not_found_message', 'The page you are looking for does not exist or is no longer available.'); ?></p>
+            <?php endif; ?>
+            
             <a href="<?php echo buildUrl('home'); ?>" class="inline-block bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-dark transition duration-300">
                 <?php echo $pageTranslatable->getContent($lang, 'back_home', 'Back to Home'); ?>
             </a>
@@ -552,6 +768,13 @@ $contactDetails = $contactTranslatable->getContent($lang, 'contact_details', [])
 if (!is_array($contactDetails)) {
     $contactDetails = json_decode($contactDetails, true);
 }
+
+// Check for form submission response messages
+$formResponse = null;
+if (isset($_SESSION['contact_form_response'])) {
+    $formResponse = $_SESSION['contact_form_response'];
+    unset($_SESSION['contact_form_response']); // Clear after use
+}
 ?>
 
 <section class="contact-hero">
@@ -564,54 +787,48 @@ if (!is_array($contactDetails)) {
 
 <section class="contact-us">
     <div class="container">
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <div class="form-message success">
+            <i class="fa fa-check-circle"></i>
+            <p><?php echo $formResponse['message'] ?? $contactTranslatable->getContent($lang, 'contact_success_message', 'Thank you for your message. We will contact you shortly.'); ?></p>
+        </div>
+        <?php elseif (isset($_GET['error']) && $_GET['error'] == 1): ?>
+        <div class="form-message error">
+            <i class="fa fa-exclamation-circle"></i>
+            <p><?php echo $formResponse['message'] ?? $contactTranslatable->getContent($lang, 'contact_error_message', 'There was a problem sending your message. Please try again.'); ?></p>
+        </div>
+        <?php endif; ?>
+        
         <div class="contact-content">
-            <!-- Form on the left for desktop, last for mobile -->
-            <div class="contact-form contact-column">
-                <h2><?php echo $contactTranslatable->getContent($lang, 'form_heading', 'Send Us a Message'); ?></h2>
-                <form id="contact-form" action="process-contact.php" method="POST">
-                    <div class="form-group">
-                        <label for="name"><?php echo $contactTranslatable->getContent($lang, 'name_label', 'Name'); ?></label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email"><?php echo $contactTranslatable->getContent($lang, 'email_label', 'Email'); ?></label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject"><?php echo $contactTranslatable->getContent($lang, 'subject_label', 'Subject'); ?></label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message"><?php echo $contactTranslatable->getContent($lang, 'message_label', 'Message'); ?></label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="button"><?php echo $contactTranslatable->getContent($lang, 'submit_button', 'Send Message'); ?></button>
-                </form>
-            </div>
-            
-            <!-- Map and contact info on the right for desktop, first for mobile -->
+            <!-- Contact info and map on the left for desktop, first for mobile -->
             <div class="contact-info-map contact-column">
                 <!-- Map section -->
+                <?php if ($contactTranslatable->getContent($lang, 'show_map', true)): ?>
                 <div class="map-section">
-                    <h2><?php echo $contactTranslatable->getContent($lang, 'our_info_map_label', 'Map'); ?></h2>
-                    <div id="map" class="contact-map"></div>
+                    <h2><?php echo $contactTranslatable->getContent($lang, 'our_info_map_label', 'Find Us'); ?></h2>
+                    <div id="map" 
+                         class="contact-map"
+                         data-lat="<?php echo $contactDetails['lat'] ?? $contactDetails['default_lat'] ?? 32.109608; ?>"
+                         data-lng="<?php echo $contactDetails['lng'] ?? $contactDetails['default_lng'] ?? 34.837384; ?>"
+                         data-address="<?php echo htmlspecialchars($contactDetails['address'] ?? $contactDetails['default_address'] ?? "18, Raoul Wallenberg, Atidim, Tel Aviv, Israel"); ?>">
+                    </div>
                     <p class="map-link">
-                        <a href="<?php echo $contactDetails['map_link'] ?? 'https://www.openstreetmap.org/?mlat=32.109608&mlon=34.837384#map=21/32.109608/34.837384'; ?>" target="_blank">
+                        <a href="<?php echo $contactDetails['map_link'] ?? $contactDetails['default_map_link'] ?? 'https://www.openstreetmap.org/?mlat=32.109608&mlon=34.837384#map=21/32.109608/34.837384'; ?>" target="_blank">
                             <?php echo TranslatableFactory::general()->getContent($lang, 'view_larger_map', 'View Larger Map'); ?>
                         </a>
                     </p>
                 </div>
+                <?php endif; ?>
                 
                 <!-- Contact information -->
                 <div class="contact-info">
-                    <h2><?php echo $contactTranslatable->getContent($lang, 'our_info_heading', 'Contact Information'); ?></h2>
+                    <h2><?php echo $contactTranslatable->getContent($lang, 'our_info_heading', 'Get in Touch'); ?></h2>
                     
                     <div class="contact-info-grid">
                         <!-- Address card -->
                         <div class="contact-card address">
-                            <div class="icon"><i class="fa fa-map-marker-alt"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_address_label', 'Address'); ?></h3>
+                            <div class="contact-info">
+                                <h3><?php echo TranslatableFactory::general()->getContent($lang, 'address', 'Address'); ?></h3>
                                 <p><?php echo $contactDetails['address'] ?? ''; ?></p>
                                 <?php if (!empty($contactDetails['zipcode'])): ?>
                                     <p><?php echo $contactTranslatable->getContent($lang, 'our_info_zipcode_label', 'Zipcode'); ?>: <?php echo $contactDetails['zipcode']; ?></p>
@@ -621,10 +838,12 @@ if (!is_array($contactDetails)) {
                         
                         <!-- Phone card -->
                         <div class="contact-card phone">
-                            <div class="icon"><i class="fa fa-phone"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_phone_label', 'Phone'); ?></h3>
-                                <p><a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone'] ?? ''); ?>"><?php echo $contactDetails['phone'] ?? ''; ?></a></p>
+                            <div class="contact-info">
+                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_phone_section_label', 'Phone'); ?></h3>
+                                <p>
+                                    <?php echo $contactTranslatable->getContent($lang, 'our_info_phone_label', 'Tel'); ?>:
+                                    <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone'] ?? ''); ?>"><?php echo $contactDetails['phone'] ?? ''; ?></a>
+                                </p>
                                 <?php if (!empty($contactDetails['fax'])): ?>
                                     <p><?php echo $contactTranslatable->getContent($lang, 'our_info_fax_label', 'Fax'); ?>: <?php echo $contactDetails['fax']; ?></p>
                                 <?php endif; ?>
@@ -633,9 +852,8 @@ if (!is_array($contactDetails)) {
                         
                         <!-- Email card -->
                         <div class="contact-card email">
-                            <div class="icon"><i class="fa fa-envelope"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_email_label', 'Email'); ?></h3>
+                            <div class="contact-info">
+                                <h3><?php echo TranslatableFactory::general()->getContent($lang, 'email', 'Email'); ?></h3>
                                 <p><a href="mailto:<?php echo $contactDetails['email'] ?? ''; ?>"><?php echo $contactDetails['email'] ?? ''; ?></a></p>
                             </div>
                         </div>
@@ -643,50 +861,291 @@ if (!is_array($contactDetails)) {
                         <!-- Website card -->
                         <?php if (!empty($contactDetails['website_link'])): ?>
                         <div class="contact-card website">
-                            <div class="icon"><i class="fa fa-globe"></i></div>
-                            <div class="contact-info-content">
-                                <h3><?php echo $contactTranslatable->getContent($lang, 'our_info_website_label', 'Website'); ?></h3>
+                            <div class="contact-info">
+                                <h3><?php echo TranslatableFactory::general()->getContent($lang, 'website', 'Website'); ?></h3>
                                 <p><a href="<?php echo $contactDetails['website_link']; ?>" target="_blank"><?php echo $contactDetails['website_link']; ?></a></p>
                             </div>
                         </div>
                         <?php endif; ?>
                     </div>
+
+                    <!-- Social Media Links -->
+                    <?php if (!empty($contactDetails['social_media'])): ?>
+                    <div class="social-media">
+                        <h3><?php echo $contactTranslatable->getContent($lang, 'social_media_heading', 'Follow Us'); ?></h3>
+                        <div class="social-links">
+                            <?php foreach ($contactDetails['social_media'] as $platform => $url): ?>
+                                <a href="<?php echo $url; ?>" target="_blank" class="social-link" aria-label="<?php echo ucfirst($platform); ?>">
+                                    <i class="fab fa-<?php echo $platform; ?>"></i>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
+
+            <!-- Form on the right for desktop, last for mobile -->
+            <div class="contact-form contact-column">
+                <h2><?php echo $contactTranslatable->getContent($lang, 'form_heading', 'Send Us a Message'); ?></h2>
+                <form id="contactForm" class="contact-form" data-action="?page=process-contact" method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                        <div class="error-message"></div>
+                    </div>
+                    <?php if (USE_RECAPTCHA): ?>
+                    <div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE_KEY; ?>"></div>
+                        <div class="error-message"></div>
+                    </div>
+                    <?php endif; ?>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                    <?php if (defined('SHOW_DEBUG_SMTP_SERVER_BUTTON') && SHOW_DEBUG_SMTP_SERVER_BUTTON): ?>
+                    <button type="button" id="debugSmtpButton" class="debug-btn">Test SMTP Server</button>
+                    <?php endif; ?>
+                </form>
+            </div>
         </div>
+        <div id="formMessage" class="form-message"></div>
     </div>
 </section>
 
-<!-- Include Leaflet CSS and JS for OpenStreetMap -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
-      crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
-        crossorigin=""></script>
+<?php if (defined('USE_RECAPTCHA') && USE_RECAPTCHA): ?>
+<!-- Add reCAPTCHA script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<?php endif; ?>
 
+<!-- Add custom JavaScript for form validation and submission -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the map
-    const map = L.map('map').setView([<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>], 17);
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
     
-    // Add OpenStreetMap tile layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19
-    }).addTo(map);
+    // Form validation
+    form.addEventListener('input', function(e) {
+        const field = e.target;
+        const errorDiv = field.nextElementSibling;
+        
+        // Reset error message
+        errorDiv.textContent = '';
+        field.classList.remove('error');
+        
+        // Validate field
+        if (field.validity.valid) {
+            field.classList.add('valid');
+        } else {
+            field.classList.add('error');
+            errorDiv.textContent = field.validationMessage;
+        }
+    });
     
-    // Add a marker for the office location
-    const officeLocation = [<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>];
-    const marker = L.marker(officeLocation).addTo(map);
+    // Debug SMTP button handler
+    const debugButton = document.getElementById('debugSmtpButton');
+    if (debugButton) {
+        debugButton.addEventListener('click', function() {
+            // Fill form with test data
+            form.querySelector('#name').value = 'test name';
+            form.querySelector('#email').value = 'ronenbitman@gmail.com';
+            form.querySelector('#subject').value = 'test subject';
+            form.querySelector('#message').value = 'test message';
+            
+            // Submit the form
+            form.dispatchEvent(new Event('submit'));
+        });
+    }
     
-    // Add a popup with the address
-    marker.bindPopup('<?php echo addslashes($contactDetails['address'] ?? "18, Raoul Wallenberg, Atidim, Tel Aviv, Israel"); ?>').openPopup();
-    
-    // Ensure the map container is visible and redraws properly
-    setTimeout(function() {
-        map.invalidateSize();
-    }, 100);
+    // Form submission
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Reset previous messages
+        formMessage.textContent = '';
+        formMessage.className = 'form-message';
+        
+        // Reset all error messages
+        form.querySelectorAll('.error-message').forEach(div => div.textContent = '');
+        form.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+        
+        // Validate form
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+        
+        // Validate reCAPTCHA if enabled
+        <?php if (USE_RECAPTCHA): ?>
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+            const recaptchaError = form.querySelector('.g-recaptcha').nextElementSibling;
+            recaptchaError.textContent = 'Please complete the reCAPTCHA verification.';
+            return;
+        }
+        <?php endif; ?>
+        
+        // Get form data
+        const formData = new FormData(form);
+        
+        try {
+            // Log form submission details
+            console.log('Form submission started');
+            console.log('Form action:', form.dataset.action);
+            console.log('Form data:', Object.fromEntries(formData));
+            
+            // Send form data
+            const response = await fetch(form.dataset.action, {
+                method: 'POST',
+                body: formData,
+                credentials: 'include',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            });
+            
+            // Get response text first
+            const responseText = await response.text();
+            console.log('Raw server response:', responseText);
+            
+            // Try to parse as JSON
+            let data;
+            try {
+                data = JSON.parse(responseText);
+            } catch (e) {
+                console.error('Failed to parse JSON response:', e);
+                throw new Error('Server returned invalid response format');
+            }
+            
+            // Log SMTP configuration if available
+            if (data.debug) {
+                console.log('SMTP Configuration:', data.debug);
+            }
+            
+            if (data.success) {
+                // Show success message
+                formMessage.textContent = data.message;
+                formMessage.className = 'form-message success';
+                
+                // Reset form
+                form.reset();
+                
+                // Reset reCAPTCHA if enabled
+                <?php if (USE_RECAPTCHA): ?>
+                grecaptcha.reset();
+                <?php endif; ?>
+                
+                // Scroll message into view
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // Show error message
+                formMessage.textContent = data.message;
+                formMessage.className = 'form-message error';
+                
+                // Show field-specific errors
+                if (data.errors) {
+                    Object.entries(data.errors).forEach(([field, message]) => {
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            input.classList.add('error');
+                            input.nextElementSibling.textContent = message;
+                        }
+                    });
+                }
+                
+                // If CSRF token error, regenerate token
+                if (data.message.includes('Invalid security token')) {
+                    try {
+                        // Get new CSRF token by making a GET request to the contact page
+                        const tokenResponse = await fetch('?page=contact&lang=<?php echo $lang; ?>', {
+                            credentials: 'include',
+                            headers: {
+                                'Accept': 'text/html'
+                            }
+                        });
+                        
+                        if (!tokenResponse.ok) {
+                            throw new Error('Failed to get new CSRF token');
+                        }
+                        
+                        const html = await tokenResponse.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const newToken = doc.querySelector('input[name="csrf_token"]')?.value;
+                        
+                        if (!newToken) {
+                            throw new Error('Could not find CSRF token in response');
+                        }
+                        
+                        // Update form with new token
+                        const tokenInput = form.querySelector('input[name="csrf_token"]');
+                        if (tokenInput) {
+                            tokenInput.value = newToken;
+                            
+                            // Retry submission if it was the debug button
+                            if (e.target === debugButton) {
+                                console.log('Retrying form submission with new CSRF token');
+                                form.dispatchEvent(new Event('submit'));
+                            }
+                        } else {
+                            throw new Error('Could not find CSRF token input field');
+                        }
+                    } catch (error) {
+                        console.error('Error refreshing CSRF token:', error);
+                        formMessage.textContent = 'Session expired. Please refresh the page and try again.';
+                        formMessage.className = 'form-message error';
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            formMessage.textContent = 'An error occurred while submitting the form. Please try again.';
+            formMessage.className = 'form-message error';
+        }
+    });
+
+    // Initialize the map only if the map container exists
+    const mapContainer = document.getElementById('map');
+    if (mapContainer) {
+        const map = L.map('map', {
+            scrollWheelZoom: false,
+            dragging: true,
+            zoomControl: true
+        }).setView([<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>], 17);
+        
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+        
+        // Add a marker for the office location
+        const officeLocation = [<?php echo $contactDetails['lat'] ?? 32.109608; ?>, <?php echo $contactDetails['lng'] ?? 34.837384; ?>];
+        const marker = L.marker(officeLocation).addTo(map);
+        
+        // Add a popup with the address
+        marker.bindPopup('<?php echo addslashes($contactDetails['address'] ?? "18, Raoul Wallenberg, Atidim, Tel Aviv, Israel"); ?>').openPopup();
+        
+        // Ensure the map container is visible and redraws properly
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 100);
+    }
 });
 </script>
 
@@ -902,7 +1361,7 @@ $teamGroups = array_keys($allTeam);
                                                     }
                                                     
                                                     if (!empty($roleTitle)) {
-                                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                        echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                                     }
                                                     
                                                     echo '</div>';
@@ -947,6 +1406,441 @@ $teamGroups = array_keys($allTeam);
 </section>
 
 
+
+
+================================================================================
+FILE: process-contact.php
+PATH: pi_website_take5\src\pages\process-contact.php
+================================================================================
+
+<?php
+/**
+ * Process Contact Form
+ * Handles the contact form submission and email sending
+ * 
+ * @package PI-Website
+ */
+
+// Configure error reporting based on debug mode
+if (defined('PHP_DEBUG_MODE') && PHP_DEBUG_MODE === true) {
+    // Debug mode: Show all errors and log verbose information
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    // Enable detailed logging
+    $detailed_logging = true;
+} else {
+    // Production mode: Only log critical errors, don't display them
+    ini_set('display_errors', 0);
+    error_reporting(E_ERROR | E_PARSE);
+    // Disable detailed logging
+    $detailed_logging = false;
+}
+
+// Always log errors to a file regardless of debug mode
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/../logs/contact_form_errors.log');
+
+// Start error logging if in debug mode
+if ($detailed_logging) {
+    error_log("Contact form processing started");
+}
+
+try {
+    // Include the configuration file
+    require_once __DIR__ . '/../config/config.php';
+    
+    if ($detailed_logging) {
+        error_log("Config loaded");
+    }
+
+    // Include utility functions
+    require_once __DIR__ . '/../utility/functions.php';
+    
+    if ($detailed_logging) {
+        error_log("Utility functions loaded");
+    }
+
+    // Check if vendor directory exists
+    if (!file_exists(__DIR__ . '/../../../vendor')) {
+        // Critical error, log it but don't expose details
+        error_log("Vendor directory not found");
+    }
+
+    // Flag to track if PHPMailer is available
+    $phpmailer_available = false;
+
+    // Try to load PHPMailer
+    try {
+        // Check if autoload file exists
+        if (!file_exists(__DIR__ . '/../../../vendor/autoload.php')) {
+            throw new \Exception("Autoload file not found");
+        }
+        
+        require_once __DIR__ . '/../../../vendor/autoload.php';
+        
+        // Check if PHPMailer classes exist
+        if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
+            throw new \Exception("PHPMailer class not found");
+        }
+        
+        $phpmailer_available = true;
+    } catch (\Exception $e) {
+        error_log("PHPMailer loading error: " . $e->getMessage());
+        $phpmailer_available = false;
+    }
+
+    // Start session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Get current language
+    $lang = $_SESSION['lang'] ?? DEFAULT_LANG;
+
+    // Initialize variables for response
+    $response = [
+        'success' => false,
+        'message' => '',
+        'errors' => []
+    ];
+
+    // Process only POST requests
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($detailed_logging) {
+            error_log("Processing POST request");
+        }
+        
+        // First check CSRF token
+        if (!isset($_POST['csrf_token']) || !validateCsrfToken($_POST['csrf_token'])) {
+            $response['message'] = 'Invalid security token. Please reload the page and try again.';
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+        
+        // Define expected fields
+        $expectedFields = ['name', 'email', 'subject', 'message'];
+        
+        // Sanitize inputs and validate required fields
+        $sanitizedData = [];
+        $validationErrors = [];
+        
+        foreach ($expectedFields as $field) {
+            if (!isset($_POST[$field]) || empty(trim($_POST[$field]))) {
+                $validationErrors[$field] = "The {$field} field is required.";
+            } else {
+                // Sanitize the input based on field type
+                switch ($field) {
+                    case 'email':
+                        $email = filter_var(trim($_POST[$field]), FILTER_SANITIZE_EMAIL);
+                        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                            $validationErrors[$field] = "Please enter a valid email address.";
+                        } else {
+                            $sanitizedData[$field] = $email;
+                        }
+                        break;
+                    
+                    case 'name':
+                        // Name should contain only letters, spaces, and limited special characters
+                        $name = trim($_POST[$field]);
+                        if (!preg_match('/^[A-Za-z\s\'-]{2,50}$/', $name)) {
+                            $validationErrors[$field] = "Please enter a valid name (2-50 characters).";
+                        } else {
+                            $sanitizedData[$field] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+                        }
+                        break;
+                    
+                    case 'subject':
+                        // Subject should be between 3-100 characters
+                        $subject = trim($_POST[$field]);
+                        if (strlen($subject) < 3 || strlen($subject) > 100) {
+                            $validationErrors[$field] = "Subject must be between 3 and 100 characters.";
+                        } else {
+                            $sanitizedData[$field] = htmlspecialchars($subject, ENT_QUOTES, 'UTF-8');
+                        }
+                        break;
+                    
+                    case 'message':
+                        // Message should be between 10-1000 characters
+                        $message = trim($_POST[$field]);
+                        if (strlen($message) < 10 || strlen($message) > 1000) {
+                            $validationErrors[$field] = "Message must be between 10 and 1000 characters.";
+                        } else {
+                            $sanitizedData[$field] = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+                        }
+                        break;
+                }
+            }
+        }
+        
+        // Process only if no validation errors
+        if (empty($validationErrors)) {
+            // Setup debug information (minimal for production)
+            $debug_info = [
+                'smtp_host' => SMTP_HOST,
+                'smtp_port' => SMTP_PORT,
+                'phpmailer_available' => $phpmailer_available
+            ];
+            
+            if ($phpmailer_available) {
+                try {
+                    // Create a new PHPMailer instance with fully qualified name
+                    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+                    
+                    // Server settings
+                    $mail->SMTPDebug = 0;                      // Disable verbose debug output
+                    $mail->isSMTP();                           // Send using SMTP
+                    $mail->Host       = SMTP_HOST;             // Set the SMTP server to send through
+                    $mail->Port       = SMTP_PORT;             // TCP port to connect to, use 587 for TLS
+                    $mail->SMTPSecure = false;                 // No encryption for port 25
+                    $mail->SMTPAuth   = false;                 // No authentication needed for this SMTP relay
+                    
+                    // Recipients
+                    $mail->setFrom(SMTP_FROM, 'PI Website Contact Form');
+                    $mail->addAddress(SMTP_TO);                // Add a recipient
+                    $mail->addReplyTo($sanitizedData['email'], $sanitizedData['name']);
+                    
+                    // Email subject
+                    $mail->Subject = '[Contact Form] ' . $sanitizedData['subject'];
+                    
+                    // Prepare email body
+                    $emailBody = "
+                    <!DOCTYPE html>
+                    <html lang='en'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <style>
+                            body { 
+                                font-family: Arial, sans-serif; 
+                                line-height: 1.6; 
+                                color: #333;
+                            }
+                            .container { 
+                                max-width: 600px; 
+                                margin: 0 auto; 
+                                padding: 20px;
+                            }
+                            .header {
+                                background-color: #003366;
+                                color: #ffffff;
+                                padding: 20px;
+                                text-align: center;
+                            }
+                            .content {
+                                padding: 20px;
+                                background-color: #f9f9f9;
+                                border: 1px solid #e0e0e0;
+                            }
+                            .field {
+                                margin-bottom: 15px;
+                            }
+                            .label {
+                                font-weight: bold;
+                                color: #003366;
+                            }
+                            .message {
+                                background-color: #ffffff;
+                                padding: 15px;
+                                border: 1px solid #e0e0e0;
+                                margin-top: 20px;
+                            }
+                            .footer {
+                                text-align: center;
+                                padding: 20px;
+                                color: #666;
+                                font-size: 12px;
+                                margin-top: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class='container'>
+                            <div class='header'>
+                                <h2>New Contact Form Submission</h2>
+                            </div>
+                            <div class='content'>
+                                <div class='field'>
+                                    <span class='label'>Name:</span> 
+                                    {$sanitizedData['name']}
+                                </div>
+                                <div class='field'>
+                                    <span class='label'>Email:</span> 
+                                    {$sanitizedData['email']}
+                                </div>
+                                <div class='field'>
+                                    <span class='label'>Subject:</span> 
+                                    {$sanitizedData['subject']}
+                                </div>
+                                <div class='field'>
+                                    <span class='label'>Message:</span>
+                                    <div class='message'>" . nl2br($sanitizedData['message']) . "</div>
+                                </div>
+                            </div>
+                            <div class='footer'>
+                                <p>This email was sent from the PI Website Contact Form</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                    ";
+                    
+                    // Content
+                    $mail->isHTML(true);
+                    $mail->CharSet = 'UTF-8';
+                    $mail->Body    = $emailBody;
+                    $mail->AltBody = "Name: {$sanitizedData['name']}\nEmail: {$sanitizedData['email']}\nSubject: {$sanitizedData['subject']}\nMessage: {$sanitizedData['message']}";
+                    
+                    // Send the email
+                    $mail->send();
+                    
+                    // Email sent successfully
+                    $response['success'] = true;
+                    $response['message'] = 'Thank you for your message. We will contact you shortly.';
+                    
+                } catch (\Exception $e) {
+                    // Log the error
+                    error_log("Error sending email: " . $e->getMessage());
+                    $response['message'] = 'Sorry, there was an error sending your message. Please try again later.';
+                }
+            } else {
+                // Fallback to PHP mail() function if PHPMailer is not available
+                try {
+                    // Prepare email headers and body
+                    $headers = "From: " . SMTP_FROM . "\r\n";
+                    $headers .= "Reply-To: " . $sanitizedData['email'] . "\r\n";
+                    $headers .= "MIME-Version: 1.0\r\n";
+                    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+                    
+                    // Email subject
+                    $emailSubject = '[Contact Form] ' . $sanitizedData['subject'];
+                    
+                    // Prepare email body
+                    $emailBody = "
+                    <!DOCTYPE html>
+                    <html lang='en'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <style>
+                            body { 
+                                font-family: Arial, sans-serif; 
+                                line-height: 1.6; 
+                                color: #333;
+                            }
+                            .container { 
+                                max-width: 600px; 
+                                margin: 0 auto; 
+                                padding: 20px;
+                            }
+                            .header {
+                                background-color: #003366;
+                                color: #ffffff;
+                                padding: 20px;
+                                text-align: center;
+                            }
+                            .content {
+                                padding: 20px;
+                                background-color: #f9f9f9;
+                                border: 1px solid #e0e0e0;
+                            }
+                            .field {
+                                margin-bottom: 15px;
+                            }
+                            .label {
+                                font-weight: bold;
+                                color: #003366;
+                            }
+                            .message {
+                                background-color: #ffffff;
+                                padding: 15px;
+                                border: 1px solid #e0e0e0;
+                                margin-top: 20px;
+                            }
+                            .footer {
+                                text-align: center;
+                                padding: 20px;
+                                color: #666;
+                                font-size: 12px;
+                                margin-top: 20px;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class='container'>
+                            <div class='header'>
+                                <h2>New Contact Form Submission</h2>
+                            </div>
+                            <div class='content'>
+                                <div class='field'>
+                                    <span class='label'>Name:</span> 
+                                    {$sanitizedData['name']}
+                                </div>
+                                <div class='field'>
+                                    <span class='label'>Email:</span> 
+                                    {$sanitizedData['email']}
+                                </div>
+                                <div class='field'>
+                                    <span class='label'>Subject:</span> 
+                                    {$sanitizedData['subject']}
+                                </div>
+                                <div class='field'>
+                                    <span class='label'>Message:</span>
+                                    <div class='message'>" . nl2br($sanitizedData['message']) . "</div>
+                                </div>
+                            </div>
+                            <div class='footer'>
+                                <p>This email was sent from the PI Website Contact Form</p>
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                    ";
+                    
+                    // Configure mail
+                    ini_set('SMTP', SMTP_HOST);
+                    ini_set('smtp_port', SMTP_PORT);
+                    
+                    // Send email
+                    $mailSent = mail(SMTP_TO, $emailSubject, $emailBody, $headers);
+                    
+                    if ($mailSent) {
+                        // Set success response
+                        $response['success'] = true;
+                        $response['message'] = 'Thank you for your message. We will contact you shortly.';
+                    } else {
+                        // Email sending failed
+                        $response['message'] = 'Sorry, there was an error sending your message. Please try again later.';
+                        error_log("Mail sending failed");
+                    }
+                } catch (\Exception $e) {
+                    // Log the error
+                    error_log("Error sending email with PHP mail(): " . $e->getMessage());
+                    $response['message'] = 'Sorry, there was an error sending your message. Please try again later.';
+                }
+            }
+        } else {
+            // If there are validation errors, include them in the response
+            $response['errors'] = $validationErrors;
+            $response['message'] = 'Please correct the errors in the form.';
+        }
+    } else {
+        $response['message'] = 'Invalid request method.';
+    }
+
+    // Always send JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
+} catch (\Exception $e) {
+    // Catch any unexpected errors
+    error_log("Unexpected error: " . $e->getMessage());
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => false,
+        'message' => 'An error occurred. Please try again later.',
+        'errors' => []
+    ]);
+    exit;
+}
 
 
 ================================================================================
@@ -1169,9 +2063,9 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
                                             $productName = isset($role['product_name']) ? $role['product_name'] : '';
                                             // todo: format the output to be more readable
                                             if (!empty($roleTitle) && !empty($productName)) {
-                                                echo htmlspecialchars(ucfirst($roleTitle)) . ' - ' . htmlspecialchars($productName);
+                                                echo htmlspecialchars($roleTitle) . ' - ' . htmlspecialchars($productName);
                                             } elseif (!empty($roleTitle)) {
-                                                echo htmlspecialchars(ucfirst($roleTitle));
+                                                echo htmlspecialchars($roleTitle);
                                             } elseif (!empty($productName)) {
                                                 echo htmlspecialchars($productName);
                                             }
@@ -1224,7 +2118,7 @@ if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) &&
                                                 }
                                                 
                                                 if (!empty($roleTitle)) {
-                                                    echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                    echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                                 }
                                                 
                                                 echo '</div>';
@@ -1310,7 +2204,6 @@ $segmentTranslatable = TranslatableFactory::segment($segmentId);
             <?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
         </div>
 
-        <h3><?php echo TranslatableFactory::general()->getContent($lang, 'our_products', 'Our Products'); ?></h3>
         <div class="product-grid">
             <?php if (empty($segmentProducts)): ?>
                 <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_products', 'No products available for this segment.'); ?></p>
@@ -1329,11 +2222,11 @@ $segmentTranslatable = TranslatableFactory::segment($segmentId);
                             </div>
                             <div class="product-text">
                                 <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
+                                <p class="slogan">
+                                    <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                                </p>
                             </div>
                         </div>
-                        <p class="slogan">
-                            <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
-                        </p>
                     </a>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -1445,7 +2338,7 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                             
                             if (is_array($positions) && !empty($positions)) {
                                 $firstRole = reset($positions);
-                                $primaryRoleTitle = isset($firstRole['title']) ? ucfirst($firstRole['title']) : '';
+                                $primaryRoleTitle = isset($firstRole['title']) ? $firstRole['title'] : '';
                                 $primaryProductName = isset($firstRole['product_name']) ? $firstRole['product_name'] : '';
                                 
                                 if (!empty($primaryRoleTitle) && !empty($primaryProductName)) {
@@ -1487,7 +2380,7 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                                     }
                                     
                                     if (!empty($roleTitle)) {
-                                        echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                        echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                     }
                                     ?>
                                 </div>
@@ -1521,7 +2414,7 @@ $arrowChar = TranslatableFactory::general()->getContent($lang, 'arrow', '»');
                         <div class="credentials-list">
                             <?php foreach ($member['credentials'] as $credential => $value) { ?>
                             <div class="credential-item">
-                                <div class="credential-label"><?php echo ucfirst(str_replace('_', ' ', $credential)); ?>:</div>
+                                <div class="credential-label"><?php echo str_replace('_', ' ', $credential); ?>:</div>
                                 <div class="credential-value"><?php echo $value; ?></div>
                             </div>
                             <?php } ?>
@@ -1650,9 +2543,11 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
             
             <div class="home-contact-content">
                 <!-- Map preview - visible first on mobile -->
+                <?php if ($contactPage->getContent($lang, 'show_map', true)): ?>
                 <div class="home-map-preview">
                     <div id="home-map" class="home-contact-map"></div>
                 </div>
+                <?php endif; ?>
                 
                 <!-- Contact info cards - visible after map on mobile -->
                 <div class="contact-info-grid">
@@ -1675,8 +2570,11 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
                     <div class="contact-card phone">
                         <div class="icon"><i class="fa fa-phone"></i></div>
                         <div class="contact-info">
-                            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'phone', 'Phone'); ?></h3>
-                            <p><a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone']); ?>"><?php echo $contactDetails['phone']; ?></a></p>
+                            <h3><?php echo $contactPage->getContent($lang, 'our_info_phone_section_label', 'Phone'); ?></h3>
+                            <p>
+                                <?php echo $contactPage->getContent($lang, 'our_info_phone_label', 'Tel'); ?>:
+                                <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $contactDetails['phone']); ?>"><?php echo $contactDetails['phone']; ?></a>
+                            </p>
                             <?php if (!empty($contactDetails['fax'])): ?>
                                 <p><?php echo $contactPage->getContent($lang, 'our_info_fax_label', 'Fax'); ?>: <?php echo $contactDetails['fax']; ?></p>
                             <?php endif; ?>
@@ -1708,15 +2606,18 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
                 </div>
             </div>
             
-            <a href="?page=contact&lang=<?php echo $lang; ?>" class="button contact-button">
-                <?php echo TranslatableFactory::general()->getContent($lang, 'get_in_touch', 'Get In Touch'); ?>
-            </a>
+            <div class="text-center">
+                <a href="?page=contact&lang=<?php echo $lang; ?>" class="button button--outline">
+                    <?php echo TranslatableFactory::general()->getContent($lang, 'get_in_touch', 'Get In Touch'); ?>
+                </a>
+            </div>
         </div>
         
         <?php renderScrollIndicator($nextSectionId, $lang, 'contact-us'); ?>
     </section>
     
     <!-- Add Leaflet for home page map preview -->
+    <?php if ($contactPage->getContent($lang, 'show_map', true)): ?>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin=""/>
@@ -1751,6 +2652,7 @@ function renderContactSection($lang, $nextSectionId = 'hero') {
         }
     });
     </script>
+    <?php endif; ?>
     <?php
 } 
 
@@ -1862,11 +2764,11 @@ function renderProductsSection($lang) {
                                 </div>
                                 <div class="product-text">
                                     <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
+                                    <p class="slogan">
+                                        <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                                    </p>
                                 </div>
                             </div>
-                            <p class="slogan">
-                                <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
-                            </p>
                         </a>
                 <?php 
                         endforeach; 
@@ -2020,7 +2922,6 @@ function renderSegmentDisplay($lang, $segment_slug, $nextSectionId = null) {
                 <?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
             </div>
 
-            <h3><?php echo TranslatableFactory::general()->getContent($lang, 'our_products', 'Our Products'); ?></h3>
             <div class="product-grid">
                 <?php if (empty($segmentProducts)): ?>
                     <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_products', 'No products available for this segment.'); ?></p>
@@ -2039,11 +2940,11 @@ function renderSegmentDisplay($lang, $segment_slug, $nextSectionId = null) {
                                 </div>
                                 <div class="product-text">
                                     <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
+                                    <p class="slogan">
+                                        <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                                    </p>
                                 </div>
                             </div>
-                            <p class="slogan">
-                                <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
-                            </p>
                         </a>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -2160,7 +3061,7 @@ function renderTeamSection($lang, $nextSectionId = 'about-us') {
                                                             }
                                                             
                                                             if (!empty($roleTitle)) {
-                                                                echo '<span class="role-title">' . htmlspecialchars(ucfirst($roleTitle)) . '</span>';
+                                                                echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
                                                             }
                                                             ?>
                                                         </div>
@@ -2353,1130 +3254,5 @@ function renderWhatWeDoSection($lang, $nextSectionId = null) {
         <?php renderScrollIndicator($nextSectionId, $lang, 'what-we-do'); ?>
     </section>
     <?php
-} 
-
-
-================================================================================
-FILE: AbstractTranslatable.php
-PATH: pi_website_take5\src\translation\AbstractTranslatable.php
-================================================================================
-
-<?php
-/**
- * Abstract base class for translatable content
- */
-abstract class AbstractTranslatable implements TranslatableInterface {
-    /**
-     * Data array containing translatable content
-     * @var array
-     */
-    protected $data;
-    
-    /**
-     * Constructor
-     * 
-     * @param array $data Data containing translatable content
-     */
-    public function __construct($data) {
-        $this->data = $data;
-    }
-    
-    /**
-     * Get specific translated content
-     * 
-     * @param string $lang Language code
-     * @param string $key Content key
-     * @param string $default Default value if content not found
-     * @return string Translated content
-     */
-    public function getContent($lang, $key, $default = '') {
-        if ($this->key_exists($lang, $key)) {
-            return $this->get_key($lang, $key);
-        }
-        return $default;
-    }
-    
-    /**
-     * Check if specific translated content exists
-     * 
-     * @param string $lang Language code
-     * @param string $key Content key
-     * @return bool True if content exists, false otherwise
-     */
-    public function hasContent($lang, $key) {
-        return $this->key_exists($lang, $key);
-    }
-    
-    /**
-     * Check if a key exists for a specific language
-     * 
-     * @param string $lang Language code
-     * @param string $key Content key
-     * @return bool True if key exists, false otherwise
-     */
-    protected abstract function key_exists($lang, $key);
-    
-    /**
-     * Get the value for a specific key and language
-     * 
-     * @param string $lang Language code
-     * @param string $key Content key
-     * @return string Value for the key
-     * @throws Exception If the key does not exist
-     */
-    protected abstract function get_key($lang, $key);
-    
-    /**
-     * Get translated content with HTML formatting preserved
-     * 
-     * This method ensures HTML tags like <br> are properly rendered and 
-     * preserves line breaks in the content.
-     * 
-     * @param string $lang Language code
-     * @param string $key Content key
-     * @param string $default Default value if content not found
-     * @param bool $convertNewlines Whether to convert newlines to <br> tags
-     * @return string HTML-formatted content
-     */
-    public function getHtmlContent($lang, $key, $default = '', $convertNewlines = true) {
-        $content = $this->getContent($lang, $key, $default);
-        
-        // Use the formatHtmlContent function to preserve HTML formatting
-        return formatHtmlContent($content, $convertNewlines);
-    }
-    
-    /**
-     * Default implementation returning empty string when content not found
-     * 
-     * @return string Empty string
-     */
-    protected function getDefaultContent() {
-        return '';
-    }
-} 
-
-
-================================================================================
-FILE: GeneralTranslatable.php
-PATH: pi_website_take5\src\translation\GeneralTranslatable.php
-================================================================================
-
-<?php
-/**
- * Translatable for general.json data format
- */
-class GeneralTranslatable extends AbstractTranslatable {
-    /**
-     * {@inheritdoc}
-     */
-    protected function key_exists($lang, $key) {
-        // Structure: { "term_slug": "X", "language_slug": { "en": { "label": "..." } } }
-        
-        // Check if we're trying to access a top-level key from the general data
-        if (isset($this->data[$key]) && 
-            isset($this->data[$key]['language_slug']) && 
-            isset($this->data[$key]['language_slug'][$lang]) && 
-            isset($this->data[$key]['language_slug'][$lang]['label'])) {
-            return true;
-        }
-        
-        // Fallback to original implementation for compatibility
-        if (isset($this->data['language_slug']) && 
-            isset($this->data['language_slug'][$lang]) && 
-            isset($this->data['language_slug'][$lang][$key])) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function get_key($lang, $key) {
-        // Structure: { "term_slug": "X", "language_slug": { "en": { "label": "..." } } }
-        
-        // Check if we're trying to access a top-level key from the general data
-        if (isset($this->data[$key]) && 
-            isset($this->data[$key]['language_slug']) && 
-            isset($this->data[$key]['language_slug'][$lang]) && 
-            isset($this->data[$key]['language_slug'][$lang]['label'])) {
-            
-            // Successfully found the translation
-            return $this->data[$key]['language_slug'][$lang]['label'];
-        }
-        
-        // Fallback to original implementation for compatibility
-        if (isset($this->data['language_slug']) && 
-            isset($this->data['language_slug'][$lang]) && 
-            isset($this->data['language_slug'][$lang][$key])) {
-            
-            // Found translation in the original structure
-            return $this->data['language_slug'][$lang][$key];
-        }
-        
-        // Translation not found - log for debugging if debug is enabled
-        if (TranslatableFactory::$debug) {
-            $backtraceInfo = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
-            $caller = isset($backtraceInfo[1]) ? $backtraceInfo[1] : $backtraceInfo[0];
-            $file = isset($caller['file']) ? basename($caller['file']) : 'unknown';
-            $line = isset($caller['line']) ? $caller['line'] : 'unknown';
-            
-            error_log("Translation missing: Key '{$key}' not found for language '{$lang}' in {$file}:{$line}");
-        }
-        
-        // This shouldn't normally happen since key_exists should be called first
-        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllContent($lang) {
-        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
-            return $this->data['language_slug'][$lang];
-        }
-        
-        return [];
-    }
-} 
-
-
-================================================================================
-FILE: PageTranslatable.php
-PATH: pi_website_take5\src\translation\PageTranslatable.php
-================================================================================
-
-<?php
-/**
- * Translatable for pages.json data format
- */
-class PageTranslatable extends AbstractTranslatable {
-    /**
-     * {@inheritdoc}
-     */
-    protected function key_exists($lang, $key) {
-        // Structure: { "language_slug": { "en": { "key": "..." } } }
-        return isset($this->data['language_slug']) && 
-               isset($this->data['language_slug'][$lang]) && 
-               isset($this->data['language_slug'][$lang][$key]);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function get_key($lang, $key) {
-        // Structure: { "language_slug": { "en": { "key": "..." } } }
-        if ($this->key_exists($lang, $key)) {
-            return $this->data['language_slug'][$lang][$key];
-        }
-        
-        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllContent($lang) {
-        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
-            return $this->data['language_slug'][$lang];
-        }
-        
-        return [];
-    }
-} 
-
-
-================================================================================
-FILE: ProductTranslatable.php
-PATH: pi_website_take5\src\translation\ProductTranslatable.php
-================================================================================
-
-<?php
-/**
- * Translatable for products.json data format
- */
-class ProductTranslatable extends AbstractTranslatable {
-    /**
-     * {@inheritdoc}
-     */
-    protected function key_exists($lang, $key) {
-        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
-        return isset($this->data['language_slug']) && 
-               isset($this->data['language_slug'][$lang]) && 
-               isset($this->data['language_slug'][$lang][$key]);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function get_key($lang, $key) {
-        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
-        if ($this->key_exists($lang, $key)) {
-            return $this->data['language_slug'][$lang][$key];
-        }
-        
-        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllContent($lang) {
-        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
-            return $this->data['language_slug'][$lang];
-        }
-        
-        return [];
-    }
-} 
-
-
-================================================================================
-FILE: SegmentTranslatable.php
-PATH: pi_website_take5\src\translation\SegmentTranslatable.php
-================================================================================
-
-<?php
-/**
- * Translatable for segments.json data format
- */
-class SegmentTranslatable extends AbstractTranslatable {
-    /**
-     * {@inheritdoc}
-     */
-    protected function key_exists($lang, $key) {
-        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
-        return isset($this->data['language_slug']) && 
-               isset($this->data['language_slug'][$lang]) && 
-               isset($this->data['language_slug'][$lang][$key]);
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function get_key($lang, $key) {
-        // Structure: { "language_slug": { "en": { "name": "...", "description": "..." } } }
-        if ($this->key_exists($lang, $key)) {
-            return $this->data['language_slug'][$lang][$key];
-        }
-        
-        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllContent($lang) {
-        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
-            return $this->data['language_slug'][$lang];
-        }
-        
-        return [];
-    }
-} 
-
-
-================================================================================
-FILE: TeamMemberEnhanced.php
-PATH: pi_website_take5\src\translation\TeamMemberEnhanced.php
-================================================================================
-
-<?php
-/**
- * Enhanced Translatable for team members with product roles
- */
-class TeamMemberEnhanced extends AbstractTranslatable {
-    /**
-     * Team member data
-     * @var array
-     */
-    protected $memberData;
-    
-    /**
-     * Product roles data for the team member
-     * @var array
-     */
-    protected $productRoles = [];
-    
-    /**
-     * Constructor
-     * 
-     * @param array $memberData Team member data
-     * @param array $productRoles Product roles for the team member
-     */
-    public function __construct($memberData, $productRoles = []) {
-        parent::__construct($memberData);
-        $this->memberData = $memberData;
-        $this->productRoles = $productRoles;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function key_exists($lang, $key) {
-        // Check if the key is 'product_roles'
-        if ($key === 'product_roles') {
-            return true;
-        }
-        
-        // First check in main member data
-        if (isset($this->memberData[$key])) {
-            // Direct key for non-translatable content
-            return true;
-        } else if (isset($this->memberData['language_slug']) && 
-            isset($this->memberData['language_slug'][$lang]) && 
-            isset($this->memberData['language_slug'][$lang][$key])) {
-            // Translated key
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function get_key($lang, $key) {
-        // Special handling for product_roles
-        if ($key === 'product_roles') {
-            return $this->productRoles;
-        }
-        
-        // Special handling for position when display_product_roles is true
-        if ($key === 'position' && isset($this->memberData['display_product_roles']) && $this->memberData['display_product_roles'] === true) {
-            $positionRoles = [];
-            
-            // Process each product role
-            foreach ($this->productRoles as $role) {
-                if (isset($role['language_slug'][$lang]['title'])) {
-                    $roleData = [
-                        'segment_slug' => $role['segment_slug'] ?? null,
-                        'product_slug' => $role['product_slug'] ?? null,
-                        'title' => $role['language_slug'][$lang]['title']
-                    ];
-                    
-                    // Try to get product name from product_data (first approach)
-                    $productName = null;
-                    if (isset($role['product_data']) && 
-                        isset($role['product_data']['language_slug']) && 
-                        isset($role['product_data']['language_slug'][$lang]) && 
-                        isset($role['product_data']['language_slug'][$lang]['name'])) {
-                        $productName = $role['product_data']['language_slug'][$lang]['name'];
-                    } 
-                    // If first approach fails, try to find it through the productRoles array
-                    else {
-                        // Look through all product roles to find products with matching product_slug
-                        foreach ($this->productRoles as $searchRole) {
-                            if (isset($searchRole['product_data']) && 
-                                isset($searchRole['product_slug']) && 
-                                $searchRole['product_slug'] === $role['product_slug']) {
-                                if (isset($searchRole['product_data']['language_slug'][$lang]['name'])) {
-                                    $productName = $searchRole['product_data']['language_slug'][$lang]['name'];
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    
-                    // Manually fetch product from TranslatableFactory if still not found
-                    if ($productName === null && isset($role['product_slug']) && $role['product_slug'] !== null) {
-                        try {
-                            $productTranslatable = TranslatableFactory::product($role['product_slug']);
-                            if ($productTranslatable !== null) {
-                                $productName = $productTranslatable->getContent($lang, 'name', null);
-                            }
-                        } catch (Exception $e) {
-                            // Silently fail and continue
-                        }
-                    }
-                    
-                    if ($productName !== null) {
-                        $roleData['product_name'] = $productName;
-                    }
-                    
-                    $positionRoles[] = $roleData;
-                }
-            }
-            
-            // Return the array of roles if not empty, otherwise fall back to regular position
-            if (!empty($positionRoles)) {
-                return $positionRoles;
-            }
-        }
-        
-        // Main data handling
-        if (isset($this->memberData[$key])) {
-            // Direct key for non-translatable content
-            return $this->memberData[$key];
-        } else if (isset($this->memberData['language_slug']) && 
-            isset($this->memberData['language_slug'][$lang]) && 
-            isset($this->memberData['language_slug'][$lang][$key])) {
-            // Translated key
-            return $this->memberData['language_slug'][$lang][$key];
-        }
-        
-        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllContent($lang) {
-        $result = [];
-        
-        // Include all direct properties
-        foreach ($this->memberData as $key => $value) {
-            if ($key !== 'language_slug') {
-                $result[$key] = $value;
-            }
-        }
-        
-        // Include all language-specific properties
-        if (isset($this->memberData['language_slug']) && isset($this->memberData['language_slug'][$lang])) {
-            foreach ($this->memberData['language_slug'][$lang] as $key => $value) {
-                // Special handling for 'position' when display_product_roles is true
-                if ($key === 'position' && isset($this->memberData['display_product_roles']) && 
-                    $this->memberData['display_product_roles'] === true) {
-                    // Use get_key to handle the position transformation
-                    $result[$key] = $this->get_key($lang, 'position');
-                } else {
-                    $result[$key] = $value;
-                }
-            }
-        }
-        
-        // Add product roles
-        $result['product_roles'] = $this->productRoles;
-        
-        return $result;
-    }
-    
-    /**
-     * Get all product roles for the team member
-     * 
-     * @param string $lang Language code
-     * @return array Array of product roles with segment, product, and title information
-     */
-    public function getProductRoles($lang) {
-        return $this->productRoles;
-    }
-} 
-
-
-================================================================================
-FILE: TeamTranslatable.php
-PATH: pi_website_take5\src\translation\TeamTranslatable.php
-================================================================================
-
-<?php
-/**
- * Translatable for team.json data format
- */
-class TeamTranslatable extends AbstractTranslatable {
-    /**
-     * {@inheritdoc}
-     */
-    protected function key_exists($lang, $key) {
-        // Structure: { "name": "X", "position": "Y", ... }
-        if (isset($this->data[$key])) {
-            // Direct key for non-translatable content
-            return true;
-        } else if (isset($this->data['language_slug']) && 
-            isset($this->data['language_slug'][$lang]) && 
-            isset($this->data['language_slug'][$lang][$key])) {
-            // Translated key
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    protected function get_key($lang, $key) {
-        // Structure: { "name": "X", "position": "Y", ... }
-        if (isset($this->data[$key])) {
-            // Direct key for non-translatable content
-            return $this->data[$key];
-        } else if (isset($this->data['language_slug']) && 
-            isset($this->data['language_slug'][$lang]) && 
-            isset($this->data['language_slug'][$lang][$key])) {
-            // Translated key
-            return $this->data['language_slug'][$lang][$key];
-        }
-        
-        throw new Exception("Translation key '{$key}' not found for language '{$lang}'");
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllContent($lang) {
-        if (isset($this->data['language_slug']) && isset($this->data['language_slug'][$lang])) {
-            $result = $this->data['language_slug'][$lang];
-            
-            // Merge direct properties (not language dependent)
-            foreach ($this->data as $key => $value) {
-                if ($key !== 'language_slug') {
-                    $result[$key] = $value;
-                }
-            }
-            
-            return $result;
-        }
-        
-        // Return just the direct properties if no language data
-        $result = [];
-        foreach ($this->data as $key => $value) {
-            if ($key !== 'language_slug') {
-                $result[$key] = $value;
-            }
-        }
-        
-        return $result;
-    }
-} 
-
-
-================================================================================
-FILE: TranslatableFactory.php
-PATH: pi_website_take5\src\translation\TranslatableFactory.php
-================================================================================
-
-<?php
-/**
- * Factory for creating translatable objects with automatic data loading
- */
-class TranslatableFactory {
-    /**
-     * Debug flag - set to true to enable debug output
-     */
-    public static $debug = false;
-    
-    /**
-     * Loaded data cache
-     */
-    private static $dataCache = [];
-    
-    /**
-     * Flag to force data refresh on next access
-     */
-    private static $refreshDataFlag = false;
-    
-    /**
-     * Initialize the factory and preload commonly used data
-     * 
-     * @param array $preloadFiles Array of file names to preload
-     */
-    public static function initialize($preloadFiles = ['general', 'pages']) {
-        foreach ($preloadFiles as $file) {
-            self::loadDataInternal($file);
-        }
-        if (self::$debug) error_log("TranslatableFactory: Initialized with preloaded files: " . implode(', ', $preloadFiles));
-    }
-    
-    /**
-     * Flag all data to be refreshed on next access
-     */
-    public static function refreshData() {
-        self::$dataCache = [];
-        self::$refreshDataFlag = true;
-        if (self::$debug) error_log("TranslatableFactory: Data refresh requested");
-    }
-    
-    /**
-     * Internal method to load JSON data from file with improved error handling
-     * 
-     * @param string $file The name of the JSON file without extension
-     * @param bool $forceRefresh Force refresh from file even if cached
-     * @return array The decoded JSON data or empty array on error
-     */
-    private static function loadDataInternal($file, $forceRefresh = false) {
-        // Check if data is already cached in memory and refresh not forced
-        if (!$forceRefresh && !self::$refreshDataFlag && isset(self::$dataCache[$file])) {
-            if (self::$debug) error_log("TranslatableFactory: Using cached data for $file");
-            return self::$dataCache[$file];
-        }
-        
-        $jsonFile = "data/{$file}.json";
-        
-        // Check if file exists
-        if (!file_exists($jsonFile)) {
-            if (self::$debug) error_log("TranslatableFactory: JSON file not found: {$jsonFile}");
-            self::$dataCache[$file] = [];
-            return [];
-        }
-        
-        // Get file contents
-        $jsonContent = file_get_contents($jsonFile);
-        if ($jsonContent === false) {
-            if (self::$debug) error_log("TranslatableFactory: Could not read JSON file: {$jsonFile}");
-            self::$dataCache[$file] = [];
-            return [];
-        }
-        
-        // Decode JSON
-        $data = json_decode($jsonContent, true);
-        
-        // Check for JSON decode errors
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            if (self::$debug) error_log("TranslatableFactory: JSON decode error for file {$jsonFile}: " . json_last_error_msg());
-            self::$dataCache[$file] = [];
-            return [];
-        }
-        
-        // Cache the data
-        self::$dataCache[$file] = $data;
-        
-        if (self::$debug) error_log("TranslatableFactory: Successfully loaded data from {$jsonFile}");
-        
-        // Reset refresh flag after successful load
-        self::$refreshDataFlag = false;
-        
-        // Return data
-        return $data;
-    }
-    
-    /**
-     * Public method to get data - for backwards compatibility
-     * 
-     * @param string $file The name of the JSON file without extension
-     * @param bool $forceRefresh Force refresh from file
-     * @return array The decoded JSON data
-     * @deprecated Use createFromFile instead for translations
-     */
-    public static function loadData($file, $forceRefresh = false) {
-        return self::loadDataInternal($file, $forceRefresh);
-    }
-    
-    /**
-     * Get specific data item by key
-     * 
-     * @param string $file The name of the JSON file without extension
-     * @param string $key The key to retrieve
-     * @return array The data or empty array if not found
-     */
-    public static function getData($file, $key = null) {
-        $data = self::loadDataInternal($file);
-        
-        if ($key !== null) {
-            return isset($data[$key]) ? $data[$key] : [];
-        }
-        
-        return $data;
-    }
-    
-    /**
-     * Create a translatable object for the given type and data
-     * 
-     * @param string $type The type of data ('general', 'page', 'product', 'segment', 'team')
-     * @param mixed $data The data containing translatable content or data key if string
-     * @param string|null $file Optional JSON file to load data from if $data is a string key
-     * @return TranslatableInterface A translatable object
-     */
-    public static function create($type, $data = null, $file = null) {
-        // Handle array input for data when it should be a string key
-        if (is_array($data) && $file !== null) {
-            if (self::$debug) error_log("TranslatableFactory: Received array for data parameter when file is specified");
-            // This means we already have the data, so we don't need to load it from a file
-            $file = null;
-        }
-        
-        // Auto-load data if needed
-        if ($data === null && $file !== null) {
-            // Load the entire file
-            $data = self::loadDataInternal($file);
-            if (self::$debug) error_log("TranslatableFactory: Auto-loaded entire file '$file'");
-        } else if (is_string($data) && $file !== null) {
-            // Load specific key from file
-            $allData = self::loadDataInternal($file);
-            $dataKey = $data; // Store the key name
-            if (isset($allData[$dataKey])) {
-                $data = $allData[$dataKey];
-                if (self::$debug) error_log("TranslatableFactory: Auto-loaded data for key '$dataKey' from file '$file'");
-            } else {
-                if (self::$debug) error_log("TranslatableFactory: Warning - Key '$dataKey' not found in file '$file'");
-                $data = [];
-            }
-        }
-        
-        if ($data === null || !is_array($data)) {
-            if (self::$debug) error_log("TranslatableFactory: Data is null or not an array, using empty array");
-            $data = [];
-        }
-        
-        $result = null;
-        
-        switch ($type) {
-            case 'general':
-                $result = new GeneralTranslatable($data);
-                if (self::$debug) error_log("TranslatableFactory: Created GeneralTranslatable for type: $type");
-                break;
-            case 'page':
-                $result = new PageTranslatable($data);
-                if (self::$debug) error_log("TranslatableFactory: Created PageTranslatable for type: $type");
-                break;
-            case 'product':
-                $result = new ProductTranslatable($data);
-                if (self::$debug) error_log("TranslatableFactory: Created ProductTranslatable for type: $type");
-                break;
-            case 'segment':
-                $result = new SegmentTranslatable($data);
-                if (self::$debug) error_log("TranslatableFactory: Created SegmentTranslatable for type: $type");
-                break;
-            case 'team':
-                $result = new TeamTranslatable($data);
-                if (self::$debug) error_log("TranslatableFactory: Created TeamTranslatable for type: $type");
-                break;
-            default:
-                // Default to general translatable for unknown types
-                $result = new GeneralTranslatable($data);
-                if (self::$debug) error_log("TranslatableFactory: Created default GeneralTranslatable for unknown type: $type");
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * Create a translatable directly from a data file and key
-     * 
-     * @param string $type The type of translatable
-     * @param string $file The data file name without extension
-     * @param string|null $key Optional key to access within the data file
-     * @return TranslatableInterface A translatable object
-     */
-    public static function createFromFile($type, $file, $key = null) {
-        if ($key !== null) {
-            if (self::$debug) error_log("TranslatableFactory: Creating $type from file $file with key $key");
-            return self::create($type, $key, $file);
-        } else {
-            if (self::$debug) error_log("TranslatableFactory: Creating $type from full file $file");
-            return self::create($type, null, $file);
-        }
-    }
-    
-    /**
-     * Get translatable for general content with automatic data loading
-     * 
-     * @param string $key Optional specific general content key
-     * @return TranslatableInterface A translatable object
-     */
-    public static function general($key = null) {
-        if (is_array($key)) {
-            if (self::$debug) error_log("TranslatableFactory: Received array for key parameter, using first array key");
-            $key = array_key_first($key);
-        }
-        
-        return self::createFromFile('general', 'general', $key);
-    }
-    
-    /**
-     * Get translatable for page content with automatic data loading
-     * 
-     * @param string $pageKey The page key (home, about, etc.)
-     * @return TranslatableInterface A translatable object
-     */
-    public static function page($pageKey) {
-        if (is_array($pageKey)) {
-            if (self::$debug) error_log("TranslatableFactory: Received array for pageKey parameter, using first array key");
-            $pageKey = array_key_first($pageKey);
-        }
-        
-        return self::createFromFile('page', 'pages', $pageKey);
-    }
-    
-    /**
-     * Get translatable for product content with automatic data loading
-     * 
-     * @param string $productKey The product key
-     * @return TranslatableInterface A translatable object
-     */
-    public static function product($productKey) {
-        if (is_array($productKey)) {
-            if (self::$debug) error_log("TranslatableFactory: Received array for productKey parameter, using first array key");
-            $productKey = array_key_first($productKey);
-        }
-        
-        // Load all products data
-        $allProducts = self::loadDataInternal('products');
-        $productData = null;
-        
-        // Search for the product in the nested structure
-        if (!empty($productKey) && is_array($allProducts)) {
-            foreach ($allProducts as $categorySlug => $categoryProducts) {
-                if (!is_array($categoryProducts)) continue;
-                
-                if (isset($categoryProducts[$productKey])) {
-                    $productData = $categoryProducts[$productKey];
-                    break;
-                }
-            }
-        }
-        
-        // If product was found, create a translatable from the data
-        if ($productData) {
-            return new ProductTranslatable($productData);
-        }
-        
-        // Fallback to old method (might not work due to nesting)
-        return self::createFromFile('product', 'products', $productKey);
-    }
-    
-    /**
-     * Get translatable for segment content with automatic data loading
-     * 
-     * @param string $segmentKey The segment key
-     * @return TranslatableInterface A translatable object
-     */
-    public static function segment($segmentKey) {
-        if (is_array($segmentKey)) {
-            if (self::$debug) error_log("TranslatableFactory: Received array for segmentKey parameter, using first array key");
-            $segmentKey = array_key_first($segmentKey);
-        }
-        
-        return self::createFromFile('segment', 'segments', $segmentKey);
-    }
-    
-    /**
-     * Get translatable for team member content with automatic data loading
-     * 
-     * @param string $memberKey The team member key
-     * @return TranslatableInterface A translatable object
-     */
-    public static function teamMember($memberKey) {
-        if (is_array($memberKey)) {
-            if (self::$debug) error_log("TranslatableFactory: Received array for memberKey parameter, using first array key");
-            $memberKey = array_key_first($memberKey);
-        }
-        
-        // Load all team data
-        $allTeam = self::loadDataInternal('team');
-        $memberData = null;
-        
-        // Search for the member in the nested team structure
-        if (!empty($memberKey) && is_array($allTeam)) {
-            foreach ($allTeam as $groupSlug => $groupMembers) {
-                if (!is_array($groupMembers)) continue;
-                
-                if (isset($groupMembers[$memberKey])) {
-                    $memberData = $groupMembers[$memberKey];
-                    break;
-                }
-            }
-        }
-        
-        // If member was found, create a translatable from the data
-        if ($memberData) {
-            return new TeamTranslatable($memberData);
-        }
-        
-        // Fallback to old method
-        return self::createFromFile('team', 'team', $memberKey);
-    }
-    
-    /**
-     * Get translatable for enhanced team member content with product roles
-     * 
-     * @param string $memberKey The team member key
-     * @return TranslatableInterface A translatable object
-     */
-    public static function teamMemberEnhanced($memberKey) {
-        if (is_array($memberKey)) {
-            if (self::$debug) error_log("TranslatableFactory: Received array for memberKey parameter, using first array key");
-            $memberKey = array_key_first($memberKey);
-        }
-        
-        // Load all team data
-        $allTeam = self::loadDataInternal('team');
-        $memberData = null;
-        
-        // Search for the member in the nested team structure
-        if (!empty($memberKey) && is_array($allTeam)) {
-            foreach ($allTeam as $groupSlug => $groupMembers) {
-                if (!is_array($groupMembers)) continue;
-                
-                foreach ($groupMembers as $member) {
-                    if (isset($member['name_slug']) && $member['name_slug'] === $memberKey) {
-                        $memberData = $member;
-                        break 2;
-                    }
-                }
-            }
-        }
-        
-        if ($memberData === null) {
-            if (self::$debug) error_log("TranslatableFactory: Team member with key '$memberKey' not found");
-            return new TeamMemberEnhanced([], []);
-        }
-        
-        // Load team_products data to get roles
-        $teamProducts = self::loadDataInternal('teams_products');
-        $productRoles = [];
-        
-        if (isset($teamProducts['team_products']) && is_array($teamProducts['team_products'])) {
-            foreach ($teamProducts['team_products'] as $role) {
-                if (isset($role['name_slug']) && $role['name_slug'] === $memberKey) {
-                    $productRoles[] = $role;
-                }
-            }
-        }
-        
-        // Get all product and segment data for reference
-        $products = self::loadDataInternal('products');
-        $segments = self::loadDataInternal('segments');
-        
-        // Enhance product roles with product and segment data
-        $enhancedRoles = [];
-        foreach ($productRoles as $role) {
-            $enhancedRole = $role;
-            
-            // Add product data if available
-            if (isset($role['product_slug']) && $role['product_slug'] !== null) {
-                $productFound = false;
-                
-                // Products are nested by segment, so we need to search differently
-                foreach ($products as $segmentSlug => $segmentProducts) {
-                    if (!is_array($segmentProducts)) continue;
-                    
-                    foreach ($segmentProducts as $productSlug => $product) {
-                        if ($productSlug === $role['product_slug']) {
-                            $enhancedRole['product_data'] = $product;
-                            $productFound = true;
-                            break 2;
-                        }
-                    }
-                }
-                
-                // If not found in nested structure, try flat search
-                if (!$productFound) {
-                    foreach ($products as $productKey => $product) {
-                        if (is_array($product) && isset($product['product_slug']) && $product['product_slug'] === $role['product_slug']) {
-                            $enhancedRole['product_data'] = $product;
-                            break;
-                        }
-                    }
-                }
-            }
-            
-            // Add segment data if available
-            if (isset($role['segment_slug']) && $role['segment_slug'] !== null) {
-                foreach ($segments as $segment) {
-                    if (isset($segment['segment_slug']) && $segment['segment_slug'] === $role['segment_slug']) {
-                        $enhancedRole['segment_data'] = $segment;
-                        break;
-                    }
-                }
-            }
-            
-            $enhancedRoles[] = $enhancedRole;
-        }
-        
-        // Check if the member has display_product_roles flag
-        $displayProductRoles = isset($memberData['display_product_roles']) ? $memberData['display_product_roles'] : false;
-        
-        // If display_product_roles is false, we will still return the roles but they won't be displayed
-        $memberData['display_product_roles'] = $displayProductRoles;
-        
-        return new TeamMemberEnhanced($memberData, $enhancedRoles);
-    }
-    
-    /**
-     * Detect the type of data and create appropriate translatable
-     * 
-     * @param array $data The data to analyze
-     * @return TranslatableInterface A translatable object
-     */
-    public static function createFromData($data) {
-        if ($data === null || !is_array($data)) {
-            if (self::$debug) error_log("TranslatableFactory: Data is null or not an array, returning default GeneralTranslatable");
-            return new GeneralTranslatable([]);
-        }
-        
-        if (isset($data['page_slug'])) {
-            if (self::$debug) error_log("TranslatableFactory: Detected page_slug, creating PageTranslatable");
-            return new PageTranslatable($data);
-        } elseif (isset($data['product_slug'])) {
-            if (self::$debug) error_log("TranslatableFactory: Detected product_slug, creating ProductTranslatable");
-            return new ProductTranslatable($data);
-        } elseif (isset($data['segment_slug'])) {
-            if (self::$debug) error_log("TranslatableFactory: Detected segment_slug, creating SegmentTranslatable");
-            return new SegmentTranslatable($data);
-        } elseif (isset($data['term_slug'])) {
-            if (self::$debug) error_log("TranslatableFactory: Detected term_slug, creating GeneralTranslatable");
-            return new GeneralTranslatable($data);
-        } elseif (isset($data['name_slug'])) {
-            if (self::$debug) error_log("TranslatableFactory: Detected name_slug, creating TeamTranslatable");
-            return new TeamTranslatable($data);
-        }
-        
-        // Default fallback
-        if (self::$debug) error_log("TranslatableFactory: No identifiable slug found, returning default GeneralTranslatable");
-        return new GeneralTranslatable($data);
-    }
-    
-    /**
-     * Print debug message to browser
-     * 
-     * @param string $message The debug message
-     */
-    public static function debugToScreen($message) {
-        if (self::$debug) {
-            echo "<div style='background: #eee; padding: 5px; margin: 5px; border: 1px solid #ccc;'>";
-            echo "<strong>TranslatableFactory Debug:</strong> " . htmlspecialchars($message);
-            echo "</div>";
-        }
-    }
-    
-    /**
-     * Debug method to check if a key exists in general.json
-     * 
-     * @param string $key The key to check
-     * @return bool True if the key exists, false otherwise
-     */
-    public static function KeyExists($file, $key) {
-        $data = self::loadDataInternal($file);
-        return isset($data[$key]);
-    }
-} 
-
-
-================================================================================
-FILE: TranslatableInterface.php
-PATH: pi_website_take5\src\translation\TranslatableInterface.php
-================================================================================
-
-<?php
-/**
- * Interface for translatable content from JSON data
- */
-interface TranslatableInterface {
-    /**
-     * Get specific translated content
-     * 
-     * @param string $lang Language code
-     * @param string $key Content key
-     * @param string $default Default value if content not found
-     * @return string Translated content
-     */
-    public function getContent($lang, $key, $default = '');
-    
-    /**
-     * Check if specific translated content exists
-     * 
-     * @param string $lang Language code
-     * @param string $key Content key
-     * @return bool True if content exists, false otherwise
-     */
-    public function hasContent($lang, $key);
-    
-    /**
-     * Get all translated content for a language
-     * 
-     * @param string $lang Language code
-     * @return array All translated content
-     */
-    public function getAllContent($lang);
 } 
 

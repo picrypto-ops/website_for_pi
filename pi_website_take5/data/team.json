@@ -53,9 +53,9 @@
             "language_slug": {
                 "en": {
                     "name": "Itay Ruschkewitz",
-                    "position": "CEO and Co-Founder",
-                    "short_bio": "CEO and Co-Founder of PI Development Group, with over 15 years of experience providing regulatory and financial advisory services to a wide range of leading entities in the Israeli market, including banks, insurance companies and financial institutions.",
-                    "bio": "<p>Itai possesses extensive experience in developing innovative financial instruments for the Israeli capital market, including fundraising, leading transactions, and issuing complex instruments such as securitizations, private debt, and sophisticated bonds.</p><p>He is also the owner and CEO of Complex Solutions, where he represents Allianz Global Investors—the investment arm of Allianz—in the Israeli market. Previously, he served as a partner at PwC Israel and, before that, at Giza Singer Even.</p><p>Itai is a Certified Public Accountant (CPA) and licensed attorney, holding a master’s degree in financial mathematics.</p>"
+                    "position": "Co-Founder and CEO",
+                    "short_bio": "Co-Founder and CEO of PI Development Group, with over 15 years of experience providing regulatory and financial advisory services to a wide range of leading entities in the Israeli market, including banks, insurance companies and financial institutions.",
+                    "bio": "<p>Itai possesses extensive experience in developing innovative financial instruments for the Israeli capital market, including fundraising, leading transactions, and issuing complex instruments such as securitizations, private debt, and sophisticated bonds.</p><p>He is also the owner and CEO of Complex, a financial consulting firm advising some of the largest local institutions. Additionally, Complex represents Allianz Global Investors—the investment arm of Allianz—in the Israeli market.</p><p>Previously, he served as a partner at PwC Israel and, before that, at Giza Singer Even.</p><p>Itai is a Certified Public Accountant (CPA) and a licensed attorney, holding a master’s degree in financial mathematics.</p>"
                 },
                 "he": {
                     "name": "איתי רושקביץ",
@@ -161,8 +161,8 @@
                 "en": {
                     "name": "Hagit Borohovitz",
                     "position": "Chief Legal Officer and Director",
-                    "short_bio": "Chief Legal Officer and a Director, with over 10 years of experience as an attorney specializing in the establishment, management, and regulatory compliance of Israeli and international investment funds.",
-                    "bio": "<p>Hagit is responsible for the legal and operational management of Group’s funds, with a focus on compliance, financial operations, and global relationships with financial institutions. She has been with the PI Group since 2018, serving as legal advisor and operations manager, and has held directorships in two of the Group’s investment funds since 2020.</p><p>Previously, Hagit held positions as an in-house lawyer and operations manager in the real estate and technology sectors.<br>Hagit holds an LL.B. and is a licensed attorney in Israel.</p>"
+                    "short_bio": "Chief Legal Officer of the Group, with over 10 years of experience in commercial law, regulatory compliance, and corporate governance.",
+                    "bio": "<p>Hagit has been with the Group since 2018, and she also serves as Head of Operations. Previously, she held positions as an in-house lawyer and operations manager in the real estate and technology sectors. Hagit holds an LL.B. and is a licensed attorney in Israel.</p>"
                 },
                 "he": {
                     "name": "חגית בורוכוביץ",
@@ -225,9 +225,9 @@
             "language_slug": {
                 "en": {
                     "name": "Dolev Trogman",
-                    "position": "Portfolio Manager",
-                    "short_bio": "Portfolio Manager with over 13 years of experience in global financial markets, specializing in equity, interest rate, and FX derivatives trading at HSBC, Brevan Howard, and JPMorgan.",
-                    "bio": "<p>Dolev Trogman is a Portfolio Manager with extensive experience in global financial markets. He began his career in equity derivatives at HSBC in Paris, then moved into interest rate strategies at Brevan Howard. He later joined JPMorgan in London, where he focused on emerging market FX options. In 2018, Dolev joined PI SPC as a Macro Portfolio Manager, and managed a derivative multi-asset portfolio.</p><p> He holds an MSc in Financial Markets from Paris Dauphine University.</p>"
+                    "position": "Fund Manager",
+                    "short_bio": "Fund Manager with over 13 years of experience in global financial markets, specializing in equity, interest rate, and FX derivatives trading at HSBC, Brevan Howard, and JPMorgan.",
+                    "bio": "<p>Dolev Trogman is a Fund Manager with extensive experience in global financial markets. He began his career in equity derivatives at HSBC in Paris, then moved into interest rate strategies at Brevan Howard. He later joined JPMorgan in London, where he focused on emerging market FX options. In 2018, Dolev joined PI SPC as a Macro Portfolio Manager, and managed a derivative multi-asset portfolio.</p><p> He holds an MSc in Financial Markets from Paris Dauphine University.</p>"
                 },
                 "he": {
                     "name": "דולב טרוגמן",
@@ -289,8 +289,8 @@
                 "en": {
                     "name": "Darina Reznikov",
                     "position": "Director and Analyst",
-                    "short_bio": "Director at PI Deposits and Structured Products Ltd., with over 7 years of experience providing regulatory and financial consulting services to a wide range of leading entities in the Israeli market, including banks, insurance companies, and financial institutions.",
-                    "bio": "<p>Darina has extensive expertise in the regulatory capital requirements for banks, insurance companies, and other financial institutions. She has significant experience in developing, modeling, and valuing innovative and complex financial instruments for leading Israeli financial institutions.</p><p>Previously, Darina served as an analyst in the Complex Finance Department at PwC and, before that, in the Markets Division at the Bank of Israel. She holds a bachelor’s degree in economics and business administration and an MBA with a specialization in Finance, both with honors from the Hebrew University of Jerusalem.</p>"
+                    "short_bio": "Director at PI Deposits, Structured Products Ltd., and PI Plus Deposits Ltd., with over 7 years of experience providing regulatory and financial consulting services to a wide range of leading entities in the Israeli market, including banks, insurance companies, and financial institutions.",
+                    "bio": "<p>Darina has extensive expertise in financial consulting. She has analyzed, modeled, and helped execute numerous complex financial transactions for a wide variety of financial institutions in Israel over the past decade.</p><p>Previously, Darina served as an analyst in the Complex Finance Department at PwC and, before that, in the Markets Division at the Bank of Israel.</p><p>She holds a bachelor’s degree in economics and business administration and an MBA with a specialization in Finance, both with honors from the Hebrew University of Jerusalem.</p>"
                 },
                 "he": {
                     "name": "דרינה רזניבוק",

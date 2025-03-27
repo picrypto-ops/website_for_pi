@@ -222,6 +222,7 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 /* Fix for iOS Safari bouncing effect */
@@ -384,13 +385,14 @@ $card-hover-shadow-color: rgba(0, 0, 0, 0.15);
 
 // Header Elements
 $header-height: 60px;
+$header-min-height: 60px;
 $header-padding: 1rem;
 $header-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 $header-transition: transform 0.3s ease;
 
 
 // Logo
-$logo-size: 40px;
+$logo-size: 30px;
 $group-name-size: 1.5rem;
 
 // Navigation
@@ -601,6 +603,7 @@ header {
   max-width: 100%;
   box-sizing: border-box;
   padding: 0 15px;
+  min-height: variables.$header-min-height;
 
   &.initially-hidden {
     transform: translateY(-100%);
@@ -677,6 +680,7 @@ header {
     display: flex;
     align-items: center;
     margin-right: 2rem; // Add more spacing in LTR mode
+    margin-top: 4px;
     
     .logo-link {
       text-decoration: none;
@@ -991,7 +995,7 @@ body:not(.home-page) {
   
   header {
     padding: 10px 0;
-    
+    min-height: variables.$header-min-height;
     .container {
       padding: 0 15px;
       position: relative;
@@ -1925,7 +1929,7 @@ PATH: pi_website_take5\assets\scss\modules\_cards.scss
   justify-content: space-between;
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #eee;
+  // border-top: 1px solid #eee;
   
   a {
     text-decoration: none;
@@ -1944,6 +1948,8 @@ PATH: pi_website_take5\assets\scss\modules\_cards.scss
 FILE: _contact.scss
 PATH: pi_website_take5\assets\scss\modules\_contact.scss
 ================================================================================
+
+@use "../base/variables" as variables;
 
 /**
  * Contact Page Styles
@@ -2081,7 +2087,7 @@ PATH: pi_website_take5\assets\scss\modules\_contact.scss
       transition: background-color 0.3s;
       
       &:hover {
-        background-color: var(--primary-color-dark);
+        background-color: variables.$button-hover ;
       }
     }
   }
@@ -2458,6 +2464,83 @@ PATH: pi_website_take5\assets\scss\modules\_cookie-consent.scss
 
 
 ================================================================================
+FILE: _form-messages.scss
+PATH: pi_website_take5\assets\scss\modules\_form-messages.scss
+================================================================================
+
+/**
+ * Form Messages Styles
+ * Styling for success and error messages displayed after form submission
+ */
+
+.form-message {
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    
+    i {
+        font-size: 1.5rem;
+        margin-right: 15px;
+    }
+    
+    p {
+        margin: 0;
+    }
+    
+    &.success {
+        background-color: rgba(76, 175, 80, 0.1);
+        border-left: 4px solid #4CAF50;
+        color: #2E7D32;
+        
+        i {
+            color: #4CAF50;
+        }
+    }
+    
+    &.error {
+        background-color: rgba(244, 67, 54, 0.1);
+        border-left: 4px solid #F44336;
+        color: #C62828;
+        
+        i {
+            color: #F44336;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+        
+        i {
+            margin-right: 0;
+            margin-bottom: 10px;
+            font-size: 1.75rem;
+        }
+    }
+}
+
+// Animation for form messages
+.form-message {
+    animation: fadeIn 0.5s ease-in-out;
+    
+    @keyframes fadeIn {
+        from { 
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+} 
+
+
+================================================================================
 FILE: _forms.scss
 PATH: pi_website_take5\assets\scss\modules\_forms.scss
 ================================================================================
@@ -2574,7 +2657,7 @@ PATH: pi_website_take5\assets\scss\modules\_home.scss
       padding: 2rem;
 
       h1 {
-        font-size: 3.5rem;
+        font-size: 3rem;
         margin-bottom: 1.5rem;
         animation: fadeInUp 1s ease-out;
         line-height: 1.2;
@@ -2673,7 +2756,7 @@ PATH: pi_website_take5\assets\scss\modules\_home.scss
     border: 1px solid rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    min-height: 150px;
+    height: 170px;
     position: relative;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -2715,21 +2798,17 @@ PATH: pi_website_take5\assets\scss\modules\_home.scss
 
     .product-content {
       display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
-      padding: 1rem 1rem;
+      padding: 1rem;
       flex: 1;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      height: 100%;
     }
 
     .product-icon {
       flex: 0 0 100px;
-      height: 150px;
+      height: 100%;
       display: flex;
       align-items: center;
-      justify-content: left;
-      margin-top: -1.5rem;
-      margin-bottom: -0.5rem;
+      justify-content: center;
       
       img {
         max-width: 100%;
@@ -2743,8 +2822,8 @@ PATH: pi_website_take5\assets\scss\modules\_home.scss
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      padding-right: 0.5rem;
+      justify-content: center;
+      padding-left: 0.5rem;
       
       h3 {
         margin: 0;
@@ -2752,20 +2831,39 @@ PATH: pi_website_take5\assets\scss\modules\_home.scss
         color: #1a1a1a;
         font-weight: 500;
         line-height: 1.2;
-        text-align: right;
-        white-space: nowrap;
+        text-align: center;
+        white-space: nowrap; /* Prevent text wrapping */
+      }
+      
+      .slogan {
+        text-align: center;
+        padding: 0.5rem 0;
+        margin: 0;
+        font-size: 1.2rem;
+        color: #666;
+        line-height: 1.4;
       }
     }
-
-    .slogan {
-      width: 100%;
-      text-align: center;
-      padding: 0.5rem 0.5rem;
-      margin: 0;
-      font-size: 1.2rem;
-      color: #666;
-      line-height: 1.4;
-      position: relative;
+    
+    // Add RTL support
+    html[dir="rtl"] & {
+      .product-content {
+        flex-direction: row-reverse;
+      }
+      
+      .product-text {
+        align-items: flex-start;
+        padding-left: 0;
+        padding-right: 0.5rem;
+        
+        h3 {
+          text-align: center;
+        }
+        
+        .slogan {
+          text-align: center;
+        }
+      }
     }
   }
 
@@ -3663,6 +3761,25 @@ html[dir="rtl"] {
   }
 }
 
+// Add a new media query section for large desktop screens
+@media (min-width: 1200px) {
+  .home-page {
+    .hero {
+      .hero-content {
+        h1 {
+          max-width: 800px;
+          font-size: 3rem;
+          /* Ensure title doesn't wrap to a third line but shows completely */
+          line-height: 1.1;
+          white-space: normal;
+          display: block;
+          overflow: visible;
+        }
+      }
+    }
+  }
+}
+
 
 
 
@@ -3686,6 +3803,7 @@ PATH: pi_website_take5\assets\scss\modules\_index.scss
 @forward "cookie-consent";
 @forward "product";
 @forward "about-image-slider";
+@forward "form-messages";
 
 
 ================================================================================
@@ -3753,7 +3871,7 @@ PATH: pi_website_take5\assets\scss\modules\_product.scss
 .product-header {
   display: flex;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -3806,8 +3924,9 @@ PATH: pi_website_take5\assets\scss\modules\_product.scss
 }
 
 .product-description-paragraph {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.8;
   color: #444;
   margin-bottom: 1.5rem;
   
@@ -4155,7 +4274,7 @@ PATH: pi_website_take5\assets\scss\modules\_segment.scss
   .product-card {
     width: 300px; /* Fixed width */
     max-width: 300px;
-    min-height: 200px; /* Ensure minimum height */
+    height: 170px; /* Fixed height instead of min-height */
     flex: 0 0 auto; /* Don't allow flexbox to resize the cards */
     margin: 0.5rem; /* Add a bit of margin between cards */
     background: #fff;
@@ -4203,21 +4322,17 @@ PATH: pi_website_take5\assets\scss\modules\_segment.scss
 
     .product-content {
       display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
-      padding: 1rem 1rem;
+      padding: 1rem;
       flex: 1;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      height: 100%;
     }
 
     .product-icon {
       flex: 0 0 100px;
-      height: 150px;
+      height: 100%;
       display: flex;
       align-items: center;
-      justify-content: left;
-      margin-top: -1.5rem;
-      margin-bottom: -0.5rem;
+      justify-content: center;
       
       img {
         max-width: 100%;
@@ -4231,8 +4346,8 @@ PATH: pi_website_take5\assets\scss\modules\_segment.scss
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      padding-right: 0.5rem;
+      justify-content: center;
+      padding-left: 0.5rem;
       
       h3 {
         margin: 0;
@@ -4240,20 +4355,20 @@ PATH: pi_website_take5\assets\scss\modules\_segment.scss
         color: #1a1a1a;
         font-weight: 500;
         line-height: 1.2;
-        text-align: right;
+        text-align: center;
         white-space: nowrap; /* Prevent text wrapping */
       }
     }
 
     .slogan {
-      width: 100%;
-      text-align: center;
-      padding: 0.5rem 0.5rem;
+      text-align: right;
+      padding: 0.5rem 0;
       margin: 0;
       font-size: 1.2rem;
       color: #666;
       line-height: 1.4;
       position: relative;
+      border-top: none;
       
       .arrow {
         position: absolute;
@@ -4351,10 +4466,9 @@ PATH: pi_website_take5\assets\scss\modules\_segment_display.scss
       color: var(--color-text);
       display: flex;
       flex-direction: column;
-      height: 100%;
+      height: 170px;
       width: 300px;
       max-width: 300px;
-      min-height: 200px;
       margin: 0;
       flex: 0 0 auto;
       
@@ -4365,37 +4479,69 @@ PATH: pi_website_take5\assets\scss\modules\_segment_display.scss
       
       .product-content {
         display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
+        padding: 1rem;
+        flex: 1;
+        height: 100%;
       }
       
       .product-icon {
-        width: 60px;
-        height: 60px;
-        margin-right: 1rem;
+        flex: 0 0 60px;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-right: 1rem;
         
         img {
           max-width: 100%;
           max-height: 100%;
+          object-fit: contain;
         }
       }
       
-      .product-text h3 {
-        font-size: 1.3rem;
-        margin: 0;
-        text-align: left;
-        color: var(--color-primary);
-        white-space: nowrap;
+      .product-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        h3 {
+          font-size: 1.3rem;
+          margin: 0;
+          text-align: center;
+          color: var(--color-primary);
+          white-space: nowrap;
+        }
+        
+        .slogan {
+          font-size: 0.9rem;
+          color: var(--color-text-light);
+          text-align: center;
+          font-style: italic;
+          margin-top: 0.5rem;
+        }
       }
       
-      .slogan {
-        font-size: 0.9rem;
-        color: var(--color-text-light);
-        margin-top: auto;
-        font-style: italic;
+      // RTL support
+      html[dir="rtl"] & {
+        .product-content {
+          flex-direction: row-reverse;
+        }
+        
+        .product-icon {
+          margin-right: 0;
+          margin-left: 1rem;
+        }
+        
+        .product-text {
+          h3 {
+            text-align: center;
+          }
+          
+          .slogan {
+            text-align: center;
+          }
+        }
       }
     }
   }
@@ -4888,7 +5034,6 @@ PATH: pi_website_take5\assets\scss\modules\_team.scss
         
         .role-title {
             color: #4a4a4a;
-            text-transform: capitalize;
         }
     }
 }
@@ -5415,4 +5560,344 @@ body.menu-open {
 }
 
 
+
+
+================================================================================
+FILE: _contact.scss
+PATH: pi_website_take5\src\scss\modules\_contact.scss
+================================================================================
+
+// Contact Page Styles
+.contact-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: var(--color-white);
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('../images/pattern.svg') repeat;
+        opacity: 0.1;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .slogan {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+    }
+
+    .lead {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+        padding: 4rem 0;
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .slogan {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.contact-us {
+    padding: 5rem 0;
+    background-color: var(--color-background-light);
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 3rem;
+
+        @media (max-width: 992px) {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
+
+    .form-message {
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        &.success {
+            background-color: var(--color-success-light);
+            color: var(--color-success);
+            border: 1px solid var(--color-success);
+
+            i {
+                color: var(--color-success);
+            }
+        }
+
+        &.error {
+            background-color: var(--color-error-light);
+            color: var(--color-error);
+            border: 1px solid var(--color-error);
+
+            i {
+                color: var(--color-error);
+            }
+        }
+
+        i {
+            font-size: 1.5rem;
+        }
+    }
+
+    .contact-form {
+        background: var(--color-white);
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--color-text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--color-text-dark);
+                font-weight: 500;
+            }
+
+            input,
+            textarea {
+                width: 100%;
+                padding: 0.8rem 1rem;
+                border: 1px solid var(--color-border);
+                border-radius: 6px;
+                font-size: 1rem;
+                transition: border-color 0.3s ease;
+
+                &:focus {
+                    outline: none;
+                    border-color: var(--color-primary);
+                }
+
+                &.error {
+                    border-color: var(--color-error);
+                }
+            }
+
+            textarea {
+                min-height: 150px;
+                resize: vertical;
+            }
+
+            .error-message {
+                color: var(--color-error);
+                font-size: 0.875rem;
+                margin-top: 0.5rem;
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+
+            &:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .contact-info-map {
+        .map-section {
+            margin-bottom: 3rem;
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+                color: var(--color-text-dark);
+            }
+
+            .contact-map {
+                height: 300px;
+                border-radius: 12px;
+                overflow: hidden;
+                margin-bottom: 1rem;
+            }
+
+            .map-link {
+                text-align: right;
+                font-size: 0.9rem;
+
+                a {
+                    color: var(--color-primary);
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        .contact-info {
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+                color: var(--color-text-dark);
+            }
+
+            .contact-info-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .contact-card {
+                background: var(--color-white);
+                padding: 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-5px);
+                }
+
+                .icon {
+                    width: 40px;
+                    height: 40px;
+                    background: var(--color-primary-light);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    i {
+                        color: var(--color-primary);
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .contact-info {
+                    h3 {
+                        font-size: 1.1rem;
+                        margin-bottom: 0.5rem;
+                        color: var(--color-text-dark);
+                    }
+
+                    p {
+                        color: var(--color-text);
+                        line-height: 1.5;
+                        margin: 0;
+
+                        a {
+                            color: var(--color-primary);
+                            text-decoration: none;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Loading state
+.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 24px;
+        border: 2px solid var(--color-primary);
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.submit-btn {
+    // ... existing styles ...
+}
+
+.debug-btn {
+    margin-top: 10px;
+    background-color: #666;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+        background-color: #555;
+    }
+    
+    &:active {
+        background-color: #444;
+    }
+} 
 

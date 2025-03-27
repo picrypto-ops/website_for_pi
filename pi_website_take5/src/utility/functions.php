@@ -88,26 +88,37 @@ function isActiveMenu($currentPage, $menuItem) {
  * @return string HTML for the language switcher
  */
 function renderLanguageSwitcher($lang, $additionalClasses = '', $includeWrapper = true) {
+    // Check if multiple languages are available, if not return empty string
+    if (count(AVAILABLE_LANGUAGES) <= 1) {
+        return '';
+    }
+    
     // Validate language
-    $lang = in_array($lang, ['en', 'he']) ? $lang : 'en';
+    $lang = in_array($lang, AVAILABLE_LANGUAGES) ? $lang : DEFAULT_LANG;
     
     // Get current URL parameters
     $currentParams = $_GET;
     
-    // Create EN link with all current parameters except for lang
-    $enParams = $currentParams;
-    $enParams['lang'] = 'en';
-    $enLink = '?' . http_build_query($enParams);
+    // Build inner HTML for each available language
+    $innerHtml = '';
+    $separatorCount = 0;
     
-    // Create HE link with all current parameters except for lang
-    $heParams = $currentParams;
-    $heParams['lang'] = 'he';
-    $heLink = '?' . http_build_query($heParams);
-    
-    // Build inner HTML
-    $innerHtml = '<a href="' . $enLink . '" class="lang-switch ' . ($lang === 'en' ? 'active' : '') . '" data-lang="en">EN</a>';
-    $innerHtml .= '<span class="separator">|</span>';
-    $innerHtml .= '<a href="' . $heLink . '" class="lang-switch ' . ($lang === 'he' ? 'active' : '') . '" data-lang="he">עב</a>';
+    foreach (AVAILABLE_LANGUAGES as $langCode) {
+        // Create language link with all current parameters except for lang
+        $langParams = $currentParams;
+        $langParams['lang'] = $langCode;
+        $langLink = '?' . http_build_query($langParams);
+        
+        // Add separator if not the first language
+        if ($separatorCount > 0) {
+            $innerHtml .= '<span class="separator">|</span>';
+        }
+        
+        // Add language switch link
+        $langDisplay = $langCode === 'en' ? 'EN' : 'עב';
+        $innerHtml .= '<a href="' . $langLink . '" class="lang-switch ' . ($lang === $langCode ? 'active' : '') . '" data-lang="' . $langCode . '">' . $langDisplay . '</a>';
+        $separatorCount++;
+    }
     
     // Return content with or without wrapper
     if ($includeWrapper) {
@@ -269,6 +280,126 @@ function getProductLogoPath($product) {
     }
     
     return $path;
+}
+
+/**
+ * Generate a new CSRF token
+ * 
+ * @return string The generated token
+ */
+function generateCsrfToken() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+    // Generate a new token
+    $token = bin2hex(random_bytes(32));
+    
+    // Store the token and its timestamp in the session
+    $_SESSION['csrf_token'] = $token;
+    $_SESSION['csrf_token_time'] = time();
+    
+    return $token;
+}
+
+/**
+ * Validate a CSRF token
+ * 
+ * @param string $token The token to validate
+ * @param int $maxAge Maximum age of the token in seconds (default 1 hour)
+ * @return bool True if the token is valid, false otherwise
+ */
+function validateCsrfToken($token, $maxAge = 3600) {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+    // Check if token exists in session
+    if (empty($_SESSION['csrf_token']) || empty($_SESSION['csrf_token_time'])) {
+        return false;
+    }
+    
+    // Check if token has expired
+    if (time() - $_SESSION['csrf_token_time'] > $maxAge) {
+        // Token has expired, remove it
+        unset($_SESSION['csrf_token']);
+        unset($_SESSION['csrf_token_time']);
+        return false;
+    }
+    
+    // Compare tokens
+    return hash_equals($_SESSION['csrf_token'], $token);
+}
+
+/**
+ * Create a CSRF token HTML input field
+ * 
+ * @return string HTML for a hidden input field with CSRF token
+ */
+function csrfTokenField() {
+    $token = generateCsrfToken();
+    return '<input type="hidden" name="csrf_token" value="' . $token . '">';
+}
+
+/**
+ * Check if a page is in the whitelist of allowed pages
+ * 
+ * @param string $page The page name to check
+ * @return bool True if the page is allowed, false otherwise
+ */
+function isPageAllowed($page) {
+    // Load the whitelist
+    $whitelist = require_once __DIR__ . '/../config/whitelist.php';
+    
+    // Check if the page exists in the whitelist
+    if (isset($whitelist[$page])) {
+        // For future: Check auth requirements if implemented
+        $requiresAuth = $whitelist[$page];
+        
+        // If page requires authentication, implement auth check here
+        // For now, we just check if it's in the whitelist
+        return true;
+    }
+    
+    return false;
+}
+
+/**
+ * Safe redirect to a specified page
+ * 
+ * @param string $page The page to redirect to
+ * @param array $params Additional URL parameters
+ * @param string $lang The language code
+ * @return void
+ */
+function redirectToPage($page, $params = [], $lang = null) {
+    // If language isn't specified, use the current one or default
+    if ($lang === null) {
+        $lang = isset($_GET['lang']) ? $_GET['lang'] : DEFAULT_LANG;
+    }
+    
+    // Ensure the language is valid from available languages
+    if (!in_array($lang, AVAILABLE_LANGUAGES)) {
+        $lang = DEFAULT_LANG;
+        
+        // If default isn't available either, use the first available language
+        if (!in_array($lang, AVAILABLE_LANGUAGES) && count(AVAILABLE_LANGUAGES) > 0) {
+            $lang = AVAILABLE_LANGUAGES[0];
+        }
+    }
+    
+    // Create the parameter array
+    $redirectParams = array_merge([
+        'page' => $page,
+        'lang' => $lang
+    ], $params);
+    
+    // Build the URL
+    $url = '?' . http_build_query($redirectParams);
+    
+    // Perform the redirect
+    header('Location: ' . $url);
+    exit;
 }
 
 // todo: remove all the notused functions & why getTranslatedContent is used

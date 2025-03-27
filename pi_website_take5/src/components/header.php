@@ -40,7 +40,11 @@ $useNewScss = isset($useNewScss) ? $useNewScss : false;
     <!-- Load the new modular JavaScript main file -->
     <script type="module" src="assets/js/main.js"></script>
     <?php if ($page === 'home'): ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script 
+            src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" 
+            integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" 
+            crossorigin="anonymous">
+        </script>
     <?php endif; ?>
     <?php if ($page === 'contact'): ?>
     <!-- Leaflet JS for OpenStreetMap -->
