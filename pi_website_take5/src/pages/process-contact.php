@@ -46,7 +46,7 @@ try {
     }
 
     // Check if vendor directory exists
-    if (!file_exists(__DIR__ . '/../../../vendor')) {
+    if (!file_exists(__DIR__ . '/../../vendor')) {
         // Critical error, log it but don't expose details
         error_log("Vendor directory not found");
     }
@@ -57,11 +57,11 @@ try {
     // Try to load PHPMailer
     try {
         // Check if autoload file exists
-        if (!file_exists(__DIR__ . '/../../../vendor/autoload.php')) {
+        if (!file_exists(__DIR__ . '/../../vendor/autoload.php')) {
             throw new \Exception("Autoload file not found");
         }
         
-        require_once __DIR__ . '/../../../vendor/autoload.php';
+        require_once __DIR__ . '/../../vendor/autoload.php';
         
         // Check if PHPMailer classes exist
         if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {

@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     // Load the PHPMailer library
-    require_once __DIR__ . '/../../vendor/autoload.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
     
     // Define expected fields
     $expectedFields = ['name', 'email', 'subject', 'message'];

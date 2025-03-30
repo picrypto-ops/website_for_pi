@@ -1,0 +1,98 @@
+. 2025-03-30 10:56:39.979 --------------------------------------------------------------------------
+. 2025-03-30 10:56:39.979 WinSCP Version 6.3.7 (Build 15131 2025-02-20) (OS 10.0.26100 – Windows 10 Enterprise)
+. 2025-03-30 10:56:39.980 Configuration: HKCU\Software\Martin Prikryl\WinSCP 2\
+. 2025-03-30 10:56:39.980 Log level: Normal
+. 2025-03-30 10:56:39.980 Local account: AzureAD\RonenBitman
+. 2025-03-30 10:56:39.980 Working directory: C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\git_CodeRepo\website_for_pi
+. 2025-03-30 10:56:39.980 Process ID: 31412
+. 2025-03-30 10:56:40.054 Ancestor processes: WinSCP, cmd, php, pwsh, Cursor, Cursor, explorer, ...
+. 2025-03-30 10:56:40.054 Command-line: "C:\Program Files (x86)\WinSCP\WinSCP.exe" /console=6.3.7 /consoleinstance=_36868_748 "/script=winscp_deploy_1743321398.txt" "/log=winscp_deploy.log" 
+. 2025-03-30 10:56:40.054 Time zone: Current: GMT+3, Standard: GMT+2 (Jerusalem Standard Time), DST: GMT+3 (Jerusalem Summer Time), DST Start: 28/03/2025, DST End: 26/10/2025
+. 2025-03-30 10:56:40.054 Login time: Sunday, 30 March 2025 10:56:40
+. 2025-03-30 10:56:40.055 --------------------------------------------------------------------------
+. 2025-03-30 10:56:40.055 Script: Retrospectively logging previous script records:
+> 2025-03-30 10:56:40.055 Script: open vibit_pi_hf_storage
+< 2025-03-30 10:56:40.055 Script: In scripting you should not rely on saved sites, use this command instead:
+< 2025-03-30 10:56:40.055 Script: open ftp://ronen%40pi-hf.com:***@ftp.s74.upress.link/ -privatekey="C:\Users\RonenBitman\OneDrive - Pi Financial Management 2005 Ltd\OnlineVesion\DevTeam\AWS\SSH\prod_v1_srv1-key.ppk" -rawsettings AuthGSSAPIKEX=1 Cipher="aes,chacha20,3des,aesgcm,WARN,des,blowfish,arcfour"
+. 2025-03-30 10:56:40.055 --------------------------------------------------------------------------
+. 2025-03-30 10:56:40.055 Session name: vibit_pi_hf_storage (Site)
+. 2025-03-30 10:56:40.055 Host name: ftp.s74.upress.link (Port: 21)
+. 2025-03-30 10:56:40.055 User name: ronen@pi-hf.com (Password: Yes, Key file: Yes, Passphrase: No)
+. 2025-03-30 10:56:40.055 Transfer Protocol: FTP
+. 2025-03-30 10:56:40.055 Ping type: Dummy, Ping interval: 30 sec; Timeout: 15 sec
+. 2025-03-30 10:56:40.055 Disable Nagle: No
+. 2025-03-30 10:56:40.055 Proxy: None
+. 2025-03-30 10:56:40.055 Send buffer: 262144
+. 2025-03-30 10:56:40.055 UTF: Auto
+. 2025-03-30 10:56:40.055 FTPS: None [Client certificate: No]
+. 2025-03-30 10:56:40.055 FTP: Passive: Yes [Force IP: Auto]; MLSD: Auto [List all: Auto]; HOST: Auto
+. 2025-03-30 10:56:40.055 Local directory: C:\Users\RonenBitman\Downloads, Remote directory: /home/ec2-user/sourcecode, Update: Yes, Cache: Yes
+. 2025-03-30 10:56:40.055 Cache directory changes: Yes, Permanent: Yes
+. 2025-03-30 10:56:40.055 Recycle bin: Delete to: No, Overwritten to: No, Bin path: 
+. 2025-03-30 10:56:40.055 Timezone offset: 0h 0m
+. 2025-03-30 10:56:40.055 --------------------------------------------------------------------------
+< 2025-03-30 10:56:40.112 Script: Connecting to ftp.s74.upress.link ...
+. 2025-03-30 10:56:40.112 Connecting to ftp.s74.upress.link ...
+. 2025-03-30 10:56:40.225 Connected with ftp.s74.upress.link. Waiting for welcome message...
+< 2025-03-30 10:56:40.251 220 ProFTPD Server ready.
+> 2025-03-30 10:56:40.251 USER ronen@pi-hf.com
+< 2025-03-30 10:56:40.251 331 Password required for ronen@pi-hf.com
+> 2025-03-30 10:56:40.251 PASS ************
+< 2025-03-30 10:56:40.263 230 User ronen@pi-hf.com logged in
+> 2025-03-30 10:56:40.263 SYST
+< 2025-03-30 10:56:40.265 215 UNIX Type: L8
+> 2025-03-30 10:56:40.265 FEAT
+< 2025-03-30 10:56:40.268 211-Features:
+< 2025-03-30 10:56:40.268  AUTH TLS
+< 2025-03-30 10:56:40.268  CCC
+< 2025-03-30 10:56:40.269  CLNT
+< 2025-03-30 10:56:40.269  CSID
+< 2025-03-30 10:56:40.269  EPRT
+< 2025-03-30 10:56:40.269  EPSV
+< 2025-03-30 10:56:40.269  HOST
+< 2025-03-30 10:56:40.269  LANG bg-BG;en-US;es-ES;fr-FR;it-IT;ja-JP;ko-KR;ru-RU;zh-CN;zh-TW
+< 2025-03-30 10:56:40.269  MDTM
+< 2025-03-30 10:56:40.269  MFF modify;UNIX.group;UNIX.mode;
+< 2025-03-30 10:56:40.269  MFMT
+< 2025-03-30 10:56:40.269  MLST modify*;perm*;size*;type*;unique*;UNIX.group*;UNIX.groupname*;UNIX.mode*;UNIX.owner*;UNIX.ownername*;
+< 2025-03-30 10:56:40.269  PBSZ
+< 2025-03-30 10:56:40.269  PROT
+< 2025-03-30 10:56:40.269  RANG STREAM
+< 2025-03-30 10:56:40.269  REST STREAM
+< 2025-03-30 10:56:40.269  SIZE
+< 2025-03-30 10:56:40.269  SSCN
+< 2025-03-30 10:56:40.269  TVFS
+< 2025-03-30 10:56:40.269  UTF8
+< 2025-03-30 10:56:40.269 211 End
+> 2025-03-30 10:56:40.269 CLNT WinSCP-release-6.3.7
+< 2025-03-30 10:56:40.273 200 OK
+> 2025-03-30 10:56:40.273 OPTS UTF8 ON
+< 2025-03-30 10:56:40.275 200 UTF8 set to on
+< 2025-03-30 10:56:40.275 Script: Connected
+. 2025-03-30 10:56:40.276 Connected
+. 2025-03-30 10:56:40.276 --------------------------------------------------------------------------
+. 2025-03-30 10:56:40.276 Using FTP protocol.
+. 2025-03-30 10:56:40.276 Doing startup conversation with host.
+< 2025-03-30 10:56:40.276 Script: Starting the session...
+> 2025-03-30 10:56:40.278 CSID Name=WinSCP;Version=6.3.7;
+< 2025-03-30 10:56:40.281 200 name=ProFTPD;version=1.3.8b;casesensitive=1;
+. 2025-03-30 10:56:40.281 Server: ProFTPD 1.3.8b
+> 2025-03-30 10:56:40.282 PWD
+< 2025-03-30 10:56:40.285 257 "/" is the current directory
+. 2025-03-30 10:56:40.285 Changing directory to "/home/ec2-user/sourcecode".
+> 2025-03-30 10:56:40.286 CWD /home/ec2-user/sourcecode
+< 2025-03-30 10:56:40.290 550 /home/ec2-user/sourcecode: No such file or directory
+. 2025-03-30 10:56:40.290 Configured initial remote directory cannot be opened, staying in the home directory.
+. 2025-03-30 10:56:40.290 Getting current directory name.
+. 2025-03-30 10:56:40.290 Startup conversation with host finished.
+< 2025-03-30 10:56:40.290 Script: Session started.
+< 2025-03-30 10:56:40.291 Script: Active session: [1] vibit_pi_hf_storage
+> 2025-03-30 10:56:40.293 Script: option transfer binary
+< 2025-03-30 10:56:40.293 Script: transfer        binary    
+> 2025-03-30 10:56:40.293 Script: option confirm off
+< 2025-03-30 10:56:40.293 Script: confirm         off       
+> 2025-03-30 10:56:40.293 Script: if exist ".pi_website_take5/cache" rmdir ".pi_website_take5/cache" /recursive
+< 2025-03-30 10:56:40.293 Script: Unknown command 'if'.
+. 2025-03-30 10:56:40.293 Script: Failed
+. 2025-03-30 10:56:40.293 Script: Exit code: 1
+. 2025-03-30 10:56:40.319 Disconnected from server

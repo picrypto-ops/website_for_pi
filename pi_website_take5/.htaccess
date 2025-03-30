@@ -119,8 +119,24 @@
     # HSTS (uncomment if you have SSL properly configured)
     # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     
-    # Prevent this site from being framed
     Header set X-Frame-Options "SAMEORIGIN"
+    # Cache immutable resources for 1 year
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|svg|js|css|swf|webp|avif|woff|woff2|ttf|otf)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Cache HTML and XML files for 1 day, must revalidate
+    <FilesMatch "\.(html|htm|xml|txt|xsl)$">
+        Header set Cache-Control "public, max-age=86400, must-revalidate"
+    </FilesMatch>
+
+    # Set ETag for better caching
+    FileETag MTime Size
+
+    # Add Vary header for correct caching with compression and content negotiation
+    Header append Vary Accept-Encoding
+    Header append Vary Accept
+    Header append Vary Accept env=REDIRECT_accept
 </IfModule>
 
 # Rewrite rules for clean URLs
@@ -143,15 +159,11 @@
     
     # Block access to sensitive files
     RewriteRule ^(?:\.git|\.env|composer\.json|composer\.lock|package\.json|package-lock\.json|config\.php)$ - [F,L]
+    # Block access to sensitive directories (add directories as needed)
+    RewriteRule ^(src|vendor|scss|js|includes|templates|logs|tmp)(/.*)?$ - [F,L]
+    RewriteRule ^(src|vendor|scss|js|includes|templates|logs|tmp)$ - [F,L]
     
-    # Rewrite URLs to index.php
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
-</IfModule>
-
-# Serve modern image formats if supported
-<IfModule mod_rewrite.c>
+    # Serve modern image formats if supported
     # WebP Support
     RewriteCond %{HTTP_ACCEPT} image/webp
     RewriteCond %{REQUEST_FILENAME} (.*)\.(jpe?g|png)$
@@ -163,10 +175,19 @@
     RewriteCond %{REQUEST_FILENAME} (.*)\.(jpe?g|png|webp)$
     RewriteCond %{REQUEST_FILENAME}\.avif -f
     RewriteRule (.+)\.(jpe?g|png|webp)$ $1.avif [T=image/avif,E=accept:1]
+
+
+    # Rewrite URLs to index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+
+<IfModule mod_rewrite.c>
 </IfModule>
 
 <IfModule mod_headers.c>
-    Header append Vary Accept env=REDIRECT_accept
 </IfModule>
 
 # Define MIME types

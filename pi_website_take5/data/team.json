@@ -76,7 +76,7 @@
                     "name": "Dan Rosenberg",
                     "position": "Founder",
                     "short_bio": "Co-Founder of PI Development Group, with over 20 years of experience across global capital and interest rate markets.",
-                    "bio": "<p>Dan possesses deep expertise in structuring and pricing complex financial instruments, with a strong focus on derivatives and interest rate strategies. His work spans valuation, financial engineering, and the development of advanced risk management solutions tailored to institutional needs.</p><p>He is also the former senior interest rate derivatives portfolio manager at PI SPC hedge fund, where he managed portfolios for over seven years. Prior to that, he served as a senior interest rate trader at Hapoalim Bank.</p><p>Dan holds a BA in Finance.</p>"
+                    "bio": "<p>Dan has deep expertise in structuring and pricing complex financial instruments, with a focus on derivatives and interest rate strategies.</p><p>He is also a former senior interest rate derivatives portfolio manager at PI SPC hedge fund, where he managed a global interest rate portfolio for over seven years. Prior to that, he served as a senior interest rate trader at Bank Hapoalim.</p><p>Dan holds a BA in Finance.</p>"
                 },
                 "he": {
                     "name": "דן רוזנברג",
@@ -120,7 +120,7 @@
                     "name": "Shlomi Cohen",
                     "position": "Chief Financial Officer and Director",
                     "short_bio": "Chief Financial Officer and Director, with over 25 years of experience in finance, accounting, and operational risk management.",
-                    "bio": "<p>Shlomi is responsible for managing financial operations and strategic financial planning, where he has worked since its inception.<br>Shlomi began his career in the financial department of PwC and later worked as an independent Certified Public Accountant (CPA).</p><p>Shlomi holds a CPA certification.</p>"
+                    "bio": "<p>Shlomi has been with PI since its inception in 1999 and is responsible for managing the financial operations and planning of the Group.<br>Shlomi began his career in the financial department of PwC and later worked as an independent Certified Public Accountant (CPA).</p><p>Shlomi holds a CPA certification</p>"
                 },
                 "he": {
                     "name": "שלומי כהן",
@@ -141,7 +141,7 @@
                     "name": "Ronen Bitman",
                     "position": "Chief Technology Officer and Director",
                     "short_bio": "Chief Technology Officer with over 25 years of fintech-focused software development experience, specializing in advanced system architecture and risk management solutions.",
-                    "bio": "<p>Ronen is responsible for the development and implementation of the group's proprietary trading, risk management, and operational IT solutions. In addition, Ronen advises on all private and public technology investments and oversees the integration of AI technologies to enhance operational efficiency and innovation across the Group.</p>"
+                    "bio": "<p>Ronen is responsible for the development and implementation of the Group’s proprietary trading, risk management, and operational IT solutions. In addition, Ronen advises on all private and public technology investments for all entities in the Group.</p>"
                 },
                 "he": {
                     "name": "רונן ביטמן",
@@ -162,34 +162,13 @@
                     "name": "Hagit Borohovitz",
                     "position": "Chief Legal Officer and Director",
                     "short_bio": "Chief Legal Officer of the Group, with over 10 years of experience in commercial law, regulatory compliance, and corporate governance.",
-                    "bio": "<p>Hagit has been with the Group since 2018, and she also serves as Head of Operations. Previously, she held positions as an in-house lawyer and operations manager in the real estate and technology sectors. Hagit holds an LL.B. and is a licensed attorney in Israel.</p>"
+                    "bio": "<p>Hagit is responsible for the legal and operational management of the Group. She has been with the Group since 2018 and serves as a Director in several of the Group's entities.</p><p>Previously, she held positions as an in-house lawyer and operations manager in the real estate and technology sectors.</p><p>Hagit holds an LL.B. and is a licensed attorney in Israel.</p>"
                 },
                 "he": {
                     "name": "חגית בורוכוביץ",
                     "position": "יועצת משפטית ראשית",
                     "short_bio": "חגית בורוחוביץ בעלת מעל 10 שנות ניסיון במשפט, בעלת התמחות בהקמה ותפעול קרנות השקעה.",
                     "bio": "חגית בורוכוביץ בעלת מעל 10 שנות ניסיון במשפט, בעלת התמחות בהקמה ותפעול קרנות השקעה. היא משמשת בקבוצת פאי מאז 2018 כיועצת משפטית ומנהלת תפעול. כיום, היא משמשת כסמנכ\"ל תפעול בפאי פיתוח, שם היא אחראית על ניהול תהליכים תפעוליים, ניהול הליכים פיננסיים ועמידה ברגולציות. עם ניסיונה הרב והבנתה העמוקה בעניינים משפטיים ותפעוליים, היא ממשיכה להוביל את הקבוצה ליעילות תפעולית והצלחה."
-                }
-            }
-        },
-        {
-            "name_slug":"muriel-cohen",
-            "photo": "assets/images/team/muriel_cohen.png",
-            "is_founder": false,
-            "display_in_home_page": true,
-            "display_product_roles": false,
-            "language_slug": {
-                "en": {
-                    "name": "Muriel Cohen",
-                    "position": "Investor Relations",
-                    "short_bio": "Investor Relations of PI Group.",
-                    "bio": "Muriel Cohen manages Investor Relations of PI Group."
-                },
-                "he": {
-                    "name": "מוריאל כהן",
-                    "position": "מנהלת קשרי לקוחות",
-                    "short_bio": "מוריאל כהן, מנהלת קשרי לקוחות בקבוצת PI, אחראית על ניהול קשרים עם לקוחות ושיפור תהליכי קשרים בין הלקוחות לבין הקבוצה.",
-                    "bio": "מוריאל כהן, מנהלת קשרי לקוחות בקבוצת PI, אחראית על ניהול קשרים עם לקוחות ושיפור תהליכי קשרים בין הלקוחות לבין הקבוצה."
                 }
             }
         },
@@ -213,7 +192,28 @@
                     "bio": "מרינה קאזר עם ניסיון של למעלה מ 35 שנה בתחום הנהלת חשבונות וחשבות שכר"
                 }
             }
-        }        
+        },        
+        {
+            "name_slug":"muriel-cohen",
+            "photo": "assets/images/team/muriel_cohen.png",
+            "is_founder": false,
+            "display_in_home_page": true,
+            "display_product_roles": false,
+            "language_slug": {
+                "en": {
+                    "name": "Muriel Cohen",
+                    "position": "Apprentice, Investor Relations",
+                    "short_bio": "",
+                    "bio": ""
+                },
+                "he": {
+                    "name": "מוריאל כהן",
+                    "position": "מנהלת קשרי לקוחות",
+                    "short_bio": "מוריאל כהן, מנהלת קשרי לקוחות בקבוצת PI, אחראית על ניהול קשרים עם לקוחות ושיפור תהליכי קשרים בין הלקוחות לבין הקבוצה.",
+                    "bio": "מוריאל כהן, מנהלת קשרי לקוחות בקבוצת PI, אחראית על ניהול קשרים עם לקוחות ושיפור תהליכי קשרים בין הלקוחות לבין הקבוצה."
+                }
+            }
+        }       
     ],
     "investments": [
         {
@@ -226,7 +226,7 @@
                 "en": {
                     "name": "Dolev Trogman",
                     "position": "Fund Manager",
-                    "short_bio": "Fund Manager with over 13 years of experience in global financial markets, specializing in equity, interest rate, and FX derivatives trading at HSBC, Brevan Howard, and JPMorgan.",
+                    "short_bio": "Dolev manages the PI Global Macro Fund. He has over 13 years of experience trading in global financial markets, specializing in equity, interest rate, and FX derivatives.",
                     "bio": "<p>Dolev Trogman is a Fund Manager with extensive experience in global financial markets. He began his career in equity derivatives at HSBC in Paris, then moved into interest rate strategies at Brevan Howard. He later joined JPMorgan in London, where he focused on emerging market FX options. In 2018, Dolev joined PI SPC as a Macro Portfolio Manager, and managed a derivative multi-asset portfolio.</p><p> He holds an MSc in Financial Markets from Paris Dauphine University.</p>"
                 },
                 "he": {
@@ -269,7 +269,7 @@
                     "name": "Asaf Shaul",
                     "position": "Senior Investment Analyst",
                     "short_bio": "Senior Investment Analyst, with over 20 years of experience in investment management and strategic analysis of private and listed local and foreign companies.",
-                    "bio" : "<p>Asaf Shaul serves as a Senior Investment Analyst and has extensive experience in managing diverse portfolios and investment strategies. Previously, Asaf held senior positions as Deputy CEO and Chief Investment Officer at leading Israeli investment firms, including Excellence Mutual Funds, Ayalon Mutual Funds, Alpha Platinum, and Gaon Mutual Funds. In these roles, he managed significant assets, established investment divisions, and developed expertise in bonds and equity investments.</p><p>Asaf holds a bachelor's degree in Economics and Business Administration from Ben-Gurion University and is a licensed Portfolio Manager certified by the Israel Securities Authority.</p>"
+                    "bio" : "<p>Asaf serves as a Senior Investment Analyst and has extensive experience in managing diverse investment strategies. Previously, Asaf worked as  Deputy CEO and Chief Investment Officer at leading Israeli investment firms, including Excellence Mutual Funds, Ayalon Mutual Funds, Alpha Platinum, and Gaon Mutual Funds. In these roles, he managed significant assets, established investment divisions, and developed expertise in bonds and equity investments.</p><p>Asaf holds a bachelor's degree in Economics and Business Administration from Ben-Gurion University and is a licensed Portfolio Manager certified by the Israel Securities Authority.</p>"
                 },
                 "he": {
                     "name": "אסף שאול",
@@ -311,7 +311,7 @@
                     "name": "Mor Katz Avrahami",
                     "position": "Analyst",
                     "short_bio": "Analyst at PI Development Group, with extensive experience in regulatory consulting, payment solutions, banking regulations, and international trade compliance for leading financial institutions in Israel.",
-                    "bio": "<p>Mor Katz Avrahami has extensive experience advising leading entities in the Israeli economy on regulatory compliance, complex financial processes, financing strategies, and advanced valuation modeling. Mor specializes in payment solutions, clearing infrastructures, and banking regulations related to capital, liquidity, and international trade.</p><p>Previously, she served as an attorney in the Markets Division of the Israel Competition Authority, focusing on financial sectors. Mor is a licensed attorney, holding an LL.B. (magna cum laude) and an MBA from Reichman University.</p>"
+                    "bio": "<p>Mor Katz Avrahami has extensive experience advising leading entities in the Israeli economy on regulatory compliance, complex financial processes, financing strategies, and advanced valuation modeling. Mor specializes in payment solutions, clearing infrastructures, and banking regulations related to capital, liquidity, and international trade.</p><p>Previously, she served as an attorney in the Markets Division of the Israel Competition Authority, focusing on financial sectors.</p><p>Mor is a licensed attorney with five years of experience. She holds an LL.B. (magna cum laude) and an MBA from Reichman University.</p>"
                 },
                 "he": {
                     "name": "מור כץ אברהמי",
