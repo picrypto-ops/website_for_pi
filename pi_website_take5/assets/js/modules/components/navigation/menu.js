@@ -13,33 +13,46 @@ class NavigationMenu {
         this.resizeTimer = null;
     }
 
-    /**
+    // ... (keep _initMenuState, _toggleMenu, _handleOutsideClick, _handleEscKey, _handleResize methods as they were) ...
+
+     /**
      * Initialize menu state based on screen size
      * @private
      */
-    _initMenuState() {
+     _initMenuState() {
         // Don't override menu state if a toggle is in progress
         if (this.isMenuToggleInProgress) {
             return;
         }
-        
-        if (window.innerWidth <= 767) {
-            // Mobile view - hide menu
-            this.mainNav.style.maxHeight = '0px';
-            this.mainNav.style.overflow = 'hidden';
-            this.mainNav.style.opacity = '0';
-            this.mainNav.style.visibility = 'hidden';
-            this.mainNav.classList.remove('open');
-            this.menuToggle.classList.remove('active');
-            this.menuToggle.setAttribute('aria-expanded', 'false');
+
+        const isMobile = window.innerWidth <= 767; // Breakpoint from variables.$mobile-breakpoint
+
+        if (isMobile) {
+            // Mobile view - ensure menu is closed initially unless already open
+            if (!this.mainNav.classList.contains('open')) {
+                this.mainNav.style.maxHeight = '0px';
+                this.mainNav.style.overflow = 'hidden';
+                this.mainNav.style.opacity = '0';
+                this.mainNav.style.visibility = 'hidden';
+                this.menuToggle.classList.remove('is-active'); // Use is-active helper class
+                this.menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('menu-open'); // Ensure body class is removed
+            }
         } else {
-            // Desktop view - show menu
+            // Desktop view - ensure menu is visible and styles are reset
             this.mainNav.style.maxHeight = '';
             this.mainNav.style.overflow = '';
             this.mainNav.style.opacity = '';
             this.mainNav.style.visibility = '';
             this.mainNav.classList.remove('open'); // Ensure mobile classes are removed
+            this.menuToggle.classList.remove('is-active');
             document.body.classList.remove('menu-open');
+            // Reset potential fixed positioning of toggle button
+            this.menuToggle.style.position = '';
+            this.menuToggle.style.top = '';
+            this.menuToggle.style.left = '';
+            this.menuToggle.style.right = '';
+            this.menuToggle.style.zIndex = '';
         }
     }
 
@@ -51,107 +64,91 @@ class NavigationMenu {
     _toggleMenu = (e) => {
         if (e) {
             e.preventDefault();
+            e.stopPropagation(); // Prevent click from bubbling up (e.g., to outside click handler)
         }
-        
+
         // Only handle toggle for mobile devices - adjust breakpoint to match CSS
-        if (window.innerWidth > 767) {
+        if (window.innerWidth > 767) { // Breakpoint from variables.$mobile-breakpoint
             return;
         }
-        
-        // Prevent multiple rapid toggles
+
         if (this.isMenuToggleInProgress) {
             return;
         }
-        
-        // Set flag to prevent multiple toggles
         this.isMenuToggleInProgress = true;
-        
+
         const isOpen = this.mainNav.classList.contains('open');
-        
-        // Toggle states
-        this.menuToggle.classList.toggle('active');
+
+        this.menuToggle.classList.toggle('is-active'); // Use helper class
         document.body.classList.toggle('menu-open');
-        
-        // Explicitly set position of toggle button in active state
+
         if (!isOpen) {
-            // When opening menu, fix the toggle button position based on direction
-            const isRTL = document.documentElement.dir === 'rtl';
-            
-            // Add open class immediately
+            // Opening menu
             this.mainNav.classList.add('open');
-            
-            // Set fixed position at the top
-            this.menuToggle.style.position = 'fixed';
-            this.menuToggle.style.top = '25px';
-            this.menuToggle.style.zIndex = '10000'; // Higher z-index to ensure button is visible
-            
-            // Set left/right based on direction
-            if (isRTL) {
-                // For RTL (Hebrew) - position on the right
-                this.menuToggle.style.right = '15px';
-                this.menuToggle.style.left = 'auto';
-            } else {
-                // For LTR (English) - position on the left
-                this.menuToggle.style.left = '15px';
-                this.menuToggle.style.right = 'auto';
-            }
-            
-            // Handle height animation for mobile only - show immediately
+            // Set visibility and opacity first for transition
             this.mainNav.style.visibility = 'visible';
             this.mainNav.style.opacity = '1';
-            this.mainNav.style.maxHeight = '100vh';
-            this.mainNav.style.zIndex = '9999'; // Ensure menu is on top when visible
-            
-            // Update ARIA
-            this.menuToggle.setAttribute('aria-expanded', 'true');
-            
-            // Allow new toggles after animation completes
+            // Use setTimeout to allow display change before starting height transition
             setTimeout(() => {
+                this.mainNav.style.maxHeight = 'calc(100vh - ' + this.mainNav.offsetTop + 'px)'; // Calculate max height dynamically
+            }, 10); // Small delay
+
+            this.menuToggle.setAttribute('aria-expanded', 'true');
+
+            // Use transitionend event for more reliable end detection
+            this.mainNav.addEventListener('transitionend', () => {
                 this.isMenuToggleInProgress = false;
-            }, 500);
+            }, { once: true });
+
         } else {
-            // For closing, start animation then remove class at the end
-            
-            // Start closing animation
+            // Closing menu
             this.mainNav.style.maxHeight = '0px';
             this.mainNav.style.opacity = '0';
-            
-            // Wait for animation to complete before removing classes and visibility
-            setTimeout(() => {
-                // When closing, reset inline styles
-                this.menuToggle.style.position = '';
-                this.menuToggle.style.top = '';
-                this.menuToggle.style.left = '';
-                this.menuToggle.style.right = '';
-                this.menuToggle.style.zIndex = '';
-                
-                // Remove class after animation completes
-                this.mainNav.classList.remove('open');
-                
-                // Finally hide the menu
-                this.mainNav.style.visibility = 'hidden';
-                this.mainNav.style.zIndex = '-1'; // Move it behind other elements
-                
-                // Update ARIA
-                this.menuToggle.setAttribute('aria-expanded', 'false');
-                
-                // Allow new toggles
+
+            // Wait for transition to complete before hiding
+             this.mainNav.addEventListener('transitionend', () => {
+                if (!this.mainNav.classList.contains('open')) { // Check if still closing
+                    this.mainNav.style.visibility = 'hidden';
+                    // Reset fixed position only if the header itself is not fixed (e.g., not home page scrolled)
+                    if(!document.querySelector('.site-header.home-header.initially-hidden')){
+                       this.menuToggle.style.position = '';
+                       this.menuToggle.style.top = '';
+                       this.menuToggle.style.left = '';
+                       this.menuToggle.style.right = '';
+                       this.menuToggle.style.zIndex = '';
+                    }
+                }
                 this.isMenuToggleInProgress = false;
-            }, 400); // Just before the transition completes
+            }, { once: true });
+
+
+            // Remove class slightly before transition ends to ensure styles are applied correctly
+            // but only visually hide fully after transition
+            setTimeout(() => {
+                 this.mainNav.classList.remove('open');
+                 this.menuToggle.setAttribute('aria-expanded', 'false');
+            }, 350); // Adjust timing based on transition duration (400ms)
+
+
         }
     }
 
-    /**
+     /**
      * Handle clicks outside the menu to close it
      * @private
      * @param {Event} event - The click event
      */
-    _handleOutsideClick = (event) => {
-        if (window.innerWidth <= 767 && 
-            this.mainNav.classList.contains('open') && 
-            !event.target.closest('.mobile-menu-toggle') && 
-            !event.target.closest('.main-nav')) {
-            this._toggleMenu();
+     _handleOutsideClick = (event) => {
+        const isMobile = window.innerWidth <= 767; // Breakpoint
+        if (isMobile &&
+            this.mainNav.classList.contains('open') &&
+            !this.menuToggle.contains(event.target) && // Check if click was on toggle itself
+            !this.mainNav.contains(event.target)) // Check if click was inside nav menu
+        {
+             // Check if toggle is in progress to prevent double toggling
+             if (!this.isMenuToggleInProgress) {
+                this._toggleMenu();
+             }
         }
     }
 
@@ -161,10 +158,14 @@ class NavigationMenu {
      * @param {KeyboardEvent} event - The keyboard event
      */
     _handleEscKey = (event) => {
-        if (window.innerWidth <= 767 && 
-            event.key === 'Escape' && 
+         const isMobile = window.innerWidth <= 767; // Breakpoint
+        if (isMobile &&
+            event.key === 'Escape' &&
             this.mainNav.classList.contains('open')) {
-            this._toggleMenu();
+             // Check if toggle is in progress
+            if (!this.isMenuToggleInProgress) {
+                this._toggleMenu();
+            }
         }
     }
 
@@ -173,26 +174,22 @@ class NavigationMenu {
      * @private
      */
     _handleResize = () => {
-        // Clear previous timeout
         clearTimeout(this.resizeTimer);
-        
-        // Set a new timeout to execute the function after 250ms
         this.resizeTimer = setTimeout(() => {
             const currentWindowWidth = window.innerWidth;
-            
-            // Only reset menu if we cross the mobile/desktop threshold (767px)
-            const wasMobile = this.previousWindowWidth <= 767;
-            const isMobile = currentWindowWidth <= 767;
-            
-            // Only reinitialize if we've crossed the threshold
+            const wasMobile = this.previousWindowWidth <= 767; // Breakpoint
+            const isMobile = currentWindowWidth <= 767; // Breakpoint
+
             if (wasMobile !== isMobile) {
+                 // Reset menu state fully when crossing breakpoint
+                 this.isMenuToggleInProgress = false; // Ensure toggle flag is reset
                 this._initMenuState();
             }
-            
-            // Update previous window width
+
             this.previousWindowWidth = currentWindowWidth;
         }, 250);
     }
+
 
     /**
      * Initialize the navigation menu
@@ -203,41 +200,37 @@ class NavigationMenu {
      */
     init(options = {}) {
         if (this.isInitialized) return this;
-        
+
         const config = {
-            menuToggleSelector: '.mobile-menu-toggle',
-            navSelector: '.main-nav',
+            // --- *** THE FIX IS HERE *** ---
+            menuToggleSelector: '.site-header__toggle', // Use the new BEM class
+            navSelector: '.site-header__nav',         // Use the new BEM class
+            // --- *********************** ---
             ...options
         };
-        
+
         // Get elements
         this.menuToggle = document.querySelector(config.menuToggleSelector);
         this.mainNav = document.querySelector(config.navSelector);
-        
+
         if (!this.menuToggle || !this.mainNav) {
-            console.warn('Menu elements not found. Navigation menu not initialized.');
+            console.warn('Header menu elements not found with BEM selectors. Navigation menu not initialized.');
             return this;
         }
-        
-        // Set ARIA attributes
-        this.menuToggle.setAttribute('aria-controls', 'main-nav-menu');
-        this.mainNav.setAttribute('id', 'main-nav-menu');
-        
-        // Initial setup
-        this._initMenuState();
-        
-        // Add click handler to toggle button
+
+        // Set ARIA attributes - ensure nav ID matches aria-controls
+        this.menuToggle.setAttribute('aria-controls', 'main-nav-menu'); // Keep existing ID for nav
+        this.mainNav.setAttribute('id', 'main-nav-menu'); // Ensure nav has this ID
+
+        // Initial setup based on current screen width
+        this._initMenuState(); // Call initialization
+
+        // Add event listeners
         this.menuToggle.addEventListener('click', this._toggleMenu);
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', this._handleOutsideClick);
-        
-        // Close menu when ESC key is pressed
+        document.addEventListener('click', this._handleOutsideClick); // Use capture phase potentially? No, regular should be fine.
         document.addEventListener('keydown', this._handleEscKey);
-        
-        // Handle window resize
         window.addEventListener('resize', this._handleResize);
-        
+
         this.isInitialized = true;
         return this;
     }
@@ -247,18 +240,35 @@ class NavigationMenu {
      */
     destroy() {
         if (!this.isInitialized) return;
-        
+
         // Remove event listeners
-        this.menuToggle.removeEventListener('click', this._toggleMenu);
+        if (this.menuToggle) {
+             this.menuToggle.removeEventListener('click', this._toggleMenu);
+        }
         document.removeEventListener('click', this._handleOutsideClick);
         document.removeEventListener('keydown', this._handleEscKey);
         window.removeEventListener('resize', this._handleResize);
-        
+
         // Clear timeout
         clearTimeout(this.resizeTimer);
-        
+
+        // Reset any inline styles potentially added by JS
+        if(this.mainNav) {
+            this.mainNav.style.maxHeight = '';
+            this.mainNav.style.opacity = '';
+            this.mainNav.style.visibility = '';
+        }
+       if(this.menuToggle) {
+            this.menuToggle.style.position = '';
+            this.menuToggle.style.top = '';
+            this.menuToggle.style.left = '';
+            this.menuToggle.style.right = '';
+            this.menuToggle.style.zIndex = '';
+       }
+
+
         this.isInitialized = false;
     }
 }
 
-export default NavigationMenu; 
+export default NavigationMenu;

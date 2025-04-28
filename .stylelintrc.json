@@ -6,10 +6,11 @@
     "selector-class-pattern": null,
     "plugin/selector-bem-pattern": {
       "preset": "bem",
-      "componentName": "^[a-z]+$",
+      "componentName": "^[a-z]+(?:-[a-z]+)*$",
       "componentSelectors": {
-        "initial": "^\\.{componentName}$|^\\.{componentName}__[a-z]+$|^\\.{componentName}--[a-z]+$|^\\.{componentName}__[a-z]+--[a-z]+$"
+        "initial": "^\\.{componentName}(?:__[a-z]+(?:-[a-z]+)*)?(?:--[a-z]+(?:-[a-z]+)*)?$"
       },
+      "utilitySelectors": "^\\.u-[a-zA-Z0-9\\-]+$",
       "ignoreSelectors": [
         "^\\.no-js$",
         "^\\.js$",

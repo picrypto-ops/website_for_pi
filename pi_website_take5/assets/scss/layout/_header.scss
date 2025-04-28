@@ -1,737 +1,579 @@
 @use "../base/variables" as variables;
 @use "../base/mixins" as mixins;
+@use "../base/animations";
+@use "sass:color";
 
-header {
-  background-color: variables.$header-bg-color;
-  color: variables.$header-text-color;
-  padding: variables.$header-padding 0;
-  width: 100%;
+// ==========================================================================
+// Block: site-header
+// ==========================================================================
+.site-header {
+  // Positioning & Box Model
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  transition: variables.$header-transition;
-  box-shadow: variables.$header-shadow;
-  max-width: 100%;
   box-sizing: border-box;
-  padding: 0 15px;
+  width: 100%;
+  max-width: 100%;
   min-height: variables.$header-min-height;
+  padding: variables.$header-padding 15px;
+  box-shadow: variables.$header-shadow;
 
+  // Visual
+  background-color: variables.$header-bg-color;
+  color: variables.$header-text-color;
+
+  // Animation & Transitions
+  transition: variables.$header-transition;
+
+  // --- State: Initially Hidden ---
   &.initially-hidden {
     transform: translateY(-100%);
   }
 
-  .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
+  // --- Descendant: Container ---
+  .container {
+    // Header-specific container styles if needed
   }
 
-  /* Hide the mobile menu toggle button by default (for desktop) */
-  .mobile-menu-toggle {
-    color: variables.$header-text-color !important;
+  // --- Element: Content Wrapper ---
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    position: relative;
+    min-height: variables.$header-min-height;
+    
+  }
+
+  // --- Element: Mobile Toggle Button ---
+  &__toggle {
+    // Positioning & Box Model
+    display: none; // Default hidden
+    z-index: 1550;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    margin: 0;
+
+    // Visual & Interaction
     background: none;
     border: none;
-    padding: 10px;
+    color: inherit;
     cursor: pointer;
-    display: none !important; // Hidden by default
     outline: none;
-    transition: all 0.3s ease;
-    
-    @media (max-width: variables.$mobile-breakpoint) {
-      display: flex !important;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      width: 30px;
-      height: 24px;
-    }
-    
-    .menu-icon {
-      color: variables.$header-text-color;
+
+    // Transitions
+    transition: background-color 0.3s ease;
+
+    // Define base toggle-icon and bar styles before :hover or .is-active modifiers
+    // Element: Toggle Icon Visual Wrapper
+    .site-header__toggle-icon { // Use full selector for clarity here if preferred
       display: block;
       position: relative;
+      width: 24px;
+      height: 18px;
+      margin: auto;
+    }
+
+    // Element: Toggle Icon Bars
+    .site-header__toggle-bar { // Use full selector
+      // Positioning & Box Model
+      position: absolute; // Moved from individual nth-child rules
+      left: 0;
+      display: block;
       width: 100%;
-      height: 100%;
-      
-      .bar {
-        color: variables.$header-text-color !important;
-        display: block;
-        width: 100%;
-        height: 3px;
-        margin-bottom: 5px;
-        background-color: variables.$text-light;
-        border-radius: 2px;
-        transform-origin: center;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-    
-    &.active {
-      .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-      }
-      
-      .bar:nth-child(2) {
-        opacity: 0;
-      }
-      
-      .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-      }
-    }
-  }
+      height: 2px;
 
-  // Section 1: Logo & Group Name
-  .logo-section {
-    display: flex;
-    align-items: center;
-    margin-right: 2rem; // Add more spacing in LTR mode
-    margin-top: 4px;
-    
-    .logo-link {
-      text-decoration: none;
-    }
-    
-    .logo-container {
-      display: flex;
-      align-items: center;
-      position: relative;
-      
-      img {
-        max-width: variables.$logo-size;
-        margin-right: 1.5rem; // Increased spacing between logo and group name
-      }
-      
-      .group-name {
-        font-weight: normal;
-        font-size: variables.$group-name-size;
-        color: variables.$nav-link-color;
-        white-space: nowrap;
-      }
-    }
-  }
+      // Visual
+      background-color: variables.$text-light;
+      border-radius: 1px;
 
-  // Section 2: Main Navigation
-  .main-nav {
-    flex: 1;
-    display: flex;
-    justify-content: center; // Center menu items
-    margin: 0 1.5rem; // Add spacing on both sides
-    
-    ul {
-      list-style-type: none;
-      padding: 0;
-      display: flex;
-      gap: variables.$nav-gap;
+      // Animation & Transitions
+      transform-origin: center;
+      transition: transform 0.3s ease, opacity 0.3s ease;
 
-      li {
-        position: relative;
-        padding: 0.5rem 0;
-        
-        a {
-          color: variables.$nav-link-color;
-          text-decoration: none;
-          font-weight: variables.$nav-font-weight;
-          font-size: variables.$header-font-size;
-          position: relative;
-          display: inline-block;
-          padding: 0.2rem 0;
-          transition: color 0.3s ease;
-          
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: variables.$nav-hover-underline-color;
-            transition: all variables.$nav-hover-animation-duration ease;
-            transform: translateX(-50%);
-            opacity: 0;
-          }
+      // Bar positioning (Base definitions first)
+      &:nth-child(1) {
+        top: 0;
+      }
 
-          &:hover {
-            color: variables.$nav-link-hover;
-            
-            &::after {
-              width: 100%;
-              opacity: 1;
-            }
-          }
-        }
-
-        &.active {
-          position: relative;
-          overflow: hidden;
-          background-color: rgba(255, 255, 255, variables.$nav-active-bg-opacity);
-          border-radius: 4px;
-          box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-          animation: activeGlow variables.$nav-active-pulse-duration infinite;
-          
-          &::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: variables.$nav-active-indicator-color;
-            border-radius: 3px;
-            animation: activePulse variables.$nav-active-pulse-duration infinite;
-          }
-          
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.05);
-            z-index: -1;
-            border-radius: 4px;
-            animation: activeSlideIn 0.5s ease-out forwards;
-          }
-          
-          a {
-            color: variables.$text-light;
-            font-weight: bold;
-            padding: 0.2rem 0.8rem;
-            position: relative;
-            z-index: 1;
-            
-            &::after {
-              display: none;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Section 3: Language Switcher
-  .language-switcher {
-    display: flex;
-    align-items: center;
-    gap: variables.$lang-switcher-gap;
-    position: relative;
-    white-space: nowrap;
-    margin-left: 2rem; // Add spacing in LTR mode
-
-    a {
-      color: variables.$nav-link-color;
-      text-decoration: none;
-      font-size: variables.$header-font-size;
-
-      &:hover {
-        color: variables.$nav-link-hover;
-        text-decoration: underline;
-      }
-      
-      &.active {
-        font-weight: bold;
-        color: variables.$nav-active;
-      }
-    }
-    
-    .separator {
-      color: variables.$nav-link-color;
-      font-size: variables.$header-font-size;
-    }
-  }
-}
-
-/* LTR (English) Layout */
-html[dir="ltr"] {
-  .header-content {
-    flex-direction: row;
-  }
-  
-  .logo-section {
-    order: 1;
-    margin-right: 2rem;
-    margin-left: 0;
-  }
-  
-  .main-nav {
-    order: 2;
-  }
-  
-  .language-switcher {
-    order: 3;
-    margin-left: 2rem;
-    margin-right: 0;
-  }
-}
-
-/* RTL (Hebrew) Layout */
-html[dir="rtl"] {
-  .header-content {
-    flex-direction: row-reverse;
-  }
-  
-  .logo-section {
-    order: 3;
-    margin-left: 2rem;
-    margin-right: 0;
-    
-    .logo-container {
-      img {
-        margin-right: 0;
-        margin-left: 1.5rem; // Mirror the spacing
-      }
-    }
-  }
-  
-  .main-nav {
-    order: 2;
-    
-    ul li {
-      a::after {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      
-      &.active::before {
-        right: 0;
-        left: auto;
-      }
-      
-      &.active a {
-        padding: 0.2rem 0.8rem;
-      }
-    }
-  }
-  
-  .language-switcher {
-    order: 1;
-    margin-right: 2rem;
-    margin-left: 0;
-  }
-}
-
-// Adding space for the fixed header on non-home pages
-body:not(.home-page) {
-  padding-top: calc(variables.$header-height + (variables.$header-padding * 2));
-}
-
-// Medium-sized screen responsive adjustments
-@media (min-width: variables.$tablet-min) and (max-width: variables.$tablet-max) {
-  header {
-    .header-content {
-      // Reduce margins between elements to prevent language selector from being cut off
-      .logo-section {
-        margin-right: 0.75rem;
-        
-        .logo-container {
-          img {
-            max-width: calc(variables.$logo-size - 5px);
-            margin-right: 1rem; // Reduce spacing between logo and group name
-          }
-          
-          .group-name {
-            font-size: calc(variables.$group-name-size - 0.1rem);
-          }
-        }
-      }
-      
-      .main-nav {
-        margin: 0 0.75rem; // Reduce side margins
-        
-        // Reduce spacing between nav items
-        ul {
-          gap: 0.75rem;
-          
-          li a {
-            padding: 0 0.25rem;
-            font-size: calc(variables.$header-font-size - 0.05rem);
-          }
-        }
-      }
-      
-      .language-switcher {
-        margin-left: 0.75rem;
-        margin-right: 0;
-        
-        a, .separator {
-          font-size: calc(variables.$header-font-size - 0.05rem);
-        }
-      }
-    }
-  }
-  
-  // RTL adjustments for medium screens
-  html[dir="rtl"] {
-    header .header-content {
-      .logo-section {
-        margin-left: 0.75rem;
-        margin-right: 0;
-        
-        .logo-container img {
-          margin-left: 1rem; // Reduce spacing for RTL
-          margin-right: 0;
-        }
-      }
-      
-      .language-switcher {
-        margin-right: 0.75rem;
-        margin-left: 0;
-      }
-    }
-  }
-}
-
-// Global media query to fix scrollbar issues on mobile devices
-@media (max-width: variables.$mobile-breakpoint) {
-  body {
-    overflow-x: hidden; // Prevent horizontal scrolling
-  }
-  
-  // Ensure content width doesn't exceed viewport
-  .container, 
-  .header-content, 
-  .main-content {
-    width: 100%;
-    max-width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    box-sizing: border-box;
-  }
-  
-  header {
-    padding: 10px 0;
-    min-height: variables.$header-min-height;
-    .container {
-      padding: 0 15px;
-      position: relative;
-    }
-    
-    /* Show the mobile menu toggle on mobile screens */
-    .mobile-menu-toggle {
-      display: block !important; /* Override the desktop hide */
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1550;
-      background: transparent;
-      border: none;
-      width: 44px;
-      height: 44px;
-      padding: 10px;
-      cursor: pointer;
-      
-      .menu-icon {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-      
-      .bar {
-        display: block;
-        position: absolute;
-        height: 2px;
-        width: 24px;
-        background: white;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        transition: all 0.3s ease;
-        
-        &:nth-child(1) {
-          top: 10px;
-        }
-        
-        &:nth-child(2) {
-          top: 18px;
-        }
-        
-        &:nth-child(3) {
-          top: 26px;
-        }
-      }
-      
-      &.active {
-        .bar:nth-child(1) {
-          transform: rotate(45deg);
-          top: 18px;
-        }
-        
-        .bar:nth-child(2) {
-          opacity: 0;
-        }
-        
-        .bar:nth-child(3) {
-          transform: rotate(-45deg);
-          top: 18px;
-        }
-      }
-      
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-      
-      &:active {
-        background-color: rgba(255, 255, 255, 0.2);
-      }
-      
-      &:before {
-        content: '';
-        position: absolute;
-        top: -15px;
-        left: -15px;
-        right: -15px;
-        bottom: -15px;
-      }
-      
-      .menu-icon, .bar {
-        pointer-events: none;
-      }
-    }
-    
-    /* LTR positioning - toggle button on left */
-    html[dir="ltr"] & .mobile-menu-toggle {
-      left: 15px;
-      right: auto;
-    }
-    
-    /* RTL positioning - toggle button on right */
-    html[dir="rtl"] & .mobile-menu-toggle {
-      right: 15px;
-      left: auto;
-    }
-    
-    /* Active state (X button) positioning - always stays in same position */
-    .mobile-menu-toggle.active {
-      position: fixed !important;
-      top: 25px !important;
-      z-index: 2000 !important;
-    }
-    
-    /* LTR active positioning - X button on left */
-    html[dir="ltr"] & .mobile-menu-toggle.active {
-      left: 15px !important;
-      right: auto !important;
-    }
-    
-    /* RTL active positioning - X button on right */
-    html[dir="rtl"] & .mobile-menu-toggle.active {
-      right: 15px !important;
-      left: auto !important;
-    }
-    
-    .header-content {
-      flex-wrap: wrap;
-      justify-content: center;
-      
-      .logo-section {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-        order: 2;
-        
-        .logo-container {
-          justify-content: center;
-        }
-      }
-      
-      .language-switcher {
-        position: absolute;
+      &:nth-child(2) {
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1510;
-        margin: 0;
-        
-        html[dir="ltr"] & {
-          right: 15px;
-          order: 3;
-        }
-        
-        html[dir="rtl"] & {
-          left: 15px;
-          order: 1;
-        }
       }
-      
-      .main-nav {
-        width: 100%;
-        max-height: 0;
-        overflow: hidden;
-        transition: all 0.4s ease;
-        margin: 0;
-        background-color: variables.$header-bg-color;
-        order: 4;
+
+      &:nth-child(3) {
+        bottom: 0;
+      }
+    }
+
+
+    &:hover {
+      // Use modern RGB notation with percentage alpha
+      background-color: rgb(255 255 255 / 10%);
+    }
+
+    // Mobile Display & Ordering
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      display: block;
+      order: 1; // First item LTR
+      html[dir="rtl"] & {
+        order: 3; // Last item RTL
+      }
+    }
+
+    // State: Active (X icon) - comes after base styles
+    &.is-active {
+      position: fixed !important;
+      top: 15px !important;
+      z-index: 10000 !important;
+
+      html[dir="ltr"] & {
+        left: 15px !important;
+        right: auto !important;
+      }
+
+      html[dir="rtl"] & {
+        right: 15px !important;
+        left: auto !important;
+      }
+
+      // Transform bars into X (Overrides base bar positions/transforms)
+      .site-header__toggle-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .site-header__toggle-bar:nth-child(2) {
         opacity: 0;
-        visibility: hidden;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        z-index: -1;
-        
-        &.open {
-          max-height: calc(100vh - 60px);
-          margin-top: 15px;
-          padding-bottom: 10px;
-          padding-top: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          position: fixed;
-          top: 60px;
+      }
+
+      .site-header__toggle-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+  }
+
+
+  // --- Element: Logo ---
+  &__logo {
+    // Positioning & Box Model (Flex item)
+    display: flex;
+    align-items: center;
+    order: 2;
+    text-align: center;
+    flex-shrink: 1;
+    flex-grow: 0;
+    min-width: 50px;
+
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      overflow: hidden;
+    }
+  }
+
+  // Element: Logo Link
+  &__logo-link {
+    display: inline-block;
+    line-height: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  // Element: Logo Inner Container (for img + text)
+  &__logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  // Element: Logo Image
+  &__logo-image {
+    display: block;
+    flex-shrink: 0;
+    max-width: variables.$logo-size;
+    height: auto;
+  }
+
+  // Element: Logo Text
+  &__logo-text {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: variables.$nav-link-color;
+    font-size: variables.$group-name-size;
+    font-weight: normal;
+    line-height: 1;
+
+    // Use interpolation for SCSS variable
+    @media (width <= 420px) {
+      font-size: calc(variables.$group-name-size - 0.3rem);
+    }
+
+    // Use interpolation for SCSS variable
+    @media (width >= 421px) and (width <= #{variables.$mobile-breakpoint}) {
+      font-size: calc(variables.$group-name-size - 0.1rem);
+    }
+  }
+
+  // --- Element: Navigation Container ---
+  &__nav {
+    display: contents; // Desktop: let list handle layout
+    order: 2;
+
+    // Mobile: slide-down panel
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      display: block;
+      order: 4;
+      position: fixed;
+      top: variables.$header-min-height;
+      left: 0;
+      right: 0;
+      z-index: 9998;
+      width: 100%;
+      max-height: 0;
+
+      // Use modern RGB notation with percentage alpha
+      background-color: rgb(from variables.$header-bg-color r g b / 95%);
+      backdrop-filter: blur(5px);
+
+      // Use modern RGB notation with percentage alpha
+      box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
+
+      // State: Open mobile menu
+      &.open {
+        max-height: calc(100vh - #{variables.$header-min-height});
+        opacity: 1;
+        visibility: visible;
+        overflow-y: auto;
+      }
+    }
+  }
+
+  // Element: Navigation List (ul)
+  &__nav-list {
+    // Positioning & Box Model (Flex item)
+    display: flex;
+    align-items: center;
+    order: 2;
+    gap: variables.$nav-gap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+      padding: 10px 0;
+      order: initial;
+    }
+  }
+
+  // Element: Navigation Item (li)
+  &__nav-item {
+    // Positioning & Box Model
+    position: relative;
+    padding: 0.5rem 0; // Desktop padding
+
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      width: 100%;
+      padding: 0;
+
+      // Use modern RGB notation with percentage alpha
+      border-bottom: 1px solid rgb(255 255 255 / 10%);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    // State: Active Item (using .is-active)
+    &.is-active {
+      // Desktop Active Styles
+      // Use interpolation for SCSS variable
+      @media (width >= calc(#{variables.$mobile-breakpoint} + 1px)) {
+        // Use modern RGB notation with percentage alpha
+        background-color: rgb(255 255 255 / var(--nav-active-bg-opacity, 15%));
+        border-radius: 4px;
+
+        // Use modern RGB notation with percentage alpha
+        box-shadow: 0 0 8px rgb(255 255 255 / 30%);
+        animation: activeGlow variables.$nav-active_pulse-duration infinite;
+
+        // Define pseudo-elements before nested selectors
+        &::before { // Bottom line indicator
+          content: '';
+          position: absolute;
+          bottom: -2px;
           left: 0;
-          right: 0;
           width: 100%;
-          z-index: 9999;
-          display: block;
-          opacity: 1;
-          visibility: visible;
-          pointer-events: auto;
-          overflow-y: auto;
+          height: 3px;
+          background-color: variables.$nav-active-indicator-color;
+          border-radius: 3px;
+          animation: activePulse variables.$nav-active_pulse-duration infinite;
+
+          html[dir="rtl"] & {
+            left: auto;
+            right: 0;
+          }
         }
-        
-        ul {
-          flex-direction: column;
-          gap: 0;
-          margin: 0;
-          padding: 0 15px;
-          
-          li {
-            width: 100%;
-            margin-bottom: 5px;
-            position: relative;
-            
-            a {
-              padding: 12px 15px;
-              display: block;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-              transition: all 0.3s ease;
-              color: white;
-              position: relative;
-              
-              &::after {
-                display: none; // Hide the underline animation on mobile
-              }
-              
-              &:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-                text-decoration: none;
-              }
-            }
-            
-            &:last-child a {
-              border-bottom: none;
-            }
-            
-            &.active {
-              a {
-                background-color: rgba(255, 255, 255, 0.2);
-                font-weight: bold;
-                border-left: 4px solid variables.$nav-active-indicator-color;
-                padding-left: 11px; // Adjust padding to account for the border
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-                animation: activeGlow variables.$nav-active-pulse-duration infinite;
-                
-                &::after {
-                  content: '';
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 4px;
-                  height: 100%;
-                  background-color: variables.$nav-active-indicator-color;
-                  animation: activePulse variables.$nav-active-pulse-duration infinite;
-                  display: block;
-                }
-              }
-              
-              &::before {
-                display: none; // Hide the desktop active indicator
-              }
-            }
+
+        &::after { // Background overlay effect
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+
+          // Use modern RGB notation with percentage alpha
+          background-color: rgb(255 255 255 / 5%);
+          z-index: -1;
+          border-radius: 4px;
+          animation: activeSlideIn 0.5s ease-out forwards;
+        }
+
+        // Style the link within the active item
+        .site-header__nav-link {
+          padding: 0.2rem 0.8rem;
+          color: variables.$text-light !important;
+          font-weight: bold !important;
+
+          // Define link's pseudo-element override here
+          &::after {
+            display: none !important; // Hide hover underline
           }
         }
       }
+
+      // Mobile Active Styles are applied to the link below
     }
   }
-}
 
-/* RTL mobile adjustments */
-@media (max-width: variables.$mobile-breakpoint) {
-  html[dir="rtl"] header .main-nav ul li {
-    &.active a {
-      border-left: none;
-      border-right: 4px solid variables.$nav-active-indicator-color;
-      padding-left: 15px;
-      padding-right: 11px;
-      
+  // Element: Navigation Link (a)
+  &__nav-link {
+    // Positioning & Box Model
+    display: block; // Default block for mobile structure
+    position: relative;
+    padding: 0.2rem 0.5rem;
+
+    // Typography & Visual
+    color: variables.$nav-link-color;
+    font-size: variables.$header-font-size;
+    font-weight: variables.$nav-font-weight;
+    text-decoration: none;
+
+    // Transitions
+    transition: color 0.3s ease, background-color 0.3s ease;
+
+    // Desktop Link Styles
+    // Use interpolation for SCSS variable
+    @media (width >= calc(#{variables.$mobile-breakpoint} + 1px)) {
+      display: inline-block;
+      padding: 0.2rem 0;
+
+      // Define base pseudo-element first for specificity rule fix
       &::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0; // Start hidden
+        height: 2px;
+        background-color: variables.$nav-hover-underline-color;
+        transition: width variables.$nav-hover_animation-duration ease;
+      }
+
+      // Then define RTL override
+      html[dir="rtl"] &::after {
         left: auto;
         right: 0;
       }
-    }
-  }
-}
 
-// Create special styles for home page with menu open
+      // Then define hover state
+      &:hover {
+        color: variables.$nav-link-hover;
+        text-decoration: none;
 
-
-/* Special fix for the exact width mentioned by user */
-@media (min-width: 420px) and (max-width: 767px) {
-  header {
-    
-    .mobile-menu-toggle {
-      width: 36px; // Reduce even further for this specific range
-      height: 36px;
-      padding: 6px;
-      
-      &:before {
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
+        &::after {
+          width: 100%;
+        }
       }
     }
-    
-    html[dir="ltr"] & .mobile-menu-toggle {
-      left: 5px;
+
+    // Mobile Link Styles
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      padding: 12px 15px;
+      width: 100%;
+      box-sizing: border-box;
+      color: variables.$text-light;
+
+      &:hover {
+        // Use modern RGB notation with percentage alpha
+        background-color: rgb(255 255 255 / 10%);
+        color: variables.$text-light;
+      }
+
+      // Mobile Active State (applied to link when parent item has .is-active)
+      .site-header__nav-item.is-active & {
+        // Use modern RGB notation with percentage alpha
+        background-color: rgb(255 255 255 / 15%);
+        color: variables.$text-light !important;
+        font-weight: bold;
+        position: relative;
+
+        // Define base pseudo-element first
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background-color: variables.$nav-active-indicator-color;
+        }
+
+        // Then define LTR/RTL overrides
+        html[dir="ltr"] &::before {
+          left: 0;
+        }
+
+        html[dir="rtl"] &::before {
+          right: 0;
+        }
+      }
     }
-    
-    html[dir="rtl"] & .mobile-menu-toggle {
-      right: 5px;
+  }
+
+  // --- Element: Language Switcher ---
+  &__lang-switcher {
+    // Positioning & Box Model (Flex item)
+    display: flex;
+    align-items: center;
+    order: 3; // Last item LTR
+    flex-shrink: 0;
+    gap: variables.$lang-switcher-gap;
+
+    html[dir="rtl"] & {
+      order: 1; // First item RTL
     }
-    
-    &.home-header.initially-hidden {
-      overflow: visible;
-      
-      .mobile-menu-toggle {
-        position: fixed;
-        top: 15px;
-        z-index: 2500;
-        width: 40px; // Slightly larger for better visibility
-        height: 40px;
-        padding: 8px;
-        background-color: rgba(114, 151, 197, 0.9); // Match header background with some transparency
+
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      margin: 0; // Reset desktop margins
+      // Order handled by flex order
+    }
+  }
+
+  // Element: Language Link (a)
+  &__lang-link {
+    // Positioning & Box Model
+    padding: 0.2rem 0.3rem;
+
+    // Typography & Visual
+    color: variables.$nav-link-color;
+    font-size: variables.$header-font-size;
+    text-decoration: none;
+
+    // Transitions & Interaction
+    transition: color 0.3s ease, opacity 0.3s ease;
+
+    &:hover {
+      color: variables.$nav-link-hover;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    // State: Active Language (using .is-active)
+    &.is-active {
+      color: variables.$text-light;
+      font-weight: bold;
+      cursor: default;
+      opacity: 1;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Element: Language Separator Span
+  &__lang-separator {
+    margin: 0 -0.1rem; // Fine-tune spacing
+    color: variables.$nav-link-color;
+    font-size: variables.$header-font-size;
+    opacity: 0.7;
+    user-select: none;
+  }
+
+  // --- Medium Screen Responsive Adjustments ---
+  // Use interpolation for SCSS variable
+  @media (width >= #{variables.$tablet-min}) and (width <= #{variables.$tablet-max}) {
+    &__logo-image { max-width: calc(variables.$logo-size - 5px); }
+    &__logo-container { gap: 0.8rem; }
+    &__logo-text { font-size: calc(variables.$group-name-size - 0.1rem); }
+    &__nav-list { gap: 0.75rem; }
+    &__nav-link { font-size: calc(variables.$header-font-size - 0.05rem); }
+    &__lang-link, &__lang-separator { font-size: calc(variables.$header-font-size - 0.05rem); }
+  }
+
+  // --- Special Fix: Home Header initially hidden mobile toggle ---
+  &.home-header.initially-hidden {
+    // Use interpolation for SCSS variable
+    @media (width <= #{variables.$mobile-breakpoint}) {
+      // overflow: visible; // Keep commented unless needed
+      .site-header__toggle {
+        position: fixed !important;
+        top: 15px !important;
+        z-index: 2500 !important;
+        opacity: 1 !important;
+
+        // Use modern RGB notation with percentage alpha
+        background-color: rgb(from variables.$header-bg-color r g b / 90%);
         border-radius: 4px;
-      }
-      
-      html[dir="ltr"] & .mobile-menu-toggle {
-        left: 15px;
-      }
-      
-      html[dir="rtl"] & .mobile-menu-toggle {
-        right: 15px;
+        
+        // Use modern RGB notation with percentage alpha
+        box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+
+        html[dir="ltr"] & { left: 15px !important; }
+        html[dir="rtl"] & { right: 15px !important; }
       }
     }
   }
+
+} // End of .site-header Block
+
+// ==========================================================================
+// General Styles Affecting Header Layout
+// ==========================================================================
+
+// Add empty line before rule
+body:not(.home-page) {
+  padding-top: variables.$header-min-height; // Space for fixed header
 }
 
+// Add empty line before rule
+body.menu-open {
+  // Use interpolation for SCSS variable
+  @media (width <= #{variables.$mobile-breakpoint}) {
+    overflow: hidden; // Prevent body scroll when mobile menu is open
+
+    .site-header__content {
+      overflow: hidden; // Prevent content overflow
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}

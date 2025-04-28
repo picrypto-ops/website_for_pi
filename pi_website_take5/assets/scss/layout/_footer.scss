@@ -1,84 +1,87 @@
 @use "../base/variables" as variables;
+@use "sass:color";
 
-footer {
-  background-color: variables.$footer-bg-color;
-  color: variables.$footer-text-color;
-  padding: variables.$footer-padding-y 0;
-  z-index: 100;
-  position: relative;
-  border-top: variables.$footer-border-top;
-  
-  .container {
-    max-width: variables.$footer-max-width;
-    margin: 0 auto;
-    padding: 0 variables.$footer-padding-x;
-  }
+// Add empty line before rule (rule-empty-line-before fix)
 
-  .footer-content {
+.breadcrumb-navigation {
+  // Remove unexpected empty line (declaration-empty-line-before fix)
+  position: fixed;
+  right: variables.$breadcrumb-padding;
+  top: 50%;
+  transform: translateY(-50%);
+  background: variables.$breadcrumb-bg;
+  padding: variables.$breadcrumb-padding;
+  border-radius: 8px;
+  border: variables.$breadcrumb-border;
+  box-shadow: variables.$breadcrumb-shadow;
+  z-index: 900;
+  display: none; // Keep original display none logic
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-  }
+    flex-direction: column;
+    gap: variables.$breadcrumb-gap;
 
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    
-    img {
-      max-width: variables.$footer-logo-size;
-      height: auto;
-      margin-right: 15px;
-    }
-    
-    .footer-text {
-      display: inline-block;
-      margin: 0;
-      font-weight: 500;
-      font-size: variables.$footer-text-size;
-      white-space: nowrap;
-      color: variables.$footer-text-color;
-    }
-  }
-
-  .footer-links {
-    ul {
-      list-style-type: none;
-      padding: 0;
-      display: flex;
-      gap: variables.$footer-link-gap;
-      margin: 0;
-
+    li {
       a {
-        color: variables.$footer-link-color;
+        display: block;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        color: variables.$breadcrumb-inactive;
+        font-size: 0.9rem;
         text-decoration: none;
-        transition: opacity 0.2s ease;
+        transition: variables.$breadcrumb-transition;
+
+        // Use double colon for pseudo-element
+        &::before {
+          content: '';
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          margin-right: 10px;
+          background-color: variables.$primary-color;
+          border-radius: 50%;
+          opacity: 0.5;
+          transition: all 0.3s ease;
+        }
 
         &:hover {
-          opacity: variables.$footer-link-hover-opacity;
+          color: variables.$breadcrumb-hover;
+          background: rgba(variables.$primary-color, 0.1);
+
+          // Use double colon for pseudo-element
+          &::before {
+            opacity: 0.8;
+            transform: scale(1.1);
+          }
+        }
+
+        // State class
+        &.active {
+          color: variables.$breadcrumb-active;
+          font-weight: bold;
+          background: rgba(variables.$primary-color, 0.15);
+
+          // Use double colon for pseudo-element
+          &::before {
+            opacity: 1;
+            transform: scale(1.2);
+            background-color: color.adjust(variables.$primary-color, $lightness: -10%);
+          }
         }
       }
     }
   }
-
-  .footer-bottom {
-    text-align: center;
-    margin-top: variables.$footer-bottom-margin;
-    font-size: 0.9rem;
-    opacity: 0.7;
-  }
-  
-  @media (max-width: 768px) {
-    .footer-content {
-      flex-direction: column;
-      text-align: center;
-      gap: variables.$footer-link-gap;
-    }
-    
-    .footer-links ul {
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-  }
 }
 
+// Add empty line before rule (rule-empty-line-before fix)
+
+// Use context range notation
+@media (width <= 768px) {
+  .breadcrumb-navigation {
+    display: none; // Hide on mobile
+  }
+}

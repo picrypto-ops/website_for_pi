@@ -47,35 +47,42 @@ function sanitizeInput($input) {
 
 /**
  * Check if a menu item is active
- * 
- * @param string $currentPage Current page
- * @param string $menuItem Menu item to check
- * @return string 'active' if current page matches menu item, empty string otherwise
+ *
+ * @param string $currentPage Current page slug (e.g., 'home', 'about', 'segment', 'product')
+ * @param string $menuItem Menu item slug to check (e.g., 'home', 'investment_banking', 'team')
+ * @return string ' is-active' if current page matches menu item, empty string otherwise
  */
 function isActiveMenu($currentPage, $menuItem) {
-    // Get current page id parameter if it exists
-    $currentId = isset($_GET['id']) ? $_GET['id'] : '';
-    
-    // Check for direct match
+    $activeClass = ' is-active'; // Use the state helper class with a leading space
+    $currentId = isset($_GET['id']) ? sanitizeInput($_GET['id']) : ''; // Sanitize input
+
+    // Direct match (e.g., 'about' page matches 'about' menu item)
     if ($currentPage === $menuItem) {
-        return 'active';
+        return $activeClass;
     }
-    
-    // Special case for team page
-    if ($currentPage === 'our-team' && $menuItem === 'team') {
-        return 'active';
+
+    // Special case for team pages (page is 'our-team', menu item is 'team' or 'our-team')
+    if ($currentPage === 'our-team' && ($menuItem === 'team' || $menuItem === 'our-team')) {
+         return $activeClass;
     }
-    
-    // Check if this is a segment page (like investment_banking)
+     // Special case for team member page, highlight "Our Team"
+     if ($currentPage === 'team-member' && ($menuItem === 'team' || $menuItem === 'our-team')) {
+        return $activeClass;
+    }
+
+    // Check if it's a segment page and the ID matches the menu item slug
     if ($currentPage === 'segment' && $currentId === $menuItem) {
-        return 'active';
+        return $activeClass;
     }
-    
-    // Check if this is a product page under a segment
-    if ($currentPage === 'product' && isset($_GET['segment']) && $_GET['segment'] === $menuItem) {
-        return 'active';
+
+    // Check if it's a product page and its segment matches the menu item slug
+    // Assumes product URLs include ?segment=... parameter
+    $currentSegment = isset($_GET['segment']) ? sanitizeInput($_GET['segment']) : '';
+    if ($currentPage === 'product' && $currentSegment === $menuItem) {
+        return $activeClass;
     }
-    
+
+    // No match found
     return '';
 }
 
@@ -134,6 +141,75 @@ function renderLanguageSwitcher($lang, $additionalClasses = '', $includeWrapper 
     }
 }
 
+// Add this function to your existing functions.php file
+
+/**
+ * Generate language switcher HTML with BEM classes
+ *
+ * @param string $lang Current language (en or he)
+ * @param string $additionalClasses Additional CSS classes for the main block (site-header__lang-switcher) - often not needed here
+ * @param bool $includeWrapper Whether to include the outer block div (usually true when called from PHP)
+ * @return string HTML for the language switcher
+ */
+function renderLanguageSwitcherBem($lang, $additionalClasses = '', $includeWrapper = true) {
+    // Check if multiple languages are available, if not return empty string
+    if (!defined('AVAILABLE_LANGUAGES') || count(AVAILABLE_LANGUAGES) <= 1) {
+        return '';
+    }
+
+    // Validate language
+    $currentLang = in_array($lang, AVAILABLE_LANGUAGES) ? $lang : (defined('DEFAULT_LANG') ? DEFAULT_LANG : 'en');
+
+    // Get current URL parameters
+    $currentParams = $_GET;
+
+    // Build inner HTML for each available language
+    $innerHtml = '';
+    $separatorCount = 0;
+
+    foreach (AVAILABLE_LANGUAGES as $langCode) {
+        // Create language link with all current parameters except for lang
+        $langParams = $currentParams;
+        $langParams['lang'] = $langCode;
+        // Prevent empty 'id' or other params from creating trailing '='
+        $langParams = array_filter($langParams, function($value) { return $value !== '' && $value !== null; });
+        $langLink = '?' . http_build_query($langParams);
+
+        // Add separator if not the first language
+        if ($separatorCount > 0) {
+            // Add BEM class to separator
+            $innerHtml .= '<span class="site-header__lang-separator">|</span>';
+        }
+
+        // Add language switch link with BEM class and state class
+        $langDisplay = ($langCode === 'he') ? 'עב' : strtoupper($langCode); // Display HE as עב
+        $activeClass = ($currentLang === $langCode) ? ' is-active' : ''; // Use state helper class
+        // Add BEM class to link
+        $innerHtml .= '<a href="' . htmlspecialchars($langLink) . '" class="site-header__lang-link' . $activeClass . '" data-lang="' . $langCode . '">' . $langDisplay . '</a>';
+        $separatorCount++;
+    }
+
+    // Return content with or without wrapper block element
+    // NOTE: The calling PHP in header.php already creates the wrapper div with the correct BEM class,
+    // so typically we don't need the wrapper here. Setting $includeWrapper=false by default might be better.
+    // Let's keep it matching the call in header.php for now ($includeWrapper=true).
+    if ($includeWrapper) {
+        $classAttribute = 'site-header__lang-switcher'; // This is the Block__Element class
+        if (!empty($additionalClasses)) {
+            $classAttribute .= ' ' . trim($additionalClasses);
+        }
+        // It's unusual to have the *same* BEM class on wrapper and inner content.
+        // The PHP in header.php already creates <div class="site-header__lang-switcher">
+        // So this function should probably just return the $innerHtml directly.
+        // Let's adjust the call in header.php instead.
+
+        return $innerHtml;
+
+    } else {
+         // This case might not be used if header.php handles the wrapper.
+        return $innerHtml;
+    }
+}
 /**
  * Generate responsive image HTML
  * 
