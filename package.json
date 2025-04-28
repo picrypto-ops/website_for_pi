@@ -1,0 +1,13 @@
+{
+  "name": "pi-website",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "lint:style": "stylelint \"**/*.scss\" --allow-empty-input"
+  },
+  "devDependencies": {
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-selector-bem-pattern": "^2.1.1"
+  }
+} 

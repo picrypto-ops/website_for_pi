@@ -1,5 +1,12 @@
 {
     "cSpell.words": [
         "Jonny"
-    ]
+    ],
+    "stylelint.validate": ["scss"],
+    "stylelint.useESLint": false,
+    "stylelint.experimental.useFlatConfig": true,
+    "stylelint.configFile": "stylelint.config.js",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": "explicit"
+    }
 }

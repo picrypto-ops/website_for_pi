@@ -15,7 +15,7 @@ define('DB_PASS', 'password');
 define('SMTP_HOST', 'pihf-com0e.mail.protection.outlook.com');
 define('SMTP_PORT', 25);
 define('SMTP_FROM', 'website_contact_us@pi-hf.com');
-define('SMTP_TO', 'ronen@pi-hf.com');
+define('SMTP_TO', 'info@pi-hf.com');
 define('SEND_CONFIRMATION_EMAIL', false);
 
 // reCAPTCHA configuration
@@ -24,6 +24,6 @@ define('RECAPTCHA_SITE_KEY', '');
 define('RECAPTCHA_SECRET_KEY', '');
 
 // Debug configuration
-define('SHOW_DEBUG_SMTP_SERVER_BUTTON', true);
+define('SHOW_DEBUG_SMTP_SERVER_BUTTON', false);
 define('PHP_DEBUG_MODE', false);
 
