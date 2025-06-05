@@ -1,19 +1,16 @@
 <?php
-$segmentId = isset($_GET['id']) ? $_GET['id'] : '';
+$segmentId = isset($_GET['id']) ? sanitizeInput($_GET['id']) : ''; // Sanitize input
 $segments = TranslatableFactory::getData('segments');
 $products = TranslatableFactory::getData('products');
-$general = TranslatableFactory::getData('general');
+// $general = TranslatableFactory::getData('general'); // Not used directly here
 
 $segment = null;
 if (!empty($segmentId) && isset($segments[$segmentId])) {
     $segment = $segments[$segmentId];
 } else {
-    // No valid segment ID found
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>404 - Segment Not Found</h1>";
-    echo "<p>The requested segment does not exist.</p>";
-    echo "<p><a href='index.php'>Return to homepage</a></p>";
-    exit;
+    // No valid segment ID found, redirect to 404 or show message
+    redirectToPage('404', ['original' => 'segment:' . $segmentId], $lang);
+    exit; // Stop execution
 }
 
 // Find products that belong to this segment
@@ -29,40 +26,48 @@ if (is_array($products)) {
 $segmentTranslatable = TranslatableFactory::segment($segmentId);
 ?>
 
-<section class="segment">
+<?php // Use a BEM block for the segment page overall structure ?>
+<section class="segment-page"> <?php // New BEM Block for the page ?>
     <div class="container">
-        <h1><?php echo $segmentTranslatable->getContent($lang, 'name', $segment['segment_slug']); ?></h1>
-        <div class="segment-description">
-            <?php echo $segmentTranslatable->getContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
+        <?php // BEM Element: segment-page__title ?>
+        <h1 class="segment-page__title">
+            <?php echo $segmentTranslatable->getContent($lang, 'name', $segment['segment_slug']); ?>
+        </h1>
+        <?php // BEM Element: segment-page__description ?>
+        <div class="segment-page__description content-with-html"> <?php // Add helper class for HTML content ?>
+            <?php echo $segmentTranslatable->getHtmlContent($lang, 'short_description', 'Detailed information about this business segment.'); ?>
         </div>
 
-        <div class="product-grid">
+        <?php // Use the standard .card-grid layout for products ?>
+        <div class="card-grid segment-page__product-grid"> <?php // BEM Element for context ?>
             <?php if (empty($segmentProducts)): ?>
                 <p><?php echo TranslatableFactory::general()->getContent($lang, 'no_products', 'No products available for this segment.'); ?></p>
             <?php else: ?>
-                <?php foreach ($segmentProducts as $productSlug => $product): 
-                    // Create a proper translatable for this product
+                <?php foreach ($segmentProducts as $productSlug => $product):
+                    // Ensure $product is an array before proceeding
+                    if (!is_array($product)) continue;
+
                     $productTranslatable = TranslatableFactory::product($productSlug);
+                    $productLogoPath = getProductLogoPath($product); // Use helper function
                 ?>
-                    <a href="?page=product&id=<?php echo $productSlug; ?>&segment=<?php echo $segmentId; ?>&lang=<?php echo $lang; ?>" class="product-card">
-                        <div class="product-content">
-                            <div class="product-icon">
-                                <?php 
-                                    $productLogoPath = getProductLogoPath($product);
-                                ?>
-                                <img src="<?php echo $productLogoPath; ?>" alt="<?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Product'; ?>">
+                    <?php // Use card-link helper for clickable card ?>
+                    <a href="?page=product&id=<?php echo $productSlug; ?>&segment=<?php echo $segmentId; ?>&lang=<?php echo $lang; ?>" class="card-link">
+                        <?php // --- BEM Block: product-card --- ?>
+                        <div class="product-card">
+                            <div class="product-card__icon">
+                                <img src="<?php echo $productLogoPath; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', 'Product'); ?>" class="product-card__icon-image">
                             </div>
-                            <div class="product-text">
-                                <h3><?php echo isset($product['language_slug'][$lang]['name']) ? $product['language_slug'][$lang]['name'] : 'Investment Product'; ?></h3>
-                                <p class="slogan">
-                                    <?php echo isset($product['language_slug'][$lang]['slogan']) ? $product['language_slug'][$lang]['slogan'] : ''; ?>
+                            <div class="product-card__text">
+                                <h3 class="product-card__title"><?php echo $productTranslatable->getContent($lang, 'name', 'Investment Product'); ?></h3>
+                                <p class="product-card__slogan">
+                                    <?php echo $productTranslatable->getContent($lang, 'slogan', ''); ?>
                                 </p>
                             </div>
                         </div>
+                        <?php // --- End BEM Block: product-card --- ?>
                     </a>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
 </section>
-

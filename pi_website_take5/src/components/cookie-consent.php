@@ -35,15 +35,22 @@ $declineText = $cookieConsent->getContent(
 );
 ?>
 
-<div id="cookie-consent-banner" class="cookie-consent-banner">
+<div id="cookie-consent-banner" class="cookie-consent">
+    <?php // Use global container or BEM container ?>
     <div class="container">
-        <div class="cookie-consent-banner__content">
-            <h3><?php echo $cookieTitle; ?></h3>
-            <p><?php echo $cookieText; ?></p>
+        <?php // Use BEM element class ?>
+        <div class="cookie-consent__content">
+            <?php // Use BEM element class ?>
+            <h3 class="cookie-consent__title"><?php echo $cookieTitle; ?></h3>
+            <?php // Use BEM element class ?>
+            <p class="cookie-consent__text"><?php echo $cookieText; ?></p>
         </div>
-        <div class="cookie-consent-banner__actions">
-            <button id="cookie-accept-btn" class="accept"><?php echo $acceptText; ?></button>
-            <button id="cookie-decline-btn" class="decline"><?php echo $declineText; ?></button>
+         <?php // Use BEM element class ?>
+        <div class="cookie-consent__actions">
+            <?php // Use BEM element and modifier classes ?>
+            <button id="cookie-accept-btn" class="cookie-consent__button cookie-consent__button--accept"><?php echo $acceptText; ?></button>
+            <?php // Use BEM element and modifier classes ?>
+            <button id="cookie-decline-btn" class="cookie-consent__button cookie-consent__button--decline"><?php echo $declineText; ?></button>
         </div>
     </div>
-</div> 
+</div>

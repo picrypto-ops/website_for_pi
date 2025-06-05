@@ -1,310 +1,145 @@
-<?php
-$productId = isset($_GET['id']) ? $_GET['id'] : '';
-$allProducts = TranslatableFactory::getData('products');
-$allTeam = TranslatableFactory::getData('team');
+@use "../base/variables" as variables;
 
-$product = null;
-$productCategory = null;
+// ==========================================================================
+// Block: product-card
+// Attempt 4: Implementing side-by-side internal layout (Icon | Text Block)
+// ==========================================================================
+.product-card {
+  // Positioning & Box Model
+  display: flex; // Keep card as flex container (column)
+  flex-direction: column; // Overall direction is still column
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 170px; // Keep minimum height from attempt 3
+  height: 100%;
+  padding: 20px; // Keep reduced padding
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
 
-// Search for the product in the nested structure
-if (!empty($productId) && is_array($allProducts)) {
-    foreach ($allProducts as $categorySlug => $categoryProducts) {
-        if (!is_array($categoryProducts)) continue;
-        
-        if (isset($categoryProducts[$productId])) {
-            $product = $categoryProducts[$productId];
-            $productCategory = $categorySlug;
-            break;
-        }
+  // Visual
+  background: variables.$card-bg-color;
+  border: 1px solid rgb(from variables.$primary-color r g b / 8%);
+  border-radius: 12px;
+  border-bottom: 4px solid variables.$primary-color;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 8%);
+  color: variables.$text-color;
+  text-decoration: none;
+  // text-align: center; // REMOVED - alignment handled by children
+
+  // Transitions
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  // Pseudo-element for hover effect
+  &::before {
+    content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgb(255 255 255 / 20%), rgb(255 255 255 / 5%));
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 1; pointer-events: none;
+  }
+
+  // Hover State (Triggered by parent .card-link:hover > &)
+  .card-link:hover &,
+  .card-link:focus & {
+     transform: translateY(-8px) scale(1.01);
+     box-shadow: 0 16px 32px rgb(0 0 0 / 15%);
+     &::before { transform: translateY(200%); }
+     .product-card__icon-image { transform: scale(1.05) rotate(5deg); }
+     .product-card__title { color: variables.$primary-color; }
+  }
+
+  // --- Element: Body (NEW WRAPPER for Icon + Text Block) ---
+  // This allows icon and text block to sit side-by-side
+  &__body {
+    display: flex;
+    flex-direction: row; // Icon and Text side-by-side
+    align-items: center; // Vertically align icon and text block
+    gap: 15px; // Space between icon and text block
+    flex-grow: 1; // Allow body to fill card height
+    width: 100%;
+  }
+
+  // --- Element: Icon Container ---
+  // Now a flex item within __body
+  &__icon {
+    width: 70px; // Keep size from previous attempt
+    height: 70px;
+    // margin: 0 auto 15px; // REMOVED margin auto
+    margin: 0; // Reset margin
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; // Prevent icon from shrinking
+  }
+
+  // --- Element: Icon Image ---
+  &__icon-image {
+    display: block; max-width: 100%; max-height: 100%; object-fit: contain;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  // --- Element: Text Container ---
+  // Now a flex item within __body
+  &__text {
+    flex-grow: 1; // Allow text block to take remaining width
+    display: flex;
+    flex-direction: column; // Stack title and slogan vertically
+    justify-content: center; // Adjust as needed (flex-start?)
+    text-align: left; // Align text left (adjust for RTL below)
+
+    html[dir="rtl"] & {
+      text-align: right; // Align text right for RTL
     }
+  }
+
+  // --- Element: Title (h3) ---
+  &__title {
+    margin-top: 0;
+    margin-bottom: 5px; // Reduced margin between title and slogan
+    color: variables.$text-color;
+    font-size: 1.6rem; // Keep adjusted size
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: normal; // Allow title to wrap if needed
+    transition: color 0.3s ease;
+    // Remove text-overflow/ellipsis for wrapping
+  }
+
+  // --- Element: Slogan (p) ---
+  &__slogan {
+    margin: 0;
+    color: variables.$text-muted;
+    font-size: 0.95rem; // Slightly increased slogan size
+    line-height: 1.45; // Slightly increased line height
+    // min-height: calc(1.45em * 2); // Keep space for 2 lines
+    // Remove overflow/ellipsis styles if needed
+  }
 }
 
-// If product not found, display error and exit
-if (!$product) {
-    header("HTTP/1.0 404 Not Found");
-    echo "<h1>404 - Product Not Found</h1>";
-    echo "<p>The requested product does not exist.</p>";
-    echo "<p><a href='index.php'>Return to homepage</a></p>";
-    exit;
+// ==========================================================================
+// Block: product-page (Styles for the product detail page template)
+// NO CHANGES NEEDED HERE FROM PREVIOUS VERSION
+// ==========================================================================
+.product-page {
+  // ... styles remain the same ...
+  padding: 60px 0;
+  @media (max-width: 768px) { padding: 30px 0; }
+
+  &__header { display: flex; align-items: center; margin-bottom: 1.5rem; @media (max-width: 768px) { flex-direction: column; align-items: flex-start; } }
+  &__logo { flex-shrink: 0; margin-right: 30px; width: 150px; html[dir="rtl"] & { margin-right: 0; margin-left: 30px; } @media (max-width: 768px) { margin-right: 0; margin-left: 0; margin-bottom: 1.5rem; } }
+  &__logo-image { display: block; max-width: 100%; height: auto; }
+  &__title-area { flex-grow: 1; }
+  &__title { margin-top: 0; margin-bottom: 0.5rem; color: variables.$text-color; font-size: 2.5rem; @media (max-width: 768px) { font-size: 2rem; } }
+  &__slogan { margin: 0; color: variables.$text-muted; font-size: 1.25rem; font-style: italic; }
+  &__content { max-width: 900px; margin: 0 auto 4rem; }
+  &__description-paragraph { margin-bottom: 1.5rem; color: variables.$text-color; font-size: 1.1rem; line-height: 1.8; &:first-of-type { font-size: 1.2rem; font-weight: 500; } ul, ol { margin-bottom: 1rem; padding-left: 1.5rem; html[dir="rtl"] & { padding-left: 0; padding-right: 1.5rem; } } li { margin-bottom: 0.5rem; } }
+  &__image-container { position: relative; width: 70%; margin: 2.5rem auto; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 30px rgb(0 0 0 / 15%); @media (max-width: 768px) { width: 90%; } &::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30%; background: linear-gradient(to top, rgb(0 0 0 / 50%), rgb(0 0 0 / 0%)); pointer-events: none; } }
+  &__image { display: block; width: 100%; height: auto; transition: transform 0.5s ease; }
+  .product-page__image-container:hover &__image { transform: scale(1.02); }
+  &__image-caption { position: absolute; bottom: 20px; left: 25px; z-index: 2; max-width: 80%; color: #fff; font-size: 1rem; text-shadow: 0 1px 3px rgb(0 0 0 / 70%); html[dir="rtl"] & { left: auto; right: 25px; text-align: right; } }
+  &__section-title { position: relative; margin-top: 4rem; margin-bottom: 2rem; font-size: 1.75rem; font-weight: 600; padding-bottom: 10px; &::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px; background-color: variables.$primary-color; html[dir="rtl"] & { left: auto; right: 0; } } }
+  &__team-grid { /* Use .card-grid */ }
+  &__back-link-container { margin-top: 3rem; text-align: center; }
+  &__back-link { /* Style applied via .button class in PHP */ }
+  &__back-link-arrow { margin-right: 0.5rem; font-size: 1.2rem; html[dir="rtl"] & { margin-right: 0; margin-left: 0.5rem; display: inline-block; transform: rotate(180deg); } }
 }
-
-// Get translatable for this product
-$productTranslatable = TranslatableFactory::product($productId);
-
-// Find team members associated with this product
-$productTeam = [];
-if (isset($product['team_group']) && is_array($allTeam)) {
-    foreach ($allTeam as $teamGroup => $members) {
-        if (!is_array($members)) continue;
-        
-        foreach ($members as $memberKey => $member) {
-            if (!is_array($member)) continue;
-            
-            // Check if member belongs to the product's team group
-            if (isset($member['groups']) && is_array($member['groups']) && 
-                in_array($product['team_group'], $member['groups'])) {
-                $productTeam[$memberKey] = $member;
-            }
-        }
-    }
-}
-
-// Find founder team members associated with team_group_slug
-$founderTeam = [];
-if (isset($product['team_group_slug']) && !empty($product['team_group_slug']) && is_array($allTeam)) {
-    // Debug output to help troubleshoot
-    if (TranslatableFactory::$debug) {
-        error_log("Looking for team members with team_group_slug: " . $product['team_group_slug']);
-    }
-    
-    foreach ($allTeam as $teamGroup => $members) {
-        if (!is_array($members)) continue;
-        
-        foreach ($members as $memberKey => $member) {
-            if (!is_array($member)) continue;
-            
-            // Check if member is a founder
-            $isFounder = isset($member['is_founder']) && $member['is_founder'] === true;
-            
-            // Check if member belongs to the product's team_group_slug
-            // First check direct match with team_group_slug
-            if ($isFounder && $product['team_group_slug'] === $teamGroup) {
-                $founderTeam[$memberKey] = $member;
-                continue;
-            }
-            
-            // Then check if member has the team_group_slug in their groups array
-            if ($isFounder && isset($member['groups']) && is_array($member['groups']) && 
-                in_array($product['team_group_slug'], $member['groups'])) {
-                $founderTeam[$memberKey] = $member;
-            }
-            
-            // Also check if the member's name_slug matches the team_group_slug
-            // This handles cases where team_group_slug might refer to an individual
-            if ($isFounder && isset($member['name_slug']) && 
-                $member['name_slug'] === $product['team_group_slug']) {
-                $founderTeam[$memberKey] = $member;
-            }
-        }
-    }
-    
-    // If still empty, try a more flexible approach by checking if the team_group_slug
-    // is contained within any member data
-    if (empty($founderTeam)) {
-        foreach ($allTeam as $teamGroup => $members) {
-            if (!is_array($members)) continue;
-            
-            foreach ($members as $memberKey => $member) {
-                if (!is_array($member)) continue;
-                
-                if (isset($member['is_founder']) && $member['is_founder'] === true) {
-                    // Add any founder to the team if we couldn't find specific matches
-                    // This is a fallback to ensure we show something
-                    $founderTeam[$memberKey] = $member;
-                }
-            }
-        }
-    }
-}
-?>
-
-<section class="product">
-    <?php
-            // Determine the path to the product image
-            $productSlug = isset($product['product_slug']) ? $product['product_slug'] : '';
-            $productCategory = isset($product['asset_category']) ? $product['asset_category'] : '';
-            $productLogoPath = getProductLogoPath($product);
-            
-            // Special case for pi_emf which has an image in pi_emf_retired directory
-            $productImagePath = "assets/images/{$productCategory}/{$productSlug}/product_image.webp";
-            // Check if product image exists
-            $productImageExists = file_exists($productImagePath);
-            
-            // Get product description - this could be a string or an array
-            $description = $productTranslatable->getContent($lang, 'description', 'Product description not available.');
-            
-            // If description is a string, convert it to an array for consistent processing
-            if (!is_array($description)) {
-                $description = [$description];
-            }
-            
-            // Get the image insertion index (default to after the first paragraph if not specified)
-            $imageInsertionIndex = $productTranslatable->getContent($lang, 'image_insertion_index', 1);
-            $imageInsertionIndex = intval($imageInsertionIndex);
-            
-            // Make sure the index is valid
-            if ($imageInsertionIndex < 0) {
-                $imageInsertionIndex = 0;
-            } elseif ($imageInsertionIndex > count($description)) {
-                $imageInsertionIndex = count($description);
-            }
-    ?>
-    <div class="container">
-        <div class="product-header">
-            <?php if (file_exists($productLogoPath)): ?>
-                <div class="product-logo">
-                    <img src="<?php echo $productLogoPath; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', $product['product_slug']); ?>">
-                </div>
-            <?php endif; ?>
-            <div class="product-title">
-                <h1><?php echo $productTranslatable->getContent($lang, 'name', $product['product_slug']); ?></h1>
-                <?php if ($productTranslatable->hasContent($lang, 'slogan')): ?>
-                    <p class="product-slogan"><?php echo $productTranslatable->getContent($lang, 'slogan', ''); ?></p>
-                <?php endif; ?>
-            </div>
-        </div>
-        
-        <div class="product-content">
-            <?php 
-            // Display paragraphs before the image
-            for ($i = 0; $i < $imageInsertionIndex; $i++) {
-                if (isset($description[$i])) {
-                    echo '<p class="product-description-paragraph">' . $description[$i] . '</p>';
-                }
-            }
-            
-            // Display the product image if it exists
-            if ($productImageExists): 
-            ?>
-                <div class="product-image">
-                    <img src="<?php echo $productImagePath; ?>" alt="<?php echo $productTranslatable->getContent($lang, 'name', $productSlug); ?> team">
-                    <div class="product-image-caption">
-                        <?php echo TranslatableFactory::general()->getContent($lang, 'product_image_caption', 'Our dedicated team'); ?>
-                    </div>
-                </div>
-            <?php endif; ?>
-            
-            <?php 
-            // Display paragraphs after the image
-            for ($i = $imageInsertionIndex; $i < count($description); $i++) {
-                echo '<p class="product-description-paragraph">' . $description[$i] . '</p>';
-            }
-            ?>
-        </div>
-
-        <?php if (!empty($founderTeam)): ?>
-            <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'product_founders', 'Founders'); ?></h2>
-            <div class="team-grid founders-grid">
-                <?php foreach ($founderTeam as $memberKey => $member): ?>
-                    <?php $memberTranslatable = TranslatableFactory::createFromData($member); ?>
-                    <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
-                        <div class="team-card founder-card">
-                            <?php if (isset($member['photo']) && !empty($member['photo'])): ?>
-                                <img src="<?php echo $member['photo']; ?>" alt="<?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?>">
-                            <?php else: ?>
-                                <div class="photo-placeholder"><i class="fa fa-user-circle"></i></div>
-                            <?php endif; ?>
-                            <div class="team-info">
-                                <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
-                                <?php
-                                // Check if this member should display product roles
-                                $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
-                                
-                                if ($displayProductRoles) {
-                                    // Get position which will be an array of roles when display_product_roles is true
-                                    $positions = $memberTranslatable->getContent($lang, 'position', []);
-                                    
-                                    if (is_array($positions) && !empty($positions)) {
-                                        echo '<div class="product-roles">';
-                                        foreach ($positions as $role) {
-                                            echo '<p class="role">';
-                                            
-                                            $roleTitle = isset($role['title']) ? $role['title'] : '';
-                                            $productName = isset($role['product_name']) ? $role['product_name'] : '';
-                                            // todo: format the output to be more readable
-                                            if (!empty($roleTitle) && !empty($productName)) {
-                                                echo htmlspecialchars($roleTitle) . ' - ' . htmlspecialchars($productName);
-                                            } elseif (!empty($roleTitle)) {
-                                                echo htmlspecialchars($roleTitle);
-                                            } elseif (!empty($productName)) {
-                                                echo htmlspecialchars($productName);
-                                            }
-                                            
-                                            echo '</p>';
-                                        }
-                                        echo '</div>';
-                                    } else {
-                                        echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
-                                    }
-                                } else {
-                                    echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (!empty($productTeam)): ?>
-            <div class="team-section">
-                <h2 class="section-title"><?php echo TranslatableFactory::general()->getContent($lang, 'product_team', 'Product Team'); ?></h2>
-                <div class="team-grid">
-                    <?php foreach ($productTeam as $memberKey => $member): ?>
-                        <?php $memberTranslatable = TranslatableFactory::teamMemberEnhanced($member['name_slug']); ?>
-                        <a href="?page=team-member&id=<?php echo $member['name_slug']; ?>&lang=<?php echo $lang; ?>" class="card-link">
-                            <div class="team-card">
-                                <div class="team-info">
-                                    <h3><?php echo $memberTranslatable->getContent($lang, 'name', $member['name_slug']); ?></h3>
-                                    <?php
-                                    // Check if this member should display product roles
-                                    $displayProductRoles = $memberTranslatable->getContent($lang, 'display_product_roles', false);
-                                    
-                                    if ($displayProductRoles) {
-                                        // Get position which will be an array of roles when display_product_roles is true
-                                        $positions = $memberTranslatable->getContent($lang, 'position', []);
-                                        
-                                        if (is_array($positions) && !empty($positions)) {
-                                            echo '<div class="product-roles">';
-                                            foreach ($positions as $role) {
-                                                echo '<div class="role">';
-                                                
-                                                $roleTitle = isset($role['title']) ? $role['title'] : '';
-                                                $productName = isset($role['product_name']) ? $role['product_name'] : '';
-                                                
-                                                if (!empty($productName)) {
-                                                    echo '<span class="product-name">' . htmlspecialchars($productName) . '</span>';
-                                                }
-                                                
-                                                if (!empty($roleTitle)) {
-                                                    echo '<span class="role-title">' . htmlspecialchars($roleTitle) . '</span>';
-                                                }
-                                                
-                                                echo '</div>';
-                                            }
-                                            echo '</div>';
-                                        } else {
-                                            echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
-                                        }
-                                    } else {
-                                        echo '<p class="position">' . $memberTranslatable->getContent($lang, 'position', 'Team Member') . '</p>';
-                                    }
-                                    ?>
-                                    
-                                    <?php if ($memberTranslatable->hasContent($lang, 'short_bio')): ?>
-                                        <p class="short-bio"><?php echo $memberTranslatable->getContent($lang, 'short_bio', ''); ?></p>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        <?php endif; ?>
-        
-        <?php
-        // Add a back to segment link if we have a segment parameter
-        $segmentId = isset($_GET['segment']) ? $_GET['segment'] : $productCategory;
-        if ($segmentId): 
-        ?>
-        <div class="back-to-segment">
-            <a href="?page=segment&id=<?php echo $segmentId; ?>&lang=<?php echo $lang; ?>" class="back-link">
-                <span class="back-arrow">←</span> 
-                <?php echo TranslatableFactory::general()->getContent($lang, 'back_to_segment', 'Back to Segment'); ?>
-            </a>
-        </div>
-        <?php endif; ?>
-    </div>
-</section>
-

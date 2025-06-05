@@ -1,26 +1,92 @@
+@use "../base/variables" as variables;
+@use "sass:color";
+
+// ==========================================================================
+// Block: form (Optional base styles for <form>)
+// ==========================================================================
+.form {
+  // Add styles for the <form> tag itself if desired
+  // Example: width: 100%; max-width: 600px; margin: 0 auto;
+}
+
+// ==========================================================================
+// Block: form-group (Replacing original .form-group class directly)
+// Alternatively, could be form__group if used within a .form block
+// Using form-group for broader reusability outside a specific .form tag
+// ==========================================================================
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
 
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
+// ==========================================================================
+// Elements within a form structure (assuming they live inside .form-group)
+// ==========================================================================
+
+// --- Element: Form Label ---
+.form-label { // Simpler name than form__label if used with form-group block
+  display: block;
+  margin-bottom: 0.5rem;
+  color: variables.$text-color; // Use appropriate text color variable
+  font-weight: 500;
+
+  // Add other label styles like font-size if needed
+}
+
+// --- Common styles for form fields ---
+%form-field-base {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid variables.$text-muted; // Use a suitable border color variable
+  border-radius: 4px;
+  background-color: #fff; // Default background
+  color: variables.$text-color; // Default text color
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: variables.$primary-color;
+    box-shadow: 0 0 0 2px rgba(variables.$primary-color, 0.2);
+    outline: none;
   }
 
-  input, textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  // State: Error (Targets element with .error class added by JS)
+  &.error {
+    border-color: #f44336; // Consider using a variable: variables.$error-color
+    &:focus {
+       box-shadow: 0 0 0 2px rgba(#f44336, 0.2);
+    }
   }
 
-  textarea {
-    min-height: 150px;
+  // Placeholder styles
+  &::placeholder {
+    color: color.adjust(variables.$text-muted, $lightness: 10%); // Lighter muted color
+    opacity: 1; // Ensure visible in all browsers
   }
 }
 
-.error-message {
-  color: red;
+// --- Element: Form Input ---
+.form-input {
+  @extend %form-field-base;
+
+  // Input-specific styles if any (e.g., height)
+}
+
+// --- Element: Form Textarea ---
+.form-textarea {
+  @extend %form-field-base;
+
+  min-height: 150px;
+  resize: vertical;
+}
+
+// --- Element: Form Error Message ---
+.form-error-message {
+  display: block; // Ensure it takes space
+  min-height: 1em; // Prevent layout shift
+  margin-top: 0.5rem;
+  color: #f44336; // variables.$error-color
   font-size: 0.9rem;
-  margin-top: 0.25rem;
 }
-

@@ -1,22 +1,79 @@
 @use "../base/variables" as variables;
-@use "sass:color";
+@use "sass:color"; // Use sass:color module
 
-.button, .cta-button {
+// ==========================================================================
+// Block: button
+// ==========================================================================
+.button {
+  // Positioning & Box Model
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: variables.$button-primary;
-  color: variables.$button-text;
-  text-decoration: none;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem; // Base padding
+  border: 1px solid transparent; // Base border
   border-radius: 4px;
-  transition: background-color 0.3s ease;
 
-  &:hover {
+  // Typography
+  color: variables.$button-text; // Default text color
+  font-weight: 500;
+  line-height: 1.4; // Consistent line height
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle; // Align with adjacent text/icons
+
+  // Visual
+  background-color: variables.$button-primary; // Default background
+  cursor: pointer;
+
+  // Transitions
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+
+  // Base hover/focus state
+  &:hover,
+  &:focus {
     background-color: variables.$button-hover;
+    color: variables.$button-text;
+    text-decoration: none;
+    outline: none; // Remove default focus outline if custom style is added later
+  }
+
+  // --- Modifier: Call to Action ---
+  &--cta {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.2rem;
+
+    // background-color: variables.$accent-color; // Example if needed
+    // &:hover { background-color: color.adjust(variables.$accent-color, $lightness: -10%); }
+  }
+
+  // --- Modifier: Form Submit ---
+  &--submit {
+    padding: 0.75rem 2rem;
+
+    // Add specific submit styles if needed
+  }
+
+  // --- Modifier: Outline ---
+  &--outline {
+    background-color: transparent;
+    border-color: variables.$button-primary;
+    color: variables.$button-text;
+
+    &:hover,
+    &:focus {
+      background-color: variables.$button-primary;
+      color: variables.$button-text;
+      border-color: variables.$button-primary;
+    }
+  }
+
+  // --- Modifier: Disabled State (Example using attribute) ---
+  &[disabled] {
+    opacity: 0.65;
+    cursor: not-allowed;
+    pointer-events: none;
+
+    // Adjust background/color for disabled state if needed
+    // background-color: color.adjust(variables.$button-primary, $lightness: 30%);
+    // border-color: color.adjust(variables.$button-primary, $lightness: 30%);
   }
 }
-
-.cta-button {
-  font-size: 1.2rem;
-  padding: 0.75rem 1.5rem;
-}
-

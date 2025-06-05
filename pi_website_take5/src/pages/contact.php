@@ -143,37 +143,38 @@ if (isset($_SESSION['contact_form_response'])) {
             <!-- Form on the right for desktop, last for mobile -->
             <div class="contact-form contact-column">
                 <h2><?php echo $contactTranslatable->getContent($lang, 'form_heading', 'Send Us a Message'); ?></h2>
-                <form id="contactForm" class="contact-form" data-action="?page=process-contact" method="post">
+                <form id="contactForm" class="form" data-action="?page=process-contact" method="post"> <?php // Added optional 'form' class ?>
                     <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                        <div class="error-message"></div>
+                    <div class="form-group"> <?php // Keep form-group as the block ?>
+                        <label for="name" class="form-label">Name</label> <?php // Changed class ?>
+                        <input type="text" id="name" name="name" required class="form-input"> <?php // Changed class ?>
+                        <div class="form-error-message"></div> <?php // Changed class ?>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                        <div class="error-message"></div>
+                        <label for="email" class="form-label">Email</label> <?php // Changed class ?>
+                        <input type="email" id="email" name="email" required class="form-input"> <?php // Changed class ?>
+                        <div class="form-error-message"></div> <?php // Changed class ?>
                     </div>
                     <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                        <div class="error-message"></div>
+                        <label for="subject" class="form-label">Subject</label> <?php // Changed class ?>
+                        <input type="text" id="subject" name="subject" required class="form-input"> <?php // Changed class ?>
+                        <div class="form-error-message"></div> <?php // Changed class ?>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                        <div class="error-message"></div>
+                        <label for="message" class="form-label">Message</label> <?php // Changed class ?>
+                        <textarea id="message" name="message" required class="form-textarea"></textarea> <?php // Changed class ?>
+                        <div class="form-error-message"></div> <?php // Changed class ?>
                     </div>
                     <?php if (USE_RECAPTCHA): ?>
-                    <div class="form-group">
+                    <div class="form-group"> <?php // Keep form-group ?>
                         <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SITE_KEY; ?>"></div>
-                        <div class="error-message"></div>
+                        <div class="form-error-message"></div> <?php // Changed class ?>
                     </div>
                     <?php endif; ?>
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <?php // Updated button class ?>
+                    <button type="submit" class="button button--submit">Send Message</button>
                     <?php if (defined('SHOW_DEBUG_SMTP_SERVER_BUTTON') && SHOW_DEBUG_SMTP_SERVER_BUTTON): ?>
-                    <button type="button" id="debugSmtpButton" class="debug-btn">Test SMTP Server</button>
+                        <button type="button" id="debugSmtpButton" class="button debug-btn">Test SMTP Server</button> <?php // Use base button style ?>
                     <?php endif; ?>
                 </form>
             </div>

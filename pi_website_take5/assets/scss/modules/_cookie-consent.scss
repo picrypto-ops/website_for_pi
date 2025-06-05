@@ -1,112 +1,145 @@
-/**
- * Cookie Consent Banner Styles
- */
+@use "../base/variables" as variables;
 
-.cookie-consent-banner {
+// ==========================================================================
+// Block: cookie-consent
+// ==========================================================================
+.cookie-consent {
+  // Positioning & Box Model
   position: fixed;
   bottom: 2rem;
-  right: -300px; // Start off-screen for LTR
+  z-index: 9999;
   width: 280px;
   max-width: 90vw;
-  background-color: rgba(22, 28, 36, 0.3); // Slightly transparent dark background
-  color: var(--color-text-light);
   padding: 1.5rem;
-  z-index: 9999;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.534);
+  box-sizing: border-box;
+
+  // Visual
+  background-color: rgb(22 28 36 / var(--cookie-bg-alpha, 80%)); // Modern rgb()
+  color: variables.$text-light;
   border-radius: 6px;
+  box-shadow: 0 0 15px rgb(0 0 0 / 35%);
+
+  // Animation & Transitions
   transition: right 0.5s ease-in-out, left 0.5s ease-in-out, opacity 0.5s ease, background-color 0.3s ease;
-  opacity: 0;
-  
-  &.active {
-    right: 2rem; // Visible position for LTR
-    opacity: 1;
-  }
-  
+  opacity: 0; // Start hidden
+
+  // Default LTR positioning (off-screen)
+  right: -350px;
+  left: auto;
+
+  // Define base &:hover state BEFORE RTL state for specificity rule fix
+
+  // Add empty line before rule
   &:hover {
-    background-color: rgba(22, 28, 36, 0.95); // More opaque on hover
+    background-color: rgb(22 28 36 / 95%); // More opaque
   }
-  
+
+  // RTL positioning (off-screen) - comes AFTER base hover
+  // Add empty line before rule
+  html[dir="rtl"] & {
+    right: auto;
+    left: -350px;
+  }
+
+  // State: Active / Visible (uses .active helper class)
+  // Add empty line before rule
+  &.active {
+    opacity: 1;
+    
+    // LTR visible position
+    right: 2rem;
+    left: auto;
+
+    html[dir="rtl"] & {
+      right: auto;
+      left: 2rem; // RTL visible position
+    }
+  }
+
+
+  // Add empty line before comment
+  // --- Element: Container ---
   .container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0;
     width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
   }
-  
+
+  // --- Element: Content Area ---
   &__content {
     flex: 1;
-    
-    h3 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #ffffff;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      opacity: 1 !important; // Ensure header is always fully opaque
-    }
-    
-    p {
-      margin: 0;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      color: #ffffff !important; // Force white text color
-      font-weight: 500;
-      opacity: 1 !important; // Ensure description is always fully opaque
-    }
   }
-  
+
+  // --- Element: Title ---
+  &__title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #fff; // Use shorthand hex
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+    opacity: 1 !important; // If needed
+  }
+
+  // --- Element: Text ---
+  &__text {
+    margin: 0;
+    color: #fff !important; // Use shorthand hex, keep important if needed
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5;
+    opacity: 1 !important; // If needed
+  }
+
+  // --- Element: Actions Container ---
   &__actions {
     display: flex;
     gap: 0.75rem;
     margin-top: 1rem;
-    
-    button {
-      padding: 0.5rem 0.75rem;
-      border-radius: 4px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      opacity: 1 !important; // Ensure buttons are always fully opaque
-      
-      &.accept {
-        background-color: var(--color-accent, #4caf50);
-        color: white !important; // Force white text
-        border: none;
-        font-weight: 600;
-        
-        &:hover {
-          background-color: var(--color-accent-dark, #388e3c);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-      }
-      
-      &.decline {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: #ffffff !important; // Force white text
-        border: 1px solid #ffffff;
-        
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.2);
-        }
-      }
-    }
-  }
-  
-  // RTL support
-  html[dir="rtl"] & {
-    right: auto;
-    left: -300px; // Start off-screen for RTL
-    
-    &.active {
-      right: auto;
-      left: 2rem; // Visible position for RTL
-    }
-    
-    &__actions {
+
+    html[dir="rtl"] & {
       flex-direction: row-reverse;
     }
   }
-} 
+
+  // --- Element: Button ---
+  &__button {
+    // Base styles specific to cookie buttons
+    padding: 0.5rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 1 !important; // If needed
+
+    // --- Modifier: Accept Button ---
+    &--accept {
+      background-color: var(--color-accent, #4caf50);
+      color: #fff !important; // Use shorthand hex
+      border-color: transparent;
+      font-weight: 600;
+
+      &:hover {
+        background-color: var(--color-accent-dark, #388e3c);
+        box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+      }
+    }
+
+    // --- Modifier: Decline Button ---
+    &--decline {
+      background-color: rgb(255 255 255 / 10%);
+      color: #fff !important; // Use shorthand hex
+      border-color: #fff; // Use shorthand hex
+
+      &:hover {
+        background-color: rgb(255 255 255 / 20%);
+      }
+    }
+  }
+} // End of .cookie-consent Block

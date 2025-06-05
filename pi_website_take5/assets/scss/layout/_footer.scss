@@ -1,87 +1,131 @@
 @use "../base/variables" as variables;
+@use "../base/mixins" as mixins; // Include if mixins are used
 @use "sass:color";
 
-// Add empty line before rule (rule-empty-line-before fix)
+// ==========================================================================
+// Block: site-footer
+// ==========================================================================
+.site-footer {
+  // Positioning & Box Model
+  position: relative;
+  z-index: 100;
+  padding: variables.$footer-padding-y 0;
+  border-top: variables.$footer-border-top;
 
-.breadcrumb-navigation {
-  // Remove unexpected empty line (declaration-empty-line-before fix)
-  position: fixed;
-  right: variables.$breadcrumb-padding;
-  top: 50%;
-  transform: translateY(-50%);
-  background: variables.$breadcrumb-bg;
-  padding: variables.$breadcrumb-padding;
-  border-radius: 8px;
-  border: variables.$breadcrumb-border;
-  box-shadow: variables.$breadcrumb-shadow;
-  z-index: 900;
-  display: none; // Keep original display none logic
+  // Visual
+  background-color: variables.$footer-bg-color;
+  color: variables.$footer-text-color;
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  // --- Descendant: Container ---
+  .container {
+    max-width: variables.$footer-max-width;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: variables.$footer-padding-x;
+    padding-left: variables.$footer-padding-x;
+  }
+
+  // --- Element: Content Wrapper ---
+  &__content {
     display: flex;
-    flex-direction: column;
-    gap: variables.$breadcrumb-gap;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; // Default desktop behavior
 
-    li {
-      a {
-        display: block;
-        padding: 0.3rem 0.6rem;
-        border-radius: 4px;
-        color: variables.$breadcrumb-inactive;
-        font-size: 0.9rem;
-        text-decoration: none;
-        transition: variables.$breadcrumb-transition;
-
-        // Use double colon for pseudo-element
-        &::before {
-          content: '';
-          display: inline-block;
-          width: 10px;
-          height: 10px;
-          margin-right: 10px;
-          background-color: variables.$primary-color;
-          border-radius: 50%;
-          opacity: 0.5;
-          transition: all 0.3s ease;
-        }
-
-        &:hover {
-          color: variables.$breadcrumb-hover;
-          background: rgba(variables.$primary-color, 0.1);
-
-          // Use double colon for pseudo-element
-          &::before {
-            opacity: 0.8;
-            transform: scale(1.1);
-          }
-        }
-
-        // State class
-        &.active {
-          color: variables.$breadcrumb-active;
-          font-weight: bold;
-          background: rgba(variables.$primary-color, 0.15);
-
-          // Use double colon for pseudo-element
-          &::before {
-            opacity: 1;
-            transform: scale(1.2);
-            background-color: color.adjust(variables.$primary-color, $lightness: -10%);
-          }
-        }
-      }
+    // Use context range notation
+    @media (width <= 768px) {
+      flex-direction: column; // Stack on mobile
+      gap: variables.$footer-link-gap; // Use gap for spacing on mobile
+      text-align: center;
     }
   }
-}
 
-// Add empty line before rule (rule-empty-line-before fix)
+  // --- Element: Logo ---
+  &__logo {
+    display: flex;
+    align-items: center;
 
-// Use context range notation
-@media (width <= 768px) {
-  .breadcrumb-navigation {
-    display: none; // Hide on mobile
+    // Use context range notation
+    @media (width <= 768px) {
+      margin-bottom: 1rem; // Space below logo on mobile stack
+    }
   }
-}
+
+  // Element: Logo Image
+  &__logo-image {
+    display: block; // Remove extra space
+    max-width: variables.$footer-logo-size;
+    height: auto;
+    margin-right: 15px; // LTR default spacing
+
+    html[dir="rtl"] & {
+      margin-right: 0;
+      margin-left: 15px; // RTL spacing
+    }
+  }
+
+  // Element: Logo Text
+  &__logo-text {
+    display: inline-block;
+    margin: 0;
+    color: variables.$footer-text-color;
+    font-size: variables.$footer-text-size;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  // --- Element: Links ---
+  &__links {
+    // Container for the list if specific styling needed
+  }
+
+  // Element: Links List (ul)
+  &__links-list {
+    display: flex;
+    gap: variables.$footer-link-gap;
+    margin: 0; // Reset default
+    padding: 0; // Reset default
+    list-style: none;
+
+    // Use context range notation
+    @media (width <= 768px) {
+      flex-wrap: wrap; // Allow wrapping on mobile
+      justify-content: center; // Center links on mobile
+    }
+  }
+
+  // Element: Links Item (li)
+  &__links-item {
+    // No specific styles needed currently
+  }
+
+  // Element: Links Link (a)
+  &__links-link {
+    color: variables.$footer-link-color;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: variables.$footer-link-hover-opacity;
+      text-decoration: none; // Consistent no underline on hover
+    }
+  }
+
+  // --- Element: Social Links ---
+  &__social {
+    // Add styles if social links are implemented
+  }
+
+  // --- Element: Bottom Text ---
+  &__bottom {
+    margin-top: variables.$footer-bottom-margin;
+    opacity: 0.7;
+    text-align: center;
+
+    p { // Target the paragraph directly if needed
+      margin: 0; // Reset default paragraph margin
+      font-size: 0.9rem; // Apply font size directly
+    }
+  }
+
+} // End of .site-footer Block

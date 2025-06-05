@@ -82,7 +82,7 @@ $menuData = TranslatableFactory::getData('menus') ?: [];
             $firstSegmentId = is_array($segments) && !empty($segments) ? 
                 'segment-' . array_key_first($segments) : 'team';
             ?>
-            <a href="#<?php echo $firstSegmentId; ?>" class="cta-button">
+            <a href="#<?php echo $firstSegmentId; ?>" class="button button--cta">
                 <?php echo TranslatableFactory::general()->getHtmlContent($lang, 'learn_more', 'Learn More'); ?>
             </a>
         </div>

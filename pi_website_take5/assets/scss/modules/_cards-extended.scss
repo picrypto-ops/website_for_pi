@@ -1,0 +1,300 @@
+@use "../base/variables" as variables;
+
+// ==========================================================================
+// Temporary Extended Card Styles (Original specific styles)
+// Contains original specific card rules and the %card-base placeholder.
+// Uses @extend %card-base !optional temporarily.
+// These will be refactored with BEM in Phase 4.
+// ==========================================================================
+
+// Define the placeholder selector that others are trying to extend
+// Placeholder MUST be defined BEFORE it is extended
+
+// Add empty line before comment
+// (scss/double-slash-comment-empty-line-before fix)
+%card-base {
+  background-color: #fff; // Use shorthand hex
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 8%);
+  height: 100%;
+  position: relative;
+  isolation: isolate; // Use if needed for stacking context
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+
+  // Add empty line before declaration
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px; // Match parent border-radius
+    // Use modern rgb() with percentage alpha
+    box-shadow: 0 8px 25px rgb(0 0 0 / 15%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: -1; // Ensure it's behind content
+  }
+
+
+  // Add empty line before rule
+  &:hover {
+    transform: translateY(-8px) scale(1.01);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+// Product Cards (Original Styles - Extending the placeholder)
+
+
+// Team Cards (Original Styles - Extending the placeholder)
+
+// Add empty line before rule
+.team-card {
+  @extend %card-base !optional; // TEMPORARY FIX
+
+  overflow: hidden;
+  border-left: 4px solid variables.$primary-color;
+  background: linear-gradient(to right, rgb(from variables.$primary-color r g b / 5%), transparent 30%);
+  display: flex;
+  flex-direction: column;
+  min-height: 160px;
+  position: relative;
+
+  // Assuming .member-info exists inside .team-card (Define base styles first)
+  .member-info {
+    padding: 20px;
+    background: transparent; // Ensure no conflicting background
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease;
+
+    // Define BASE h3 style first
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+      color: variables.$text-color; // Base text color
+      transition: color 0.3s ease;
+      position: relative;
+      padding-bottom: 12px;
+
+      // Use double colon
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: variables.$primary-color;
+      }
+    }
+
+    // Assuming .position exists inside .member-info
+    .position {
+      margin: 0;
+      color: variables.$text-muted; // Use muted text color
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+  }
+
+  // Define hover state AFTER base child styles
+
+  // Add empty line before rule
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 12%); // Modern RGB
+
+    // Hover style for h3 comes AFTER base h3 style
+    .member-info {
+        h3 {
+            color: variables.$primary-color;
+        }
+    }
+  }
+
+  // Founder card variations (Original) - Modifier comes after base and hover
+
+  // Add empty line before rule
+  &.founder-card {
+    text-align: left;
+    background: linear-gradient(135deg, rgb(from variables.$primary-color r g b / 8%) 0%, rgb(from variables.$primary-color r g b / 3%) 100%);
+    border-left: 5px solid variables.$primary-color;
+  }
+}
+
+
+// Segment Cards (Original Styles - Extending the placeholder)
+
+// Add empty line before rule
+.segment-card {
+  @extend %card-base !optional; // TEMPORARY FIX
+
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 4px solid variables.$primary-color;
+  text-align: center;
+
+  // Define base h3 and p styles first
+  // Assuming h3 exists inside .segment-card
+  h3 {
+    margin-bottom: 15px;
+    color: variables.$text-color;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+    
+  // Assuming .segment-icon exists inside .segment-card (Define base styles first)
+  .segment-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    img {
+       max-width: 100%;
+       max-height: 100%;
+       display: block;
+    }
+
+
+     // Add empty line before rule
+     // Assuming .icon-placeholder exists
+     .icon-placeholder {
+        width: 80px;
+        height: 80px;
+        background-color: rgb(from variables.$primary-color r g b / 10%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: variables.$primary-color;
+      }
+  }
+
+  // Assuming descriptive p tag exists inside .segment-card
+  p {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    color: variables.$text-muted;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  // Define hover state AFTER base child styles
+
+  // Add empty line before rule
+  &:hover {
+    .segment-icon {
+      transform: scale(1.1) rotate(8deg);
+    }
+
+    h3 {
+        color: variables.$primary-color;
+    }
+  }
+
+
+  // Add empty line before comment
+  // Assuming .segment-button exists
+   .segment-button {
+     align-self: center;
+     margin-top: auto;
+   }
+
+
+  // Add empty line before comment
+  // Assuming .segment-link wraps the card or is inside
+   .segment-link {
+      text-decoration: none;
+      color: inherit;
+
+
+      // Add empty line before comment
+      // Assuming .slogan exists inside .segment-link
+      .slogan {
+        width: 100%;
+        padding: 0.5rem;
+        margin: 0;
+        color: #666; // Specific color from original
+        font-size: 1.2rem;
+        line-height: 1.4;
+        position: relative;
+        text-align: center;
+      }
+   }
+}
+
+
+// Add empty line before comment
+// --- POTENTIALLY UNRELATED STYLES found in original _cards.scss ---
+// These should ideally move to their specific component files later.
+
+
+// Add empty line before comment
+// Single team member profile
+.member-profile {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  margin-bottom: 3rem;
+
+  // Use context range notation
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  .member-image { // Assuming class exists
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .member-info { // Assuming class exists
+    h1 {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+
+    .member-title { // Assuming class exists
+      // Break single line declaration
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #666;
+      font-size: 1.25rem;
+    }
+  }
+}
+
+
+// Add empty line before comment
+// Member navigation
+.member-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+
+  // border-top: 1px solid #eee; // Keep commented if original was
+
+  a {
+    color: #555; // Specific color from original
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #000;
+    }
+  }
+}
